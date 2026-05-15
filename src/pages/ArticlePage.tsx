@@ -70,12 +70,14 @@ export default function ArticlePage() {
     <main style={{ paddingTop: '72px' }}>
       <section style={{ background: 'var(--grad-subtle)', padding: '64px 0' }}>
         <div className="container" style={{ maxWidth: '760px' }}>
-          <Link to="/blog" style={{ color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontFamily: 'Montserrat,sans-serif', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '24px' }}>
-            ← Voltar ao Blog
-          </Link>
-          <span className="badge badge-purple" style={{ marginBottom: '16px', display: 'inline-block' }}>
-            {article.category}
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '24px' }}>
+            <Link to="/blog" style={{ color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontFamily: 'Montserrat,sans-serif', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              ← Voltar ao Blog
+            </Link>
+            <span className="badge badge-purple" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>
+              {article.category}
+            </span>
+          </div>
           <h1 style={{ color: 'var(--white)', marginBottom: '20px', fontSize: '40px' }}>
             {article.title}
           </h1>
@@ -124,7 +126,7 @@ export default function ArticlePage() {
               Gostou do artigo? Fale com a nossa equipa.
             </p>
             <Link to="/contacto" className="btn-gradient">
-              Agendar consulta gratuita →
+              Marcar chamada gratuita →
             </Link>
           </div>
         </div>
