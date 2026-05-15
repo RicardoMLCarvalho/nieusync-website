@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Servicos from './pages/Servicos';
 import Sobre from './pages/Sobre';
 import Blog from './pages/Blog';
+import ArticlePage from './pages/ArticlePage';
 import Contacto from './pages/Contacto';
 import AvisosLegais from './pages/AvisosLegais';
 import CodigoConduta from './pages/CodigoConduta';
@@ -34,6 +35,7 @@ function AppContent() {
         <Route path="/servicos" element={<Servicos />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<ArticlePage />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/avisos-legais" element={<AvisosLegais />} />
         <Route path="/codigo-conduta" element={<CodigoConduta />} />
