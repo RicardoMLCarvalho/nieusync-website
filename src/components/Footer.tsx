@@ -70,51 +70,71 @@ export default function Footer() {
           {divider}
 
           {/* Serviços */}
-          <div style={{ flex: 1, padding: '0 28px' }}>
+          <div style={{ flex: 1, padding: '0 28px', display: 'flex', flexDirection: 'column' }}>
             <p style={colTitle}>Serviços</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px' }}>
-              {[
-                { to: '/servicos#direito', label: 'Direito Empresarial' },
-                { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
-                { to: '/servicos#gestao', label: 'Gestão Estratégica' },
-                { to: '/servicos#ti', label: 'Tecnologias de Informação' },
-                { to: '/servicos#marketing', label: 'Marketing Digital' },
-              ].map(({ to, label }) => (
-                <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-              ))}
+            <div style={{ display: 'flex', gap: '12px', flex: 1 }}>
+              {/* Coluna esquerda — NÃO mexer espaçamento */}
+              <div style={{ flex: 1 }}>
+                {[
+                  { to: '/servicos#direito', label: 'Direito Empresarial' },
+                  { to: '/servicos#gestao', label: 'Gestão Estratégica' },
+                  { to: '/servicos#marketing', label: 'Marketing Digital' },
+                ].map(({ to, label }) => (
+                  <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                ))}
+              </div>
+              {/* Coluna direita — 2 items distribuídos pela mesma altura */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                {[
+                  { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
+                  { to: '/servicos#ti', label: 'Tecnologias de Informação' },
+                ].map(({ to, label }) => (
+                  <Link key={label} to={to} style={{ ...lnk, marginBottom: 0 }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                ))}
+              </div>
             </div>
           </div>
 
           {divider}
 
           {/* Contacto */}
-          <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px' }}>
+          <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px', display: 'flex', flexDirection: 'column' }}>
             <p style={colTitle}>Contacto</p>
-            {[
-              { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
-              { label: '(+351) 933 644 596', href: 'tel:+351933644596' },
-              { label: 'geral@nieusync.com', href: 'mailto:geral@nieusync.com' },
-            ].map(({ label, href }) => (
-              <a key={label} href={href} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
-            ))}
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
+              {[
+                { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
+                { label: '(+351) 933 644 596', href: 'tel:+351933644596' },
+                { label: 'geral@nieusync.com', href: 'mailto:geral@nieusync.com' },
+              ].map(({ label, href }) => (
+                <a key={label} href={href} style={{ ...lnk, marginBottom: 0 }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
+              ))}
+            </div>
           </div>
 
           {divider}
 
           {/* Legal */}
-          <div style={{ flex: 1, paddingLeft: '28px' }}>
+          <div style={{ flex: 1, paddingLeft: '28px', display: 'flex', flexDirection: 'column' }}>
             <p style={colTitle}>Legal</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px' }}>
-              {[
-                { to: '/avisos-legais', label: 'Avisos Legais' },
-                { to: '/politica-cookies', label: 'Política de Cookies' },
-                { to: '/codigo-conduta', label: 'Código de Conduta' },
-                { to: '/privacidade', label: 'Política de Privacidade' },
-                { to: '/termos-condicoes', label: 'Termos e Condições' },
-                { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' },
-              ].map(({ to, label }) => (
-                <Link key={to} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-              ))}
+            <div style={{ display: 'flex', gap: '12px', flex: 1 }}>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                {[
+                  { to: '/avisos-legais', label: 'Avisos Legais' },
+                  { to: '/codigo-conduta', label: 'Código de Conduta' },
+                  { to: '/termos-condicoes', label: 'Termos e Condições' },
+                ].map(({ to, label }) => (
+                  <Link key={to} to={to} style={{ ...lnk, marginBottom: 0 }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                ))}
+              </div>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                {[
+                  { to: '/politica-cookies', label: 'Política de Cookies' },
+                  { to: '/privacidade', label: 'Política de Privacidade' },
+                  { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' },
+                ].map(({ to, label }) => (
+                  <Link key={to} to={to} style={{ ...lnk, marginBottom: 0 }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                ))}
+              </div>
             </div>
           </div>
 
