@@ -75,23 +75,26 @@ export default function Servicos() {
   }, []);
 
   const legalIcon = (
-    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 3v18M3 9l4 4-4 4M21 9l-4 4 4 4" />
-      <path d="M3 13h5M16 13h5" />
-      <circle cx="12" cy="21" r="1" fill="var(--blue)" stroke="none" />
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <defs><linearGradient id="legalGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs>
+      <path stroke="url(#legalGrad)" d="M12 3v18M3 9l4 4-4 4M21 9l-4 4 4 4" />
+      <path stroke="url(#legalGrad)" d="M3 13h5M16 13h5" />
+      <circle cx="12" cy="21" r="1" fill="url(#legalGrad)" stroke="none" />
     </svg>
   );
 
   const gestaoIcon = (
-    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-      <polyline points="16 7 22 7 22 13" />
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <defs><linearGradient id="gestaoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs>
+      <polyline stroke="url(#gestaoGrad)" points="22 7 13.5 15.5 8.5 10.5 2 17" />
+      <polyline stroke="url(#gestaoGrad)" points="16 7 22 7 22 13" />
     </svg>
   );
 
   const mktIcon = (
-    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 11l19-9-9 19-2-8-8-2z" />
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <defs><linearGradient id="mktGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs>
+      <path stroke="url(#mktGrad)" d="M3 11l19-9-9 19-2-8-8-2z" />
     </svg>
   );
 
@@ -197,11 +200,12 @@ export default function Servicos() {
         id="financas"
         bg="var(--bg)"
         iconEl={(
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2"/>
-            <line x1="8" y1="7" x2="16" y2="7"/>
-            <line x1="8" y1="11" x2="16" y2="11"/>
-            <line x1="8" y1="15" x2="12" y2="15"/>
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <defs><linearGradient id="finGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs>
+            <rect x="4" y="2" width="16" height="20" rx="2" stroke="url(#finGrad)" />
+            <line x1="8" y1="7" x2="16" y2="7" stroke="url(#finGrad)" />
+            <line x1="8" y1="11" x2="16" y2="11" stroke="url(#finGrad)" />
+            <line x1="8" y1="15" x2="12" y2="15" stroke="url(#finGrad)" />
           </svg>
         )}
         title="Finanças & Contabilidade"
@@ -233,10 +237,11 @@ export default function Servicos() {
         id="tecnologias"
         bg="var(--white)"
         iconEl={(
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/>
-            <line x1="8" y1="21" x2="16" y2="21"/>
-            <line x1="12" y1="17" x2="12" y2="21"/>
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <defs><linearGradient id="tiGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs>
+            <rect x="2" y="3" width="20" height="14" rx="2" stroke="url(#tiGrad)" />
+            <line x1="8" y1="21" x2="16" y2="21" stroke="url(#tiGrad)" />
+            <line x1="12" y1="17" x2="12" y2="21" stroke="url(#tiGrad)" />
           </svg>
         )}
         title="Tecnologias de Informação"
