@@ -11,7 +11,7 @@ export default function TermosCondicoes() {
         {
           title: 'Objeto e Aceitação',
           content: [
-            'Os presentes Termos regulam o acesso e a utilização do website [www.nieusync.pt] e dos conteúdos, funcionalidades ou serviços disponibilizados.',
+            'Os presentes Termos regulam o acesso e a utilização do website [www.nieusync.com] e dos conteúdos, funcionalidades ou serviços disponibilizados.',
             'Ao aceder ou utilizar o Website, o Utilizador declara que leu, compreendeu e aceita os Termos. Se não concordar, deverá cessar a utilização.',
             'A Equipa de TI da NIEUSYNC poderá atualizar estes Termos. Alterações materiais serão comunicadas no Website. O uso continuado após a publicação implica aceitação.',
             'A NIEUSYNC reserva-se o direito de recusar a prestação de serviços a qualquer cliente.',
@@ -19,8 +19,10 @@ export default function TermosCondicoes() {
         },
         {
           title: 'Definições',
-          content: 
-            '“Utilizador” significa qualquer pessoa que acede ao Website. “Conteúdo” inclui textos, imagens, gráficos, logótipos, vídeos, software e outros materiais. ',            
+          content: [
+            '“Utilizador” significa qualquer pessoa que acede ao Website.',
+            '“Conteúdo” inclui textos, imagens, gráficos, logótipos, vídeos, software e outros materiais.',
+          ],
         },
         {
           title: 'Condições de Utilização do Website',
