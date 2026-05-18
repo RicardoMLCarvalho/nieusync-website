@@ -420,7 +420,7 @@ export default function Home() {
               <div className="accent-line" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
               <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>Tudo o que precisa, numa só parceria.</h2>
               <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
-                A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Próxima, ágil e completamente orientada para os seus resultados reais.
+                A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Desenhamos soluções à medida que libertam o seu potencial e transformam metas em resultados.
               </p>
               <Link to="/sobre" className="btn-gradient">Sobre Nós →</Link>
             </div>
