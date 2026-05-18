@@ -432,7 +432,7 @@ export default function Home() {
                 { title: 'Decisão com dados', desc: 'Relatórios simples para escolhas inteligentes' },
                 { title: 'Preço transparente', desc: 'Sem surpresas, sem letras pequenas' },
               ].map(({ title, desc }) => (
-                <div key={title} className="stagger-child animate-on-scroll" style={{ borderLeft: '3px solid', borderImage: 'var(--grad-vertical) 1', paddingLeft: '18px' }}>
+                <div key={title} className="stagger-child animate-on-scroll" style={{ borderLeft: '3px solid var(--purple)', paddingLeft: '18px' }}>
                   <h3 style={{ fontSize: '15px', color: 'var(--blue)', marginBottom: '6px' }}>{title}</h3>
                   <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>{desc}</p>
                 </div>
