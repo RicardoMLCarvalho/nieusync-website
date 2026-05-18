@@ -393,7 +393,7 @@ export default function Home() {
                 }}>
                   <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)', lineHeight: '60px', display: 'block' }}>{step.num}</span>
                 </div>
-                <h3 style={{ color: 'var(--blue)', fontSize: '16px', marginBottom: '10px' }}>{step.title}</h3>
+                <h3 style={{ color: 'var(--purple)', fontSize: '16px', marginBottom: '10px' }}>{step.title}</h3>
                 <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '14px' }}>{step.desc}</p>
               </div>
             ))}
