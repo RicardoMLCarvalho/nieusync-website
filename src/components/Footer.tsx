@@ -142,7 +142,7 @@ export default function Footer() {
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', marginTop: '40px', padding: '16px 0', background: '#233877' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>
-            © {currentYear} NIEUSYNC — Todos os direitos reservados.
+            © {currentYear} NIEUSYNC, Sociedade Multidisciplinar de Advogados e Consultores SP, LDA — Todos os direitos reservados.
           </p>
         </div>
       </div>
