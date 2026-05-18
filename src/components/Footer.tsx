@@ -27,9 +27,10 @@ const lnk: React.CSSProperties = {
   fontWeight: 400,
   fontSize: '13px',
   color: 'rgba(255,255,255,0.70)',
-  marginBottom: '10px',
+  marginBottom: '4px',
   transition: 'color 0.2s ease',
   textDecoration: 'none',
+  lineHeight: 1.3,
 };
 
 export default function Footer() {
@@ -121,7 +122,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div style={{ background: 'rgba(0,0,0,0.22)', marginTop: '40px', padding: '16px 0' }}>
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', marginTop: '40px', padding: '16px 0', background: '#233877' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>
             © {currentYear} NIEUSYNC — Todos os direitos reservados.
