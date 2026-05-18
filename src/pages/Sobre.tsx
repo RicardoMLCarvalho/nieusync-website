@@ -76,7 +76,7 @@ export default function Sobre() {
           <div className="accent-line accent-line-white accent-line-center" />
           <h1 style={{ color: 'var(--white)', marginBottom: '20px' }}>Quem somos</h1>
           <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '580px', margin: '0 auto', fontSize: '18px' }}>
-            Uma consultora criada para sincronizar todas as dimensões do seu negócio, com a proximidade que as PMEs merecem.
+            Uma consultora criada para sincronizar todas as necessidades do seu negócio, com a proximidade que as PMEs merecem.
           </p>
         </div>
       </section>
@@ -91,11 +91,11 @@ export default function Sobre() {
               <h2 style={{ color: 'var(--blue)', marginBottom: '24px' }}>Expertise real, preços justos.</h2>
               <div style={{ borderLeft: '4px solid var(--purple)', paddingLeft: '24px', marginBottom: '28px', maxWidth: '680px' }}>
                 <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '18px', color: 'var(--blue)', lineHeight: 1.70 }}>
-                  "Nascemos da convicção de que as PMEs portuguesas merecem o mesmo nível de expertise que as grandes empresas — sem os preços inacessíveis nem a burocracia das grandes consultoras."
+                  "Nascemos da convicção absoluta de que as PMEs portuguesas merecem o mesmo nível de expertise que as grandes empresas — sem os preços inacessíveis nem a burocracia desnecessária."
                 </p>
               </div>
               <p style={{ color: 'rgba(35,56,119,0.70)' }}>
-                A NIEUSYNC nasceu no Alentejo Litoral e serve empresas em todo o país. Acreditamos que o crescimento sustentável começa com uma base sólida: jurídica, financeira e digital.
+                A NIEUSYNC serve empresas em todo o país. Acreditamos que o crescimento sustentável começa com uma base sólida: jurídica, financeira e digital.
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
@@ -177,10 +177,10 @@ export default function Sobre() {
         <div className="container animate-on-scroll">
           <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>Pronto para trabalhar connosco?</h2>
           <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '480px', margin: '0 auto 36px' }}>
-            Uma chamada sem compromisso é tudo o que precisamos para perceber como podemos ajudar.
+            Uma consulta sem compromisso é tudo o que precisamos para perceber como podemos ajudar.
           </p>
           <Link to="/contacto" className="btn-gradient" style={{ padding: '16px 40px' }}>
-            Marcar chamada gratuita →
+            Agendar Consulta →
           </Link>
         </div>
       </section>
