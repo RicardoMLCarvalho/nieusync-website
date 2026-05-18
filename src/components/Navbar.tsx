@@ -147,7 +147,7 @@ export default function Navbar() {
           </div>
 
           <Link to="/contacto" className="btn-gradient desktop-nav" style={{ fontSize: '12px', padding: '12px 24px' }}>
-            Marcar Chamada
+            Agendar Consulta
           </Link>
 
           {/* Hamburger */}
@@ -217,7 +217,7 @@ export default function Navbar() {
         ))}
 
         <Link to="/contacto" className="btn-gradient" style={{ marginTop: '20px', textAlign: 'center' }}>
-          Marcar Chamada
+          Agendar Consulta
         </Link>
       </div>
 
