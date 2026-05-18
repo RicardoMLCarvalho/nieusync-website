@@ -18,9 +18,10 @@ const colTitle: React.CSSProperties = {
   color: 'rgba(255,255,255,0.38)',
   letterSpacing: '0.12em',
   marginBottom: '14px',
+  textAlign: 'center',
 };
 
-const footerLink = (): React.CSSProperties => ({
+const link: React.CSSProperties = {
   display: 'block',
   fontFamily: 'Montserrat, sans-serif',
   fontWeight: 400,
@@ -29,7 +30,13 @@ const footerLink = (): React.CSSProperties => ({
   marginBottom: '10px',
   transition: 'color 0.2s ease',
   textDecoration: 'none',
-});
+};
+
+const separator: React.CSSProperties = {
+  borderRight: '1px solid rgba(255,255,255,0.10)',
+  paddingRight: '32px',
+  marginRight: '32px',
+};
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -37,13 +44,13 @@ export default function Footer() {
   const unhoverLink = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.70)';
 
   return (
-    <footer style={{ background: 'var(--grad-subtle)' }}>
+    <footer style={{ background: 'var(--blue)' }}>
       <div className="container" style={{ padding: '48px 40px 0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr 1fr 1fr', gap: '28px' }} className="footer-grid">
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0' }} className="footer-flex">
 
-          {/* Col 1 — Brand */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '16px' }} />
+          {/* Brand */}
+          <div style={{ ...separator, display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0, minWidth: '160px' }}>
+            <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '14px' }} />
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
               {[
                 { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
@@ -61,63 +68,49 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2 — Serviços A */}
-          <div>
+          {/* Serviços */}
+          <div style={{ ...separator, flex: 1 }}>
             <p style={colTitle}>Serviços</p>
-            {[
-              { to: '/servicos#direito', label: 'Direito Empresarial' },
-              { to: '/servicos#gestao', label: 'Gestão Estratégica' },
-              { to: '/servicos#marketing', label: 'Marketing Digital' },
-            ].map(({ to, label }) => (
-              <Link key={label} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-            ))}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+              {[
+                { to: '/servicos#direito', label: 'Direito Empresarial' },
+                { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
+                { to: '/servicos#gestao', label: 'Gestão Estratégica' },
+                { to: '/servicos#ti', label: 'Tecnologias de Informação' },
+                { to: '/servicos#marketing', label: 'Marketing Digital' },
+              ].map(({ to, label }) => (
+                <Link key={label} to={to} style={link} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+              ))}
+            </div>
           </div>
 
-          {/* Col 3 — Serviços B */}
-          <div>
-            <p style={{ ...colTitle, opacity: 0 }}>.</p>
-            {[
-              { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
-              { to: '/servicos#ti', label: 'Tecnologias de Informação' },
-            ].map(({ to, label }) => (
-              <Link key={label} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-            ))}
-          </div>
-
-          {/* Col 4 — Contacto */}
-          <div>
+          {/* Contacto */}
+          <div style={{ ...separator, flexShrink: 0, minWidth: '180px' }}>
             <p style={colTitle}>Contacto</p>
             {[
               { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
               { label: '(+351) 933 644 596', href: 'tel:+351933644596' },
               { label: 'geral@nieusync.com', href: 'mailto:geral@nieusync.com' },
             ].map(({ label, href }) => (
-              <a key={label} href={href} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
+              <a key={label} href={href} style={link} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
             ))}
           </div>
 
-          {/* Col 5 — Legal A */}
-          <div>
+          {/* Legal */}
+          <div style={{ flex: 1 }}>
             <p style={colTitle}>Legal</p>
-            {[
-              { to: '/avisos-legais', label: 'Avisos Legais' },
-              { to: '/codigo-conduta', label: 'Código de Conduta' },
-              { to: '/termos-condicoes', label: 'Termos e Condições' },
-            ].map(({ to, label }) => (
-              <Link key={to} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-            ))}
-          </div>
-
-          {/* Col 6 — Legal B */}
-          <div>
-            <p style={{ ...colTitle, opacity: 0 }}>.</p>
-            {[
-              { to: '/politica-cookies', label: 'Política de Cookies' },
-              { to: '/privacidade', label: 'Política de Privacidade' },
-              { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' },
-            ].map(({ to, label }) => (
-              <Link key={to} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-            ))}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+              {[
+                { to: '/avisos-legais', label: 'Avisos Legais' },
+                { to: '/politica-cookies', label: 'Política de Cookies' },
+                { to: '/codigo-conduta', label: 'Código de Conduta' },
+                { to: '/privacidade', label: 'Política de Privacidade' },
+                { to: '/termos-condicoes', label: 'Termos e Condições' },
+                { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' },
+              ].map(({ to, label }) => (
+                <Link key={to} to={to} style={link} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+              ))}
+            </div>
           </div>
 
         </div>
@@ -134,13 +127,11 @@ export default function Footer() {
 
       <style>{`
         @media (max-width: 1024px) {
-          .footer-grid { grid-template-columns: repeat(3,1fr) !important; }
-        }
-        @media (max-width: 768px) {
-          .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+          .footer-flex { flex-wrap: wrap !important; gap: 28px !important; }
+          .footer-flex > div { border-right: none !important; padding-right: 0 !important; margin-right: 0 !important; min-width: calc(50% - 14px) !important; }
         }
         @media (max-width: 480px) {
-          .footer-grid { grid-template-columns: 1fr !important; }
+          .footer-flex > div { min-width: 100% !important; }
         }
       `}</style>
     </footer>
