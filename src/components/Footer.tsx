@@ -29,14 +29,12 @@ export default function Footer() {
 
   return (
     <footer style={{ background: 'var(--grad-subtle)' }}>
-      <div className="container" style={{ padding: '64px 40px 0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1.2fr', gap: '40px' }} className="footer-grid">
+      <div className="container" style={{ padding: '48px 40px 0' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1.2fr', gap: '32px' }} className="footer-grid">
+
           {/* Col 1 — Brand */}
-          <div>
-            <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="160" style={{ display: 'block', marginBottom: '16px' }} />
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(255,255,255,0.65)', marginBottom: '20px' }}>
-              Sincronize o seu negócio.
-            </p>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="140" style={{ display: 'block', marginBottom: '16px' }} />
             <div style={{ display: 'flex', gap: '12px' }}>
               {[
                 { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
@@ -56,7 +54,7 @@ export default function Footer() {
 
           {/* Col 2 — Navigation */}
           <div>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '16px' }}>
+            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '14px' }}>
               Navegação
             </p>
             {[
@@ -72,14 +70,15 @@ export default function Footer() {
 
           {/* Col 3 — Services */}
           <div>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '16px' }}>
+            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '14px' }}>
               Serviços
             </p>
             {[
               { to: '/servicos#direito', label: 'Direito Empresarial' },
               { to: '/servicos#gestao', label: 'Gestão Estratégica' },
               { to: '/servicos#marketing', label: 'Marketing Digital' },
-              { to: '/contacto', label: 'Book a Call' },
+              { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
+              { to: '/servicos#ti', label: 'Tecnologias de Informação' },
             ].map(({ to, label }) => (
               <Link key={label} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
             ))}
@@ -87,7 +86,7 @@ export default function Footer() {
 
           {/* Col 4 — Contact */}
           <div>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '16px' }}>
+            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '14px' }}>
               Contacto
             </p>
             {[
@@ -102,7 +101,7 @@ export default function Footer() {
 
           {/* Col 5 — Legal */}
           <div>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '16px' }}>
+            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '14px' }}>
               Legal
             </p>
             {[
@@ -120,26 +119,11 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div style={{ background: 'rgba(0,0,0,0.22)', marginTop: '48px', padding: '20px 0' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+      <div style={{ background: 'rgba(0,0,0,0.22)', marginTop: '40px', padding: '16px 0' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>
             © {currentYear} NIEUSYNC — Todos os direitos reservados.
           </p>
-          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-            {[
-              { label: 'Política de Privacidade', to: '/privacidade' },
-              { label: 'Termos e Condições', to: '/termos-condicoes' },
-              { label: 'Política de Cookies', to: '/politica-cookies' },
-            ].map(({ label, to }) => (
-              <Link key={to} to={to}
-                style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.45)', transition: 'color 0.2s ease', textDecoration: 'none' }}
-                onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.70)'}
-                onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.45)'}
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
 
