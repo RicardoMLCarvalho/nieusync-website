@@ -144,28 +144,28 @@ export default function Contacto() {
                       <div><label>Nome da empresa</label><input type="text" name="empresa" value={form.empresa} onChange={handleChange} placeholder="A sua empresa" /></div>
                     </div>
                     <div>
-                      <label>Sector de actividade</label>
-                      <select name="sector" value={form.sector} onChange={handleChange} style={{ color: form.sector ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }}>
+                      <label>Sector de actividade *</label>
+                      <select name="sector" value={form.sector} onChange={handleChange} style={{ color: form.sector ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }} required>
                         <option value="" style={{ color: 'rgba(35,56,119,0.40)' }}>Seleccione o sector</option>
                         {['Tecnologia', 'Comércio', 'Serviços', 'Construção', 'Agro', 'Turismo', 'Saúde', 'Outro'].map((s) => <option key={s} value={s} style={{ color: 'var(--blue)' }}>{s}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label>Principal desafio</label>
-                      <select name="desafio" value={form.desafio} onChange={handleChange} style={{ color: form.desafio ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }}>
+                      <label>Principal desafio *</label>
+                      <select name="desafio" value={form.desafio} onChange={handleChange} style={{ color: form.desafio ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }} required>
                         <option value="" style={{ color: 'rgba(35,56,119,0.40)' }}>Seleccione o desafio principal</option>
                         {['Questões legais', 'Organização financeira', 'Marketing e crescimento', 'Processos e automação', 'Não sei por onde começar'].map((d) => <option key={d} value={d} style={{ color: 'var(--blue)' }}>{d}</option>)}
                       </select>
                     </div>
                     <div><label>Mensagem (opcional)</label><textarea name="mensagem" value={form.mensagem} onChange={handleChange} rows={4} placeholder="Conte-nos mais sobre o seu negócio..." style={{ resize: 'vertical' }} /></div>
-
+                  
                     <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', textTransform: 'none', letterSpacing: 'normal', fontSize: '13px', fontWeight: 400, color: 'rgba(35,56,119,0.70)' }}>
                       <div onClick={() => setForm((p) => ({ ...p, rgpd: !p.rgpd }))} style={{ width: '18px', height: '18px', minWidth: '18px', border: '2px solid var(--purple)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: form.rgpd ? 'var(--purple)' : 'var(--white)', transition: 'background 0.2s ease', marginTop: '2px', cursor: 'pointer' }}>
                         {form.rgpd && <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round"><path d="M2 6l3 3 5-5" /></svg>}
                       </div>
                       <span>Li e aceito a <a href="/privacidade" style={{ color: 'var(--purple)', textDecoration: 'underline' }}>Política de Privacidade</a> e autorizo o tratamento dos meus dados para efeitos de contacto.</span>
                     </label>
-
+                  
                     <button type="submit" className="btn-gradient" disabled={!form.rgpd} style={{ width: '100%', padding: '16px', fontSize: '14px', opacity: form.rgpd ? 1 : 0.5, cursor: form.rgpd ? 'pointer' : 'not-allowed', marginTop: '8px' }}>
                       Enviar pedido →
                     </button>
