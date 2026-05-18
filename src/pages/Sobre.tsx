@@ -89,7 +89,7 @@ export default function Sobre() {
               <span className="section-label">A nossa missão</span>
               <div className="accent-line" />
               <h2 style={{ color: 'var(--blue)', marginBottom: '24px' }}>Expertise real, preços justos.</h2>
-              <div style={{ '4px solid var(--purple)', paddingLeft: '24px', marginBottom: '28px', maxWidth: '680px' }}>
+              <div style={{ borderLeft: '4px solid var(--purple)', paddingLeft: '24px', marginBottom: '28px', maxWidth: '680px' }}>
                 <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '18px', color: 'var(--blue)', lineHeight: 1.70 }}>
                   "Nascemos da convicção de que as PMEs portuguesas merecem o mesmo nível de expertise que as grandes empresas — sem os preços inacessíveis nem a burocracia das grandes consultoras."
                 </p>
