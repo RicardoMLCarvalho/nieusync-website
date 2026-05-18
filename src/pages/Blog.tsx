@@ -30,7 +30,7 @@ export default function Blog() {
           <div className="accent-line accent-line-white accent-line-center" />
           <h1 style={{ color: 'var(--white)', marginBottom: '16px' }}>Blog & Recursos</h1>
           <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '520px', margin: '0 auto', fontSize: '18px' }}>
-            Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e IA para empresas que querem crescer com solidez.
+            Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e IA, para empresas que querem crescer com solidez.
           </p>
         </div>
       </section>
@@ -117,7 +117,7 @@ export default function Blog() {
               <div className="card" style={{ marginTop: '20px' }}>
                 <h3 style={{ fontSize: '16px', color: 'var(--blue)', marginBottom: '10px' }}>Precisa de ajuda?</h3>
                 <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '16px' }}>
-                  Fale directamente com a nossa equipa sem compromisso.
+                  Fale directamente com a nossa equipa, sem qualquer compromisso.
                 </p>
                 <Link to="/contacto" className="btn-gradient" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                   Agendar Consulta →
