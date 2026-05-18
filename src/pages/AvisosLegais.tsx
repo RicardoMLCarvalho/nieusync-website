@@ -39,12 +39,34 @@ export default function AvisosLegais() {
            ],
         },
         {
-          title: 'Lei Aplicável e Foro Competente',
-          content: 'Este website e os seus termos estão sujeitos à legislação portuguesa. Em caso de litígio, é competente o tribunal da comarca de Santiago do Cacém, com renúncia a qualquer outro.',
+          title: 'Estudos de caso, insights e resultados',
+          content: [
+            'Estudos de caso, testemunhos e indicadores apresentados ilustram experiências específicas; não garantem resultados idênticos. O desempenho efetivo depende de fatores contextuais (setor, maturidade organizacional, dados, equipa, tecnologia, orçamento e calendário).',
+            'Declarações prospetivas (expectativas, metas, intenções) refletem o entendimento à data e estão sujeitas a mudança sem aviso.',            
+           ],
         },
         {
-          title: 'Alterações aos Avisos Legais',
-          content: 'A NIEUSYNC reserva-se o direito de actualizar estes Avisos Legais a qualquer momento, sem aviso prévio. Recomendamos a consulta periódica deste documento. A data da última actualização está indicada no topo da página.',
+          title: 'Segurança e divulgação responsável',
+          content: [
+            'É proibido contornar ou testar controlos de segurança sem autorização escrita.',
+            'Incentivamos a divulgação responsável de vulnerabilidades para geral@nieusync.com, com detalhes suficientes para reprodução. A submissão não confere remuneração, salvo programas comunicados.',            
+           ],
+        },
+        {
+          title: 'Limitação de responsabilidade',
+          content: [
+            'Na extensão máxima permitida por lei, a NIEUSYNC não responde por (i) lucros cessantes, (ii) perda de dados, (iii) danos indiretos, consequentes, especiais ou punitivos decorrentes do uso ou da incapacidade de uso do website ou do conteúdo.',
+            'Nada neste Aviso exclui responsabilidades que não possam ser excluídas por lei (v.g., dolo, morte ou lesões pessoais por negligência). Os direitos legais inderrogáveis do consumidor mantêm‑se intactos.',            
+           ],
+        },
+        {
+          title: 'Conformidade regulatória e referência legal',
+          content: [
+            'O tratamento de dados pessoais é regido pelo RGPD e pela Lei n.º 58/2019 (execução nacional). Consulte a nossa Política de Privacidade para mais detalhes.',
+            'A utilização de cookies e tecnologias semelhantes segue a Lei n.º 41/2004 (ePrivacy) e a nossa Política de Cookies.', 
+            'Quanto à prestação de serviços em linha, observamos o Decreto‑Lei n.º 7/2004, incluindo deveres de informação e o princípio da ausência de dever geral de vigilância sobre conteúdos de terceiros.', 
+            'A nível da União, o Digital Services Act (Regulamento (UE) 2022/2065) mantém o princípio de ausência de obrigação geral de monitorização para prestadores intermediários.', 
+           ],
         },
       ]}
     />
