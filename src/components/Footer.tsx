@@ -10,8 +10,6 @@ function FacebookIcon() {
   return <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>;
 }
 
-const FOOTER_BG = '#1b2c5e';
-
 const colTitle: React.CSSProperties = {
   fontFamily: 'Montserrat, sans-serif',
   fontWeight: 700,
@@ -29,10 +27,9 @@ const lnk: React.CSSProperties = {
   fontWeight: 400,
   fontSize: '13px',
   color: 'rgba(255,255,255,0.70)',
-  marginBottom: '8px',
+  marginBottom: '10px',
   transition: 'color 0.2s ease',
   textDecoration: 'none',
-  lineHeight: 1.4,
 };
 
 export default function Footer() {
@@ -41,16 +38,16 @@ export default function Footer() {
   const unhoverLink = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.70)';
 
   const divider = (
-    <div style={{ width: '1px', background: 'rgba(255,255,255,0.10)', alignSelf: 'stretch', flexShrink: 0, margin: '0 28px' }} />
+    <div style={{ width: '1px', background: 'rgba(255,255,255,0.10)', alignSelf: 'stretch', flexShrink: 0 }} />
   );
 
   return (
-    <footer style={{ background: FOOTER_BG }}>
+    <footer style={{ background: '#233877' }}>
       <div className="container" style={{ padding: '40px 40px 0' }}>
-        <div style={{ display: 'flex', alignItems: 'stretch' }} className="footer-flex">
+        <div style={{ display: 'flex', alignItems: 'stretch', gap: '0' }} className="footer-flex">
 
           {/* Brand */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, width: '160px', paddingRight: '28px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, minWidth: '160px', paddingRight: '32px' }}>
             <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '14px' }} />
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
               {[
@@ -72,9 +69,9 @@ export default function Footer() {
           {divider}
 
           {/* Serviços */}
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, padding: '0 28px' }}>
             <p style={colTitle}>Serviços</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px', alignItems: 'start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px' }}>
               {[
                 { to: '/servicos#direito', label: 'Direito Empresarial' },
                 { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
@@ -90,7 +87,7 @@ export default function Footer() {
           {divider}
 
           {/* Contacto */}
-          <div style={{ flex: 1 }}>
+          <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px' }}>
             <p style={colTitle}>Contacto</p>
             {[
               { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
@@ -104,9 +101,9 @@ export default function Footer() {
           {divider}
 
           {/* Legal */}
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, paddingLeft: '28px' }}>
             <p style={colTitle}>Legal</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px', alignItems: 'start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px' }}>
               {[
                 { to: '/avisos-legais', label: 'Avisos Legais' },
                 { to: '/politica-cookies', label: 'Política de Cookies' },
@@ -124,7 +121,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', marginTop: '40px', padding: '16px 0' }}>
+      <div style={{ background: 'rgba(0,0,0,0.22)', marginTop: '40px', padding: '16px 0' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>
             © {currentYear} NIEUSYNC — Todos os direitos reservados.
@@ -135,7 +132,7 @@ export default function Footer() {
       <style>{`
         @media (max-width: 1024px) {
           .footer-flex { flex-wrap: wrap !important; gap: 24px !important; }
-          .footer-flex > div { min-width: calc(50% - 12px) !important; }
+          .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 0 !important; }
         }
         @media (max-width: 480px) {
           .footer-flex > div { min-width: 100% !important; }
