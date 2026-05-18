@@ -40,35 +40,90 @@ export default function TermosCondicoes() {
         },
         {
           title: 'Direitos de Propriedade Intelectual',
-          content: 'Os materiais, relatórios, estratégias e outros entregáveis produzidos no âmbito dos serviços prestados são propriedade da NIEUSYNC até integral pagamento do preço acordado. Após pagamento, os direitos de utilização são transferidos para o cliente nos termos definidos no contrato.',
-        },
-        {
-          title: 'Confidencialidade',
           content: [
-            'A NIEUSYNC compromete-se a manter a confidencialidade de toda a informação partilhada pelos clientes.',
-            'Os clientes comprometem-se a não divulgar informações confidenciais da NIEUSYNC.',
-            'As obrigações de confidencialidade mantêm-se após a conclusão da relação contratual.',
+            'Salvo indicação em contrário, o Conteúdo é propriedade da Equipa de TI da NIEUSYNC ou de licenciantes e encontra‑se protegido por direitos de autor, marcas e demais direitos.',
+            'Não são permitidas cópias, modificações, distribuição, exploração comercial ou criação de obras derivadas sem autorização prévia por escrito.',
+            'As marcas e logótipos exibidos são marcas registadas dos respetivos titulares; não é concedida qualquer licença.',
           ],
         },
         {
-          title: 'Limitação de Responsabilidade',
-          content: 'A responsabilidade da NIEUSYNC por danos causados ao cliente está limitada ao valor total dos serviços prestados no mês em que ocorreu o facto danoso. A NIEUSYNC não é responsável por danos indirectos, lucros cessantes ou danos emergentes.',
-        },
-        {
-          title: 'Resolução do Contrato',
+          title: 'Conteúdos do Utilizador (quando aplicável)',
           content: [
-            'Qualquer das partes pode resolver o contrato com aviso prévio de 30 dias.',
-            'A resolução imediata é possível em caso de incumprimento grave por qualquer das partes.',
-            'Em caso de resolução, os serviços prestados até à data são devidos na totalidade.',
+            'O Utilizador garante ter os direitos necessários sobre quaisquer conteúdos que submeta (“Conteúdos do Utilizador”) e que os mesmos não violam a lei nem direitos de terceiros.',
+            'Ao submeter, concede à Equipa de TI da NIEUSYNC uma licença mundial, não exclusiva, gratuita, por todo o período de proteção, para hospedar, reproduzir e exibir esses conteúdos para operação do Website.',
+            'Mecanismo de notificação: pedidos de remoção por alegada ilicitude podem ser enviados para [geral@nieusync.com], com fundamentos e prova suficientes. Esta abordagem cumpre as obrigações de mecanismos de “notice‑and‑action” previstas no Regulamento (UE) 2022/2065 – Digital Services Act (aplicável desde 17.02.2024).',
+            'A Equipa de TI da NIEUSYNC pode moderar, remover ou bloquear Conteúdos do Utilizador que infrinjam estes Termos.',
           ],
         },
         {
-          title: 'Alterações aos Termos',
-          content: 'A NIEUSYNC reserva-se o direito de actualizar estes Termos e Condições. As alterações produzem efeitos imediatos para novos contratos. Os contratos em vigor mantêm-se sujeitos aos termos vigentes à data da sua celebração, salvo acordo em contrário.',
+          title: 'Ligações e Serviços de Terceiros',
+          content: [
+            'O Website pode conter hiperligações para websites de terceiros. A Equipa de TI da NIEUSYNC não controla nem é responsável pelo respetivo conteúdo ou práticas.',
+            'A utilização de serviços de terceiros está sujeita aos seus termos e políticas.',            
+          ],
         },
         {
-          title: 'Lei Aplicável',
-          content: 'Os presentes Termos e Condições são regidos pela lei portuguesa. Em caso de litígio, as partes comprometem-se a tentar resolver o conflito amigavelmente antes de recorrer aos tribunais. É competente o tribunal da comarca de Santiago do Cacém.',
+          title: 'Privacidade e Cookies',
+          content: [
+            'O tratamento de dados pessoais é descrito na Política de Privacidade e cumpre o RGPD e a lei nacional de execução (Lei n.º 58/2019).',
+            'O uso de cookies e tecnologias semelhantes é descrito na Política de Cookies, em conformidade com a Lei n.º 41/2004 (e alterações).',
+          ],
+        },
+        {
+          title: 'Informação, Conteúdos Profissionais e Isenção de Responsabilidade',
+          content: [
+            'O Conteúdo do Website tem natureza informativa. Salvo indicação expressa, não constitui aconselhamento jurídico, fiscal, financeiro ou outro.',
+            'A Equipa de TI da NIEUSYNC envida esforços razoáveis para assegurar exatidão e atualidade, mas não garante que o Conteúdo esteja livre de erros, omissões ou interrupções.',
+          ],
+        },
+        {
+          title: 'Compras, Subscrições e Direito de Livre Resolução (quando aplicável)',
+          content: [
+            'Condições comerciais (preços, impostos, renovações, cancelamentos) serão apresentadas no momento da compra.',
+            'Consumidores UE: podem beneficiar do direito de livre resolução no prazo de 14 dias para contratos celebrados à distância, sujeito às exceções legais (por exemplo, início de prestação de serviços com consentimento expresso). Baseado na Diretiva 2011/83/UE (versões nacionais aplicáveis).',
+            'Reembolsos serão processados usando o mesmo meio de pagamento, salvo acordo diverso.',
+          ],
+        },
+        {
+          title: 'Segurança e Divulgação Responsável',
+          content: [
+            'Não é permitido testar ou contornar controlos de segurança sem autorização por escrito.',
+            'A Equipa de TI da NIEUSYNC incentiva a divulgação responsável de vulnerabilidades via [geral@nieusync.com]; não são devidos pagamentos, salvo programas explicitamente comunicados.',
+          ],
+        },
+        {
+          title: 'Garantias e Limitação de Responsabilidade',
+          content: [
+            'O Website é fornecido “tal como está” e “conforme disponível”. Na máxima extensão permitida por lei, excluem‑se garantias implícitas de comerciabilidade, adequação a um fim específico e não infração.',
+            'A NIEUSYNC não será responsável por (i) lucros cessantes, (ii) perda de dados, (iii) danos indiretos, emergentes ou punitivos; exceptuam‑se responsabilidades que a lei não permita excluir (por ex., morte ou lesões por negligência).',
+            'Se o Utilizador for consumidor, as limitações acima não prejudicam os seus direitos legais inderrogáveis.',
+          ],
+        },
+        {
+          title: 'Indemnização',
+          content: 'O Utilizador concorda em indemnizar a NIEUSYNC por quaisquer perdas, custos e despesas (incl. honorários legais) resultantes de violação destes Termos ou de utilização ilícita do Website.',
+        },
+        {
+          title: 'Força Maior',
+          content: 'A NIEUSYNC não é responsável por incumprimentos resultantes de eventos fora do seu controlo razoável (p. ex., falhas de rede, ciber ataques, catástrofes naturais, entre outros).',
+        },
+        {
+          title: 'Lei Aplicável e Foro',
+          content: [
+            'Estes Termos regem‑se pela lei portuguesa, incluindo o DL n.º 7/2004 (serviços da sociedade da informação / comércio eletrónico). ',
+            'Os tribunais da comarca de Santiago do Cacém terão competência exclusiva, sem prejuízo das regras de proteção do consumidor e de competência territorial obrigatória aplicáveis na UE/EEE.',
+            'Resolução de Litígios de Consumo: a antiga Plataforma ODR da UE foi descontinuada em 20/07/2025; para apoio e vias alternativas de resolução de litígios, consulte os recursos atualizados da Comissão Europeia.',
+          ],
+        },
+        {
+          title: 'Disposições Gerais',
+          content: [
+            'Cessação: A Equipa de TI da NIEUSYNC pode suspender ou terminar o acesso do Utilizador por violação destes Termos.',
+            'Cessão: o Utilizador não pode ceder os seus direitos sem consentimento escrito da NIEUSYNC.',
+            'Autonomia das Cláusulas: a invalidade de alguma cláusula não afeta a validade das demais.',
+            'Ausência de Renúncia: a tolerância de incumprimento não constitui renúncia.',
+            'Prioridade Linguística: Em caso de divergência, prevalece a versão em português.',
+          ],
         },
       ]}
     />
