@@ -17,12 +17,10 @@ export default function AvisosLegais() {
             ],
         },
         {
-          title: 'Propriedade Intelectual',
+          title: 'Ausência de relação profissional e confidencialidade',
           content: [
-            'Todo o conteúdo deste website, incluindo textos, imagens, logótipos, gráficos e código, é propriedade da NIEUSYNC ou dos seus licenciantes.',
-            'É proibida a reprodução, distribuição ou utilização de qualquer conteúdo sem autorização prévia e escrita da NIEUSYNC.',
-            'A marca NIEUSYNC e o respectivo logótipo são marcas registadas da empresa.',
-            'Os artigos do blog podem ser partilhados com indicação clara da fonte e link para o artigo original.',
+            'O contacto através do website não estabelece, por si, qualquer relação cliente‑consultor (jurídica, fiscal, financeira, tecnológica ou outra). Tal relação apenas se considera constituída após aceitação formal, por escrito, dos termos de prestação de serviços entre a NIEUSYNC e o Cliente.',
+            'Não envie informação confidencial através de formulários genéricos do website. A NIEUSYNC não pode garantir a confidencialidade de comunicações não solicitadas ou não encriptadas.',            
           ],
         },
         {
