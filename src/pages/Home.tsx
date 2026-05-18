@@ -91,9 +91,7 @@ export default function Home() {
 
               <h1 style={{ color: 'var(--white)', marginBottom: '24px', fontSize: '64px' }}>
                 WE ARE THE BASIS FOR <br />
-                <span>
-                  YOUR BUSINESS TO FLY
-                </span>
+                <span style={{ color: 'var(--purple)' }}>YOUR BUSINESS</span> TO FLY
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', maxWidth: '520px', marginBottom: '36px' }}>
