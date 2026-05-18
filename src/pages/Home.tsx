@@ -128,7 +128,7 @@ export default function Home() {
                     transition: 'background 0.25s ease, color 0.25s ease, transform 0.2s ease',
                   }}
                 >
-                  Marcar Chamada Gratuita →
+                  Agendar Consulta →
                 </Link>
                 <Link to="/servicos" className="btn-outline-white">
                   Conhecer os Serviços
