@@ -6,7 +6,7 @@ export default function AvisosLegais() {
       title="Avisos Legais"
       subtitle="Informação jurídica obrigatória"
       lastUpdated="Outubro de 2025"
-      docTitle="NIEUSYNC, Sociedade Multidisciplinar de Advogados e Consultores SP, Lda."
+      docTitle="Avisos Legais — NIEUSYNC"
       sections={[
         {
           title: 'Enquadramento e âmbito',
