@@ -614,7 +614,7 @@ export default function Home() {
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span className="section-label">Blog & Recursos</span>
-            <div className="accent-line" style={{ background: 'var(--blue)', backgroundImage: 'none' }} />
+            <div className="accent-line accent-line-center" style={{ background: 'var(--blue)', backgroundImage: 'none' }}/>
             <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Conhecimento que transforma</h2>
             <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos sobre Direito, Gestão, Finanças, Marketing, Tecnologia e IA para empresas.</p>
           </div>
