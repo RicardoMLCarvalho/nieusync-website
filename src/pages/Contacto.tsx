@@ -47,11 +47,11 @@ export default function Contacto() {
       <section style={{ background: 'var(--grad-main)', padding: '80px 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', width: '400px', height: '400px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.08)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative' }}>
-          <span className="section-label section-label-white">Contacto</span>
+          <span className="section-label section-label-white">Contactos</span>
           <div className="accent-line accent-line-white accent-line-center" />
           <h1 style={{ color: 'var(--white)', marginBottom: '16px' }}>Fale connosco</h1>
           <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '560px', margin: '0 auto', fontSize: '18px' }}>
-            Uma chamada de 30 minutos pode mudar a forma como gere o seu negócio.
+            Uma consulta de 30 minutos pode mudar a forma como gere o seu negócio.
           </p>
         </div>
       </section>
@@ -119,10 +119,10 @@ export default function Contacto() {
             <div className="animate-on-scroll">
               <div className="card-featured">
                 <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '22px', color: 'var(--blue)', marginBottom: '8px' }}>
-                  Marcar chamada gratuita de 30 min
+                  Agendar consulta de 30 min
                 </h3>
                 <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'var(--purple)', marginBottom: '28px' }}>
-                  Preencha o formulário e entraremos em contacto no próprio dia.
+                  Preencha o formulário e entraremos em contacto o mais rápido possível.
                 </p>
 
                 {submitted ? (
@@ -131,7 +131,7 @@ export default function Contacto() {
                       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
                     </div>
                     <h3 style={{ color: 'var(--blue)', marginBottom: '10px', fontSize: '20px' }}>Pedido enviado!</h3>
-                    <p style={{ color: 'rgba(35,56,119,0.65)', fontSize: '15px' }}>Entraremos em contacto em menos de 24 horas úteis.</p>
+                    <p style={{ color: 'rgba(35,56,119,0.65)', fontSize: '15px' }}>Entraremos em contacto o mais rápido possível.</p>
                   </div>
                 ) : (
                   <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -170,7 +170,7 @@ export default function Contacto() {
                       Enviar pedido →
                     </button>
                     <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.45)', textAlign: 'center' }}>
-                      Resposta garantida em menos de 24 horas úteis.
+                      Resposta garantida no prazo de 24 horas úteis.
                     </p>
                   </form>
                 )}
