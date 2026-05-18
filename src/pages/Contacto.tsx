@@ -140,19 +140,19 @@ export default function Contacto() {
                       <div><label>Email profissional *</label><input type="email" name="email" value={form.email} onChange={handleChange} placeholder="email@empresa.pt" required /></div>
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="form-grid">
-                      <div><label>Telefone *</label><input type="tel" name="telefone" value={form.telefone} onChange={handleChange} placeholder="+351 ..." required /></div>
+                      <div><label>Telefone *</label><input type="tel" name="telefone" value={form.telefone} onChange={handleChange} placeholder="+351 912 345 678" required /></div>
                       <div><label>Nome da empresa</label><input type="text" name="empresa" value={form.empresa} onChange={handleChange} placeholder="A sua empresa" /></div>
                     </div>
                     <div>
                       <label>Sector de actividade</label>
-                      <select name="sector" value={form.sector} onChange={handleChange}>
+                      <select name="sector" value={form.sector} onChange={handleChange} style={{ color: form.desafio ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }}>
                         <option value="">Seleccione o sector</option>
                         {['Tecnologia', 'Comércio', 'Serviços', 'Construção', 'Agro', 'Turismo', 'Saúde', 'Outro'].map((s) => <option key={s} value={s}>{s}</option>)}
                       </select>
                     </div>
                     <div>
                       <label>Principal desafio</label>
-                      <select name="desafio" value={form.desafio} onChange={handleChange}>
+                      <select name="desafio" value={form.desafio} onChange={handleChange} style={{ color: form.desafio ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }}>
                         <option value="">Seleccione o desafio principal</option>
                         {['Questões legais', 'Organização financeira', 'Marketing e crescimento', 'Processos e automação', 'Não sei por onde começar'].map((d) => <option key={d} value={d}>{d}</option>)}
                       </select>
