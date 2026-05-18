@@ -76,7 +76,7 @@ export default function Sobre() {
           <div className="accent-line accent-line-white accent-line-center" />
           <h1 style={{ color: 'var(--white)', marginBottom: '20px' }}>Quem somos</h1>
           <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '580px', margin: '0 auto', fontSize: '18px' }}>
-            Uma consultora criada para sincronizar todas as necessidades do seu negócio, com a proximidade que as PMEs merecem.
+            Um parceiro fundamental para sincronizar todas as necessidades do seu negócio, com a proximidade que as PMEs merecem.
           </p>
         </div>
       </section>
