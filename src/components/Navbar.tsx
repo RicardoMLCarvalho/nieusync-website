@@ -52,7 +52,7 @@ export default function Navbar() {
     { to: '/', label: 'Início' },
     { to: '/servicos', label: 'Serviços' },
     { to: '/blog', label: 'Blog' },
-    { to: '/contactos', label: 'Contactos' },
+    { to: '/contacto', label: 'Contactos' },
   ];
 
   return (
