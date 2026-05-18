@@ -384,7 +384,7 @@ export default function Home() {
             ].map((step, i) => (
               <div key={step.num} className="stagger-child animate-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
                 {i < 3 && (
-                  <div style={{ position: 'absolute', right: '-12%', top: '28px', color: 'rgba(255,255,255,0.18)', fontSize: '20px', fontWeight: 700 }} className="step-arrow">→</div>
+                  <div style={{ position: 'absolute', right: '-12%', top: '30px', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.18)', fontSize: '20px', fontWeight: 700 }} className="step-arrow">→</div>
                 )}
                 <div style={{
                   width: '60px', height: '60px', borderRadius: '50%',
