@@ -90,14 +90,14 @@ export default function Home() {
               </div>
 
               <h1 style={{ color: 'var(--white)', marginBottom: '24px' }}>
-                Sincronize o seu<br />
+               WE ARE THE BASIS FOR <br />
                 <span style={{ textDecoration: 'underline', textDecorationColor: 'var(--purple)', textDecorationThickness: '3px', textUnderlineOffset: '6px' }}>
-                  negócio.
+                  YOUR BUSINESS TO FLY
                 </span>
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', maxWidth: '520px', marginBottom: '36px' }}>
-                Direito, Gestão Financeira, Marketing e Tecnologia de Informação integrados numa única parceria de confiança. A consultora que as empresas realmente precisam.
+                Direito, Gestão Financeira, Marketing e Tecnologia de Informação integrados numa única parceria de confiança.
               </p>
 
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
