@@ -5,8 +5,8 @@ export default function CodigoConduta() {
     <LegalPage
       title="Código de Conduta"
       subtitle="Princípios e valores que guiam a nossa actividade"
-      lastUpdated="Janeiro 2025"
-      docTitle="Código de Conduta — NIEUSYNC"
+      lastUpdated="Agosto de 2025"
+      docTitle="NIEUSYNC, Sociedade Multidisciplinar de Advogados e Consultores SP, Lda."
       sections={[
         {
           title: 'Propósito e Âmbito',
