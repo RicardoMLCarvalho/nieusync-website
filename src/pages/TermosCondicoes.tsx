@@ -25,21 +25,17 @@ export default function TermosCondicoes() {
           ],
         },
         {
-          title: 'Condições de Utilização do Website',
+          title: 'Elegibilidade e Conta',
           content: [
-            'O website destina-se exclusivamente a fins informativos e comerciais legítimos.',
-            'É proibida qualquer utilização do website que viole a lei, os direitos de terceiros ou a boa-fé.',
-            'Não é permitida a extracção automática de dados (scraping) do website sem autorização.',
-            'A NIEUSYNC pode suspender o acesso ao website a qualquer momento, sem aviso prévio.',
+            'O Website destina‑se a maiores de 18 anos ou a menores com consentimento e supervisão de representante legal.',
+            'Quando aplicável, a criação de conta requer dados exatos e completos. O Utilizador é responsável por manter a confidencialidade das credenciais e por toda a atividade na conta.',            
           ],
         },
         {
-          title: 'Preços e Condições de Pagamento',
+          title: 'Utilização Permitida',
           content: [
-            'Os preços dos serviços são apresentados em proposta comercial individualizada.',
-            'Todos os preços são indicados em euros e acrescidos de IVA à taxa legal em vigor.',
-            'As condições de pagamento são definidas contratualmente.',
-            'O incumprimento dos prazos de pagamento pode resultar na suspensão dos serviços.',
+            'É concedida ao Utilizador uma licença pessoal, limitada, não exclusiva e revogável para aceder e usar o Website de acordo com a lei e estes Termos.',
+            'Proibições: (i) engenharia reversa, scraping ou mineração automatizada não autorizada; (ii) upload de código malicioso; (iii) violação de direitos de terceiros; (iv) interferência com a segurança ou disponibilidade; (v) utilização do Website para fins ilícitos, enganosos ou fraudulentos.',
           ],
         },
         {
