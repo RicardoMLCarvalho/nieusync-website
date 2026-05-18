@@ -102,7 +102,7 @@ export default function LegalPage({ title, subtitle, lastUpdated, sections, docT
                   <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(35,56,119,0.45)' }}>
                     Para questões relacionadas com este documento, contacte-nos através do email{' '}
                     <a href="mailto:geral@nieusync.com" style={{ color: 'var(--purple)', textDecoration: 'underline' }}>geral@nieusync.com</a>
-                    {' '}ou ligue-nos para o número (+351) 269 030 096.
+                    {' '}ou através do contacto (+351) 269 030 096.
                   </p>
                 </div>
               </div>
