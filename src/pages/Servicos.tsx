@@ -282,26 +282,25 @@ export default function Servicos() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="packages-grid animate-on-scroll">
             {[
               {
-                name: 'Essencial', featured: false,
+                name: 'Essencial',
                 desc: 'Para empresas que precisam de resolver um desafio específico com rapidez.',
                 includes: ['Diagnóstico inicial', '1 área de serviço', 'Plano de acção personalizado', 'Suporte por email', 'Relatório mensal'],
               },
               {
-                name: 'Growth', featured: true, badge: 'Mais popular',
+                name: 'Growth',
                 desc: 'Para empresas em crescimento que precisam de apoio multidisciplinar contínuo.',
                 includes: ['Diagnóstico 360º completo', '2-3 áreas de serviço', 'Plano estratégico anual', 'Reunião mensal dedicada', 'Suporte directo à equipa', 'Dashboard de KPIs', 'Relatório quinzenal'],
               },
               {
-                name: 'Premium', featured: false,
+                name: 'Premium',
                 desc: 'Para empresas que querem um parceiro estratégico de confiança a longo prazo.',
                 includes: ['Todas as áreas de serviço', 'Parceiro estratégico dedicado', 'Reunião semanal', 'Implementação directa', 'Acesso prioritário à equipa', 'Reporting semanal', 'Preparação para financiamento'],
               },
-            ].map(({ name, featured, badge, desc, includes }) => (
-              <div key={name} className={featured ? 'card-featured stagger-child animate-on-scroll' : 'card stagger-child animate-on-scroll'}>
-                {badge && <div style={{ marginBottom: '16px' }}><span className="badge badge-gradient">{badge}</span></div>}
+            ].map(({ name, desc, includes }) => (
+              <div key={name} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
                 <h3 style={{ color: 'var(--blue)', marginBottom: '8px' }}>{name}</h3>
                 <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>{desc}</p>
-                <ul style={{ listStyle: 'none', marginBottom: '24px' }}>
+                <ul style={{ listStyle: 'none', marginBottom: '24px', flex: 1 }}>
                   {includes.map((item) => (
                     <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '18px', position: 'relative' }}>
                       <span style={{ position: 'absolute', left: 0, color: 'var(--purple)' }}>✓</span>
