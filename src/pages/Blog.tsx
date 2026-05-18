@@ -120,7 +120,7 @@ export default function Blog() {
                   Fale directamente com a nossa equipa, sem qualquer compromisso.
                 </p>
                 <Link to="/contacto" className="btn-gradient" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                  Agendar Consulta →
+                  Agendar Consulta
                 </Link>
               </div>
             </div>
