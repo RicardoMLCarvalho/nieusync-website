@@ -36,6 +36,7 @@ export default function AvisosLegais() {
             'O website pode incluir hiperligações para sites de terceiros. A NIEUSYNC não controla nem é responsável pelo respetivo conteúdo, políticas ou práticas. A inclusão de ligações não implica endosso.',
             'Marcas, logótipos e designações de terceiros exibidos são propriedade dos seus titulares e são referidos apenas para identificação; não é concedida qualquer licença.',
             'Quando a NIEUSYNC atue como prestador intermediário (p. ex., hospedagem de comentários ou submissões), a lei europeia e portuguesa não impõe um dever geral de vigilância; contudo, atuaremos com diligência em regime de notice‑and‑action para remover ou bloquear conteúdos ilícitos de que tenhamos conhecimento.',
+           ],
         },
         {
           title: 'Lei Aplicável e Foro Competente',
