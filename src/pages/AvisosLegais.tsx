@@ -24,17 +24,18 @@ export default function AvisosLegais() {
           ],
         },
         {
-          title: 'Limitação de Responsabilidade',
+          title: 'Exatidão, atualidade e disponibilidade',
           content: [
-            'As informações disponibilizadas neste website têm carácter meramente informativo e não constituem aconselhamento jurídico, financeiro ou de qualquer outra natureza.',
-            'A NIEUSYNC não se responsabiliza por eventuais danos resultantes da utilização das informações contidas neste website.',
-            'O aconselhamento profissional é prestado exclusivamente no âmbito de contratos de prestação de serviços formalmente celebrados.',
-            'A NIEUSYNC não garante a exactidão, integridade ou actualidade das informações publicadas.',
+            'Envidamos esforços razoáveis para assegurar a exatidão e atualidade do conteúdo; todavia, podem ocorrer lapsos, omissões ou desatualizações. O conteúdo pode ser alterado, suspenso ou descontinuado sem aviso prévio.',
+            'Funcionais/Preferências (consentimento): recordam opções do utilizador e personalizam a experiência.',        
           ],
         },
         {
-          title: 'Links para Sites Externos',
-          content: 'Este website pode conter links para websites de terceiros. A NIEUSYNC não é responsável pelo conteúdo, políticas de privacidade ou práticas de qualquer website de terceiros. A inclusão de links não implica endorsement ou aprovação do respectivo conteúdo.',
+          title: 'Direitos dos titulares de dados',
+          content: [
+            'O website pode incluir hiperligações para sites de terceiros. A NIEUSYNC não controla nem é responsável pelo respetivo conteúdo, políticas ou práticas. A inclusão de ligações não implica endosso.',
+            'Marcas, logótipos e designações de terceiros exibidos são propriedade dos seus titulares e são referidos apenas para identificação; não é concedida qualquer licença.',
+            'Quando a NIEUSYNC atue como prestador intermediário (p. ex., hospedagem de comentários ou submissões), a lei europeia e portuguesa não impõe um dever geral de vigilância; contudo, atuaremos com diligência em regime de notice‑and‑action para remover ou bloquear conteúdos ilícitos de que tenhamos conhecimento.',
         },
         {
           title: 'Lei Aplicável e Foro Competente',
