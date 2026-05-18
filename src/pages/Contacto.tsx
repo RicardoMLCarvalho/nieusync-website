@@ -157,7 +157,7 @@ export default function Contacto() {
                         {['Questões legais', 'Organização financeira', 'Marketing e crescimento', 'Processos e automação', 'Não sei por onde começar'].map((d) => <option key={d} value={d} style={{ color: 'var(--blue)' }}>{d}</option>)}
                       </select>
                     </div>
-                    <div><label>Mensagem (opcional)</label><textarea name="mensagem" value={form.mensagem} onChange={handleChange} rows={4} placeholder="Conte-nos mais sobre o seu negócio..." style={{ resize: 'vertical' }} /></div>
+                    <div><label>Mensagem</label><textarea name="mensagem" value={form.mensagem} onChange={handleChange} rows={4} placeholder="Conte-nos mais sobre o seu negócio..." style={{ resize: 'vertical' }} /></div>
                   
                     <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', textTransform: 'none', letterSpacing: 'normal', fontSize: '13px', fontWeight: 400, color: 'rgba(35,56,119,0.70)' }}>
                       <div onClick={() => setForm((p) => ({ ...p, rgpd: !p.rgpd }))} style={{ width: '18px', height: '18px', minWidth: '18px', border: '2px solid var(--purple)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: form.rgpd ? 'var(--purple)' : 'var(--white)', transition: 'background 0.2s ease', marginTop: '2px', cursor: 'pointer' }}>
