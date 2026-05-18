@@ -30,7 +30,7 @@ export default function Blog() {
           <div className="accent-line accent-line-white accent-line-center" />
           <h1 style={{ color: 'var(--white)', marginBottom: '16px' }}>Blog & Recursos</h1>
           <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '520px', margin: '0 auto', fontSize: '18px' }}>
-            Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e IA, para empresas que querem crescer com solidez.
+            Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e Inteligência Artificial, para empresas que querem crescer com solidez.
           </p>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function Blog() {
               <div className="card">
                 <h3 style={{ fontSize: '18px', color: 'var(--blue)', marginBottom: '10px' }}>Newsletter Mensal</h3>
                 <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>
-                  Receba os melhores artigos sobre Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e IA directamente no seu email.
+                  Receba os melhores artigos sobre Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e Inteligência Artificial directamente no seu email.
                 </p>
                 <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <div>
