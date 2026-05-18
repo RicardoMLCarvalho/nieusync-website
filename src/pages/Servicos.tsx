@@ -267,7 +267,7 @@ export default function Servicos() {
         ctaText="Falar com um especialista em TI"
       />
 
-      {/* Packages */}
+     {/* Packages */}
       <section style={{ background: 'var(--grad-subtle)', padding: '100px 0' }}>
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
@@ -278,7 +278,6 @@ export default function Servicos() {
               Todos os pacotes são personalizados ao seu sector e dimensão da empresa.
             </p>
           </div>
-
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="packages-grid animate-on-scroll">
             {[
               {
@@ -298,8 +297,8 @@ export default function Servicos() {
               },
             ].map(({ name, desc, includes }) => (
               <div key={name} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ color: 'var(--blue)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
-                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px', minHeight: '60px' }}>{desc}</p>
+                <h3 style={{ color: 'var(--purple)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
+                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px', minHeight: '80px' }}>{desc}</p>
                 <ul style={{ listStyle: 'none', marginBottom: '24px', flex: 1 }}>
                   {includes.map((item) => (
                     <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '18px', position: 'relative' }}>
@@ -318,7 +317,6 @@ export default function Servicos() {
             ))}
           </div>
         </div>
-
         <style>{`
           @media (max-width: 768px) {
             .packages-grid { grid-template-columns: 1fr !important; }
