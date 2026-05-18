@@ -117,7 +117,7 @@ export default function Contacto() {
             </div>
 
             <div className="animate-on-scroll">
-              <div className="card-featured">
+              <div className="card" style={{ borderTop: '4px solid var(--purple)', boxShadow: '0 8px 40px rgba(35,56,119,0.12)' }}>
                 <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '22px', color: 'var(--blue)', marginBottom: '8px' }}>
                   Agendar consulta de 30 min
                 </h3>
@@ -140,8 +140,8 @@ export default function Contacto() {
                       <div><label>Email profissional *</label><input type="email" name="email" value={form.email} onChange={handleChange} placeholder="email@empresa.pt" required /></div>
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="form-grid">
-                      <div><label>Telefone</label><input type="tel" name="telefone" value={form.telefone} onChange={handleChange} placeholder="+351 ..." /></div>
-                      <div><label>Nome da empresa *</label><input type="text" name="empresa" value={form.empresa} onChange={handleChange} placeholder="A sua empresa" required /></div>
+                      <div><label>Telefone *</label><input type="tel" name="telefone" value={form.telefone} onChange={handleChange} placeholder="+351 ..." required /></div>
+                      <div><label>Nome da empresa</label><input type="text" name="empresa" value={form.empresa} onChange={handleChange} placeholder="A sua empresa" /></div>
                     </div>
                     <div>
                       <label>Sector de actividade</label>
