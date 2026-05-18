@@ -14,7 +14,7 @@ function ServiceSection({
           <div style={{ direction: 'ltr' }} className="animate-on-scroll">
             {iconEl}
             <h2 style={{ color: 'var(--blue)', marginBottom: '10px', marginTop: '20px' }}>{title}</h2>
-            <div className="accent-line" style={{ width: '50%', background: 'var(--blue)', backgroundImage: 'none' }} />
+            <div className="accent-line" style={{ width: '20%', background: 'var(--blue)', backgroundImage: 'none' }} />
             <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '24px' }}>{description}</p>
             <ul style={{ listStyle: 'none', marginBottom: '28px' }}>
               {services.map((s) => (
