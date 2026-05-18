@@ -152,9 +152,9 @@ export default function Contacto() {
                     </div>
                     <div>
                       <label>Principal desafio</label>
-                      <select name="desafio" value={form.desafio} onChange={handleChange} style={{ color: form.desafio ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }}>
-                        <option value="">Seleccione o desafio principal</option>
-                        {['Questões legais', 'Organização financeira', 'Marketing e crescimento', 'Processos e automação', 'Não sei por onde começar'].map((d) => <option key={d} value={d}>{d}</option>)}
+                      <select name="sector" value={form.sector} onChange={handleChange} style={{ color: form.sector ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }}>
+                        <option value="" style={{ color: 'rgba(35,56,119,0.40)' }}>Seleccione o sector</option>
+                        {['Tecnologia', 'Comércio', 'Serviços', 'Construção', 'Agro', 'Turismo', 'Saúde', 'Outro'].map((s) => <option key={s} value={s} style={{ color: 'var(--blue)' }}>{s}</option>)}
                       </select>
                     </div>
                     <div><label>Mensagem (opcional)</label><textarea name="mensagem" value={form.mensagem} onChange={handleChange} rows={4} placeholder="Conte-nos mais sobre o seu negócio..." style={{ resize: 'vertical' }} /></div>
