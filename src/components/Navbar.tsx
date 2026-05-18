@@ -72,7 +72,8 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }} className="desktop-nav">
-            {mainLinks.slice(0, 2).map((link) => (
+            {/* Início */}
+            {mainLinks.slice(0, 1).map((link) => (
               <Link key={link.to} to={link.to}
                 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '14px', color: isActive(link.to) ? 'var(--purple)' : 'var(--blue)', padding: '8px 14px', borderRadius: '6px', position: 'relative', transition: 'color 0.2s ease', textDecoration: 'none' }}
                 onMouseEnter={(e) => { if (!isActive(link.to)) (e.currentTarget as HTMLElement).style.color = 'var(--purple)'; }}
@@ -134,7 +135,8 @@ export default function Navbar() {
               )}
             </div>
 
-            {mainLinks.slice(2).map((link) => (
+            {/* Serviços, Blog e Contactos */}
+            {mainLinks.slice(1).map((link) => (
               <Link key={link.to} to={link.to}
                 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '14px', color: isActive(link.to) ? 'var(--purple)' : 'var(--blue)', padding: '8px 14px', borderRadius: '6px', position: 'relative', transition: 'color 0.2s ease', textDecoration: 'none' }}
                 onMouseEnter={(e) => { if (!isActive(link.to)) (e.currentTarget as HTMLElement).style.color = 'var(--purple)'; }}
@@ -177,8 +179,8 @@ export default function Navbar() {
           ×
         </button>
 
-        {/* Início & Serviços */}
-        {mainLinks.slice(0, 2).map((link) => (
+        {/* Início */}
+        {mainLinks.slice(0, 1).map((link) => (
           <Link key={link.to} to={link.to}
             style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '16px', color: 'var(--white)', padding: '12px 16px', borderRadius: '8px', textDecoration: 'none', background: isActive(link.to) ? 'rgba(255,255,255,0.12)' : 'transparent', transition: 'background 0.2s ease', minHeight: '44px', display: 'flex', alignItems: 'center' }}>
             {link.label}
@@ -208,8 +210,8 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Blog & Contacto */}
-        {mainLinks.slice(2).map((link) => (
+        {/* Serviços, Blog e Contactos */}
+        {mainLinks.slice(1).map((link) => (
           <Link key={link.to} to={link.to}
             style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '16px', color: 'var(--white)', padding: '12px 16px', borderRadius: '8px', textDecoration: 'none', background: isActive(link.to) ? 'rgba(255,255,255,0.12)' : 'transparent', transition: 'background 0.2s ease', minHeight: '44px', display: 'flex', alignItems: 'center' }}>
             {link.label}
