@@ -102,7 +102,7 @@ export default function Navbar() {
                   style={{ transition: 'transform 0.2s ease', transform: sobreOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
-                {isSobreActive && <span style={{ position: 'absolute', bottom: '2px', left: '14px', right: '14px', height: '2px', borderRadius: '1px', background: 'var(--grad-main)' }} />}
+                {isSobreActive && <span style={{ position: 'absolute', bottom: '2px', left: '14px', right: '14px', height: '2px', borderRadius: '1px', background: 'var(--blue)' }} />}
               </button>
 
               {sobreOpen && (
