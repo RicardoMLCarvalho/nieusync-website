@@ -71,7 +71,7 @@ export default function Footer() {
           {divider}
 
           {/* Serviços */}
-          <div style={{ flex: 1, padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '24px' }}>
+          <div style={{ flex: 1, padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
             <p style={colTitle}>Serviços</p>
             <div style={{ display: 'flex', gap: '12px' }}>
               <div style={{ flex: 1 }}>
@@ -97,7 +97,7 @@ export default function Footer() {
           {divider}
 
           {/* Contacto */}
-          <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '24px' }}>
+          <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
             <p style={colTitle}>Contacto</p>
             {[
               { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
@@ -111,7 +111,7 @@ export default function Footer() {
           {divider}
 
           {/* Legal */}
-          <div style={{ flex: 1, paddingLeft: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '24px' }}>
+          <div style={{ flex: 1, paddingLeft: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
             <p style={colTitle}>Legal</p>
             <div style={{ display: 'flex', gap: '12px' }}>
               <div style={{ flex: 1 }}>
