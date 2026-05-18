@@ -452,7 +452,7 @@ export default function Home() {
       <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
         <div className="container">
           <h2 className="animate-on-scroll" style={{ color: 'var(--blue)', textAlign: 'center', marginBottom: '40px' }}>
-            A NIEUSYNC foi criada para si se...
+            A <span style={{ color: 'var(--purple)' }}>NIEUSYNC</span> foi criada para si se...
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px', marginBottom: '40px' }} className="persona-grid animate-on-scroll">
             {[
@@ -461,8 +461,8 @@ export default function Home() {
               'Factura bem mas não sabe ao certo quanto sobra no final do mês',
             ].map((text) => (
               <div key={text} className="stagger-child animate-on-scroll" style={{
-                background: 'var(--white)', borderLeft: '4px solid transparent',
-                borderImage: 'var(--grad-vertical) 1', borderRadius: '0 14px 14px 0', padding: '22px 26px',
+                background: 'var(--white)', borderLeft: '4px solid var(--blue)',
+                borderRadius: '0 14px 14px 0', padding: '22px 26px',
                 display: 'flex', alignItems: 'flex-start', gap: '12px',
               }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0, marginTop: '2px' }}>
