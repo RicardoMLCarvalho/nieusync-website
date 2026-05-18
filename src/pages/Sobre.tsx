@@ -101,8 +101,8 @@ export default function Sobre() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
               {[
                 { value: '360º', label: 'Visão multidisciplinar' },
-                { value: '24h', label: 'Tempo de resposta garantido' },
                 { value: '5', label: 'Áreas especializadas' },
+                { value: '24h', label: 'Tempo de resposta garantido' },
                 { value: '100%', label: 'Foco em resultados' },
               ].map(({ value, label }) => (
                 <div key={label} style={{ textAlign: 'center', padding: '24px', background: 'var(--bg)', borderRadius: '12px' }}>
