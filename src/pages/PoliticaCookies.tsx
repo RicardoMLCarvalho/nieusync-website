@@ -34,6 +34,7 @@ export default function PoliticaCookies() {
             'Meta Pixel (Facebook): Para remarketing e análise de conversões.',
             'LinkedIn Insight Tag: Para análise de audiências profissionais.',
           ],
+        },
         {
           title: 'Direitos dos titulares de dados',
           content: [
