@@ -73,7 +73,7 @@ export function CookieBanner() {
     <div className="cookie-banner">
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
         <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'var(--white)', margin: 0, flex: 1, minWidth: '200px' }}>
-          Utilizamos cookies para melhorar a tua experiência. Ao continuar, aceitas a nossa{' '}
+          Utilizamos cookies para melhorar a sua experiência. Ao continuar, aceita a nossa{' '}
           <a href="/privacidade" style={{ color: 'var(--purple)', textDecoration: 'underline' }}>Política de Privacidade</a>.
         </p>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexShrink: 0 }}>
