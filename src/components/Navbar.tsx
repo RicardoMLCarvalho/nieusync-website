@@ -66,7 +66,7 @@ export default function Navbar() {
       }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px' }}>
           {/* Logo */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img src="logo_new.png" alt="NIEUSYNC" style={{ display: 'block', height: '150px', width: 'auto' }} />
           </Link>
 
