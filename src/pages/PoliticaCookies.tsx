@@ -10,8 +10,7 @@ export default function PoliticaCookies() {
       sections={[
         {
           title: 'Enquadramento e âmbito',
-          content: 'Esta Política explica como a NIEUSYNC utiliza cookies e tecnologias semelhantes no website. Cumprimos a Lei n.º 41/2004 (transposição da Diretiva ePrivacy) e o RGPD. Em Portugal, a colocação de cookies não estritamente necessários exige consentimento prévio e informado; os cookies estritamente necessários podem ser utilizados sem consentimento.
-"A CNPD recorda que os responsáveis pelos websites devem informar os utilizadores e obter o consentimento quando exigido, sendo responsáveis pelos cookies que autorizam colocar nos dispositivos dos utilizadores."',
+          content: 'Esta Política explica como a NIEUSYNC utiliza cookies e tecnologias semelhantes no website. Cumprimos a Lei n.º 41/2004 (transposição da Diretiva ePrivacy) e o RGPD. Em Portugal, a colocação de cookies não estritamente necessários exige consentimento prévio e informado; os cookies estritamente necessários podem ser utilizados sem consentimento. "A CNPD recorda que os responsáveis pelos websites devem informar os utilizadores e obter o consentimento quando exigido, sendo responsáveis pelos cookies que autorizam colocar nos dispositivos dos utilizadores."',
         },
         {
           title: 'O que são cookies e tecnologias semelhantes',
