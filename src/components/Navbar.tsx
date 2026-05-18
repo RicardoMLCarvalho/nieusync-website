@@ -216,7 +216,7 @@ export default function Navbar() {
           </Link>
         ))}
 
-        <Link to="/contacto" className="btn-gradient" style={{ marginTop: '20px', textAlign: 'center' }}>
+        <Link to="/contacto" className="btn-blue" style={{ marginTop: '20px', textAlign: 'center' }}>
           Agendar Consulta
         </Link>
       </div>
