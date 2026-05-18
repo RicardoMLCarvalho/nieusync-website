@@ -473,6 +473,14 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
   outline-offset: 3px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--blue) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 label {
   display: block;
   font-family: 'Montserrat', sans-serif;
