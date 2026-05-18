@@ -79,6 +79,7 @@ export default function Servicos() {
       <defs><linearGradient id="legalGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs>
       <path stroke="url(#legalGrad)" d="M12 3v18M3 9l4 4-4 4M21 9l-4 4 4 4" />
       <path stroke="url(#legalGrad)" d="M3 13h5M16 13h5" />
+      <circle cx="12" cy="21" r="1" fill="url(#legalGrad)" stroke="none" />
     </svg>
   );
 
@@ -200,7 +201,7 @@ export default function Servicos() {
         bg="var(--bg)"
         iconEl={(
           <svg width="80" height="80" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <defs><linearGradient id="finGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#9F8EC2" /><stop offset="100%" stopColor="#233877" /></linearGradient></defs>
+            <defs><linearGradient id="finGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs>
             <rect x="4" y="2" width="16" height="20" rx="2" stroke="url(#finGrad)" />
             <line x1="8" y1="7" x2="16" y2="7" stroke="url(#finGrad)" />
             <line x1="8" y1="11" x2="16" y2="11" stroke="url(#finGrad)" />
@@ -267,7 +268,7 @@ export default function Servicos() {
         ctaText="Falar com um especialista em TI"
       />
 
-     {/* Packages */}
+      {/* Packages */}
       <section style={{ background: 'var(--grad-subtle)', padding: '100px 0' }}>
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
@@ -297,7 +298,7 @@ export default function Servicos() {
               },
             ].map(({ name, desc, includes }) => (
               <div key={name} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ color: 'var(--blue)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
+                <h3 style={{ color: 'var(--purple)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
                 <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px', minHeight: '80px' }}>{desc}</p>
                 <ul style={{ listStyle: 'none', marginBottom: '24px', flex: 1 }}>
                   {includes.map((item) => (
