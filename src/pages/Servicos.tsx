@@ -28,7 +28,7 @@ function ServiceSection({
           </div>
 
           <div style={{ direction: 'ltr' }} className="animate-on-scroll">
-            <div style={{ background: 'rgba(159,142,194,0.08)', borderLeft: '4px solid var(--blue)', borderImage: 'var(--grad-vertical) 1', borderRadius: '0 12px 12px 0', padding: '24px 28px' }}>
+            <div style={{ background: 'rgba(159,142,194,0.08)', borderLeft: '4px solid var(--blue)', borderRadius: '0 12px 12px 0', padding: '24px 28px' }}>
               <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.10em', color: 'var(--blue)', marginBottom: '14px' }}>
                 {highlight.title}
               </p>
