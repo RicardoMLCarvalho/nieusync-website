@@ -79,7 +79,7 @@ export default function Navbar() {
                 onMouseLeave={(e) => { if (!isActive(link.to)) (e.currentTarget as HTMLElement).style.color = 'var(--blue)'; }}
               >
                 {link.label}
-                {isActive(link.to) && <span style={{ position: 'absolute', bottom: '2px', left: '14px', right: '14px', height: '2px', borderRadius: '1px', background: 'var(--grad-main)' }} />}
+                {isActive(link.to) && <span style={{ position: 'absolute', bottom: '2px', left: '14px', right: '14px', height: '2px', borderRadius: '1px', background: 'var(--blue)' }} />}
               </Link>
             ))}
 
