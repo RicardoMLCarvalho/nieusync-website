@@ -97,7 +97,7 @@ export default function Home() {
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', maxWidth: '520px', marginBottom: '36px' }}>
-                Direito, Gestão e Marketing integrados numa única parceria de confiança. A consultora que as empresas reais precisam.
+                Direito, Gestão Financeira, Marketing e Tecnologia de Informação integrados numa única parceria de confiança. A consultora que as empresas realmente precisam.
               </p>
 
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
