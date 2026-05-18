@@ -100,9 +100,9 @@ export default function LegalPage({ title, subtitle, lastUpdated, sections, docT
 
                 <div style={{ borderTop: '1px solid rgba(159,142,194,0.15)', paddingTop: '24px', marginTop: '8px' }}>
                   <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(35,56,119,0.45)' }}>
-                    Para questões relacionadas com este documento, contacte-nos através de{' '}
+                    Para questões relacionadas com este documento, contacte-nos através do email{' '}
                     <a href="mailto:geral@nieusync.com" style={{ color: 'var(--purple)', textDecoration: 'underline' }}>geral@nieusync.com</a>
-                    {' '}ou ligue para (+351) 269 030 096.
+                    {' '}ou ligue-nos para o número (+351) 269 030 096.
                   </p>
                 </div>
               </div>
