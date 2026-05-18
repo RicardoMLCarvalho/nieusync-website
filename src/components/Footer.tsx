@@ -85,8 +85,8 @@ export default function Footer() {
               </div>
               <div style={{ flex: 1 }}>
                 {[
-                  { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
-                  { to: '/servicos#ti', label: 'Tecnologias de Informação' },
+                  { to: '/servicos#financas', label: 'Finanças & Contabilidade' },
+                  { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' },
                 ].map(({ to, label }) => (
                   <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
                 ))}
