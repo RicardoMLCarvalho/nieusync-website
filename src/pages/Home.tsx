@@ -391,7 +391,7 @@ export default function Home() {
                   background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.30)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px',
                 }}>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)' }}>{step.num}</span>
+                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)', lineHeight: '60px', display: 'block' }}>{step.num}</span>
                 </div>
                 <h3 style={{ color: 'var(--white)', fontSize: '16px', marginBottom: '10px' }}>{step.title}</h3>
                 <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '14px' }}>{step.desc}</p>
