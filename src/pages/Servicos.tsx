@@ -298,8 +298,8 @@ export default function Servicos() {
               },
             ].map(({ name, desc, includes }) => (
               <div key={name} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ color: 'var(--purple)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
-                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>{desc}</p>
+                <h3 style={{ color: 'var(--blue)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
+                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px', minHeight: '60px' }}>{desc}</p>
                 <ul style={{ listStyle: 'none', marginBottom: '24px', flex: 1 }}>
                   {includes.map((item) => (
                     <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '18px', position: 'relative' }}>
