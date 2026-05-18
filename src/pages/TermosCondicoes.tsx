@@ -5,21 +5,22 @@ export default function TermosCondicoes() {
     <LegalPage
       title="Termos e Condições"
       subtitle="Condições gerais de utilização e de prestação de serviços"
-      lastUpdated="Janeiro 2025"
+      lastUpdated="Outubro de 2025"
       docTitle="Termos e Condições Gerais — NIEUSYNC"
       sections={[
         {
-          title: 'Aceitação dos Termos',
-          content: 'Ao aceder e utilizar o website da NIEUSYNC ou ao contratar os nossos serviços, o utilizador aceita integralmente os presentes Termos e Condições. Se não concordar com alguma das disposições aqui previstas, deverá abster-se de utilizar o website e os serviços da NIEUSYNC.',
-        },
-        {
-          title: 'Serviços Prestados',
+          title: 'Objeto e Aceitação',
           content: [
-            'A NIEUSYNC presta serviços de consultoria nas áreas de Direito Empresarial, Gestão Estratégica e Marketing Digital.',
-            'Os serviços são formalizados através de proposta comercial e contrato de prestação de serviços.',
-            'O âmbito, duração e condições de cada serviço são definidos contratualmente.',
+            'Os presentes Termos regulam o acesso e a utilização do website [www.nieusync.pt] e dos conteúdos, funcionalidades ou serviços disponibilizados.',
+            'Ao aceder ou utilizar o Website, o Utilizador declara que leu, compreendeu e aceita os Termos. Se não concordar, deverá cessar a utilização.',
+            'A Equipa de TI da NIEUSYNC poderá atualizar estes Termos. Alterações materiais serão comunicadas no Website. O uso continuado após a publicação implica aceitação.',
             'A NIEUSYNC reserva-se o direito de recusar a prestação de serviços a qualquer cliente.',
           ],
+        },
+        {
+          title: 'Definições',
+          content: 
+            '“Utilizador” significa qualquer pessoa que acede ao Website. “Conteúdo” inclui textos, imagens, gráficos, logótipos, vídeos, software e outros materiais. ',            
         },
         {
           title: 'Condições de Utilização do Website',
