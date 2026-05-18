@@ -232,7 +232,7 @@ export default function Home() {
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
             <span className="section-label">Os nossos serviços</span>
-            <div className="accent-line accent-line-center" />
+            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
             <h2 style={{ color: 'var(--blue)', marginBottom: '16px' }}>Cinco áreas. Uma visão integrada.</h2>
             <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '560px', margin: '0 auto' }}>
               Não tratamos problemas isolados. Sincronizamos o seu negócio.
@@ -417,7 +417,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '64px', alignItems: 'center' }} className="why-grid animate-on-scroll">
             <div>
               <span className="section-label">Porquê a NIEUSYNC?</span>
-              <div className="accent-line" />
+              <div className="accent-line" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
               <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>Tudo o que precisa, numa só parceria.</h2>
               <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
                 A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Próxima, ágil e completamente orientada para os seus resultados reais.
@@ -558,7 +558,7 @@ export default function Home() {
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
             <span className="section-label">Testemunhos</span>
-            <div className="accent-line accent-line-center" />
+            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
             <h2 style={{ color: 'var(--blue)' }}>O que dizem os nossos clientes</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="testimonials-grid animate-on-scroll">
@@ -614,7 +614,7 @@ export default function Home() {
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span className="section-label">Blog & Recursos</span>
-            <div className="accent-line accent-line-center" style={{ background: 'var(--blue)', backgroundImage: 'none' }}/>
+            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
             <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Conhecimento que transforma</h2>
             <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos sobre Direito, Gestão, Finanças, Marketing, Tecnologia e IA para empresas.</p>
           </div>
