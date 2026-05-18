@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function ServiceSection({
   id, bg, iconEl, title, description, services, highlight, ctaText, reverse,
@@ -54,6 +54,8 @@ function ServiceSection({
 }
 
 export default function Servicos() {
+  const location = useLocation();
+
   useEffect(() => {
     document.title = 'Serviços | NIEUSYNC · Direito, Gestão e Marketing Digital';
     const observer = new IntersectionObserver(
@@ -73,6 +75,17 @@ export default function Servicos() {
     document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location.hash]);
 
   const legalIcon = (
     <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
