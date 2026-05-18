@@ -275,7 +275,7 @@ export default function Servicos() {
             <div className="accent-line accent-line-white accent-line-center" />
             <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>Escolha o seu ponto de entrada</h2>
             <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '520px', margin: '0 auto' }}>
-              Todos os pacotes são personalizados ao seu sector e dimensão de empresa.
+              Todos os pacotes são personalizados ao seu sector e dimensão da empresa.
             </p>
           </div>
 
