@@ -456,9 +456,9 @@ export default function Home() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px', marginBottom: '40px' }} className="persona-grid animate-on-scroll">
             {[
-              'Factura bem mas não sabe ao certo quanto sobra no final do mês',
-              'A empresa cresceu e agora a gestão parece um caos constante',
               'Precisa de crescer mas tem receio de avançar sem estrutura sólida',
+              'A empresa cresceu e agora a gestão parece um caos constante',
+              'Factura bem mas não sabe ao certo quanto sobra no final do mês',
             ].map((text) => (
               <div key={text} className="stagger-child animate-on-scroll" style={{
                 background: 'var(--white)', borderLeft: '4px solid transparent',
@@ -474,7 +474,7 @@ export default function Home() {
           </div>
           <div style={{ textAlign: 'center' }}>
             <p style={{ fontFamily: 'Montserrat, sans-serif', fontStyle: 'italic', color: 'rgba(35,56,119,0.65)', marginBottom: '24px', maxWidth: '560px', margin: '0 auto 24px' }}>
-              "Se se identifica com algum destes cenários, temos exactamente o que precisa."
+              "Caso se identifique com algum destes cenários, temos exactamente o que precisa."
             </p>
             <Link to="/contacto" className="btn-gradient">Falar com um especialista →</Link>
           </div>
