@@ -10,12 +10,22 @@ function FacebookIcon() {
   return <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>;
 }
 
-const footerLink = (color = 'rgba(255,255,255,0.70)') => ({
-  display: 'block' as const,
+const colTitle: React.CSSProperties = {
+  fontFamily: 'Montserrat, sans-serif',
+  fontWeight: 700,
+  fontSize: '11px',
+  textTransform: 'uppercase',
+  color: 'rgba(255,255,255,0.38)',
+  letterSpacing: '0.12em',
+  marginBottom: '14px',
+};
+
+const footerLink = (): React.CSSProperties => ({
+  display: 'block',
   fontFamily: 'Montserrat, sans-serif',
   fontWeight: 400,
-  fontSize: '14px',
-  color,
+  fontSize: '13px',
+  color: 'rgba(255,255,255,0.70)',
   marginBottom: '10px',
   transition: 'color 0.2s ease',
   textDecoration: 'none',
@@ -23,19 +33,18 @@ const footerLink = (color = 'rgba(255,255,255,0.70)') => ({
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-
   const hoverPurple = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)';
   const unhoverLink = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.70)';
 
   return (
     <footer style={{ background: 'var(--grad-subtle)' }}>
       <div className="container" style={{ padding: '48px 40px 0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1.2fr', gap: '32px' }} className="footer-grid">
+        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr 1fr 1fr', gap: '28px' }} className="footer-grid">
 
           {/* Col 1 — Brand */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="140" style={{ display: 'block', marginBottom: '16px' }} />
-            <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '16px' }} />
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
               {[
                 { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
                 { href: 'https://www.instagram.com/nieusync', Icon: InstagramIcon },
@@ -52,31 +61,22 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2 — Navigation */}
+          {/* Col 2 — Serviços A */}
           <div>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '14px' }}>
-              Navegação
-            </p>
-            {[
-              { to: '/', label: 'Início' },
-              { to: '/servicos', label: 'Serviços' },
-              { to: '/sobre', label: 'Sobre Nós' },
-              { to: '/blog', label: 'Blog' },
-              { to: '/contacto', label: 'Contacto' },
-            ].map(({ to, label }) => (
-              <Link key={to} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-            ))}
-          </div>
-
-          {/* Col 3 — Services */}
-          <div>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '14px' }}>
-              Serviços
-            </p>
+            <p style={colTitle}>Serviços</p>
             {[
               { to: '/servicos#direito', label: 'Direito Empresarial' },
               { to: '/servicos#gestao', label: 'Gestão Estratégica' },
               { to: '/servicos#marketing', label: 'Marketing Digital' },
+            ].map(({ to, label }) => (
+              <Link key={label} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+            ))}
+          </div>
+
+          {/* Col 3 — Serviços B */}
+          <div>
+            <p style={{ ...colTitle, opacity: 0 }}>.</p>
+            {[
               { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
               { to: '/servicos#ti', label: 'Tecnologias de Informação' },
             ].map(({ to, label }) => (
@@ -84,37 +84,42 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Col 4 — Contact */}
+          {/* Col 4 — Contacto */}
           <div>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '14px' }}>
-              Contacto
-            </p>
+            <p style={colTitle}>Contacto</p>
             {[
               { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
               { label: '(+351) 933 644 596', href: 'tel:+351933644596' },
               { label: 'geral@nieusync.com', href: 'mailto:geral@nieusync.com' },
-              { label: 'www.nieusync.com', href: 'https://www.nieusync.com' },
             ].map(({ label, href }) => (
               <a key={label} href={href} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
             ))}
           </div>
 
-          {/* Col 5 — Legal */}
+          {/* Col 5 — Legal A */}
           <div>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', letterSpacing: '0.12em', marginBottom: '14px' }}>
-              Legal
-            </p>
+            <p style={colTitle}>Legal</p>
             {[
               { to: '/avisos-legais', label: 'Avisos Legais' },
               { to: '/codigo-conduta', label: 'Código de Conduta' },
               { to: '/termos-condicoes', label: 'Termos e Condições' },
+            ].map(({ to, label }) => (
+              <Link key={to} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+            ))}
+          </div>
+
+          {/* Col 6 — Legal B */}
+          <div>
+            <p style={{ ...colTitle, opacity: 0 }}>.</p>
+            {[
               { to: '/politica-cookies', label: 'Política de Cookies' },
               { to: '/privacidade', label: 'Política de Privacidade' },
               { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' },
             ].map(({ to, label }) => (
-              <Link key={to} to={to} style={{ ...footerLink(), fontSize: '13px' }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+              <Link key={to} to={to} style={footerLink()} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
             ))}
           </div>
+
         </div>
       </div>
 
@@ -132,7 +137,7 @@ export default function Footer() {
           .footer-grid { grid-template-columns: repeat(3,1fr) !important; }
         }
         @media (max-width: 768px) {
-          .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+          .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
         }
         @media (max-width: 480px) {
           .footer-grid { grid-template-columns: 1fr !important; }
