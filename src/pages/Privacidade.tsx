@@ -6,7 +6,7 @@ export default function Privacidade() {
       title="Política de Privacidade"
       subtitle="Como recolhemos, utilizamos e protegemos os seus dados pessoais"
       lastUpdated="Janeiro 2025"
-      docTitle="Política de Privacidade — NIEUSYNC (RGPD)"
+      docTitle="Política de Privacidade (RGPD) — NIEUSYNC"
       sections={[
         {
           title: 'Responsável pelo Tratamento',
