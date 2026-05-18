@@ -9,16 +9,22 @@ export default function PoliticaCookies() {
       docTitle="Política de Cookies — NIEUSYNC"
       sections={[
         {
-          title: 'O que são Cookies?',
-          content: 'Cookies são pequenos ficheiros de texto que são armazenados no seu dispositivo quando visita um website. Permitem que o website reconheça o seu dispositivo e recorde informações sobre a sua visita, como as suas preferências de idioma e outras definições.',
+          title: 'Enquadramento e âmbito',
+          content: 'Esta Política explica como a NIEUSYNC utiliza cookies e tecnologias semelhantes no website. Cumprimos a Lei n.º 41/2004 (transposição da Diretiva ePrivacy) e o RGPD. Em Portugal, a colocação de cookies não estritamente necessários exige consentimento prévio e informado; os cookies estritamente necessários podem ser utilizados sem consentimento.
+"A CNPD recorda que os responsáveis pelos websites devem informar os utilizadores e obter o consentimento quando exigido, sendo responsáveis pelos cookies que autorizam colocar nos dispositivos dos utilizadores."',
         },
         {
-          title: 'Cookies que Utilizamos',
+          title: 'O que são cookies e tecnologias semelhantes',
+          content: '“Cookies” são pequenos ficheiros armazenados no seu dispositivo quando visita o nosso site. Tecnologias semelhantes (p. ex., Local Storage, pixels, SDKs) podem ter finalidades equivalentes e estão abrangidas pelas mesmas regras do “cookie rule” da ePrivacy.',
+        },
+        {
+          title: 'Categorias de cookies que podemos utilizar',
           content: [
-            'Cookies estritamente necessários: Essenciais para o funcionamento do website. Sem eles, determinadas funcionalidades não estão disponíveis. Não requerem consentimento.',
-            'Cookies de desempenho: Recolhem informação anónima sobre a utilização do website (páginas visitadas, tempo de permanência, erros). Utilizamos Google Analytics para este fim.',
-            'Cookies funcionais: Guardam as suas preferências (como o consentimento de cookies) para personalizar a sua experiência.',
-            'Cookies de marketing: Utilizados para apresentar anúncios relevantes. Podem incluir cookies do Meta Pixel e Google Ads.',
+            'Estritamente necessários (sem consentimento): essenciais para o funcionamento e segurança do site (gestão de sessão, balanceamento de carga, preferência de idioma).',
+            'Cookies de Analíticos/Estatísticos (consentimento): Recolhem informação anónima sobre a utilização do website (páginas visitadas, tempo de permanência, erros). Utilizamos Google Analytics para este fim.',
+            'Cookies Funcionais/Preferências (consentimento): recordam opções do utilizador e personalizam a experiência.',
+            'Cookies de Marketing/Publicidade (consentimento): Utilizados para apresentar anúncios relevantes. Podem incluir cookies do Meta Pixel e Google Ads.',
+            'Nota sobre consentimento válido: não são permitidas caixas pré‑selecionadas para aceitar cookies; o consentimento deve ser expresso (opt‑in) e livre, sendo tão fácil recusar como aceitar.', 
           ],
         },
         {
