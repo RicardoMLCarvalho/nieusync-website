@@ -616,7 +616,7 @@ export default function Home() {
             <span className="section-label">Blog & Recursos</span>
             <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
             <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Conhecimento que transforma</h2>
-            <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e IA, para empresas.</p>
+            <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e Inteligência Artificial, para empresas.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px', marginBottom: '40px' }} className="blog-grid animate-on-scroll">
             {[
