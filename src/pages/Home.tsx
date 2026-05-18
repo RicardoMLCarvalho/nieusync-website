@@ -661,11 +661,11 @@ export default function Home() {
               Pronto para sincronizar o seu negócio?
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '560px', margin: '0 auto 40px', fontSize: '17px' }}>
-              Uma chamada de 30 minutos sem compromisso. Analisamos a sua situação e indicamos exactamente o que pode melhorar.
+              Uma consulta de 30 minutos sem compromisso. Analisamos a sua situação e indicamos exactamente o que pode melhorar.
             </p>
             <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link to="/contacto" className="btn-outline-white" style={{ padding: '16px 36px' }}>
-                Marcar Chamada Gratuita →
+                Agendar Consulta →
               </Link>
               <a
                 href="https://wa.me/351933644596?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20NIEUSYNC"
