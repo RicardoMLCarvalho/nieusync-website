@@ -90,7 +90,7 @@ export default function Contacto() {
                 Enviar mensagem no WhatsApp
               </a>
 
-              <div style={{ display: 'flex', gap: '16px', marginBottom: '28px' }}>
+              <div style={{ display: 'flex', gap: '16px', marginBottom: '28px', justifyContent: 'center' }}>
                 {[
                   { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
                   { href: 'https://www.instagram.com/nieusync', Icon: InstagramIcon },
