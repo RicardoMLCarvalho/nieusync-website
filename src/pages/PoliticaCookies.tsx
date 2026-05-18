@@ -34,31 +34,36 @@ export default function PoliticaCookies() {
             'Meta Pixel (Facebook): Para remarketing e análise de conversões.',
             'LinkedIn Insight Tag: Para análise de audiências profissionais.',
           ],
+        {
+          title: 'Direitos dos titulares de dados',
+          content: [
+            'Estritamente necessários: excepcionados do consentimento pela ePrivacy (art. 5.º, n.º 3).',
+            'Restantes categorias: dependem de consentimento. O interesse legítimo não é base legal suficiente para colocar cookies; pode ser relevante para tratamentos subsequentes de dados depois de os cookies serem legitimamente colocados.',            
+          ],
+        },
         },
         {
-          title: 'Gestão de Cookies',
+          title: 'Como gerimos o seu consentimento',
           content: [
-            'Pode aceitar ou recusar cookies não essenciais através do banner apresentado na sua primeira visita.',
-            'Pode alterar as suas preferências a qualquer momento nas definições do seu browser.',
-            'A recusa de cookies pode afectar a funcionalidade e experiência de utilização do website.',
-            'A maioria dos browsers permite gerir cookies através das definições de privacidade.',
+            'Banner de consentimento: no primeiro acesso, apresentamos opções claras “Aceitar tudo”, “Rejeitar tudo” e “Configurar preferências”. O utilizador pode retirar (ou alterar) o consentimento a qualquer momento em [Gerir preferências de cookies] (ligação permanente no rodapé). Princípios alinhados com o Relatório do EDPB sobre Banners de Cookies.',
+            'Validade/expiração do consentimento: renovamos o pedido de consentimento periodicamente ou quando mudarem as finalidades/terceiros.',       
           ],
         },
         {
-          title: 'Duração dos Cookies',
+          title: 'Gestão de cookies pelo utilizador',
           content: [
-            'Cookies de sessão: São eliminados quando fecha o browser.',
-            'Cookies persistentes: Permanecem no dispositivo até expirar ou serem eliminados manualmente. A duração varia entre 30 dias e 2 anos, dependendo do tipo.',
-            'O cookie de preferências de privacidade da NIEUSYNC tem duração de 12 meses.',
+            'No nosso site: altere a qualquer momento em [Gerir preferências de cookies].',
+            'No navegador: pode bloquear/eliminar cookies nas definições do seu navegador (atenção que certas funcionalidades poderão deixar de funcionar).',
+            'Opt‑out de analítica/publicidade: alguns fornecedores oferecem mecanismos próprios de opt‑out.',
           ],
         },
         {
-          title: 'Actualizações desta Política',
-          content: 'Esta Política de Cookies pode ser actualizada periodicamente para reflectir alterações nas tecnologias utilizadas ou na legislação aplicável. Recomendamos a consulta regular deste documento.',
+          title: 'Terceiros e transferências',
+          content: 'Determinadas ferramentas (analítica, A/B testing, publicidade) implicam cookies de terceiros e transferência de dadospara fora do EEE. Nesses casos, aplicamos medidas adequadas (contratuais e técnicas) e só ativamos a recolha após consentimento.',
         },
         {
-          title: 'Contacto',
-          content: 'Para questões relacionadas com a utilização de cookies, contacte-nos através de geral@nieusync.com ou (+351) 269 030 096.',
+          title: 'Retenção e revisão',
+          content: 'Conservamos registos de consentimento e revemos periodicamente os cookies, fornecedores e finalidades. Atualizaremos esta Política sempre que houver alterações relevantes.',
         },
       ]}
     />
