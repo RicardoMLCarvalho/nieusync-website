@@ -275,7 +275,7 @@ export default function Servicos() {
             <div className="accent-line accent-line-white accent-line-center" />
             <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>Escolha o seu ponto de entrada</h2>
             <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '520px', margin: '0 auto' }}>
-              Todos os pacotes são personalizados ao seu sector e dimensão da empresa.
+              Todos os pacotes são personalizados às suas necessidade, ao seu sector e à dimensão da sua empresa.
             </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="packages-grid animate-on-scroll">
@@ -297,7 +297,7 @@ export default function Servicos() {
               },
             ].map(({ name, desc, includes }) => (
               <div key={name} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ color: 'var(--purple)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
+                <h3 style={{ color: 'var(--blue)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
                 <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px', minHeight: '80px' }}>{desc}</p>
                 <ul style={{ listStyle: 'none', marginBottom: '24px', flex: 1 }}>
                   {includes.map((item) => (
