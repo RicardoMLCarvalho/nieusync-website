@@ -40,8 +40,7 @@ export default function PoliticaCookies() {
             'Estritamente necessários: excepcionados do consentimento pela ePrivacy (art. 5.º, n.º 3).',
             'Restantes categorias: dependem de consentimento. O interesse legítimo não é base legal suficiente para colocar cookies; pode ser relevante para tratamentos subsequentes de dados depois de os cookies serem legitimamente colocados.',            
           ],
-        },
-        },
+        },       
         {
           title: 'Como gerimos o seu consentimento',
           content: [
@@ -55,6 +54,14 @@ export default function PoliticaCookies() {
             'No nosso site: altere a qualquer momento em [Gerir preferências de cookies].',
             'No navegador: pode bloquear/eliminar cookies nas definições do seu navegador (atenção que certas funcionalidades poderão deixar de funcionar).',
             'Opt‑out de analítica/publicidade: alguns fornecedores oferecem mecanismos próprios de opt‑out.',
+          ],
+        },
+        {
+          title: 'Duração dos Cookies',
+          content: [
+            'Cookies de sessão: São eliminados quando fecha o browser.',
+            'Cookies persistentes: Permanecem no dispositivo até expirar ou serem eliminados manualmente. A duração varia entre 30 dias e 2 anos, dependendo do tipo.',
+            'O cookie de preferências de privacidade da NIEUSYNC tem duração de 12 meses.',
           ],
         },
         {
