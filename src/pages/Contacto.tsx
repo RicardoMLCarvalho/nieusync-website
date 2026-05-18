@@ -68,7 +68,7 @@ export default function Contacto() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '28px' }}>
                 {contactItems.map(({ icon, label, value, href }) => (
                   <a key={value} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    style={{ display: 'flex', alignItems: 'center', gap: '16px', background: 'var(--white)', borderLeft: '4px solid var(--purple)', borderRadius: '0 12px 12px 0', padding: '16px 20px', textDecoration: 'none', transition: 'box-shadow 0.2s ease' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: '16px', background: 'var(--white)', borderLeft: '4px solid var(--blue)', borderRadius: '0 12px 12px 0', padding: '16px 20px', textDecoration: 'none', transition: 'box-shadow 0.2s ease' }}
                     onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(35,56,119,0.10)'}
                     onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.boxShadow = 'none'}
                   >
