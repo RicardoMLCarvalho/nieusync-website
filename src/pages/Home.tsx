@@ -422,7 +422,7 @@ export default function Home() {
               <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
                 A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Próxima, ágil e completamente orientada para os seus resultados reais.
               </p>
-              <Link to="/sobre" className="btn-gradient">Conhecer a equipa →</Link>
+              <Link to="/sobre" className="btn-gradient">Sobre Nós →</Link>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
