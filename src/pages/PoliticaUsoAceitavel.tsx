@@ -69,8 +69,38 @@ export default function PoliticaUsoAceitavel() {
           ],
         },
         {
-          title: 'Reporte de Violações',
-          content: 'Se detectar uma violação desta política ou tiver dúvidas sobre o que constitui uso aceitável, contacte-nos em geral@nieusync.com. Investigaremos todas as denúncias e agiremos em conformidade.',
+          title: 'Divulgação Responsável de Vulnerabilidades',
+          content: [
+            'Incentivamos a comunicação responsável de vulnerabilidades para geral@nieusync.com com detalhes técnicos, passos de reprodução e impacto esperado.',
+            'Não são devidos pagamentos salvo indicação expressa de programa específico.',
+            'É proibida a divulgação pública sem prazo razoável de correção acordado com a NIEUSYNC.',            
+          ],
+        },
+        {
+          title: 'Emails, Newsletters e Comunicações',
+          content: [
+            'O envio de newsletters ou convites depende de consentimento (quando exigido) ou de outra base legal válida (ex.: interesse legítimo B2B, com opt‑out claro).',
+            'Todas as mensagens incluirão identificação do remetente e mecanismo de cancelamento de subscrição.',            
+          ],
+        },
+        {
+          title: 'Exportação, Sanções e Uso Regulamentado',
+          content: [
+            'O Utilizador não pode usar o Website para atividades sujeitas a sanções internacionais, financiamento ilícito ou exportação de tecnologias controladas sem as autorizações necessárias.',
+            'É proibida a promoção de bens/serviços proibidos ou altamente regulados sem prova de elegibilidade legal.',            
+          ],
+        },
+        {
+          title: 'Monitorização de Registos',
+          content: [
+            'A NIEUSYNC pode monitorizar o uso para garantir segurança e conformidade, nos termos da lei e da nossa Política de Privacidade.',
+            'Em caso de violação, podemos: (i) emitir aviso, (ii) bloquear conteúdo, (iii) suspender ou terminar acesso, (iv)notificar autoridades, (v) intentar ações legais.',
+            'Podemos preservar registos relevantes para investigação e cumprimento de obrigações legais.',            
+          ],
+        },
+        {
+          title: 'Alterações',
+          content: 'Podemos atualizar esta Política de Uso Aceitável para refletir alterações legais ou operacionais. A versão vigente será publicada no Website com data de revisão.',
         },
       ]}
     />
