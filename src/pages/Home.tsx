@@ -89,7 +89,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <h1 style={{ color: 'var(--white)', marginBottom: '24px', fontSize: '49px' }}>
+              <h1 style={{ color: 'var(--white)', marginBottom: '24px', fontSize: '64px' }}>
                 WE ARE THE BASIS FOR <br />
                 <span>
                   YOUR BUSINESS TO FLY
