@@ -353,7 +353,7 @@ export default function Home() {
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '40px' }}>
-            <Link to="/servicos" className="btn-secondary">Ver todos os serviços →</Link>
+            <Link to="/servicos" className="btn-gradient">Ver todos os serviços →</Link>
           </div>
         </div>
 
