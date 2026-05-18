@@ -642,7 +642,7 @@ export default function Home() {
             ))}
           </div>
           <div style={{ textAlign: 'center' }}>
-            <Link to="/blog" className="btn-secondary">Ver todos os artigos →</Link>
+            <Link to="/blog" className="btn-gradient">Ver todos os artigos →</Link>
           </div>
         </div>
         <style>{`
