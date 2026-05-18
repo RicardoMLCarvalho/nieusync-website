@@ -311,7 +311,7 @@ export default function Servicos() {
                 <div style={{ marginBottom: '16px' }}>
                   <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--blue)' }}>Sob consulta</span>
                 </div>
-                <Link to="/contacto" className="btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
+                <Link to="/contacto" className="btn-gradient" style={{ width: '100%', justifyContent: 'center' }}>
                   Solicitar proposta
                 </Link>
               </div>
