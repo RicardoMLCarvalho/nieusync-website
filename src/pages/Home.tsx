@@ -89,9 +89,9 @@ export default function Home() {
                 </span>
               </div>
 
-              <h1 style={{ color: 'var(--white)', marginBottom: '24px' }}>
-               WE ARE THE BASIS FOR <br />
-                <span style={{ textDecoration: 'underline', textDecorationColor: 'var(--purple)', textDecorationThickness: '3px', textUnderlineOffset: '6px' }}>
+              <h1 style={{ color: 'var(--white)', marginBottom: '24px', fontSize: '48px' }}>
+                WE ARE THE BASIS FOR <br />
+                <span>
                   YOUR BUSINESS TO FLY
                 </span>
               </h1>
