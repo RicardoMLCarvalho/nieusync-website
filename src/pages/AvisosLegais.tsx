@@ -9,9 +9,12 @@ export default function AvisosLegais() {
       docTitle="Avisos Legais — NIEUSYNC, Lda."
       sections={[
         {
-          title: 'Identificação da Empresa',
-          content: 'A NIEUSYNC é uma consultora B2B multidisciplinar portuguesa, constituída sob a forma de sociedade comercial, com sede no Alentejo Litoral, Portugal. A empresa presta serviços nas áreas de Direito Empresarial, Gestão Estratégica e Marketing Digital a PMEs, Startups e empresas em crescimento. Para contacto: geral@nieusync.com | (+351) 269 030 096.',
+          title: 'Enquadramento e âmbito',
+          content: [
+            'Este Aviso Legal deve ser lido em conjunto com os Termos e Condições, a Política de Privacidade e a Política de Cookies do website.',
         },
+            'A NIEUSYNC disponibiliza informações no website para fins exclusivamente informativos. Salvo indicação expressa, tais informações não constituem aconselhamento jurídico, fiscal, contabilístico, financeiro, tecnológico, de cibersegurança, de marketing ou de gestão.',
+            'Sempre que a lei o exija, asseguramos a disponibilização permanente das informações do prestador previstas no regime português dos serviços da sociedade da informação.',
         {
           title: 'Propriedade Intelectual',
           content: [
