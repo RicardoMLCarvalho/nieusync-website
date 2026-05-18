@@ -21,7 +21,7 @@ const colTitle: React.CSSProperties = {
   textAlign: 'center',
 };
 
-const link: React.CSSProperties = {
+const lnk: React.CSSProperties = {
   display: 'block',
   fontFamily: 'Montserrat, sans-serif',
   fontWeight: 400,
@@ -32,24 +32,22 @@ const link: React.CSSProperties = {
   textDecoration: 'none',
 };
 
-const separator: React.CSSProperties = {
-  borderRight: '1px solid rgba(255,255,255,0.10)',
-  paddingRight: '32px',
-  marginRight: '32px',
-};
-
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const hoverPurple = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)';
   const unhoverLink = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.70)';
 
+  const divider = (
+    <div style={{ width: '1px', background: 'rgba(255,255,255,0.10)', alignSelf: 'stretch', flexShrink: 0 }} />
+  );
+
   return (
-    <footer style={{ background: 'var(--blue)' }}>
-      <div className="container" style={{ padding: '48px 40px 0' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0' }} className="footer-flex">
+    <footer style={{ background: '#233877' }}>
+      <div className="container" style={{ padding: '40px 40px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'stretch', gap: '0' }} className="footer-flex">
 
           {/* Brand */}
-          <div style={{ ...separator, display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0, minWidth: '160px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, minWidth: '160px', paddingRight: '32px' }}>
             <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '14px' }} />
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
               {[
@@ -68,10 +66,12 @@ export default function Footer() {
             </div>
           </div>
 
+          {divider}
+
           {/* Serviços */}
-          <div style={{ ...separator, flex: 1 }}>
+          <div style={{ flex: 1, padding: '0 28px' }}>
             <p style={colTitle}>Serviços</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px' }}>
               {[
                 { to: '/servicos#direito', label: 'Direito Empresarial' },
                 { to: '/servicos#financeiro', label: 'Finanças & Contabilidade' },
@@ -79,27 +79,31 @@ export default function Footer() {
                 { to: '/servicos#ti', label: 'Tecnologias de Informação' },
                 { to: '/servicos#marketing', label: 'Marketing Digital' },
               ].map(({ to, label }) => (
-                <Link key={label} to={to} style={link} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
               ))}
             </div>
           </div>
 
+          {divider}
+
           {/* Contacto */}
-          <div style={{ ...separator, flexShrink: 0, minWidth: '180px' }}>
-            <p style={colTitle}>Contacto</p>
+          <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px' }}>
+            <p style={colTitle}>Contactos</p>
             {[
               { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
               { label: '(+351) 933 644 596', href: 'tel:+351933644596' },
               { label: 'geral@nieusync.com', href: 'mailto:geral@nieusync.com' },
             ].map(({ label, href }) => (
-              <a key={label} href={href} style={link} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
+              <a key={label} href={href} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
             ))}
           </div>
 
+          {divider}
+
           {/* Legal */}
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, paddingLeft: '28px' }}>
             <p style={colTitle}>Legal</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px' }}>
               {[
                 { to: '/avisos-legais', label: 'Avisos Legais' },
                 { to: '/politica-cookies', label: 'Política de Cookies' },
@@ -108,7 +112,7 @@ export default function Footer() {
                 { to: '/termos-condicoes', label: 'Termos e Condições' },
                 { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' },
               ].map(({ to, label }) => (
-                <Link key={to} to={to} style={link} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                <Link key={to} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
               ))}
             </div>
           </div>
@@ -127,8 +131,8 @@ export default function Footer() {
 
       <style>{`
         @media (max-width: 1024px) {
-          .footer-flex { flex-wrap: wrap !important; gap: 28px !important; }
-          .footer-flex > div { border-right: none !important; padding-right: 0 !important; margin-right: 0 !important; min-width: calc(50% - 14px) !important; }
+          .footer-flex { flex-wrap: wrap !important; gap: 24px !important; }
+          .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 0 !important; }
         }
         @media (max-width: 480px) {
           .footer-flex > div { min-width: 100% !important; }
