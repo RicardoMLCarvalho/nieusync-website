@@ -332,60 +332,15 @@ export default function Home() {
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
               zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '640px', height: '640px', objectFit: 'contain' }} />
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '600px', height: '600px', objectFit: 'contain' }} />
             </div>
-
       
-            {/* Setas entre itens */}
-            <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 520 520">
-              <defs>
-                <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-                  <path d="M0,0 L0,7 L7,3.5 z" fill="var(--purple)" opacity="0.8" />
-                </marker>
-              </defs>
-              {[-90, -18, 54, 126, 198].map((angle, i) => {
-                const radius = 180;
-                const cx = 260, cy = 260;
-                const rad = (angle * Math.PI) / 180;
-                const nextRad = ((angle + 72) * Math.PI) / 180;
             
-                // ponto médio entre os dois ícones na órbita
-                const midRad = (rad + nextRad) / 2;
-            
-                // seta começa 25° antes do meio e termina 25° depois
-                const spanRad = 22 * (Math.PI / 180);
-                const aRad = midRad - spanRad;
-                const bRad = midRad + spanRad;
-            
-                const ax = cx + Math.cos(aRad) * radius;
-                const ay = cy + Math.sin(aRad) * radius;
-                const bx = cx + Math.cos(bRad) * radius;
-                const by = cy + Math.sin(bRad) * radius;
-            
-                // ponto de controlo levemente afastado para curvar para fora
-                const ctrlX = cx + Math.cos(midRad) * (radius + 28);
-                const ctrlY = cy + Math.sin(midRad) * (radius + 28);
-            
-                return (
-                  <path
-                    key={i}
-                    d={`M ${ax} ${ay} Q ${ctrlX} ${ctrlY} ${bx} ${by}`}
-                    fill="none"
-                    stroke="var(--purple)"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    opacity="0.60"
-                    markerEnd="url(#arrowhead)"
-                  />
-                );
-              })}
-            </svg>
-
             {/* Serviços em órbita */}
             {[
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18"/><line x1="8" y1="21" x2="16" y2="21"/><path d="M5 8h14"/><path d="M5 8l-2 5a3 3 0 0 0 6 0L7 8"/><path d="M19 8l-2 5a3 3 0 0 0 6 0L19 8"/></svg>, label: 'Direito Empresarial', href: '/servicos#direito', angle: -90 },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V2m0 0H8m4 0h4M6 12H2l4-8 4 8H6zm12 0h-4l4-8 4 8h-4zm-6 10H8m4 0h4"/></svg>, label: 'Direito Empresarial', href: '/servicos#direito', angle: -90 },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>, label: 'Gestão Estratégica', href: '/servicos#gestao', angle: -18 },
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>, label: 'Marketing Digital', href: '/servicos#marketing', angle: 54 },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block', margin: 'auto' }}><line x1="22" y1="7" x2="2" y2="17"/><polyline points="2 7 12 12 22 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>, label: 'Marketing Digital', href: '/servicos#marketing', angle: 54 },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/></svg>, label: 'Finanças & Contabilidade', href: '/servicos#financas', angle: 126 },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>, label: 'Tecnologias de Informação', href: '/servicos#tecnologias', angle: 198 },
             ].map(({ icon, label, href, angle }) => {
