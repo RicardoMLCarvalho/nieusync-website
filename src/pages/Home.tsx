@@ -533,7 +533,7 @@ export default function Home() {
       </section>
 
       {/* ── BLOG PREVIEW ── */}
-      <section style={{ background: 'var(--white)', padding: '80px 0' }}>
+      <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span className="section-label">Blog & Recursos</span>
