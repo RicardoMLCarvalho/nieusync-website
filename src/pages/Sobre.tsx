@@ -115,48 +115,48 @@ export default function Sobre() {
         <style>{`@media (max-width: 768px) { .values-grid { grid-template-columns: 1fr !important; } }`}</style>
       </section>
 
-      {/* Why NIEUSYNC */}
-      <section style={{ background: 'var(--white)', padding: '100px 0' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '64px', alignItems: 'center' }} className="why-grid animate-on-scroll">
-            <div>
-              <span className="section-label">Porquê a NIEUSYNC?</span>
-              <div className="accent-line" />
-              <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>Tudo o que precisa, numa só parceria.</h2>
-              <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
-                A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Próxima, ágil e completamente orientada para os seus resultados reais.
-              </p>
-              <Link to="/contacto" className="btn-gradient">Agendar consulta gratuita →</Link>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-              {[
-                { title: 'Multidisciplinar 360º', desc: 'Legal, financeiro e digital num só lugar' },
-                { title: 'Resposta ágil', desc: 'Acesso directo à equipa, sem intermediários' },
-                { title: 'Decisão com dados', desc: 'Relatórios simples para escolhas inteligentes' },
-                { title: 'Preço transparente', desc: 'Sem surpresas, sem letras pequenas' },
-              ].map(({ title, desc }) => (
-                <div key={title} className="stagger-child animate-on-scroll" style={{ borderLeft: '3px solid var(--purple)', paddingLeft: '18px' }}>
-                  <h3 style={{ fontSize: '15px', color: 'var(--blue)', marginBottom: '6px' }}>{title}</h3>
-                  <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <style>{`@media (max-width: 768px) { .why-grid { grid-template-columns: 1fr !important; } }`}</style>
-      </section>
-
-      <section style={{ background: 'var(--grad-subtle)', padding: '80px 0', textAlign: 'center' }}>
-        <div className="container animate-on-scroll">
-          <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>Pronto para trabalhar connosco?</h2>
-          <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '480px', margin: '0 auto 36px' }}>
-            Uma consulta sem compromisso é tudo o que precisamos para perceber como podemos ajudar.
+        {/* Why NIEUSYNC */}
+  <section style={{ background: 'var(--white)', padding: '100px 0' }}>
+    <div className="container">
+      <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '64px', alignItems: 'center' }} className="why-grid animate-on-scroll">
+        <div>
+          <span className="section-label">Porquê a NIEUSYNC?</span>
+          <div className="accent-line" />
+          <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>Tudo o que precisa, numa só parceria.</h2>
+          <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
+            A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Próxima, ágil e completamente orientada para os seus resultados reais.
           </p>
-          <Link to="/contacto" className="btn-gradient" style={{ padding: '16px 40px' }}>
-            Agendar Consulta →
-          </Link>
         </div>
-      </section>
-    </main>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+          {[
+            { title: 'Multidisciplinar 360º', desc: 'Legal, financeiro e digital num só lugar' },
+            { title: 'Resposta ágil', desc: 'Acesso directo à equipa, sem intermediários' },
+            { title: 'Decisão com dados', desc: 'Relatórios simples para escolhas inteligentes' },
+            { title: 'Preço transparente', desc: 'Sem surpresas, sem letras pequenas' },
+          ].map(({ title, desc }) => (
+            <div key={title} className="stagger-child animate-on-scroll" style={{ borderLeft: '3px solid var(--purple)', paddingLeft: '18px' }}>
+              <h3 style={{ fontSize: '15px', color: 'var(--blue)', marginBottom: '6px' }}>{title}</h3>
+              <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <style>{`@media (max-width: 768px) { .why-grid { grid-template-columns: 1fr !important; } }`}</style>
+  </section>
+  
+  {/* CTA Final */}
+  <section style={{ background: 'var(--grad-subtle)', padding: '80px 0', textAlign: 'center' }}>
+    <div className="container animate-on-scroll">
+      <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>Pronto para trabalhar connosco?</h2>
+      <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '480px', margin: '0 auto 36px' }}>
+        Uma consulta sem compromisso é tudo o que precisamos para perceber como podemos ajudar.
+      </p>
+      <Link to="/contacto" className="btn-gradient" style={{ padding: '16px 40px' }}>
+        Agendar Consulta →
+      </Link>
+    </div>
+  </section>
+      </main>
   );
 }
