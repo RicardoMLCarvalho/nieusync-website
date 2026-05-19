@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Sobre() {
   useEffect(() => {
-    document.title = 'Sobre Nós | NIEUSYNC · A equipa por detrás da consultora';
+    document.title = 'NIEUSYNC - Sobre Nós';
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
