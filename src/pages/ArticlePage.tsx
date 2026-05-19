@@ -45,7 +45,7 @@ export default function ArticlePage() {
   const { article, loading } = useArticle(slug || '')
 
   useEffect(() => {
-    if (article) document.title = `${article.title} | NIEUSYNC`
+    if (article) document.title = `NIEUSYNC - ${article.title}`
     window.scrollTo(0, 0)
   }, [article])
 
