@@ -63,7 +63,7 @@ export default function Sobre() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' }} className="mission-grid">
             <div>
               <span className="section-label">A nossa missão</span>
-              <div className="accent-line" />
+              <div className="accent-line" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
               <h2 style={{ color: 'var(--blue)', marginBottom: '24px' }}>Expertise real, preços justos.</h2>
               <div style={{ borderLeft: '4px solid var(--purple)', paddingLeft: '24px', marginBottom: '28px', maxWidth: '680px' }}>
                 <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '18px', color: 'var(--blue)', lineHeight: 1.70 }}>
@@ -97,7 +97,7 @@ export default function Sobre() {
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
             <span className="section-label">Os nossos valores</span>
-            <div className="accent-line accent-line-center" />
+            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
             <h2 style={{ color: 'var(--blue)' }}>O que nos guia todos os dias</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '24px' }} className="values-grid animate-on-scroll">
@@ -121,7 +121,7 @@ export default function Sobre() {
       <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '64px', alignItems: 'center' }} className="why-grid animate-on-scroll">
         <div>
           <span className="section-label">Porquê a NIEUSYNC?</span>
-          <div className="accent-line" />
+          <div className="accent-line" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
           <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>Tudo o que precisa, numa só parceria.</h2>
           <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
             A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Próxima, ágil e completamente orientada para os seus resultados reais.
