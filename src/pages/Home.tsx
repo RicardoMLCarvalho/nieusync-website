@@ -332,7 +332,7 @@ export default function Home() {
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
               zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '350px', height: '350px', objectFit: 'contain' }} />
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '250px', height: '250px', objectFit: 'contain' }} />
             </div>
       
             
