@@ -331,10 +331,8 @@ export default function Home() {
             <div style={{
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
               zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '800px', height: '800px',
-              marginLeft: '-140px', marginTop: '-140px',
             }}>
-              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '100%', height: '100%', objectFit: 'contain', opacity: 0.9 }} />
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '320px', height: '320px', objectFit: 'contain' }} />
             </div>
       
             
