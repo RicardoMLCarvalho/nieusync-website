@@ -326,7 +326,7 @@ export default function Home() {
             </p>
           </div>
       
-          <div className="services-orbit animate-on-scroll" style={{ position: 'relative', width: '520px', height: '520px', margin: '0 auto' }}>
+          <div className="services-orbit animate-on-scroll" style={{ position: 'relative', width: '520px', height: '520px', margin: '0 auto', overflow: 'visible' }}>
             {/* Logo central */}
             <div style={{
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
