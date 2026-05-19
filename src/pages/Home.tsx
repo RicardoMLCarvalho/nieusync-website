@@ -207,7 +207,7 @@ export default function Home() {
                   {[
                     { src: '/aep-logo-novo-2.png', alt: 'AEP', href: 'https://www.aeportugal.pt' },
                     { src: '/apersalogo.png', alt: 'APERSA', href: 'https://www.cppme.pt/estrutura-associativa/associacoes/132-apersa-associacao-de-pequenos-empresarios-da-regiao-de-setubal-e-alentejo' },
-                    { src: '/ADL_svg', alt: 'ADL Litoral Alentejano', href: 'https://litoralalentejano.pt' },
+                    { src: '/ADL.svg', alt: 'ADL Litoral Alentejano', href: 'https://litoralalentejano.pt' },
                     { src: '/AES.png', alt: 'AE Sines', href: 'https://www.aesines.com' },
                     { src: '/anpme-logo.svg', alt: 'ANPME', href: 'https://www.anpme.pt' },
                   ].map(({ src, alt, href }) => (
