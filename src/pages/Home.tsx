@@ -211,14 +211,12 @@ export default function Home() {
                   { src: '/anpme-logo.svg', alt: 'ANPME', href: 'https://www.anpme.pt' },
                 ].map(({ src, alt, href }) => (
                   <a key={alt} href={href} target="_blank" rel="noopener noreferrer"
-                    style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.7, transition: 'opacity 0.2s ease', width: '180px' }}
-                    onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = '1'}
-                    onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = '0.7'}
+  style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'opacity 0.2s ease', width: '180px' }}
                   >
-                    <img src={src} alt={alt} style={{ height: '48px', width: 'auto', maxWidth: '140px', objectFit: 'contain', filter: 'grayscale(100%)', transition: 'filter 0.2s ease' }}
-                      onMouseEnter={(e) => (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(0%)'}
-                      onMouseLeave={(e) => (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(100%)'}
-                    />
+                    <img src={src} alt={alt} style={{ height: '48px', width: 'auto', maxWidth: '140px', objectFit: 'contain', opacity: 0.55, transition: 'opacity 0.2s ease' }}
+                    onMouseEnter={(e) => (e.currentTarget as HTMLImageElement).style.opacity = '1'}
+                    onMouseLeave={(e) => (e.currentTarget as HTMLImageElement).style.opacity = '0.55'}
+                  />
                   </a>
                 ))}
               </div>
