@@ -335,7 +335,7 @@ export default function Home() {
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               border: '2px solid rgba(159,142,194,0.20)', zIndex: 2,
             }}>
-              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '140px', height: '140px', objectFit: 'contain' }} />
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '200px', height: '200px'}} />
             </div>
 
       
