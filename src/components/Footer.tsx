@@ -166,11 +166,11 @@ export default function Footer() {
             .footer-flex > div { min-width: 100% !important; padding: 14px 0 !important; }
             .mobile-divider {
               display: block !important;
-              width: 100%;
+              width: 100vw;
               height: 1px;
               background: rgba(255,255,255,0.10);
-              margin: 0 -40px;
-              padding: 0;
+              margin: 0;
+              flex-shrink: 0;
             }
             .footer-flex { gap: 0 !important; }
             .footer-flex p, .footer-flex a { font-size: 11px !important; }
