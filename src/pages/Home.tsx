@@ -95,7 +95,7 @@ export default function Home() {
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', maxWidth: '520px', marginBottom: '36px' }}>
-                Direito Empresarial, Gestão Financeira, Marketing Digital e Tecnologia de Informação integrados numa única parceria de confiança.
+                Direito Empresarial, Gestão Financeira, Marketing Digital e Tecnologia de Informação integrados num único parceiro de confiança.
               </p>
 
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
