@@ -22,30 +22,6 @@ export default function Sobre() {
     return () => observer.disconnect();
   }, []);
 
-  const teamMembers = [
-    {
-      initials: 'RS', avatarGrad: 'var(--grad-main)',
-      name: 'Ricardo Serrão de Carvalho', role: 'CEO · Direito & Gestão',
-      bio: 'Especialista em Direito Empresarial e Gestão Estratégica com mais de 15 anos de experiência a apoiar PMEs portuguesas. Combina rigor jurídico com visão de negócio para criar soluções práticas e sustentáveis.',
-      expertise: ['Direito Empresarial', 'Gestão Estratégica', 'Due Diligence'],
-      linkedin: 'https://www.linkedin.com/in/ricardo-serrao-de-carvalho/',
-    },
-    {
-      initials: 'RC', avatarGrad: 'var(--grad-reverse)',
-      name: 'Ricardo M. Carvalho', role: 'CMO · Marketing & Crescimento',
-      bio: 'Especialista em marketing digital B2B com foco em crescimento sustentável. Combina estratégia de conteúdo, paid media e análise de dados para gerar resultados mensuráveis para PMEs e Startups.',
-      expertise: ['Marketing Digital B2B', 'Growth Strategy', 'Paid Media'],
-      linkedin: 'https://www.linkedin.com/in/ricardo-m-carvalho/',
-    },
-    {
-      initials: 'MP', avatarGrad: 'var(--grad-main)',
-      name: 'Marlene S. Pereira', role: 'CHRO · Recursos Humanos & Cultura',
-      bio: 'Especialista em Recursos Humanos e desenvolvimento organizacional. Apoia empresas na construção de equipas de alta performance, processos de recrutamento eficientes e culturas organizacionais saudáveis.',
-      expertise: ['Recursos Humanos', 'Cultura Organizacional', 'Direito do Trabalho'],
-      linkedin: 'https://www.linkedin.com/in/marlene-s-pereira/',
-    },
-  ];
-
   const values = [
     {
       icon: (<svg width="32" height="32" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><defs><linearGradient id="v1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs><circle cx="12" cy="12" r="10" stroke="url(#v1)" /><path stroke="url(#v1)" d="M8 12l3 3 5-5" /></svg>),
@@ -139,38 +115,35 @@ export default function Sobre() {
         <style>{`@media (max-width: 768px) { .values-grid { grid-template-columns: 1fr !important; } }`}</style>
       </section>
 
-      {/* Team */}
+      {/* Why NIEUSYNC */}
       <section style={{ background: 'var(--white)', padding: '100px 0' }}>
         <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <span className="section-label">A equipa</span>
-            <div className="accent-line accent-line-center" />
-            <h2 style={{ color: 'var(--blue)' }}>A nossa equipa</h2>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="team-grid animate-on-scroll">
-            {teamMembers.map(({ initials, avatarGrad, name, role, bio, expertise, linkedin }) => (
-              <div key={name} className="card stagger-child animate-on-scroll" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ width: '88px', height: '88px', borderRadius: '50%', background: avatarGrad, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '26px', color: 'var(--white)', boxShadow: '0 4px 20px rgba(35,56,119,0.25)', marginBottom: '16px', flexShrink: 0 }}>
-                  {initials}
+          <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '64px', alignItems: 'center' }} className="why-grid animate-on-scroll">
+            <div>
+              <span className="section-label">Porquê a NIEUSYNC?</span>
+              <div className="accent-line" />
+              <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>Tudo o que precisa, numa só parceria.</h2>
+              <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
+                A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Próxima, ágil e completamente orientada para os seus resultados reais.
+              </p>
+              <Link to="/contacto" className="btn-gradient">Agendar consulta gratuita →</Link>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+              {[
+                { title: 'Multidisciplinar 360º', desc: 'Legal, financeiro e digital num só lugar' },
+                { title: 'Resposta ágil', desc: 'Acesso directo à equipa, sem intermediários' },
+                { title: 'Decisão com dados', desc: 'Relatórios simples para escolhas inteligentes' },
+                { title: 'Preço transparente', desc: 'Sem surpresas, sem letras pequenas' },
+              ].map(({ title, desc }) => (
+                <div key={title} className="stagger-child animate-on-scroll" style={{ borderLeft: '3px solid var(--purple)', paddingLeft: '18px' }}>
+                  <h3 style={{ fontSize: '15px', color: 'var(--blue)', marginBottom: '6px' }}>{title}</h3>
+                  <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>{desc}</p>
                 </div>
-                <h3 style={{ fontSize: '18px', color: 'var(--blue)', marginBottom: '8px' }}>{name}</h3>
-                <div style={{ marginBottom: '14px' }}><span className="badge badge-gradient">{role}</span></div>
-                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.70)', marginBottom: '16px', lineHeight: 1.70, textAlign: 'center' }}>{bio}</p>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '20px' }}>
-                  {expertise.map((e) => <span key={e} className="badge badge-light">{e}</span>)}
-                </div>
-                <a href={linkedin} target="_blank" rel="noopener noreferrer" className="btn-secondary btn-sm" style={{ fontSize: '12px' }}>
-                  Ver perfil no LinkedIn
-                </a>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-        <style>{`
-          @media (max-width: 768px) { .team-grid { grid-template-columns: 1fr !important; } }
-          @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2,1fr) !important; } }
-        `}</style>
+        <style>{`@media (max-width: 768px) { .why-grid { grid-template-columns: 1fr !important; } }`}</style>
       </section>
 
       <section style={{ background: 'var(--grad-subtle)', padding: '80px 0', textAlign: 'center' }}>
