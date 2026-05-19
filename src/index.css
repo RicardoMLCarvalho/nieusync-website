@@ -541,4 +541,10 @@ label {
     padding-top: 56px !important;
     padding-bottom: 56px !important;
   }
+  .hero-grid h1 {
+    font-size: 36px !important;
+  }
+  .hero-badge {
+    margin-top: -20px !important;
+  }
 }
