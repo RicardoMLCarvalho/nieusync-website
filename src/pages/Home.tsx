@@ -30,7 +30,7 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'NIEUSYNC | Consultora B2B · Direito, Gestão e Marketing · Portugal';
+    document.title = 'NIEUSYNC - Consultora B2B · Direito Empresarial, Gestão Financeira, Marketing Digital e Tecnologias de Informação';
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
