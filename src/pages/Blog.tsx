@@ -19,7 +19,7 @@ export default function Blog() {
     : articles.filter((a) => a.category === activeCategory);
 
   useEffect(() => {
-    document.title = 'Blog & Recursos · NIEUSYNC · Artigos sobre Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologias de Informação e Inteligência Artificial';    
+    document.title = 'NIEUSYNC - Blog & Recursos · Artigos sobre Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologias de Informação e Inteligência Artificial';
   }, []);
 
   return (
