@@ -332,14 +332,14 @@ export default function Home() {
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
               zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '800px', height: '800px', objectFit: 'contain' }} />
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '640px', height: '640px', objectFit: 'contain' }} />
             </div>
 
       
             {/* Setas entre itens */}
             <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 520 520">
               <defs>
-                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
                   <path d="M0,1 L0,9 L9,5 z" fill="var(--purple)" />
                 </marker>
               </defs>
@@ -353,21 +353,22 @@ export default function Home() {
                 const x2 = cx + Math.cos(nextRad) * radius;
                 const y2 = cy + Math.sin(nextRad) * radius;
                 const midRad = (rad + nextRad) / 2;
-                const mx = cx + Math.cos(midRad) * (radius + 40);
-                const my = cy + Math.sin(midRad) * (radius + 40);
-                const t1 = 0.35;
-                const t2 = 0.65;
-                const ax = (1-t1)*(1-t1)*x1 + 2*(1-t1)*t1*mx + t1*t1*x2;
-                const ay = (1-t1)*(1-t1)*y1 + 2*(1-t1)*t1*my + t1*t1*y2;
-                const bx = (1-t2)*(1-t2)*x1 + 2*(1-t2)*t2*mx + t2*t2*x2;
-                const by = (1-t2)*(1-t2)*y1 + 2*(1-t2)*t2*my + t2*t2*y2;
+                const mx = cx + Math.cos(midRad) * (radius + 50);
+                const my = cy + Math.sin(midRad) * (radius + 50);
+                // ponto a 70% do caminho para a seta apontar na direcção certa
+                const t = 0.70;
+                const ax = (1-t)*(1-t)*x1 + 2*(1-t)*t*mx + t*t*x2;
+                const ay = (1-t)*(1-t)*y1 + 2*(1-t)*t*my + t*t*y2;
                 return (
-                  <line
+                  <path
                     key={i}
-                    x1={ax} y1={ay} x2={bx} y2={by}
-                    stroke="var(--purple)" strokeWidth="2.5"
-                    markerEnd="url(#arrowhead)"
+                    d={`M ${x1} ${y1} Q ${mx} ${my} ${ax} ${ay}`}
+                    fill="none"
+                    stroke="var(--purple)"
+                    strokeWidth="2"
                     strokeLinecap="round"
+                    markerEnd="url(#arrowhead)"
+                    opacity="0.7"
                   />
                 );
               })}
@@ -377,7 +378,7 @@ export default function Home() {
             {[
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18"/><line x1="8" y1="21" x2="16" y2="21"/><path d="M5 8h14"/><path d="M5 8l-2 5a3 3 0 0 0 6 0L7 8"/><path d="M19 8l-2 5a3 3 0 0 0 6 0L19 8"/></svg>, label: 'Direito Empresarial', href: '/servicos#direito', angle: -90 },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>, label: 'Gestão Estratégica', href: '/servicos#gestao', angle: -18 },
-              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>, label: 'Marketing Digital', href: '/servicos#marketing', angle: 54 },
+              { { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>, label: 'Marketing Digital', href: '/servicos#marketing', angle: 54 },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/></svg>, label: 'Finanças & Contabilidade', href: '/servicos#financas', angle: 126 },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>, label: 'Tecnologias de Informação', href: '/servicos#tecnologias', angle: 198 },
             ].map(({ icon, label, href, angle }) => {
