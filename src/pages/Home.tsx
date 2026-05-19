@@ -39,9 +39,9 @@ function BlogPreview() {
   );
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="blog-grid animate-on-scroll">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="blog-grid">
       {articles.map((a) => (
-        <div key={a._id} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div key={a._id} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
           {a.mainImage && (
             <div style={{ marginBottom: '16px', borderRadius: '8px', overflow: 'hidden', height: '160px' }}>
               <img
