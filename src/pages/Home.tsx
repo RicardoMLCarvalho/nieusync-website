@@ -340,33 +340,55 @@ export default function Home() {
 
       
             {/* Setas entre itens */}
-<svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 520 520">
-  <defs>
-    <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L6,3 z" fill="rgba(159,142,194,0.60)" />
-    </marker>
-  </defs>
-  {[-90, -18, 54, 126, 198].map((angle, i) => {
-    const rad = (angle * Math.PI) / 180;
-    const radius = 180;
-    const cx = 260, cy = 260;
-    const x = cx + Math.cos(rad) * radius;
-    const y = cy + Math.sin(rad) * radius;
-    const nextAngle = angle + 72;
-    const nextRad = (nextAngle * Math.PI) / 180;
-    const nx = cx + Math.cos(nextRad) * radius;
-    const ny = cy + Math.sin(nextRad) * radius;
-    const mx = (x + nx) / 2 + Math.cos((rad + nextRad) / 2) * 30;
-    const my = (y + ny) / 2 + Math.sin((rad + nextRad) / 2) * 30;
-    return (
-      <path key={i}
-        d={`M ${x} ${y} Q ${mx} ${my} ${nx} ${ny}`}
-        fill="none" stroke="rgba(159,142,194,0.40)" strokeWidth="1.5"
-        strokeDasharray="4 4" markerEnd="url(#arrow)"
-      />
-    );
-  })}
-</svg>
+            <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 520 520">
+              <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                  <path d="M0,0 L0,8 L8,4 z" fill="var(--purple)" />
+                </marker>
+              </defs>
+              {[-90, -18, 54, 126, 198].map((angle, i) => {
+                const radius = 180;
+                const cx = 260, cy = 260;
+                const circleR = 32;
+            
+                const rad = (angle * Math.PI) / 180;
+                const nextRad = ((angle + 72) * Math.PI) / 180;
+            
+                const x1 = cx + Math.cos(rad) * radius;
+                const y1 = cy + Math.sin(rad) * radius;
+                const x2 = cx + Math.cos(nextRad) * radius;
+                const y2 = cy + Math.sin(nextRad) * radius;
+            
+                // ponto de controlo curvo
+                const midRad = (rad + nextRad) / 2;
+                const mx = cx + Math.cos(midRad) * (radius + 30);
+                const my = cy + Math.sin(midRad) * (radius + 30);
+            
+                // ponto a 45% do caminho (antes do meio) para a seta ficar no meio do arco
+                const t = 0.45;
+                const ax = (1-t)*(1-t)*x1 + 2*(1-t)*t*mx + t*t*x2;
+                const ay = (1-t)*(1-t)*y1 + 2*(1-t)*t*my + t*t*y2;
+                const t2 = 0.55;
+                const bx = (1-t2)*(1-t2)*x1 + 2*(1-t2)*t2*mx + t2*t2*x2;
+                const by = (1-t2)*(1-t2)*y1 + 2*(1-t2)*t2*my + t2*t2*y2;
+            
+                // linha curva sem markerEnd, só a seta no meio
+                return (
+                  <g key={i}>
+                    <path
+                      d={`M ${x1} ${y1} Q ${mx} ${my} ${x2} ${y2}`}
+                      fill="none" stroke="rgba(159,142,194,0.35)" strokeWidth="1.5"
+                      strokeDasharray="5 4"
+                    />
+                    <line
+                      x1={ax} y1={ay} x2={bx} y2={by}
+                      stroke="var(--purple)" strokeWidth="2"
+                      markerEnd="url(#arrowhead)"
+                    />
+                  </g>
+                );
+              })}
+            </svg>
 
             {/* Serviços em órbita */}
             {[
