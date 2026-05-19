@@ -1,5 +1,76 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createClient } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
+import { Article } from '../hooks/useArticles';
+
+const sanityClient = createClient({
+  projectId: 'j7qyuhtx',
+  dataset: 'production',
+  useCdn: true,
+  apiVersion: '2024-01-01',
+});
+
+const builder = imageUrlBuilder(sanityClient);
+const urlFor = (source: any) => builder.image(source);
+
+const formatDate = (dateStr: string) => {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('pt-PT', { month: 'short', year: 'numeric' });
+};
+
+function BlogPreview() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    sanityClient.fetch(`*[_type == "article"] | order(publishedAt desc)[0..2] {
+      _id, title, slug, category, author, readTime, publishedAt, excerpt, mainImage
+    }`).then((data) => {
+      setArticles(data);
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return (
+    <div style={{ textAlign: 'center', padding: '40px', color: 'var(--purple)', fontFamily: 'Montserrat,sans-serif' }}>
+      A carregar artigos...
+    </div>
+  );
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="blog-grid animate-on-scroll">
+      {articles.map((a) => (
+        <div key={a._id} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
+          {a.mainImage && (
+            <div style={{ marginBottom: '16px', borderRadius: '8px', overflow: 'hidden', height: '160px' }}>
+              <img
+                src={urlFor(a.mainImage).width(400).height(160).fit('crop').url()}
+                alt={a.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+          )}
+          <div style={{ marginBottom: '12px' }}>
+            <span className="badge badge-purple">{a.category}</span>
+          </div>
+          <Link to={`/blog/${a.slug.current}`} style={{ textDecoration: 'none' }}>
+            <h3 style={{ fontSize: '17px', color: 'var(--blue)', marginBottom: '12px', lineHeight: 1.4 }}>{a.title}</h3>
+          </Link>
+          <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.60)', marginBottom: '20px', flex: 1 }}>{a.excerpt}</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(159,142,194,0.15)', paddingTop: '14px', marginTop: 'auto' }}>
+            <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'var(--purple)' }}>
+              {a.readTime} min · {formatDate(a.publishedAt)}
+            </span>
+            <Link to={`/blog/${a.slug.current}`} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)' }}>
+              Ler artigo →
+            </Link>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function ScaleIcon({ size = 40, color = 'var(--blue)' }: { size?: number; color?: string }) {
   return (
@@ -533,45 +604,25 @@ export default function Home() {
       </section>
 
       {/* ── BLOG PREVIEW ── */}
-      <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
-        <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <span className="section-label">Blog & Recursos</span>
-            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
-            <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Conhecimento que transforma</h2>
-            <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e Inteligência Artificial, para empresas.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px', marginBottom: '40px' }} className="blog-grid animate-on-scroll">
-            {[
-              { cat: 'Direito', title: '5 Contratos que toda PME deve ter antes de crescer', excerpt: 'A ausência de contratos adequados é um dos maiores riscos jurídicos para empresas em crescimento. Descubra quais são essenciais.', time: '5 min · Jan 2025' },
-              { cat: 'Gestão', title: 'Como criar um dashboard simples para gerir o seu negócio', excerpt: 'Monitorize os KPIs mais importantes sem ferramentas complexas. Um guia prático para donos de PME.', time: '7 min · Fev 2025' },
-              { cat: 'Marketing', title: 'LinkedIn para B2B: o guia prático para PMEs portuguesas', excerpt: 'Aproveite o LinkedIn para gerar leads qualificados e posicionar a sua empresa como referência no sector.', time: '8 min · Mar 2025' },
-            ].map(({ cat, title, excerpt, time }) => (
-              <div key={title} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
-                <div style={{ marginBottom: '16px' }}>
-                  <span className="badge badge-purple">{cat}</span>
-                </div>
-                <h3 style={{ fontSize: '17px', color: 'var(--blue)', marginBottom: '12px', lineHeight: 1.4 }}>{title}</h3>
-                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.60)', marginBottom: '20px', flex: 1 }}>{excerpt}</p>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(159,142,194,0.15)', paddingTop: '14px', marginTop: 'auto' }}>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'var(--purple)' }}>{time}</span>
-                  <Link to="/blog" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)' }}>
-                    Ler artigo →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            <Link to="/blog" className="btn-gradient">Ver todos os artigos →</Link>
-          </div>
-        </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .blog-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
-      </section>
+<section style={{ background: 'var(--bg)', padding: '80px 0' }}>
+  <div className="container">
+    <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '48px' }}>
+      <span className="section-label">Blog & Recursos</span>
+      <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
+      <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Conhecimento que transforma</h2>
+      <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e Inteligência Artificial, para empresas.</p>
+    </div>
+    <BlogPreview />
+    <div style={{ textAlign: 'center', marginTop: '40px' }}>
+      <Link to="/blog" className="btn-gradient">Ver todos os artigos →</Link>
+    </div>
+  </div>
+  <style>{`
+    @media (max-width: 768px) {
+      .blog-grid { grid-template-columns: 1fr !important; }
+    }
+  `}</style>
+</section>
 
       {/* ── CTA FINAL ── */}
       <section style={{ background: 'var(--grad-main)', padding: '100px 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
