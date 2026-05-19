@@ -192,56 +192,58 @@ export default function Home() {
         `}</style>
       </section>
 
-      {/* ── TRUST BAR ── */}
-   
-        <section style={{ background: 'var(--white)', borderTop: '1px solid rgba(159,142,194,0.18)', borderBottom: '1px solid rgba(159,142,194,0.18)', padding: '48px 0', overflow: 'hidden' }}>
-          <div className="container" style={{ textAlign: 'center' }}>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.50)', marginBottom: '28px' }}>
-              Presença activa em associações e comunidades empresariais:
-            </p>
+            {/* ── TRUST BAR ── */}
+      <section style={{ background: 'var(--white)', borderTop: '1px solid rgba(159,142,194,0.18)', borderBottom: '1px solid rgba(159,142,194,0.18)', padding: '48px 0', overflow: 'hidden' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.50)', marginBottom: '28px' }}>
+            Presença activa em associações e comunidades empresariais:
+          </p>
+        </div>
+        <div style={{ overflow: 'hidden', position: 'relative' }}>
+          <div className="partners-track">
+            {[...Array(4)].map((_, ri) => (
+              <div key={ri} className="partners-set">
+                {[
+                  { src: '/aep-logo-novo-2.png', alt: 'AEP', href: 'https://www.aeportugal.pt' },
+                  { src: '/apersalogo.png', alt: 'APERSA', href: 'https://www.cppme.pt' },
+                  { src: '/ADL.svg', alt: 'ADL Litoral Alentejano', href: 'https://litoralalentejano.pt' },
+                  { src: '/AES.png', alt: 'AE Sines', href: 'https://www.aesines.com' },
+                  { src: '/anpme-logo.svg', alt: 'ANPME', href: 'https://www.anpme.pt' },
+                ].map(({ src, alt, href }) => (
+                  <a key={alt} href={href} target="_blank" rel="noopener noreferrer"
+                    style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.7, transition: 'opacity 0.2s ease', width: '180px' }}
+                    onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = '1'}
+                    onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = '0.7'}
+                  >
+                    <img src={src} alt={alt} style={{ height: '48px', width: 'auto', maxWidth: '140px', objectFit: 'contain', filter: 'grayscale(100%)', transition: 'filter 0.2s ease' }}
+                      onMouseEnter={(e) => (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(0%)'}
+                      onMouseLeave={(e) => (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(100%)'}
+                    />
+                  </a>
+                ))}
+              </div>
+            ))}
           </div>
-          <div style={{ overflow: 'hidden', position: 'relative' }}>
-            <div className="partners-track">
-              {[
-                { src: '/aep-logo-novo-2.png', alt: 'AEP', href: 'https://www.aeportugal.pt' },
-                { src: '/apersalogo.png', alt: 'APERSA', href: 'https://www.cppme.pt/estrutura-associativa/associacoes/132-apersa-associacao-de-pequenos-empresarios-da-regiao-de-setubal-e-alentejo' },
-                { src: '/ADL.svg', alt: 'ADL Litoral Alentejano', href: 'https://litoralalentejano.pt' },
-                { src: '/AES.png', alt: 'AE Sines', href: 'https://www.aesines.com' },
-                { src: '/anpme-logo.svg', alt: 'ANPME', href: 'https://www.anpme.pt' },
-                { src: '/aep-logo-novo-2.png', alt: 'AEP2', href: 'https://www.aeportugal.pt' },
-                { src: '/apersalogo.png', alt: 'APERSA2', href: 'https://www.cppme.pt/estrutura-associativa/associacoes/132-apersa-associacao-de-pequenos-empresarios-da-regiao-de-setubal-e-alentejo' },
-                { src: '/ADL.svg', alt: 'ADL2', href: 'https://litoralalentejano.pt' },
-                { src: '/AES.png', alt: 'AE Sines2', href: 'https://www.aesines.com' },
-                { src: '/anpme-logo.svg', alt: 'ANPME2', href: 'https://www.anpme.pt' },
-              ].map(({ src, alt, href }) => (
-                <a key={alt} href={href} target="_blank" rel="noopener noreferrer"
-                  style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.7, transition: 'opacity 0.2s ease', padding: '0 50px' }}
-                  onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = '1'}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = '0.7'}
-                >
-                  <img src={src} alt={alt} style={{ height: '48px', width: 'auto', maxWidth: '140px', objectFit: 'contain', filter: 'grayscale(100%)', transition: 'filter 0.2s ease' }}
-                    onMouseEnter={(e) => (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(0%)'}
-                    onMouseLeave={(e) => (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(100%)'}
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-          <style>{`
-            .partners-track {
-              display: flex;
-              width: max-content;
-              animation: scrollPartners 30s linear infinite;
-            }
-            @keyframes scrollPartners {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .partners-track:hover {
-              animation-play-state: paused;
-            }
-          `}</style>
-        </section>
+        </div>
+        <style>{`
+          .partners-track {
+            display: flex;
+            width: max-content;
+            animation: scrollPartners 25s linear infinite;
+          }
+          .partners-set {
+            display: flex;
+            align-items: center;
+          }
+          @keyframes scrollPartners {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .partners-track:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+      </section>
 
      {/* ── SERVICES ── */}
       <section style={{ background: 'var(--bg)', padding: '100px 0' }}>
