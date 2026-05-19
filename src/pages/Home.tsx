@@ -389,11 +389,12 @@ export default function Home() {
 
         <style>{`
           @media (max-width: 768px) {
-            .services-orbit { width: 280px !important; height: 280px !important; }
+            .services-orbit { width: 220px !important; height: 220px !important; }
             .services-orbit .orbit-item { width: 90px !important; }
-            .services-orbit .orbit-item > div { width: 48px !important; height: 48px !important; }
-            .services-orbit .orbit-item > div svg { width: 20px !important; height: 20px !important; }
-            .services-orbit .orbit-item > span { font-size: 10px !important; }
+            .services-orbit .orbit-item > div { width: 52px !important; height: 52px !important; }
+            .services-orbit .orbit-item > div svg { width: 22px !important; height: 22px !important; }
+            .services-orbit .orbit-item > span { font-size: 12px !important; }
+            .services-orbit img { width: 200px !important; height: 200px !important; }
           }
         `}</style>
       </section>
