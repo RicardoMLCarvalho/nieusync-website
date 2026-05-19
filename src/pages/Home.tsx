@@ -330,12 +330,9 @@ export default function Home() {
             {/* Logo central */}
             <div style={{
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-              width: '160px', height: '160px', borderRadius: '50%',
-              background: 'var(--white)', boxShadow: '0 8px 40px rgba(35,56,119,0.15)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              border: '2px solid rgba(159,142,194,0.20)', zIndex: 2,
+              zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '200px', height: '200px'}} />
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '220px', height: '220px', objectFit: 'contain' }} />
             </div>
 
       
