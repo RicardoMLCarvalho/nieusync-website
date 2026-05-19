@@ -314,138 +314,97 @@ export default function Home() {
         `}</style>
       </section>
 
-     {/* ── SERVICES ── */}
+           {/* ── SERVICES ── */}
       <section style={{ background: 'var(--bg)', padding: '100px 0' }}>
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
             <span className="section-label">Os nossos serviços</span>
-            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
+            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
             <h2 style={{ color: 'var(--blue)', marginBottom: '16px' }}>Cinco áreas. Uma visão integrada.</h2>
             <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '560px', margin: '0 auto' }}>
               Não tratamos problemas isolados. Sincronizamos o seu negócio.
             </p>
           </div>
-
-          {/* Linha 1 — 3 cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px', marginBottom: '24px' }} className="services-grid animate-on-scroll">
-
-            <div className="card stagger-child animate-on-scroll" style={{ borderTop: '4px solid var(--purple)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ marginBottom: '20px', color: 'var(--blue)' }}><ScaleIcon /></div>
-              <h3 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Direito Empresarial</h3>
-              <p style={{ fontSize: '15px', color: 'rgba(35,56,119,0.75)', marginBottom: '16px', minHeight: '80px' }}>
-                Protecção jurídica completa para o seu negócio, desde contratos até compliance.
-              </p>
-              <ul style={{ listStyle: 'none', marginBottom: '20px', flex: 1 }}>
-                {['Contratos e acordos comerciais', 'Compliance e protecção de dados', 'Direito do trabalho para gestores', 'Due diligence e estruturação legal'].map((item) => (
-                  <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '16px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>·</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/servicos" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)', transition: 'all 0.2s' }}>
-                Saber mais →
-              </Link>
+      
+          <div className="services-orbit animate-on-scroll" style={{ position: 'relative', width: '520px', height: '520px', margin: '0 auto' }}>
+            {/* Logo central */}
+            <div style={{
+              position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+              width: '140px', height: '140px', borderRadius: '50%',
+              background: 'var(--white)', boxShadow: '0 8px 40px rgba(35,56,119,0.15)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              border: '2px solid rgba(159,142,194,0.20)', zIndex: 2,
+            }}>
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
             </div>
-
-            <div className="card stagger-child animate-on-scroll" style={{ borderTop: '4px solid var(--purple)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ marginBottom: '20px', color: 'var(--blue)' }}><ChartIcon /></div>
-              <h3 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Gestão Estratégica</h3>
-              <p style={{ fontSize: '15px', color: 'rgba(35,56,119,0.75)', marginBottom: '16px', minHeight: '80px' }}>
-                Organize, planeie e escale o seu negócio com dados e processos claros.
-              </p>
-              <ul style={{ listStyle: 'none', marginBottom: '20px', flex: 1 }}>
-                {['Organização financeira e controlo de caixa', 'Processos e automação operacional', 'Dashboards e KPIs personalizados', 'Planeamento estratégico e orçamentação'].map((item) => (
-                  <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '16px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>·</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/servicos" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)', transition: 'all 0.2s' }}>
-                Saber mais →
-              </Link>
-            </div>
-
-            <div className="card stagger-child animate-on-scroll" style={{ borderTop: '4px solid var(--purple)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ marginBottom: '20px', color: 'var(--blue)' }}><MegaphoneIcon /></div>
-              <h3 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Marketing Digital</h3>
-              <p style={{ fontSize: '15px', color: 'rgba(35,56,119,0.75)', marginBottom: '16px', minHeight: '80px' }}>
-                Estratégia e execução digital para atrair, converter e fidelizar clientes B2B.
-              </p>
-              <ul style={{ listStyle: 'none', marginBottom: '20px', flex: 1 }}>
-                {['Estratégia e posicionamento digital', 'LinkedIn, Instagram e Google Ads', 'Conteúdo e gestão de redes sociais', 'Análise de dados e reporting'].map((item) => (
-                  <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '16px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>·</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/servicos" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)', transition: 'all 0.2s' }}>
-                Saber mais →
-              </Link>
-            </div>
+      
+            {/* Círculo decorativo */}
+            <div style={{
+              position: 'absolute', top: '50%', left: '50%',
+              transform: 'translate(-50%,-50%)',
+              width: '360px', height: '360px', borderRadius: '50%',
+              border: '1px dashed rgba(159,142,194,0.30)',
+              pointerEvents: 'none',
+            }} />
+      
+            {/* Serviços em órbita */}
+            {[
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 9l4 4-4 4M21 9l-4 4 4 4" /><path d="M3 13h5M16 13h5" /></svg>, label: 'Direito Empresarial', href: '/servicos#direito', angle: -90 },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>, label: 'Gestão Estratégica', href: '/servicos#gestao', angle: -18 },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>, label: 'Marketing Digital', href: '/servicos#marketing', angle: 54 },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/></svg>, label: 'Finanças & Contabilidade', href: '/servicos#financas', angle: 126 },
+              { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>, label: 'Tecnologias de Informação', href: '/servicos#tecnologias', angle: 198 },
+            ].map(({ icon, label, href, angle }) => {
+              const rad = (angle * Math.PI) / 180;
+              const radius = 180;
+              const x = Math.cos(rad) * radius;
+              const y = Math.sin(rad) * radius;
+              return (
+                <Link
+                  key={label}
+                  to={href}
+                  className="orbit-item"
+                  style={{
+                    position: 'absolute',
+                    top: '50%', left: '50%',
+                    transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
+                    textDecoration: 'none', width: '110px', textAlign: 'center',
+                    transition: 'transform 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1.1)`}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1)`}
+                >
+                  <div style={{
+                    width: '64px', height: '64px', borderRadius: '50%',
+                    background: 'var(--white)', border: '2px solid rgba(159,142,194,0.25)',
+                    boxShadow: '0 4px 16px rgba(35,56,119,0.10)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+                  }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--purple)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px rgba(159,142,194,0.30)'; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(159,142,194,0.25)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(35,56,119,0.10)'; }}
+                  >
+                    {icon}
+                  </div>
+                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', color: 'var(--blue)', lineHeight: 1.3, letterSpacing: '0.02em' }}>{label}</span>
+                </Link>
+              );
+            })}
           </div>
-
-          {/* Linha 2 — 2 cards centrados */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '24px', maxWidth: 'calc(66.66% - 8px)', margin: '0 auto' }} className="services-grid-2 animate-on-scroll">
-
-            <div className="card stagger-child animate-on-scroll" style={{ borderTop: '4px solid var(--purple)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ marginBottom: '20px' }}>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/>
-                </svg>
-              </div>
-              <h3 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Finanças & Contabilidade</h3>
-              <p style={{ fontSize: '15px', color: 'rgba(35,56,119,0.75)', marginBottom: '16px', minHeight: '80px' }}>
-                Contabilidade integrada e gestão fiscal para teres controlo total sobre os números do teu negócio.
-              </p>
-              <ul style={{ listStyle: 'none', marginBottom: '20px', flex: 1 }}>
-                {['Contabilidade organizada e actualizada', 'Declarações fiscais e obrigações legais', 'Controlo de caixa e tesouraria', 'Optimização fiscal e redução de custos'].map((item) => (
-                  <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '16px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>·</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/servicos" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)', transition: 'all 0.2s' }}>
-                Saber mais →
-              </Link>
-            </div>
-
-            <div className="card stagger-child animate-on-scroll" style={{ borderTop: '4px solid var(--purple)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ marginBottom: '20px' }}>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-                </svg>
-              </div>
-              <h3 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Tecnologias de Informação</h3>
-              <p style={{ fontSize: '15px', color: 'rgba(35,56,119,0.75)', marginBottom: '16px', minHeight: '80px' }}>
-                Soluções tecnológicas que digitalizam, automatizam e escalam o teu negócio com as ferramentas certas.
-              </p>
-              <ul style={{ listStyle: 'none', marginBottom: '20px', flex: 1 }}>
-                {['Desenvolvimento e manutenção de websites', 'Automação de processos com IA', 'Integração de ferramentas digitais (CRM, ERP)', 'Cibersegurança e protecção de dados'].map((item) => (
-                  <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '16px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>·</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/servicos" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)', transition: 'all 0.2s' }}>
-                Saber mais →
-              </Link>
-            </div>
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+      
+          <div style={{ textAlign: 'center', marginTop: '56px' }}>
             <Link to="/servicos" className="btn-gradient">Ver todos os serviços →</Link>
           </div>
         </div>
-
+      
         <style>{`
           @media (max-width: 768px) {
-            .services-grid { grid-template-columns: 1fr !important; }
-            .services-grid-2 { grid-template-columns: 1fr !important; max-width: 100% !important; }
+            .services-orbit { width: 340px !important; height: 340px !important; }
+            .services-orbit .orbit-item { width: 80px !important; }
+            .services-orbit .orbit-item > div { width: 48px !important; height: 48px !important; }
+            .services-orbit .orbit-item > div svg { width: 20px !important; height: 20px !important; }
+            .services-orbit .orbit-item > span { font-size: 9px !important; }
           }
         `}</style>
       </section>
