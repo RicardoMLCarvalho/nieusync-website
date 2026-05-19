@@ -338,47 +338,48 @@ export default function Home() {
       
             {/* Setas entre itens */}
             <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 520 520">
-  <defs>
-    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-      <path d="M0,0 L0,8 L8,4 z" fill="var(--purple)" opacity="0.7" />
-    </marker>
-  </defs>
-  {[-90, -18, 54, 126, 198].map((angle, i) => {
-    const radius = 180;
-    const cx = 260, cy = 260;
-    const rad = (angle * Math.PI) / 180;
-    const nextRad = ((angle + 72) * Math.PI) / 180;
-
-    // pontos na borda de cada círculo (offset de 32px do centro)
-    const startX = cx + Math.cos(rad) * (radius + 32);
-    const startY = cy + Math.sin(rad) * (radius + 32);
-    const endX = cx + Math.cos(nextRad) * (radius + 32);
-    const endY = cy + Math.sin(nextRad) * (radius + 32);
-
-    // ponto médio levemente afastado para criar curvatura suave
-    const midRad = (rad + nextRad) / 2;
-    const ctrlX = cx + Math.cos(midRad) * (radius + 60);
-    const ctrlY = cy + Math.sin(midRad) * (radius + 60);
-
-    // ponto a 85% da curva para a seta terminar antes do círculo
-    const t = 0.82;
-    const ex = (1-t)*(1-t)*startX + 2*(1-t)*t*ctrlX + t*t*endX;
-    const ey = (1-t)*(1-t)*startY + 2*(1-t)*t*ctrlY + t*t*endY;
-
-    return (
-      <path
-        key={i}
-        d={`M ${startX} ${startY} Q ${ctrlX} ${ctrlY} ${ex} ${ey}`}
-        fill="none"
-        stroke="var(--purple)"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        opacity="0.55"
-        markerEnd="url(#arrowhead)"
-      />
-    );
-  })}
-</svg>
+              <defs>
+                <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                  <path d="M0,0 L0,7 L7,3.5 z" fill="var(--purple)" opacity="0.8" />
+                </marker>
+              </defs>
+              {[-90, -18, 54, 126, 198].map((angle, i) => {
+                const radius = 180;
+                const cx = 260, cy = 260;
+                const rad = (angle * Math.PI) / 180;
+                const nextRad = ((angle + 72) * Math.PI) / 180;
+            
+                // ponto médio entre os dois ícones na órbita
+                const midRad = (rad + nextRad) / 2;
+            
+                // seta começa 25° antes do meio e termina 25° depois
+                const spanRad = 22 * (Math.PI / 180);
+                const aRad = midRad - spanRad;
+                const bRad = midRad + spanRad;
+            
+                const ax = cx + Math.cos(aRad) * radius;
+                const ay = cy + Math.sin(aRad) * radius;
+                const bx = cx + Math.cos(bRad) * radius;
+                const by = cy + Math.sin(bRad) * radius;
+            
+                // ponto de controlo levemente afastado para curvar para fora
+                const ctrlX = cx + Math.cos(midRad) * (radius + 28);
+                const ctrlY = cy + Math.sin(midRad) * (radius + 28);
+            
+                return (
+                  <path
+                    key={i}
+                    d={`M ${ax} ${ay} Q ${ctrlX} ${ctrlY} ${bx} ${by}`}
+                    fill="none"
+                    stroke="var(--purple)"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    opacity="0.60"
+                    markerEnd="url(#arrowhead)"
+                  />
+                );
+              })}
+            </svg>
 
             {/* Serviços em órbita */}
             {[
