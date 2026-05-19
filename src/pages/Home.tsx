@@ -426,44 +426,7 @@ export default function Home() {
           }
         `}</style>
       </section>
-
-      {/* ── WHY NIEUSYNC ── */}
-      <section style={{ background: 'var(--white)', padding: '100px 0' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '64px', alignItems: 'center' }} className="why-grid animate-on-scroll">
-            <div>
-              <span className="section-label">Porquê a NIEUSYNC?</span>
-              <div className="accent-line" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
-              <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>Tudo o que precisa, numa só parceria.</h2>
-              <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
-                A NIEUSYNC foca-se na Criação, Crescimento e Recuperação de Start-Ups e PME's. Desenhamos soluções à medida, que libertam o seu potencial e transformam metas em resultados.
-              </p>
-              <Link to="/sobre" className="btn-gradient">Sobre Nós →</Link>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-              {[
-                { title: 'Multidisciplinar 360º', desc: 'Legal, financeiro, digital e tecnológico num só lugar' },
-                { title: 'Resposta ágil', desc: 'Acesso directo à equipa, sem intermediários' },
-                { title: 'Decisão com dados', desc: 'Relatórios simples para escolhas inteligentes' },
-                { title: 'Preço transparente', desc: 'Sem surpresas, sem letras pequenas' },
-              ].map(({ title, desc }) => (
-                <div key={title} className="stagger-child animate-on-scroll" style={{ borderLeft: '3px solid var(--purple)', paddingLeft: '18px' }}>
-                  <h3 style={{ fontSize: '15px', color: 'var(--blue)', marginBottom: '6px' }}>{title}</h3>
-                  <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <style>{`
-          @media (max-width: 768px) {
-            .why-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
-      </section>
-
+    
       {/* ── PERSONA ── */}
       <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
         <div className="container">
