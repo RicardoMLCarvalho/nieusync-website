@@ -142,7 +142,7 @@ export default function Footer() {
         </div>
 
         {/* Serviços + Legal lado a lado */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: '1px solid rgba(255,255,255,0.10)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
           <div style={{ padding: '20px 12px', borderRight: '1px solid rgba(255,255,255,0.10)' }}>
             <p style={{ ...colTitle, fontSize: '10px' }}>Serviços</p>
             {[{ to: '/servicos#direito', label: 'Direito Empresarial' }, { to: '/servicos#gestao', label: 'Gestão Estratégica' }, { to: '/servicos#marketing', label: 'Marketing Digital' }, { to: '/servicos#financas', label: 'Finanças & Contabilidade' }, { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' }].map(({ to, label }) => (
@@ -159,7 +159,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', marginTop: '40px', padding: '16px 0', background: '#233877' }}>
+      <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '16px 0', background: '#233877' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>
             © {currentYear} NIEUSYNC, Sociedade Multidisciplinar de Advogados e Consultores SP, LDA — Todos os direitos reservados.
@@ -171,10 +171,12 @@ export default function Footer() {
         .footer-mobile { display: none; }
         .footer-desktop { display: block; }
         .desktop-divider { display: flex; }
+        .footer-bottom { margin-top: 40px; }
 
         @media (max-width: 480px) {
           .footer-mobile { display: block; }
           .footer-desktop { display: none; }
+          .footer-bottom { margin-top: 0 !important; }
         }
       `}</style>
     </footer>
