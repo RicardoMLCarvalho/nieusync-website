@@ -344,7 +344,7 @@ export default function Home() {
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>, label: 'Tecnologias de Informação', href: '/servicos#tecnologias', angle: 198 },
             ].map(({ icon, label, href, angle }) => {
               const rad = (angle * Math.PI) / 180;
-              const radius = window.innerWidth <= 768 ? 110 : 180;
+              const radius = window.innerWidth <= 768 ? 130 : 180;
               const x = Math.cos(rad) * radius;
               const y = Math.sin(rad) * radius;
               return (
