@@ -17,7 +17,7 @@ export default function Contacto() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    document.title = 'Contacto | NIEUSYNC · Agendar Consulta';
+    document.title = 'NIEUSYNC - Contactos · Agendar Consulta';
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
