@@ -330,23 +330,44 @@ export default function Home() {
             {/* Logo central */}
             <div style={{
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-              width: '140px', height: '140px', borderRadius: '50%',
+              width: '180px', height: '180px', borderRadius: '50%',
               background: 'var(--white)', boxShadow: '0 8px 40px rgba(35,56,119,0.15)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               border: '2px solid rgba(159,142,194,0.20)', zIndex: 2,
             }}>
-              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '120px', height: '120px', objectFit: 'contain' }} />
             </div>
+
       
-            {/* Círculo decorativo */}
-            <div style={{
-              position: 'absolute', top: '50%', left: '50%',
-              transform: 'translate(-50%,-50%)',
-              width: '360px', height: '360px', borderRadius: '50%',
-              border: '1px dashed rgba(159,142,194,0.30)',
-              pointerEvents: 'none',
-            }} />
-      
+            {/* Setas entre itens */}
+<svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 520 520">
+  <defs>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="rgba(159,142,194,0.60)" />
+    </marker>
+  </defs>
+  {[-90, -18, 54, 126, 198].map((angle, i) => {
+    const rad = (angle * Math.PI) / 180;
+    const radius = 180;
+    const cx = 260, cy = 260;
+    const x = cx + Math.cos(rad) * radius;
+    const y = cy + Math.sin(rad) * radius;
+    const nextAngle = angle + 72;
+    const nextRad = (nextAngle * Math.PI) / 180;
+    const nx = cx + Math.cos(nextRad) * radius;
+    const ny = cy + Math.sin(nextRad) * radius;
+    const mx = (x + nx) / 2 + Math.cos((rad + nextRad) / 2) * 30;
+    const my = (y + ny) / 2 + Math.sin((rad + nextRad) / 2) * 30;
+    return (
+      <path key={i}
+        d={`M ${x} ${y} Q ${mx} ${my} ${nx} ${ny}`}
+        fill="none" stroke="rgba(159,142,194,0.40)" strokeWidth="1.5"
+        strokeDasharray="4 4" markerEnd="url(#arrow)"
+      />
+    );
+  })}
+</svg>
+
             {/* Serviços em órbita */}
             {[
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18M3 9l4 4-4 4M21 9l-4 4 4 4" /><path d="M3 13h5M16 13h5" /></svg>, label: 'Direito Empresarial', href: '/servicos#direito', angle: -90 },
