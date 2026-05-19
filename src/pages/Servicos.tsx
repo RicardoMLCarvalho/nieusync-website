@@ -57,7 +57,7 @@ export default function Servicos() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = 'Serviços | NIEUSYNC · Direito, Gestão e Marketing Digital';
+    document.title = 'NIEUSYNC - Serviços · Direito Empresarial, Gestão Financeira, Marketing Digital e Tecnologia de Informação';
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
