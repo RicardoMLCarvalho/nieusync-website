@@ -71,7 +71,7 @@ export default function Sobre() {
                 </p>
               </div>
               <p style={{ color: 'rgba(35,56,119,0.70)' }}>
-                A NIEUSYNC serve empresas em todo o país. Acreditamos que o crescimento sustentável começa com uma base sólida: jurídica, financeira e digital.
+                A NIEUSYNC trabalha com empresas nacionais e internacionais. Acreditamos que o crescimento sustentável começa com uma base sólida: jurídica, financeira, digital e tecnológica.
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
