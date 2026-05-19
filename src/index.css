@@ -537,4 +537,8 @@ label {
   h1 { font-size: 28px; }
   h2 { font-size: 22px; }
   .container { padding: 0 16px; }
+  main > section {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
 }
