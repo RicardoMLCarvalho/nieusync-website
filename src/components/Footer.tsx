@@ -153,29 +153,29 @@ export default function Footer() {
       </div>
 
       <style>{`
-        .desktop-divider { display: flex; }
-        .mobile-divider { display: none; }
-
-        @media (max-width: 1024px) {
-          .footer-flex { flex-wrap: wrap !important; gap: 0 !important; }
-          .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 16px 12px !important; }
-          .desktop-divider { display: none !important; }
-        }
-
-        @media (max-width: 480px) {
-          .footer-flex > div { min-width: 100% !important; padding: 14px 0 !important; }
-          .mobile-divider {
-            display: block !important;
-            width: 100%;
-            height: 1px;
-            background: rgba(255,255,255,0.10);
-            margin: 0;
+          .desktop-divider { display: flex; }
+          .mobile-divider { display: none; }
+        
+          @media (max-width: 1024px) {
+            .footer-flex { flex-wrap: wrap !important; gap: 0 !important; }
+            .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 16px 12px !important; }
+            .desktop-divider { display: none !important; }
           }
-          .footer-flex { gap: 0 !important; }
-          .footer-flex p, .footer-flex a { font-size: 11px !important; }
-          .footer-flex p[style*="fontSize: '11px'"] { font-size: 10px !important; }
-        }
-      `}</style>
+        
+          @media (max-width: 480px) {
+            .footer-flex > div { min-width: 100% !important; padding: 14px 0 !important; }
+            .mobile-divider {
+              display: block !important;
+              width: 100%;
+              height: 1px;
+              background: rgba(255,255,255,0.10);
+              margin: 0 -40px;
+              padding: 0;
+            }
+            .footer-flex { gap: 0 !important; }
+            .footer-flex p, .footer-flex a { font-size: 11px !important; }
+          }
+        `}</style>
     </footer>
   );
 }
