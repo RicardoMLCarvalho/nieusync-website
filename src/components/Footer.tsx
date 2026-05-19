@@ -39,8 +39,10 @@ export default function Footer() {
   const hoverPurple = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)';
   const unhoverLink = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.70)';
 
+  const mobileDivider = <div className="mobile-divider" />;
+
   const divider = (
-    <div style={{ width: '1px', background: 'rgba(255,255,255,0.10)', alignSelf: 'stretch', flexShrink: 0 }} />
+    <div style={{ width: '1px', background: 'rgba(255,255,255,0.10)', alignSelf: 'stretch', flexShrink: 0 }} className="desktop-divider" />
   );
 
   return (
@@ -69,6 +71,7 @@ export default function Footer() {
           </div>
 
           {divider}
+          {mobileDivider}
 
           {/* Serviços */}
           <div style={{ flex: 1, padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
@@ -95,6 +98,7 @@ export default function Footer() {
           </div>
 
           {divider}
+          {mobileDivider}
 
           {/* Contacto */}
           <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
@@ -109,6 +113,7 @@ export default function Footer() {
           </div>
 
           {divider}
+          {mobileDivider}
 
           {/* Legal */}
           <div style={{ flex: 1, paddingLeft: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
@@ -148,14 +153,30 @@ export default function Footer() {
       </div>
 
       <style>{`
+        .desktop-divider { display: flex; }
+        .mobile-divider { display: none; }
+
         @media (max-width: 1024px) {
-          .footer-flex { flex-wrap: wrap !important; gap: 24px !important; }
-          .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 0 !important; }
+          .footer-flex { flex-wrap: wrap !important; gap: 0 !important; }
+          .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 16px 12px !important; }
+          .desktop-divider { display: none !important; }
         }
+
         @media (max-width: 480px) {
-          .footer-flex > div { min-width: 100% !important; }
+          .footer-flex > div { min-width: 100% !important; padding: 14px 0 !important; }
+          .mobile-divider {
+            display: block !important;
+            width: 100%;
+            height: 1px;
+            background: rgba(255,255,255,0.10);
+            margin: 0;
+          }
+          .footer-flex { gap: 0 !important; }
+          .footer-flex p, .footer-flex a { font-size: 11px !important; }
+          .footer-flex p[style*="fontSize: '11px'"] { font-size: 10px !important; }
         }
       `}</style>
     </footer>
   );
 }
+
