@@ -317,16 +317,16 @@ export default function Home() {
            {/* ── SERVICES ── */}
       <section style={{ background: 'var(--bg)', padding: '100px 0' }}>
         <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '100px' }}>
             <span className="section-label">Os nossos serviços</span>
             <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
             <h2 style={{ color: 'var(--blue)', marginBottom: '16px' }}>Cinco áreas. Uma visão integrada.</h2>
             <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '560px', margin: '0 auto' }}>
-              Não tratamos problemas isolados. Sincronizamos o seu negócio.
+              Não isole os seus problemas. Sincronize o seu negócio.
             </p>
           </div>
-      
-          <div className="services-orbit animate-on-scroll" style={{ position: 'relative', width: '350px', height: '350px', margin: '0 auto', overflow: 'visible' }}>
+
+          <div className="services-orbit animate-on-scroll" style={{ position: 'relative', width: '350px', height: '350px', margin: '60px auto 0', overflow: 'visible' }}>
             {/* Logo central */}
             <div style={{
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
@@ -334,8 +334,7 @@ export default function Home() {
             }}>
               <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '350px', height: '350px', objectFit: 'contain' }} />
             </div>
-      
-            
+
             {/* Serviços em órbita */}
             {[
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V2m0 0H8m4 0h4M6 12H2l4-8 4 8H6zm12 0h-4l4-8 4 8h-4zm-6 10H8m4 0h4"/></svg>, label: 'Direito Empresarial', href: '/servicos#direito', angle: -90 },
@@ -358,8 +357,9 @@ export default function Home() {
                     top: '50%', left: '50%',
                     transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
-                    textDecoration: 'none', width: '110px', textAlign: 'center',
+                    textDecoration: 'none', width: '120px', textAlign: 'center',
                     transition: 'transform 0.3s ease',
+                    zIndex: 2,
                   }}
                   onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1.1)`}
                   onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1)`}
@@ -376,24 +376,24 @@ export default function Home() {
                   >
                     {icon}
                   </div>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', color: 'var(--blue)', lineHeight: 1.3, letterSpacing: '0.02em' }}>{label}</span>
+                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--blue)', lineHeight: 1.3, letterSpacing: '0.02em' }}>{label}</span>
                 </Link>
               );
             })}
           </div>
-      
-          <div style={{ textAlign: 'center', marginTop: '56px' }}>
+
+          <div style={{ textAlign: 'center', marginTop: '120px' }}>
             <Link to="/servicos" className="btn-gradient">Ver todos os serviços →</Link>
           </div>
         </div>
-      
+
         <style>{`
           @media (max-width: 768px) {
-            .services-orbit { width: 340px !important; height: 340px !important; }
-            .services-orbit .orbit-item { width: 80px !important; }
+            .services-orbit { width: 280px !important; height: 280px !important; }
+            .services-orbit .orbit-item { width: 90px !important; }
             .services-orbit .orbit-item > div { width: 48px !important; height: 48px !important; }
             .services-orbit .orbit-item > div svg { width: 20px !important; height: 20px !important; }
-            .services-orbit .orbit-item > span { font-size: 9px !important; }
+            .services-orbit .orbit-item > span { font-size: 10px !important; }
           }
         `}</style>
       </section>
