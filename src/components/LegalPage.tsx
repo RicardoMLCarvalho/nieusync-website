@@ -16,7 +16,7 @@ interface LegalPageProps {
 
 export default function LegalPage({ title, subtitle, lastUpdated, sections, docTitle }: LegalPageProps) {
   useEffect(() => {
-    document.title = `${title} | NIEUSYNC`;
+    document.title = `NIEUSYNC - ${title}`;
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [title]);
 
