@@ -51,7 +51,7 @@ export default function Footer() {
         <div style={{ display: 'flex', alignItems: 'stretch', gap: '0' }} className="footer-flex">
 
           {/* Brand */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, minWidth: '160px', paddingRight: '32px' }}>
+          <div className="footer-brand" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, minWidth: '160px', paddingRight: '32px' }}>
             <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '14px' }} />
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
               {[
@@ -101,7 +101,7 @@ export default function Footer() {
           {mobileDivider}
 
           {/* Contacto */}
-          <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
+          <div className="footer-contacto" style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
             <p style={colTitle}>Contacto</p>
             {[
               { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
@@ -111,9 +111,6 @@ export default function Footer() {
               <a key={label} href={href} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
             ))}
           </div>
-
-          {divider}
-          {mobileDivider}
 
           {/* Legal */}
           <div style={{ flex: 1, paddingLeft: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
@@ -153,29 +150,53 @@ export default function Footer() {
       </div>
 
       <style>{`
-          .desktop-divider { display: flex; }
-          .mobile-divider { display: none; }
-        
-          @media (max-width: 1024px) {
-            .footer-flex { flex-wrap: wrap !important; gap: 0 !important; }
-            .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 16px 12px !important; }
-            .desktop-divider { display: none !important; }
+        .desktop-divider { display: flex; }
+        .mobile-divider { display: none; }
+      
+        @media (max-width: 1024px) {
+          .footer-flex { flex-wrap: wrap !important; gap: 0 !important; }
+          .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 16px 12px !important; }
+          .desktop-divider { display: none !important; }
+        }
+      
+        @media (max-width: 480px) {
+          .footer-flex { flex-direction: column !important; gap: 0 !important; }
+      
+          .footer-brand { 
+            padding: 20px 0 16px !important; 
+            min-width: 100% !important;
+            border-bottom: 1px solid rgba(255,255,255,0.10);
           }
-        
-          @media (max-width: 480px) {
-            .footer-flex > div { min-width: 100% !important; padding: 14px 0 !important; }
-            .mobile-divider {
-              display: block !important;
-              width: 100%;
-              height: 1px;
-              background: rgba(255,255,255,0.10);
-              margin: 0 -40px;
-              padding: 0;
-            }
-            .footer-flex { gap: 0 !important; }
-            .footer-flex p, .footer-flex a { font-size: 11px !important; }
+      
+          .footer-services-legal {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            width: 100% !important;
+            border-bottom: 1px solid rgba(255,255,255,0.10);
           }
-        `}</style>
+      
+          .footer-contacto {
+            min-width: 100% !important;
+            padding: 16px 0 !important;
+            border-bottom: 1px solid rgba(255,255,255,0.10);
+          }
+      
+          .footer-flex > div { 
+            min-width: 100% !important; 
+            padding: 16px 0 !important;
+          }
+      
+          .mobile-divider {
+            display: block !important;
+            width: 100%;
+            height: 1px;
+            background: rgba(255,255,255,0.10);
+          }
+      
+          .footer-flex p, .footer-flex a { font-size: 11px !important; }
+          .desktop-divider { display: none !important; }
+        }
+      `}</style>
     </footer>
   );
 }
