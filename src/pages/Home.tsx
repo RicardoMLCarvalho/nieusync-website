@@ -338,41 +338,47 @@ export default function Home() {
       
             {/* Setas entre itens */}
             <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 520 520">
-              <defs>
-                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-                  <path d="M0,1 L0,9 L9,5 z" fill="var(--purple)" />
-                </marker>
-              </defs>
-              {[-90, -18, 54, 126, 198].map((angle, i) => {
-                const radius = 180;
-                const cx = 260, cy = 260;
-                const rad = (angle * Math.PI) / 180;
-                const nextRad = ((angle + 72) * Math.PI) / 180;
-                const x1 = cx + Math.cos(rad) * radius;
-                const y1 = cy + Math.sin(rad) * radius;
-                const x2 = cx + Math.cos(nextRad) * radius;
-                const y2 = cy + Math.sin(nextRad) * radius;
-                const midRad = (rad + nextRad) / 2;
-                const mx = cx + Math.cos(midRad) * (radius + 50);
-                const my = cy + Math.sin(midRad) * (radius + 50);
-                // ponto a 70% do caminho para a seta apontar na direcção certa
-                const t = 0.70;
-                const ax = (1-t)*(1-t)*x1 + 2*(1-t)*t*mx + t*t*x2;
-                const ay = (1-t)*(1-t)*y1 + 2*(1-t)*t*my + t*t*y2;
-                return (
-                  <path
-                    key={i}
-                    d={`M ${x1} ${y1} Q ${mx} ${my} ${ax} ${ay}`}
-                    fill="none"
-                    stroke="var(--purple)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    markerEnd="url(#arrowhead)"
-                    opacity="0.7"
-                  />
-                );
-              })}
-            </svg>
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" fill="var(--purple)" opacity="0.7" />
+    </marker>
+  </defs>
+  {[-90, -18, 54, 126, 198].map((angle, i) => {
+    const radius = 180;
+    const cx = 260, cy = 260;
+    const rad = (angle * Math.PI) / 180;
+    const nextRad = ((angle + 72) * Math.PI) / 180;
+
+    // pontos na borda de cada círculo (offset de 32px do centro)
+    const startX = cx + Math.cos(rad) * (radius + 32);
+    const startY = cy + Math.sin(rad) * (radius + 32);
+    const endX = cx + Math.cos(nextRad) * (radius + 32);
+    const endY = cy + Math.sin(nextRad) * (radius + 32);
+
+    // ponto médio levemente afastado para criar curvatura suave
+    const midRad = (rad + nextRad) / 2;
+    const ctrlX = cx + Math.cos(midRad) * (radius + 60);
+    const ctrlY = cy + Math.sin(midRad) * (radius + 60);
+
+    // ponto a 85% da curva para a seta terminar antes do círculo
+    const t = 0.82;
+    const ex = (1-t)*(1-t)*startX + 2*(1-t)*t*ctrlX + t*t*endX;
+    const ey = (1-t)*(1-t)*startY + 2*(1-t)*t*ctrlY + t*t*endY;
+
+    return (
+      <path
+        key={i}
+        d={`M ${startX} ${startY} Q ${ctrlX} ${ctrlY} ${ex} ${ey}`}
+        fill="none"
+        stroke="var(--purple)"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        opacity="0.55"
+        markerEnd="url(#arrowhead)"
+      />
+    );
+  })}
+</svg>
 
             {/* Serviços em órbita */}
             {[
