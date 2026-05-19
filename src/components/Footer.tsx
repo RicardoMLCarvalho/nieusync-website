@@ -39,104 +39,122 @@ export default function Footer() {
   const hoverPurple = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)';
   const unhoverLink = (e: React.MouseEvent) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.70)';
 
-  const mobileDivider = <div className="mobile-divider" />;
-
   const divider = (
     <div style={{ width: '1px', background: 'rgba(255,255,255,0.10)', alignSelf: 'stretch', flexShrink: 0 }} className="desktop-divider" />
   );
 
   return (
     <footer style={{ background: '#233877' }}>
-      <div className="container" style={{ padding: '40px 40px 0' }}>
-        <div style={{ display: 'flex', alignItems: 'stretch', gap: '0' }} className="footer-flex">
 
-          {/* Brand */}
-          <div className="footer-brand" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, minWidth: '160px', paddingRight: '32px' }}>
-            <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '14px' }} />
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
-              {[
-                { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
-                { href: 'https://www.instagram.com/nieusync', Icon: InstagramIcon },
-                { href: 'https://www.facebook.com/nieusync', Icon: FacebookIcon },
-              ].map(({ href, Icon }) => (
-                <a key={href} href={href} target="_blank" rel="noopener noreferrer"
-                  style={{ color: 'rgba(255,255,255,0.55)', transition: 'color 0.2s ease' }}
-                  onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)'}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)'}
-                >
-                  <Icon />
-                </a>
+      {/* DESKTOP */}
+      <div className="footer-desktop">
+        <div className="container" style={{ padding: '40px 40px 0' }}>
+          <div style={{ display: 'flex', alignItems: 'stretch', gap: '0' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, minWidth: '160px', paddingRight: '32px' }}>
+              <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '14px' }} />
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+                {[
+                  { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
+                  { href: 'https://www.instagram.com/nieusync', Icon: InstagramIcon },
+                  { href: 'https://www.facebook.com/nieusync', Icon: FacebookIcon },
+                ].map(({ href, Icon }) => (
+                  <a key={href} href={href} target="_blank" rel="noopener noreferrer"
+                    style={{ color: 'rgba(255,255,255,0.55)', transition: 'color 0.2s ease' }}
+                    onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)'}
+                    onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)'}
+                  >
+                    <Icon />
+                  </a>
+                ))}
+              </div>
+            </div>
+            {divider}
+            <div style={{ flex: 1, padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
+              <p style={colTitle}>Serviços</p>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ flex: 1 }}>
+                  {[{ to: '/servicos#direito', label: 'Direito Empresarial' }, { to: '/servicos#gestao', label: 'Gestão Estratégica' }, { to: '/servicos#marketing', label: 'Marketing Digital' }].map(({ to, label }) => (
+                    <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                  ))}
+                </div>
+                <div style={{ flex: 1 }}>
+                  {[{ to: '/servicos#financas', label: 'Finanças & Contabilidade' }, { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' }].map(({ to, label }) => (
+                    <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {divider}
+            <div style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
+              <p style={colTitle}>Contacto</p>
+              {[{ label: '(+351) 269 030 096', href: 'tel:+351269030096' }, { label: '(+351) 933 644 596', href: 'tel:+351933644596' }, { label: 'geral@nieusync.com', href: 'mailto:geral@nieusync.com' }].map(({ label, href }) => (
+                <a key={label} href={href} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
               ))}
             </div>
-          </div>
-
-          {divider}
-          {mobileDivider}
-
-          {/* Serviços */}
-          <div style={{ flex: 1, padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
-            <p style={colTitle}>Serviços</p>
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <div style={{ flex: 1 }}>
-                {[
-                  { to: '/servicos#direito', label: 'Direito Empresarial' },
-                  { to: '/servicos#gestao', label: 'Gestão Estratégica' },
-                  { to: '/servicos#marketing', label: 'Marketing Digital' },
-                ].map(({ to, label }) => (
-                  <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-                ))}
-              </div>
-              <div style={{ flex: 1 }}>
-                {[
-                  { to: '/servicos#financas', label: 'Finanças & Contabilidade' },
-                  { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' },
-                ].map(({ to, label }) => (
-                  <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-                ))}
+            {divider}
+            <div style={{ flex: 1, paddingLeft: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
+              <p style={colTitle}>Legal</p>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ flex: 1 }}>
+                  {[{ to: '/avisos-legais', label: 'Avisos Legais' }, { to: '/codigo-conduta', label: 'Código de Conduta' }, { to: '/termos-condicoes', label: 'Termos e Condições' }].map(({ to, label }) => (
+                    <Link key={to} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                  ))}
+                </div>
+                <div style={{ flex: 1 }}>
+                  {[{ to: '/politica-cookies', label: 'Política de Cookies' }, { to: '/privacidade', label: 'Política de Privacidade' }, { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' }].map(({ to, label }) => (
+                    <Link key={to} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {divider}
-          {mobileDivider}
-
-          {/* Contacto */}
-          <div className="footer-contacto" style={{ flexShrink: 0, minWidth: '180px', padding: '0 28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
-            <p style={colTitle}>Contacto</p>
+      {/* MOBILE */}
+      <div className="footer-mobile">
+        {/* Logo + Redes */}
+        <div style={{ padding: '28px 20px 20px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.10)' }}>
+          <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="110" style={{ display: 'block', margin: '0 auto 12px' }} />
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
             {[
-              { label: '(+351) 269 030 096', href: 'tel:+351269030096' },
-              { label: '(+351) 933 644 596', href: 'tel:+351933644596' },
-              { label: 'geral@nieusync.com', href: 'mailto:geral@nieusync.com' },
-            ].map(({ label, href }) => (
-              <a key={label} href={href} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
+              { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
+              { href: 'https://www.instagram.com/nieusync', Icon: InstagramIcon },
+              { href: 'https://www.facebook.com/nieusync', Icon: FacebookIcon },
+            ].map(({ href, Icon }) => (
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer"
+                style={{ color: 'rgba(255,255,255,0.55)', transition: 'color 0.2s ease' }}
+                onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)'}
+                onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)'}
+              >
+                <Icon />
+              </a>
             ))}
           </div>
+        </div>
 
-          {/* Legal */}
-          <div style={{ flex: 1, paddingLeft: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', paddingTop: '30px' }}>
-            <p style={colTitle}>Legal</p>
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <div style={{ flex: 1 }}>
-                {[
-                  { to: '/avisos-legais', label: 'Avisos Legais' },
-                  { to: '/codigo-conduta', label: 'Código de Conduta' },
-                  { to: '/termos-condicoes', label: 'Termos e Condições' },
-                ].map(({ to, label }) => (
-                  <Link key={to} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-                ))}
-              </div>
-              <div style={{ flex: 1 }}>
-                {[
-                  { to: '/politica-cookies', label: 'Política de Cookies' },
-                  { to: '/privacidade', label: 'Política de Privacidade' },
-                  { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' },
-                ].map(({ to, label }) => (
-                  <Link key={to} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
-                ))}
-              </div>
-            </div>
+        {/* Contacto */}
+        <div style={{ padding: '20px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.10)' }}>
+          <p style={colTitle}>Contacto</p>
+          {[{ label: '(+351) 269 030 096', href: 'tel:+351269030096' }, { label: '(+351) 933 644 596', href: 'tel:+351933644596' }, { label: 'geral@nieusync.com', href: 'mailto:geral@nieusync.com' }].map(({ label, href }) => (
+            <a key={label} href={href} style={{ ...lnk, fontSize: '12px' }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</a>
+          ))}
+        </div>
+
+        {/* Serviços + Legal lado a lado */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: '1px solid rgba(255,255,255,0.10)' }}>
+          <div style={{ padding: '20px 12px', borderRight: '1px solid rgba(255,255,255,0.10)' }}>
+            <p style={{ ...colTitle, fontSize: '10px' }}>Serviços</p>
+            {[{ to: '/servicos#direito', label: 'Direito Empresarial' }, { to: '/servicos#gestao', label: 'Gestão Estratégica' }, { to: '/servicos#marketing', label: 'Marketing Digital' }, { to: '/servicos#financas', label: 'Finanças & Contabilidade' }, { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' }].map(({ to, label }) => (
+              <Link key={label} to={to} style={{ ...lnk, fontSize: '11px' }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+            ))}
           </div>
-
+          <div style={{ padding: '20px 12px' }}>
+            <p style={{ ...colTitle, fontSize: '10px' }}>Legal</p>
+            {[{ to: '/avisos-legais', label: 'Avisos Legais' }, { to: '/codigo-conduta', label: 'Código de Conduta' }, { to: '/termos-condicoes', label: 'Termos e Condições' }, { to: '/politica-cookies', label: 'Política de Cookies' }, { to: '/privacidade', label: 'Política de Privacidade' }, { to: '/politica-uso-aceitavel', label: 'Política de Uso Aceitável' }].map(({ to, label }) => (
+              <Link key={to} to={to} style={{ ...lnk, fontSize: '11px' }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -150,51 +168,13 @@ export default function Footer() {
       </div>
 
       <style>{`
+        .footer-mobile { display: none; }
+        .footer-desktop { display: block; }
         .desktop-divider { display: flex; }
-        .mobile-divider { display: none; }
-      
-        @media (max-width: 1024px) {
-          .footer-flex { flex-wrap: wrap !important; gap: 0 !important; }
-          .footer-flex > div { min-width: calc(50% - 12px) !important; padding: 16px 12px !important; }
-          .desktop-divider { display: none !important; }
-        }
-      
+
         @media (max-width: 480px) {
-          .footer-flex { flex-direction: column !important; gap: 0 !important; }
-      
-          .footer-brand { 
-            padding: 20px 0 16px !important; 
-            min-width: 100% !important;
-            border-bottom: 1px solid rgba(255,255,255,0.10);
-          }
-      
-          .footer-services-legal {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            width: 100% !important;
-            border-bottom: 1px solid rgba(255,255,255,0.10);
-          }
-      
-          .footer-contacto {
-            min-width: 100% !important;
-            padding: 16px 0 !important;
-            border-bottom: 1px solid rgba(255,255,255,0.10);
-          }
-      
-          .footer-flex > div { 
-            min-width: 100% !important; 
-            padding: 16px 0 !important;
-          }
-      
-          .mobile-divider {
-            display: block !important;
-            width: 100%;
-            height: 1px;
-            background: rgba(255,255,255,0.10);
-          }
-      
-          .footer-flex p, .footer-flex a { font-size: 11px !important; }
-          .desktop-divider { display: none !important; }
+          .footer-mobile { display: block; }
+          .footer-desktop { display: none; }
         }
       `}</style>
     </footer>
