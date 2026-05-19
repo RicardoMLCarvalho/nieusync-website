@@ -532,62 +532,6 @@ export default function Home() {
         `}</style>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section style={{ background: 'var(--bg)', padding: '100px 0' }}>
-        <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <span className="section-label">Testemunhos</span>
-            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
-            <h2 style={{ color: 'var(--blue)' }}>O que dizem os nossos clientes</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="testimonials-grid animate-on-scroll">
-            {[
-              
-              {
-                text: 'Finalmente temos contratos sólidos, processos definidos e uma estratégia de marketing que gera resultados — tudo com a mesma equipa.',
-                name: 'Miguel Santos', role: 'Fundador · Startup Agro-tech, Santiago do Cacém', initials: 'MS',
-              },
-              {      
-                text: 'A NIEUSYNC foi fundamental para organizar a nossa estrutura financeira e legal quando decidimos contratar os primeiros colaboradores. Têm uma visão global que nenhum outro parceiro nos conseguiu dar.',
-                name: 'Ana Ferreira', role: 'CEO · Empresa de Tecnologia, Setúbal', initials: 'AF',
-              },
-              {
-                text: 'Profissionalismo, disponibilidade e resultados concretos desde o primeiro mês de trabalho conjunto.',
-                name: 'Carla Oliveira', role: 'Directora Geral · Consultora Imobiliária, Lisboa', initials: 'CO',
-              },
-            ].map(({ text, name, role, initials }) => (
-              <div key={name} className="card stagger-child animate-on-scroll" style={{ borderTop: '3px solid var(--purple)', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ position: 'absolute', top: '8px', left: '16px', fontFamily: 'Georgia, serif', fontWeight: 700, fontSize: '80px', lineHeight: 1, color: 'var(--purple)', opacity: 1, pointerEvents: 'none', userSelect: 'none' }}>
-                  "
-                </div>
-                <p style={{ fontSize: '15px', color: 'var(--blue)', lineHeight: 1.80, marginBottom: '24px', position: 'relative', paddingTop: '48px', flex: 1 }}>{text}</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: 'auto' }}>
-                  <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'var(--purple)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)', flexShrink: 0 }}>
-                    {initials}
-                  </div>
-                  <div>
-                    <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '14px', color: 'var(--blue)' }}>{name}</div>
-                    <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'var(--blue)' }}>{role}</div>
-                    <div style={{ display: 'flex', gap: '2px', marginTop: '4px' }}>
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="var(--purple)">
-                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .testimonials-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
-      </section>
-
       {/* ── BLOG PREVIEW ── */}
       <section style={{ background: 'var(--white)', padding: '80px 0' }}>
         <div className="container">
