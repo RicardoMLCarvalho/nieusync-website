@@ -193,39 +193,54 @@ export default function Home() {
       </section>
 
       {/* ── TRUST BAR ── */}
-      <section style={{ background: 'var(--white)', borderTop: '1px solid rgba(159,142,194,0.18)', borderBottom: '1px solid rgba(159,142,194,0.18)', padding: '48px 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.50)', marginBottom: '28px' }}>
-            Presença activa em associações e comunidades empresariais:
-          </p>
-          <div style={{ display: 'flex', gap: '60px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            {[
-              { name: 'AEP', url: 'https://www.aeportugal.pt' },
-              { name: 'APERSA', url: 'https://www.cppme.pt/estrutura-associativa/associacoes/132-apersa-associacao-de-pequenos-empresarios-da-regiao-de-setubal-e-alentejo' },
-              { name: 'ADL Litoral Alentejano', url: 'https://litoralalentejano.pt' },
-              { name: 'AE Sines', url: 'https://www.aesines.com' },
-              { name: 'ANPME', url: 'https://www.anpme.pt' },
-            ].map((item) => (
-              <a
-                key={item.name}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gradient-text"
-                style={{
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: 700,
-                  fontSize: '16px',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                }}
-              >
-                {item.name}
-              </a>
-            ))}
+   
+        <section style={{ background: 'var(--white)', borderTop: '1px solid rgba(159,142,194,0.18)', borderBottom: '1px solid rgba(159,142,194,0.18)', padding: '48px 0', overflow: 'hidden' }}>
+          <div className="container" style={{ textAlign: 'center' }}>
+            <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.50)', marginBottom: '28px' }}>
+              Presença activa em associações e comunidades empresariais:
+            </p>
           </div>
-        </div>
-      </section>
+          <div style={{ overflow: 'hidden', position: 'relative' }}>
+            <div className="partners-track">
+              {[...Array(2)].map((_, ri) => (
+                <div key={ri} style={{ display: 'flex', alignItems: 'center', gap: '60px', paddingRight: '60px' }}>
+                  {[
+                    { src: '/aep-logo-novo-2.png', alt: 'AEP', href: 'https://www.aeportugal.pt' },
+                    { src: '/apersalogo.png', alt: 'APERSA', href: 'https://www.cppme.pt/estrutura-associativa/associacoes/132-apersa-associacao-de-pequenos-empresarios-da-regiao-de-setubal-e-alentejo' },
+                    { src: '/ADL_svg', alt: 'ADL Litoral Alentejano', href: 'https://litoralalentejano.pt' },
+                    { src: '/AES.png', alt: 'AE Sines', href: 'https://www.aesines.com' },
+                    { src: '/anpme-logo.svg', alt: 'ANPME', href: 'https://www.anpme.pt' },
+                  ].map(({ src, alt, href }) => (
+                    <a key={alt} href={href} target="_blank" rel="noopener noreferrer"
+                      style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.7, transition: 'opacity 0.2s ease' }}
+                      onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = '1'}
+                      onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = '0.7'}
+                    >
+                      <img src={src} alt={alt} style={{ height: '48px', width: 'auto', maxWidth: '140px', objectFit: 'contain', filter: 'grayscale(100%)', transition: 'filter 0.2s ease' }}
+                        onMouseEnter={(e) => (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(0%)'}
+                        onMouseLeave={(e) => (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(100%)'}
+                      />
+                    </a>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <style>{`
+            .partners-track {
+              display: flex;
+              width: max-content;
+              animation: scrollPartners 20s linear infinite;
+            }
+            @keyframes scrollPartners {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .partners-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+        </section>
 
      {/* ── SERVICES ── */}
       <section style={{ background: 'var(--bg)', padding: '100px 0' }}>
