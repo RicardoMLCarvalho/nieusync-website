@@ -17,7 +17,7 @@
   --bg: #F5F5F7;
 
   --grad-main: linear-gradient(135deg, #233877 0%, #9F8EC2 100%);
-  --grad-subtle: linear-gradient(135deg, rgba(35,56,119,0.04) 0%, rgba(159,142,194,0.08) 100%);
+  --grad-subtle: linear-gradient(135deg, #233877 0%, #9F8EC2 100%);
   --grad-reverse: linear-gradient(135deg, #9F8EC2 0%, #233877 100%);
   --grad-vertical: linear-gradient(180deg, #233877 0%, #9F8EC2 100%);
   --grad-text: linear-gradient(135deg, #233877, #9F8EC2);
