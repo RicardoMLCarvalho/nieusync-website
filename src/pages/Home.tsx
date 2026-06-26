@@ -234,7 +234,7 @@ function LeadMagnetSection() {
                     {status === 'loading' ? 'A enviar...' : 'Descarregar agora →'}
                   </button>
                   <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.45)', textAlign: 'center', margin: 0 }}>
-                    Sem spam. Cancela a qualquer momento.
+                    Sem spam. Pode cancelar a qualquer momento.
                   </p>
                 </form>
               </>
