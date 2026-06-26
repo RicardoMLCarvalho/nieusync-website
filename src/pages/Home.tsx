@@ -129,8 +129,7 @@ interface NewsItem {
   thumbnail: string;
 }
 
-O problema é claro — o código da imagem ficou fora do lugar, entre o const looped e o return, o que quebra o JavaScript inteiro e deixa a página em branco. Vou dar-te apenas a função NewsTickerSection corrigida para substituíres no ficheiro:
-tsxfunction NewsTickerSection() {
+function NewsTickerSection() {
   const [news,    setNews]    = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
