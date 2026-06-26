@@ -129,7 +129,8 @@ interface NewsItem {
   thumbnail: string;
 }
 
-function NewsTickerSection() {
+O problema é claro — o código da imagem ficou fora do lugar, entre o const looped e o return, o que quebra o JavaScript inteiro e deixa a página em branco. Vou dar-te apenas a função NewsTickerSection corrigida para substituíres no ficheiro:
+tsxfunction NewsTickerSection() {
   const [news,    setNews]    = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -179,17 +180,7 @@ function NewsTickerSection() {
   if (loading || news.length === 0) return null;
 
   const looped = [...news, ...news, ...news];
- 
-  {item.thumbnail && (
-  <div style={{ borderRadius: '8px', overflow: 'hidden', height: '100px', marginBottom: '2px' }}>
-    <img
-      src={item.thumbnail}
-      alt={item.title}
-      loading="lazy"
-      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-    />
-  </div>
-)}
+
   return (
     <section style={{
       background: 'var(--white)',
@@ -216,7 +207,7 @@ function NewsTickerSection() {
           {looped.map((item, i) => {
             const color = AREA_COLORS[item.area] ?? 'var(--blue)';
             return (
-              <a
+              
                 key={i}
                 href={item.link}
                 target="_blank"
@@ -231,6 +222,19 @@ function NewsTickerSection() {
                   transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
                 }}
               >
+                {/* ── IMAGEM ── */}
+                {item.thumbnail && (
+                  <div style={{ borderRadius: '8px', overflow: 'hidden', height: '100px' }}>
+                    <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      loading="lazy"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  </div>
+                )}
+
+                {/* ── ÁREA + FONTE ── */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
                   <span style={{
                     fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '10px',
@@ -244,6 +248,8 @@ function NewsTickerSection() {
                     {item.source}
                   </span>
                 </div>
+
+                {/* ── TÍTULO ── */}
                 <p style={{
                   fontFamily: 'Montserrat, sans-serif', fontWeight: 600, fontSize: '13px',
                   color: 'var(--blue)', lineHeight: 1.45, margin: 0,
@@ -252,6 +258,7 @@ function NewsTickerSection() {
                 }}>
                   {item.title}
                 </p>
+
                 <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', color: 'var(--purple)' }}>
                   Ler artigo →
                 </span>
