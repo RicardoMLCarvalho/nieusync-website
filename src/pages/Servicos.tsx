@@ -131,8 +131,8 @@ export default function Servicos() {
           'Contratos comerciais e de prestação de serviços',
           'Compliance RGPD e protecção de dados',
           'Direito do trabalho: contratos, despedimentos, obrigações',
-          'Estruturação societária e pactos de sócios',
-          'Due diligence em aquisições e parcerias',
+          'Estruturação e pactos societários',
+          'Due diligence',
           'Resolução de conflitos comerciais',
           'Regulamentos internos e políticas empresariais',
           'Assessoria jurídica contínua',
@@ -191,7 +191,7 @@ export default function Servicos() {
           'LinkedIn Ads e Meta Ads',
           'Criação e gestão de conteúdo',
           'SEO e optimização de website',
-          'Email marketing e newsletter',
+          'Email marketing e Newsletter',
           'Análise de dados e relatórios de performance',
         ]}
         highlight={{
