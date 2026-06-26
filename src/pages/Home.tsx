@@ -206,7 +206,7 @@ function NewsTickerSection() {
           {looped.map((item, i) => {
             const color = AREA_COLORS[item.area] ?? 'var(--blue)';
             return (
-              
+              <a
                 key={i}
                 href={item.link}
                 target="_blank"
