@@ -153,13 +153,28 @@ function NewsTickerSection() {
         );
         const json = await res.json();
         if (json.status !== 'ok') return [];
-        return json.items.map((item: { title: string; link: string; thumbnail: string }) => ({
-          title:     item.title,
-          link:      item.link,
-          source:    src.name,
-          area:      src.area,
-          thumbnail: item.thumbnail || '',
-        }));
+        return json.items.map((item: { title: string; link: string; thumbnail: string; content: string; enclosure: { link: string; type: string } }) => {
+          let thumbnail = item.thumbnail || '';
+        
+          // Tenta extrair do HTML do conteúdo
+          if (!thumbnail && item.content) {
+            const match = item.content.match(/<img[^>]+src=["']([^"']+)["']/i);
+            if (match) thumbnail = match[1];
+          }
+        
+          // Tenta o campo enclosure (alguns feeds usam este formato)
+          if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image')) {
+            thumbnail = item.enclosure.link;
+          }
+        
+          return {
+            title:     item.title,
+            link:      item.link,
+            source:    src.name,
+            area:      src.area,
+            thumbnail,
+          };
+        });
       })
     ).then((results) => {
       const all = results
