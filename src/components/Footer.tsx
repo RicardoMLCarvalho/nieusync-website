@@ -51,7 +51,7 @@ export default function Footer() {
         <div className="container" style={{ padding: '40px 40px 0' }}>
           <div style={{ display: 'flex', alignItems: 'stretch', gap: '0' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0, minWidth: '160px', paddingRight: '32px' }}>
-              <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" style={{ display: 'block', marginBottom: '14px' }} />
+              <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="130" loading="lazy" style={{ display: 'block', marginBottom: '14px' }} />
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
                 {[
                   { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
@@ -115,7 +115,7 @@ export default function Footer() {
       <div className="footer-mobile">
         {/* Logo + Redes */}
         <div style={{ padding: '28px 20px 20px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.10)' }}>
-          <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="110" style={{ display: 'block', margin: '0 auto 12px' }} />
+          <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" width="110" loading="lazy" style={{ display: 'block', margin: '0 auto 12px' }} />
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
             {[
               { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
