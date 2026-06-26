@@ -567,6 +567,7 @@ export default function Home() {
               { num: '02', title: 'Planeamento', desc: 'Criamos um plano claro com prioridades e responsabilidades.' },
               { num: '03', title: 'Implementação', desc: 'Executamos com a sua equipa, integrando processos e ferramentas.' },
               { num: '04', title: 'Acompanhamento', desc: 'Reporting mensal, ajustes e resultados medidos com dados.' },
+              { num: '05', title: 'Pensar em Algum', desc: 'Reporting mensal, ajustes e resultados medidos com dados.' },
             ].map((step, i) => (
               <div key={step.num} className="stagger-child animate-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
                 {i < 3 && (
@@ -605,9 +606,9 @@ export default function Home() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px', marginBottom: '40px' }} className="persona-grid animate-on-scroll">
             {[
+              'Tem uma ideia de negócio mas não sabe como avançar',
               'Precisa de crescer mas tem receio de avançar sem estrutura sólida',
-              'A empresa cresceu e agora a gestão parece um caos constante',
-              'Factura bem mas não sabe ao certo quanto sobra no final do mês',
+              'A empresa cresceu e agora a gestão parece um caos constante',              
             ].map((text) => (
               <div key={text} className="stagger-child animate-on-scroll" style={{
                 background: 'var(--white)', borderLeft: '4px solid var(--blue)',
