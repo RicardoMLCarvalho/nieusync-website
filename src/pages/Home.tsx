@@ -357,7 +357,7 @@ export default function Home() {
               </div>
 
               <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-                {['Multidisciplinar 360º', 'Resposta em 24h', 'Sem compromisso'].map((t) => (
+                {['Parceiro Estratégico', 'Online ou presencial', 'Sem compromisso'].map((t) => (
                   <span key={t} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)' }}>
                     ✓ {t}
                   </span>
