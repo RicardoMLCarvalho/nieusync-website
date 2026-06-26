@@ -59,7 +59,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-            <img src="logo_new.png" alt="NIEUSYNC" style={{ display: 'block', height: '64px', width: 'auto' }} />
+            <img src="logo_new.png" alt="NIEUSYNC" style={{ display: 'block', height: '84px', width: 'auto' }} />
           </Link>
 
           {/* Desktop Nav */}
