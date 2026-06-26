@@ -512,11 +512,11 @@ export default function Home() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px', position: 'relative' }} className="steps-grid animate-on-scroll">
             {[
-              { num: '01', title: 'Diagnóstico', desc: 'Analisamos a situação legal, financeira e digital do seu negócio.' },
-              { num: '02', title: 'Planeamento', desc: 'Criamos um plano claro com prioridades e responsabilidades.' },
-              { num: '03', title: 'Implementação', desc: 'Executamos com a sua equipa, integrando processos e ferramentas.' },
-              { num: '04', title: 'Acompanhamento', desc: 'Reporting mensal, ajustes e resultados medidos com dados.' },
-              { num: '05', title: 'Pensar em Algum', desc: 'Reporting mensal, ajustes e resultados medidos com dados.' },
+              { num: '01', title: 'Diagnóstico', desc: 'Analisamos a situação actual da empresa: legal, estratégica, digital e operacional' },
+              { num: '02', title: 'Estratégia', desc: 'Definimos prioridades, objetivos e um plano de ação à medida do negócio' },
+              { num: '03', title: 'Implementação', desc: 'Executamos em coordenação com a sua equipa, integrando processos e ferramentas' },
+              { num: '04', title: 'Acompanhamento', desc: 'Monitorizamos o progresso com indicadores claros e reuniões periódicas' },
+              { num: '05', title: 'Optimização', desc: 'Revemos, ajustamos e evoluímos a estratégia com base nos resultados obtidos' },
             ].map((step, i) => (
               <div key={step.num} className="stagger-child animate-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
                 {i < 3 && (
