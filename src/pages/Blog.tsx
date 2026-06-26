@@ -111,7 +111,7 @@ export default function Blog() {
                   <button type="submit" className="btn-gradient" style={{ width: '100%' }}>Subscrever</button>
                 </form>
                 <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.40)', textAlign: 'center', marginTop: '10px' }}>
-                  Sem spam. Cancela quando quiser.
+                  Sem spam. Pode cancelar a qualquer momento.
                 </p>
               </div>
               <div className="card" style={{ marginTop: '20px' }}>
