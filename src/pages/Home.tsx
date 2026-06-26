@@ -148,7 +148,7 @@ function NewsTickerSection() {
     Promise.allSettled(
       RSS_SOURCES.map(async (src) => {
         const res  = await fetch(
-          `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=5`
+          `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=5&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`
         );
         const json = await res.json();
         if (json.status !== 'ok') return [];
