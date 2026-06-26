@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
@@ -47,6 +47,7 @@ function BlogPreview() {
               <img
                 src={urlFor(a.mainImage).width(400).height(160).fit('crop').url()}
                 alt={a.title}
+                loading="lazy"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
             </div>
@@ -99,6 +100,157 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
   );
 }
 
+// ─────────────────────────────────────────────────────────────
+// MAILCHIMP — substitui MAILCHIMP_URL pelo URL do teu formulário
+// Como obter:
+//   1. Mailchimp → Audience → Signup forms → Embedded forms
+//   2. Copia o atributo "action" do <form>
+//      ex: https://nieusync.us1.list-manage.com/subscribe/post?u=abc&id=xyz
+//   3. Substitui "post" por "post-json" no URL abaixo
+// ─────────────────────────────────────────────────────────────
+const MAILCHIMP_URL =
+  'https://SUBSTITUIR.us1.list-manage.com/subscribe/post-json?u=SUBSTITUIR&id=SUBSTITUIR';
+
+type LeadStatus = 'idle' | 'loading' | 'success' | 'error' | 'duplicate';
+
+function LeadMagnetSection() {
+  const [nome,    setNome]    = useState('');
+  const [email,   setEmail]   = useState('');
+  const [empresa, setEmpresa] = useState('');
+  const [status,  setStatus]  = useState<LeadStatus>('idle');
+  const scriptRef = useRef<HTMLScriptElement | null>(null);
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    if (!nome || !email || !empresa) return;
+    setStatus('loading');
+
+    const cbName = `_mc_cb_${Date.now()}`;
+
+    (window as Record<string, unknown>)[cbName] = (data: { result: string; msg: string }) => {
+      delete (window as Record<string, unknown>)[cbName];
+      if (scriptRef.current) document.body.removeChild(scriptRef.current);
+      if (data.result === 'success') {
+        setStatus('success');
+        setNome(''); setEmail(''); setEmpresa('');
+      } else if (data.msg?.toLowerCase().includes('already')) {
+        setStatus('duplicate');
+      } else {
+        setStatus('error');
+      }
+    };
+
+    const params = new URLSearchParams({
+      EMAIL: email,
+      FNAME: nome,
+      MMERGE6: empresa,
+      c: cbName,
+    });
+
+    const script = document.createElement('script');
+    script.src = `${MAILCHIMP_URL}&${params.toString()}`;
+    scriptRef.current = script;
+    document.body.appendChild(script);
+
+    setTimeout(() => {
+      if ((window as Record<string, unknown>)[cbName]) {
+        delete (window as Record<string, unknown>)[cbName];
+        setStatus('error');
+      }
+    }, 10000);
+  }, [nome, email, empresa]);
+
+  const checklistItems = [
+    'Contratos que não pode dispensar',
+    'Como evitar multas RGPD',
+    'Direito do trabalho: o essencial',
+    'Due diligence antes de assinar',
+    'Check-list de compliance anual',
+  ];
+
+  return (
+    <section style={{ background: 'var(--grad-main)', padding: '80px 0' }}>
+      <div className="container">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '56px', alignItems: 'center' }} className="lead-grid animate-on-scroll">
+          <div>
+            <span style={{
+              display: 'inline-block', background: 'rgba(255,255,255,0.12)',
+              border: '1.5px solid rgba(255,255,255,0.40)', color: 'var(--white)',
+              fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px',
+              letterSpacing: '0.10em', textTransform: 'uppercase', padding: '5px 14px',
+              borderRadius: '100px', marginBottom: '20px',
+            }}>
+              Download gratuito
+            </span>
+            <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '28px', color: 'var(--white)', marginBottom: '24px', lineHeight: 1.3 }}>
+              Guia: As 5 Protecções Legais que Toda a PME Precisa
+            </h3>
+            <ul style={{ listStyle: 'none' }}>
+              {checklistItems.map((item) => (
+                <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '15px', color: 'rgba(255,255,255,0.82)', padding: '6px 0', paddingLeft: '20px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: 0, color: 'var(--white)', fontWeight: 700 }}>✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div style={{ background: 'var(--white)', borderRadius: '16px', padding: '36px', boxShadow: '0 8px 40px rgba(35,56,119,0.20)' }}>
+            {status === 'success' ? (
+              <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+                <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '12px' }}>
+                  Guia enviado!
+                </h3>
+                <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>
+                  Verifica a tua caixa de email. Se não encontrares, verifica a pasta de spam.
+                </p>
+              </div>
+            ) : (
+              <>
+                <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '24px' }}>
+                  Descarregar guia gratuito
+                </h3>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div>
+                    <label htmlFor="lead-nome">Nome completo</label>
+                    <input id="lead-nome" type="text" placeholder="O seu nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
+                  </div>
+                  <div>
+                    <label htmlFor="lead-email">Email profissional</label>
+                    <input id="lead-email" type="email" placeholder="email@empresa.pt" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                  </div>
+                  <div>
+                    <label htmlFor="lead-empresa">Nome da empresa</label>
+                    <input id="lead-empresa" type="text" placeholder="A sua empresa" value={empresa} onChange={(e) => setEmpresa(e.target.value)} required />
+                  </div>
+                  {status === 'duplicate' && (
+                    <p style={{ fontSize: '13px', color: '#e53e3e', margin: 0 }}>Este email já está registado. Verifica a tua caixa de entrada.</p>
+                  )}
+                  {status === 'error' && (
+                    <p style={{ fontSize: '13px', color: '#e53e3e', margin: 0 }}>Ocorreu um erro. Tenta novamente ou contacta-nos directamente.</p>
+                  )}
+                  <button type="submit" className="btn-gradient" disabled={status === 'loading'} style={{ width: '100%', marginTop: '8px', opacity: status === 'loading' ? 0.7 : 1 }}>
+                    {status === 'loading' ? 'A enviar...' : 'Descarregar agora →'}
+                  </button>
+                  <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.45)', textAlign: 'center', margin: 0 }}>
+                    Sem spam. Cancela a qualquer momento.
+                  </p>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .lead-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
 export default function Home() {
   useEffect(() => {
     document.title = 'NIEUSYNC - Consultora B2B · Direito Empresarial, Gestão Financeira, Marketing Digital e Tecnologias de Informação';
@@ -122,7 +274,7 @@ export default function Home() {
 
   return (
     <main style={{ paddingTop: '72px' }}>
-     {/* ── HERO ── */}
+      {/* ── HERO ── */}
       <section style={{ background: 'var(--grad-subtle)', padding: '100px 0 80px', position: 'relative', overflow: 'hidden' }}>
         {[
           { size: 400, top: '-100px', right: '-100px', opacity: 0.10 },
@@ -263,7 +415,7 @@ export default function Home() {
         `}</style>
       </section>
 
-            {/* ── TRUST BAR ── */}
+      {/* ── TRUST BAR ── */}
       <section style={{ background: 'var(--white)', borderTop: '1px solid rgba(159,142,194,0.18)', borderBottom: '1px solid rgba(159,142,194,0.18)', padding: '48px 0', overflow: 'hidden' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.50)', marginBottom: '28px' }}>
@@ -282,12 +434,12 @@ export default function Home() {
                   { src: '/anpme-logo.svg', alt: 'ANPME', href: 'https://www.anpme.pt' },
                 ].map(({ src, alt, href }) => (
                   <a key={alt} href={href} target="_blank" rel="noopener noreferrer"
-  style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'opacity 0.2s ease', width: '180px' }}
+                    style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'opacity 0.2s ease', width: '180px' }}
                   >
-                    <img src={src} alt={alt} style={{ height: '48px', width: 'auto', maxWidth: '140px', objectFit: 'contain', opacity: 0.55, transition: 'opacity 0.2s ease' }}
-                    onMouseEnter={(e) => (e.currentTarget as HTMLImageElement).style.opacity = '1'}
-                    onMouseLeave={(e) => (e.currentTarget as HTMLImageElement).style.opacity = '0.55'}
-                  />
+                    <img src={src} alt={alt} loading="lazy" style={{ height: '48px', width: 'auto', maxWidth: '140px', objectFit: 'contain', opacity: 0.55, transition: 'opacity 0.2s ease' }}
+                      onMouseEnter={(e) => (e.currentTarget as HTMLImageElement).style.opacity = '1'}
+                      onMouseLeave={(e) => (e.currentTarget as HTMLImageElement).style.opacity = '0.55'}
+                    />
                   </a>
                 ))}
               </div>
@@ -314,7 +466,7 @@ export default function Home() {
         `}</style>
       </section>
 
-           {/* ── SERVICES ── */}
+      {/* ── SERVICES ── */}
       <section style={{ background: 'var(--bg)', padding: '100px 0' }}>
         <div className="container">
           <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '100px' }}>
@@ -327,15 +479,13 @@ export default function Home() {
           </div>
 
           <div className="services-orbit animate-on-scroll" style={{ position: 'relative', width: '350px', height: '350px', margin: '60px auto 0', overflow: 'visible' }}>
-            {/* Logo central */}
             <div style={{
               position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
               zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" style={{ width: '350px', height: '350px', objectFit: 'contain' }} />
+              <img src="/Logo_sem_letras.png" alt="NIEUSYNC" loading="lazy" style={{ width: '350px', height: '350px', objectFit: 'contain' }} />
             </div>
 
-            {/* Serviços em órbita */}
             {[
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V2m0 0H8m4 0h4M6 12H2l4-8 4 8H6zm12 0h-4l4-8 4 8h-4zm-6 10H8m4 0h4"/></svg>, label: 'Direito Empresarial', href: '/servicos#direito', angle: -90 },
               { icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>, label: 'Gestão Estratégica', href: '/servicos#gestao', angle: -18 },
@@ -446,7 +596,7 @@ export default function Home() {
           }
         `}</style>
       </section>
-    
+
       {/* ── PERSONA ── */}
       <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
         <div className="container">
@@ -487,91 +637,28 @@ export default function Home() {
       </section>
 
       {/* ── LEAD MAGNET ── */}
-      <section style={{ background: 'var(--grad-main)', padding: '80px 0' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '56px', alignItems: 'center' }} className="lead-grid animate-on-scroll">
-            <div>
-              <span style={{
-                display: 'inline-block', background: 'rgba(255,255,255,0.12)',
-                border: '1.5px solid rgba(255,255,255,0.40)', color: 'var(--white)',
-                fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px',
-                letterSpacing: '0.10em', textTransform: 'uppercase', padding: '5px 14px',
-                borderRadius: '100px', marginBottom: '20px',
-              }}>
-                Download gratuito
-              </span>
-              <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '28px', color: 'var(--white)', marginBottom: '24px', lineHeight: 1.3 }}>
-                Guia: As 5 Protecções Legais que Toda a PME Precisa
-              </h3>
-              <ul style={{ listStyle: 'none' }}>
-                {[
-                  'Contratos que não pode dispensar',
-                  'Como evitar multas RGPD',
-                  'Direito do trabalho: o essencial',
-                  'Due diligence antes de assinar',
-                  'Check-list de compliance anual',
-                ].map((item) => (
-                  <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '15px', color: 'rgba(255,255,255,0.82)', padding: '6px 0', paddingLeft: '20px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--white)', fontWeight: 700 }}>✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <LeadMagnetSection />
 
-            <div style={{ background: 'var(--white)', borderRadius: '16px', padding: '36px', boxShadow: '0 8px 40px rgba(35,56,119,0.20)' }}>
-              <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '24px' }}>
-                Descarregar guia gratuito
-              </h3>
-              <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                {[
-                  { label: 'Nome completo', type: 'text', placeholder: 'O seu nome' },
-                  { label: 'Email profissional', type: 'email', placeholder: 'email@empresa.pt' },
-                  { label: 'Nome da empresa', type: 'text', placeholder: 'A sua empresa' },
-                ].map(({ label, type, placeholder }) => (
-                  <div key={label}>
-                    <label>{label}</label>
-                    <input type={type} placeholder={placeholder} />
-                  </div>
-                ))}
-                <button type="submit" className="btn-gradient" style={{ width: '100%', marginTop: '8px' }}>
-                  Descarregar agora →
-                </button>
-                <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.45)', textAlign: 'center', margin: 0 }}>
-                  Sem spam. Cancela a qualquer momento.
-                </p>
-              </form>
-            </div>
+      {/* ── BLOG PREVIEW ── */}
+      <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
+        <div className="container">
+          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <span className="section-label">Blog & Recursos</span>
+            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
+            <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Conhecimento que transforma</h2>
+            <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e Inteligência Artificial, focados especialmente em empresas.</p>
+          </div>
+          <BlogPreview />
+          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <Link to="/blog" className="btn-gradient">Ver todos os artigos →</Link>
           </div>
         </div>
-
         <style>{`
           @media (max-width: 768px) {
-            .lead-grid { grid-template-columns: 1fr !important; }
+            .blog-grid { grid-template-columns: 1fr !important; }
           }
         `}</style>
       </section>
-
-      {/* ── BLOG PREVIEW ── */}
-<section style={{ background: 'var(--bg)', padding: '80px 0' }}>
-  <div className="container">
-    <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '48px' }}>
-      <span className="section-label">Blog & Recursos</span>
-      <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }}/>
-      <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Conhecimento que transforma</h2>
-      <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos de Direito Empresarial, Gestão Financeira, Marketing Digital, Tecnologia e Inteligência Artificial, focados especialmente em empresas.</p>
-    </div>
-    <BlogPreview />
-    <div style={{ textAlign: 'center', marginTop: '40px' }}>
-      <Link to="/blog" className="btn-gradient">Ver todos os artigos →</Link>
-    </div>
-  </div>
-  <style>{`
-    @media (max-width: 768px) {
-      .blog-grid { grid-template-columns: 1fr !important; }
-    }
-  `}</style>
-</section>
 
       {/* ── CTA FINAL ── */}
       <section style={{ background: 'var(--grad-main)', padding: '100px 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
@@ -588,7 +675,7 @@ export default function Home() {
               <Link to="/contacto" className="btn-outline-white" style={{ padding: '16px 36px' }}>
                 Agendar Consulta →
               </Link>
-              <a
+              
                 href="https://wa.me/351933644596?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20NIEUSYNC"
                 target="_blank"
                 rel="noopener noreferrer"
