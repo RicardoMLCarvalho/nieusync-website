@@ -382,7 +382,7 @@ export default function Home() {
                   {[
                     { value: '360°', label: 'Visão multidisciplinar' },
                     { value: '5', label: 'Áreas de serviço integradas' },
-                    { value: '24h', label: 'Tempo de resposta garantido' },
+                    { value: 'B2B', label: 'Foco exclusivo em empresas' },
                     { value: '100%', label: 'Foco em resultados' },
                   ].map(({ value, label }, i) => (
                     <div
