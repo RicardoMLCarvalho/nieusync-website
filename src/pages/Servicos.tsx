@@ -130,7 +130,7 @@ export default function Servicos() {
         services={[
           'Contratos comerciais e de prestação de serviços',
           'Compliance RGPD e protecção de dados',
-          'Direito do trabalho: contratos, despedimentos, obrigações',
+          'Direito do trabalho: contratos, ???, obrigações',
           'Estruturação e pactos societários',
           'Due diligence',
           'Resolução de conflitos comerciais',
@@ -273,7 +273,7 @@ export default function Servicos() {
             'Quer adoptar IA para ganhar eficiência operacional',
           ],
         }}
-        ctaText="Falar com um especialista em TI"
+        ctaText="Falar com um especialista em IT"
       />
 
       {/* Packages */}
