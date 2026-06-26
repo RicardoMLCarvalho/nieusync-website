@@ -126,6 +126,7 @@ interface NewsItem {
   link:   string;
   source: string;
   area:   string;
+  thumbnail: string;
 }
 
 function NewsTickerSection() {
@@ -152,11 +153,12 @@ function NewsTickerSection() {
         );
         const json = await res.json();
         if (json.status !== 'ok') return [];
-        return json.items.map((item: { title: string; link: string }) => ({
-          title:  item.title,
-          link:   item.link,
-          source: src.name,
-          area:   src.area,
+        return json.items.map((item: { title: string; link: string; thumbnail: string }) => ({
+          title:     item.title,
+          link:      item.link,
+          source:    src.name,
+          area:      src.area,
+          thumbnail: item.thumbnail || '',
         }));
       })
     ).then((results) => {
@@ -177,7 +179,17 @@ function NewsTickerSection() {
   if (loading || news.length === 0) return null;
 
   const looped = [...news, ...news, ...news];
-
+ 
+  {item.thumbnail && (
+  <div style={{ borderRadius: '8px', overflow: 'hidden', height: '100px', marginBottom: '2px' }}>
+    <img
+      src={item.thumbnail}
+      alt={item.title}
+      loading="lazy"
+      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+    />
+  </div>
+)}
   return (
     <section style={{
       background: 'var(--white)',
