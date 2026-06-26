@@ -499,53 +499,76 @@ export default function Home() {
       </section>
 
       {/* ── METHODOLOGY ── */}
-      <section style={{ background: 'var(--grad-subtle)', padding: '100px 0' }}>
-        <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <span className="section-label section-label-white">Como trabalhamos</span>
-            <div className="accent-line accent-line-white accent-line-center" />
-            <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>Do diagnóstico ao resultado.</h2>
-            <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '540px', margin: '0 auto' }}>
-              Um processo claro, sem surpresas, com resultados mensuráveis desde o primeiro mês.
-            </p>
-          </div>
+<section style={{ background: 'var(--grad-subtle)', padding: '100px 0' }}>
+  <div className="container">
+    <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '64px' }}>
+      <span className="section-label section-label-white">Como trabalhamos</span>
+      <div className="accent-line accent-line-white accent-line-center" />
+      <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>Do diagnóstico ao resultado.</h2>
+      <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '540px', margin: '0 auto' }}>
+        Um processo claro, sem surpresas, com entrega de valor em cada fase.
+      </p>
+    </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px', position: 'relative' }} className="steps-grid animate-on-scroll">
-            {[
-              { num: '01', title: 'Diagnóstico', desc: 'Analisamos a situação actual da empresa: legal, estratégica, digital e operacional' },
-              { num: '02', title: 'Estratégia', desc: 'Definimos prioridades, objetivos e um plano de ação à medida do negócio' },
-              { num: '03', title: 'Implementação', desc: 'Executamos em coordenação com a sua equipa, integrando processos e ferramentas' },
-              { num: '04', title: 'Acompanhamento', desc: 'Monitorizamos o progresso com indicadores claros e reuniões periódicas' },
-              { num: '05', title: 'Optimização', desc: 'Revemos, ajustamos e evoluímos a estratégia com base nos resultados obtidos' },
-            ].map((step, i) => (
-              <div key={step.num} className="stagger-child animate-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
-                {i < 3 && (
-                  <div style={{ position: 'absolute', right: '-12%', top: '30px', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.18)', fontSize: '20px', fontWeight: 700 }} className="step-arrow">→</div>
-                )}
-                <div style={{
-                  width: '60px', height: '60px', borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.30)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px',
-                }}>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)', lineHeight: '60px', display: 'block' }}>{step.num}</span>
-                </div>
-                <h3 style={{ color: 'var(--white)', fontSize: '16px', marginBottom: '10px' }}>{step.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '14px' }}>{step.desc}</p>
-              </div>
-            ))}
+    {/* Linha 1 — 3 passos */}
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px', position: 'relative', marginBottom: '32px' }} className="steps-grid-top animate-on-scroll">
+      {[
+        { num: '01', title: 'Diagnóstico',    desc: 'Mapeamos a situação actual da empresa: legal, estratégica, digital e operacional.' },
+        { num: '02', title: 'Estratégia',     desc: 'Definimos prioridades, objetivos e um plano de ação à medida do negócio.' },
+        { num: '03', title: 'Implementação',  desc: 'Executamos em coordenação com a sua equipa, integrando processos e ferramentas.' },
+      ].map((step, i) => (
+        <div key={step.num} className="stagger-child" style={{ textAlign: 'center', position: 'relative' }}>
+          {i < 2 && (
+            <div style={{ position: 'absolute', right: '-12%', top: '30px', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.18)', fontSize: '20px', fontWeight: 700 }} className="step-arrow">→</div>
+          )}
+          <div style={{
+            width: '60px', height: '60px', borderRadius: '50%',
+            background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.30)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px',
+          }}>
+            <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)' }}>{step.num}</span>
           </div>
+          <h3 style={{ color: 'var(--white)', fontSize: '16px', marginBottom: '10px' }}>{step.title}</h3>
+          <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '14px' }}>{step.desc}</p>
         </div>
+      ))}
+    </div>
 
-        <style>{`
-          @media (max-width: 768px) {
-            .steps-grid { grid-template-columns: 1fr !important; }
-            .step-arrow { display: none !important; }
-          }
-          @media (max-width: 1024px) {
-            .steps-grid { grid-template-columns: repeat(2,1fr) !important; }
-          }
-        `}</style>
-      </section>
+    {/* Linha 2 — 2 passos centrados */}
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '24px', maxWidth: '680px', margin: '0 auto', position: 'relative' }} className="steps-grid-bottom animate-on-scroll">
+      {[
+        { num: '04', title: 'Acompanhamento', desc: 'Monitorizamos o progresso com indicadores claros e reuniões periódicas.' },
+        { num: '05', title: 'Optimização',    desc: 'Revemos, ajustamos e evoluímos a estratégia com base nos resultados obtidos.' },
+      ].map((step, i) => (
+        <div key={step.num} className="stagger-child" style={{ textAlign: 'center', position: 'relative' }}>
+          {i < 1 && (
+            <div style={{ position: 'absolute', right: '-12%', top: '30px', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.18)', fontSize: '20px', fontWeight: 700 }} className="step-arrow">→</div>
+          )}
+          <div style={{
+            width: '60px', height: '60px', borderRadius: '50%',
+            background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.30)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px',
+          }}>
+            <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)' }}>{step.num}</span>
+          </div>
+          <h3 style={{ color: 'var(--white)', fontSize: '16px', marginBottom: '10px' }}>{step.title}</h3>
+          <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '14px' }}>{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <style>{`
+    @media (max-width: 768px) {
+      .steps-grid-top  { grid-template-columns: 1fr !important; }
+      .steps-grid-bottom { grid-template-columns: 1fr !important; max-width: 100% !important; }
+      .step-arrow { display: none !important; }
+    }
+    @media (max-width: 1024px) {
+      .steps-grid-top { grid-template-columns: repeat(2,1fr) !important; }
+    }
+  `}</style>
+</section>
 
       {/* ── PERSONA ── */}
       <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
