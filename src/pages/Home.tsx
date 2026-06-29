@@ -107,8 +107,9 @@ const RSS_SOURCES = [
   { url: 'https://www.dinheirovivo.pt/feed/',        name: 'Dinheiro Vivo', area: 'Gestão' },
   // Batch a testar
   { url: 'https://www.forbes.pt/feed/',              name: 'Forbes PT',     area: 'Negócios' },
-  { url: 'https://www.rtp.pt/noticias/rss/economia', name: 'RTP',           area: 'Gestão' },
-  { url: 'https://executivedigest.sapo.pt/feed/',    name: 'Executive Digest', area: 'Gestão' },
+  { url: 'https://www.rtp.pt/noticias/rss/economia',   name: 'RTP',           area: 'Negócios' },
+  { url: 'https://www.rtp.pt/noticias/rss/tecnologia', name: 'RTP',           area: 'Tecnologia' },
+  { url: 'https://www.rtp.pt/noticias/rss/pais',       name: 'RTP',           area: 'Gestão' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
