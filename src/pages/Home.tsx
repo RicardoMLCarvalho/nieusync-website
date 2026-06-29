@@ -103,15 +103,14 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
   
-  { url: 'https://eco.pt/empresas/feed/',               name: 'ECO',           area: 'Negócios' },
-  { url: 'https://eco.pt/financas/feed/',               name: 'ECO',           area: 'Negócios' },
-  { url: 'https://eco.pt/tech/feed/',                   name: 'ECO',           area: 'Tecnologia' },
-  
-  { url: 'https://www.dinheirovivo.pt/economia/feed/',  name: 'Dinheiro Vivo', area: 'Gestão' },
-  { url: 'https://www.dinheirovivo.pt/digital/feed/',   name: 'Dinheiro Vivo', area: 'Tecnologia' },
-  { url: 'https://www.dinheirovivo.pt/empresas/feed/',  name: 'Dinheiro Vivo', area: 'Negócios' },
-  
-  { url: 'https://pplware.sapo.pt/feed/',               name: 'Pplware',       area: 'Tecnologia' },
+ const RSS_SOURCES = [
+  // ✅ Confirmados a funcionar
+  { url: 'https://eco.pt/feed/',                     name: 'ECO',           area: 'Negócios' },
+  { url: 'https://www.dinheirovivo.pt/feed/',        name: 'Dinheiro Vivo', area: 'Gestão' },
+  // Batch a testar
+  { url: 'https://pplware.sapo.pt/feed/',            name: 'Pplware',       area: 'Tecnologia' },
+  { url: 'https://www.sabado.pt/economia/rss',       name: 'Sábado',        area: 'Negócios' },
+  { url: 'https://www.noticiasaominuto.com/rss/tech', name: 'Notícias ao Minuto', area: 'Tecnologia' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -414,7 +413,7 @@ function NewsTickerSection() {
         }
         @keyframes scrollNews {
           0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-33.333%); }
         }
       `}</style>
     </section>
