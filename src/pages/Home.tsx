@@ -380,7 +380,7 @@ function NewsTickerSection() {
         .news-track {
           display: flex;
           width: max-content;
-          animation: scrollNews 40s linear infinite;
+          animation: scrollNews 80s linear infinite;
         }
         .news-track:hover { animation-play-state: paused; }
         .news-card:hover {
