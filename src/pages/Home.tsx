@@ -153,19 +153,37 @@ function NewsTickerSection() {
         );
         const json = await res.json();
         if (json.status !== 'ok') return [];
-        return json.items.map((item: { title: string; link: string; thumbnail: string; content: string; enclosure: { link: string; type: string } }) => {
+        return json.items.map((item: {
+          title: string; link: string; thumbnail: string;
+          content: string; description: string;
+          enclosure: { link: string; type: string };
+        }) => {
           let thumbnail = item.thumbnail || '';
         
-          // Tenta extrair do HTML do conteúdo
-          if (!thumbnail && item.content) {
-            const match = item.content.match(/<img[^>]+src=["']([^"']+)["']/i);
-            if (match) thumbnail = match[1];
-          }
-        
-          // Tenta o campo enclosure (alguns feeds usam este formato)
+          // Enclosure (formato podcast/media)
           if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image')) {
             thumbnail = item.enclosure.link;
           }
+        
+          // Extrai imagem do HTML do conteúdo — tenta src, data-src, data-original, data-lazy-src
+          const extractImg = (html: string) => {
+            const patterns = [
+              /src=["']([^"']+\.(jpg|jpeg|png|webp)[^"']*)["']/i,
+              /data-src=["']([^"']+\.(jpg|jpeg|png|webp)[^"']*)["']/i,
+              /data-original=["']([^"']+\.(jpg|jpeg|png|webp)[^"']*)["']/i,
+              /data-lazy-src=["']([^"']+\.(jpg|jpeg|png|webp)[^"']*)["']/i,
+            ];
+            for (const p of patterns) {
+              const m = html.match(p);
+              if (m?.[1] && m[1].startsWith('http') && !m[1].includes('pixel') && !m[1].includes('1x1') && !m[1].includes('spacer')) {
+                return m[1];
+              }
+            }
+            return '';
+          };
+        
+          if (!thumbnail && item.content)     thumbnail = extractImg(item.content);
+          if (!thumbnail && item.description) thumbnail = extractImg(item.description);
         
           return {
             title:     item.title,
