@@ -102,12 +102,13 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
-  { url: 'https://news.google.com/rss/search?q=%22direito+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',             name: 'Google News', area: 'Direito' },
-  { url: 'https://news.google.com/rss/search?q=%22gest%C3%A3o+estrat%C3%A9gica%22+PME+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt', name: 'Google News', area: 'Gestão' },
-  { url: 'https://news.google.com/rss/search?q=%22marketing+digital%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',               name: 'Google News', area: 'Marketing' },
+  
+  { url: 'https://eco.pt/feed/',                      name: 'ECO',           area: 'Negócios' },
+  { url: 'https://www.dinheirovivo.pt/feed/',         name: 'Dinheiro Vivo', area: 'Gestão' },
+  { url: 'https://news.google.com/rss/search?q=%22direito+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',               name: 'Google News', area: 'Direito' },
+  { url: 'https://news.google.com/rss/search?q=%22marketing+digital%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                name: 'Google News', area: 'Marketing' },
   { url: 'https://news.google.com/rss/search?q=%22transforma%C3%A7%C3%A3o+digital%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt', name: 'Google News', area: 'Tecnologia' },
-  { url: 'https://eco.pt/feed/',                                                                                           name: 'ECO',         area: 'Negócios' },
-  { url: 'https://news.google.com/rss/search?q=compliance+RGPD+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',               name: 'Google News', area: 'RH & Compliance' },
+  { url: 'https://news.google.com/rss/search?q=compliance+RGPD+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                name: 'Google News', area: 'RH & Compliance' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -207,7 +208,7 @@ function NewsTickerSection() {
           const ctrl  = new AbortController();
           const timer = setTimeout(() => ctrl.abort(), 5000);
           const res   = await fetch(
-            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=5&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
+            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=10&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
             { signal: ctrl.signal }
           );
           clearTimeout(timer);
