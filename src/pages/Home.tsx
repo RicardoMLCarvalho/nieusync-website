@@ -101,14 +101,13 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 }
 
 // ── NOTÍCIAS ──────────────────────────────────────────────────
-// Para adicionar/remover fontes, edita este array
 const RSS_SOURCES = [
-  { url: 'https://eco.pt/feed/',                                  name: 'ECO',           area: 'Gestão' },
-  { url: 'https://www.dinheirovivo.pt/feed/',                     name: 'Dinheiro Vivo', area: 'Gestão' },
-  { url: 'https://tek.sapo.pt/rss',                               name: 'TEK',           area: 'Tecnologia' },
-  { url: 'https://www.computerworld.com.pt/feed/',                name: 'Computerworld', area: 'Tecnologia' },
-  { url: 'https://marketeer.sapo.pt/feed/',                       name: 'Marketeer',     area: 'Marketing' },
-  { url: 'https://observador.pt/secao/economia/feed/',            name: 'Observador',    area: 'Negócios' },
+  { url: 'https://eco.pt/feed/',                       name: 'ECO',           area: 'Gestão' },
+  { url: 'https://www.dinheirovivo.pt/feed/',          name: 'Dinheiro Vivo', area: 'Gestão' },
+  { url: 'https://tek.sapo.pt/rss',                   name: 'TEK',           area: 'Tecnologia' },
+  { url: 'https://www.computerworld.com.pt/feed/',    name: 'Computerworld', area: 'Tecnologia' },
+  { url: 'https://marketeer.sapo.pt/feed/',           name: 'Marketeer',     area: 'Marketing' },
+  { url: 'https://observador.pt/secao/economia/feed/', name: 'Observador',   area: 'Negócios' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -119,14 +118,73 @@ const AREA_COLORS: Record<string, string> = {
 };
 
 const NEWS_CACHE_KEY = 'nieusync_news';
-const NEWS_CACHE_TTL = 2 * 60 * 60 * 1000; // 2 horas
+const NEWS_CACHE_TTL = 2 * 60 * 60 * 1000;
 
 interface NewsItem {
-  title:  string;
-  link:   string;
-  source: string;
-  area:   string;
+  title:     string;
+  link:      string;
+  source:    string;
+  area:      string;
   thumbnail: string;
+}
+
+// ── Valida se uma URL de imagem é utilizável ──
+function isValidImg(url: string): boolean {
+  return (
+    typeof url === 'string' &&
+    url.startsWith('http') &&
+    url.length > 20 &&
+    !url.includes('1x1') &&
+    !url.includes('pixel') &&
+    !url.includes('spacer') &&
+    !url.includes('tracking') &&
+    !url.includes('beacon')
+  );
+}
+
+// ── Extrai a primeira imagem válida de um bloco de HTML ──
+function extractFromHtml(html: string): string {
+  if (!html) return '';
+  const patterns = [
+    /src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
+    /data-src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
+    /data-lazy=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
+    /data-original=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
+    /data-lazy-src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
+    /data-echo=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
+    /srcset=["']([^"' ,]+)/i,
+  ];
+  for (const p of patterns) {
+    const m = html.match(p);
+    const url = m?.[1]?.split(' ')[0]?.trim();
+    if (url && isValidImg(url)) return url;
+  }
+  return '';
+}
+
+// ── Vai ao site do artigo buscar o og:image (imagem principal do artigo) ──
+async function fetchOgImage(link: string): Promise<string> {
+  try {
+    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`;
+    const ctrl  = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 6000);
+    const res   = await fetch(proxy, { signal: ctrl.signal });
+    clearTimeout(timer);
+    const data = await res.json();
+    const html: string = data.contents ?? '';
+
+    const patterns = [
+      /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
+      /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
+      /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i,
+      /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image["']/i,
+    ];
+    for (const p of patterns) {
+      const m = html.match(p);
+      if (m?.[1]?.startsWith('http')) return m[1];
+    }
+  } catch (_) {}
+  return '';
 }
 
 function NewsTickerSection() {
@@ -134,6 +192,7 @@ function NewsTickerSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Tenta cache primeiro
     try {
       const cached = localStorage.getItem(NEWS_CACHE_KEY);
       if (cached) {
@@ -146,6 +205,7 @@ function NewsTickerSection() {
       }
     } catch (_) {}
 
+    // ── FASE 1: fetch RSS ──
     Promise.allSettled(
       RSS_SOURCES.map(async (src) => {
         const res  = await fetch(
@@ -153,59 +213,61 @@ function NewsTickerSection() {
         );
         const json = await res.json();
         if (json.status !== 'ok') return [];
+
         return json.items.map((item: {
           title: string; link: string; thumbnail: string;
           content: string; description: string;
           enclosure: { link: string; type: string };
         }) => {
-          let thumbnail = item.thumbnail || '';
-        
-          // Enclosure (formato podcast/media)
-          if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image')) {
+          let thumbnail = '';
+
+          if (item.thumbnail && isValidImg(item.thumbnail))
+            thumbnail = item.thumbnail;
+
+          if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image'))
             thumbnail = item.enclosure.link;
-          }
-        
-          // Extrai imagem do HTML do conteúdo — tenta src, data-src, data-original, data-lazy-src
-          const extractImg = (html: string) => {
-            const patterns = [
-              /src=["']([^"']+\.(jpg|jpeg|png|webp)[^"']*)["']/i,
-              /data-src=["']([^"']+\.(jpg|jpeg|png|webp)[^"']*)["']/i,
-              /data-original=["']([^"']+\.(jpg|jpeg|png|webp)[^"']*)["']/i,
-              /data-lazy-src=["']([^"']+\.(jpg|jpeg|png|webp)[^"']*)["']/i,
-            ];
-            for (const p of patterns) {
-              const m = html.match(p);
-              if (m?.[1] && m[1].startsWith('http') && !m[1].includes('pixel') && !m[1].includes('1x1') && !m[1].includes('spacer')) {
-                return m[1];
-              }
-            }
-            return '';
-          };
-        
-          if (!thumbnail && item.content)     thumbnail = extractImg(item.content);
-          if (!thumbnail && item.description) thumbnail = extractImg(item.description);
-        
-          return {
-            title:     item.title,
-            link:      item.link,
-            source:    src.name,
-            area:      src.area,
-            thumbnail,
-          };
+
+          if (!thumbnail) thumbnail = extractFromHtml(item.content     ?? '');
+          if (!thumbnail) thumbnail = extractFromHtml(item.description ?? '');
+
+          return { title: item.title, link: item.link, source: src.name, area: src.area, thumbnail };
         });
       })
-    ).then((results) => {
+    ).then(async (results) => {
       const all = results
         .filter((r): r is PromiseFulfilledResult<NewsItem[]> => r.status === 'fulfilled')
         .flatMap((r) => r.value)
         .sort(() => Math.random() - 0.5);
 
+      // Mostra imediatamente o que temos do RSS
       setNews(all);
       setLoading(false);
 
-      try {
-        localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ data: all, ts: Date.now() }));
-      } catch (_) {}
+      // ── FASE 2: og:image em background para artigos sem imagem ──
+      const missing = all
+        .map((a, i) => ({ ...a, _idx: i }))
+        .filter(a => !a.thumbnail);
+
+      if (missing.length > 0) {
+        const enriched = [...all];
+
+        await Promise.allSettled(
+          missing.map(async (item) => {
+            const img = await fetchOgImage(item.link);
+            if (img) enriched[item._idx] = { ...enriched[item._idx], thumbnail: img };
+          })
+        );
+
+        setNews([...enriched]);
+
+        try {
+          localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ data: enriched, ts: Date.now() }));
+        } catch (_) {}
+      } else {
+        try {
+          localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ data: all, ts: Date.now() }));
+        } catch (_) {}
+      }
     });
   }, []);
 
@@ -239,7 +301,7 @@ function NewsTickerSection() {
           {looped.map((item, i) => {
             const color = AREA_COLORS[item.area] ?? 'var(--blue)';
             return (
-              <a
+              
                 key={i}
                 href={item.link}
                 target="_blank"
@@ -263,27 +325,27 @@ function NewsTickerSection() {
                       loading="lazy"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                       onError={(e) => {
-                        // Se a imagem falhar ao carregar, esconde e mostra o placeholder
-                        (e.currentTarget as HTMLImageElement).style.display = 'none';
-                        (e.currentTarget.parentElement as HTMLElement).style.background = `${color}18`;
-                        (e.currentTarget.parentElement as HTMLElement).style.display = 'flex';
-                        (e.currentTarget.parentElement as HTMLElement).style.alignItems = 'center';
-                        (e.currentTarget.parentElement as HTMLElement).style.justifyContent = 'center';
+                        // Imagem falhou — esconde e mostra placeholder
+                        const img = e.currentTarget as HTMLImageElement;
+                        const parent = img.parentElement as HTMLElement;
+                        img.style.display = 'none';
+                        parent.style.background = `linear-gradient(135deg, ${color}22, ${color}44)`;
+                        parent.style.display = 'flex';
+                        parent.style.alignItems = 'center';
+                        parent.style.justifyContent = 'center';
+                        parent.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" style="opacity:0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`;
                       }}
                     />
                   </div>
                 ) : (
+                  // Placeholder enquanto og:image ainda está a carregar em background
                   <div style={{
                     borderRadius: '8px', height: '100px', flexShrink: 0,
-                    background: `${color}18`,
+                    background: `linear-gradient(135deg, ${color}22, ${color}44)`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
-                      <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"/>
-                      <path d="M2 6h2M2 10h2M2 14h2M2 18h2"/>
-                      <line x1="9" y1="8" x2="15" y2="8"/>
-                      <line x1="9" y1="12" x2="15" y2="12"/>
-                      <line x1="9" y1="16" x2="13" y2="16"/>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" style={{ opacity: 0.4 }}>
+                      <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
                     </svg>
                   </div>
                 )}
