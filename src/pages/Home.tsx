@@ -102,14 +102,16 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
-  // ✅ Confirmados a funcionar
-  { url: 'https://eco.pt/feed/',                     name: 'ECO',           area: 'Negócios' },
-  { url: 'https://www.dinheirovivo.pt/feed/',        name: 'Dinheiro Vivo', area: 'Gestão' },
-  // Batch a testar
-  { url: 'https://www.forbes.pt/feed/',              name: 'Forbes PT',     area: 'Negócios' },
-  { url: 'https://www.rtp.pt/noticias/rss/economia',   name: 'RTP',           area: 'Negócios' },
-  { url: 'https://www.rtp.pt/noticias/rss/tecnologia', name: 'RTP',           area: 'Tecnologia' },
-  
+  { url: 'https://rss.app/feeds/v1.1/thmbFWR9SUIF8Uos.json', area: 'Direito'         },
+  { url: 'https://rss.app/feeds/v1.1/10MDgWuZVrI1ZDEn.json', area: 'Direito'         },
+  { url: 'https://rss.app/feeds/v1.1/tyFGbL2DIz8yppOv.json', area: 'Gestão'          },
+  { url: 'https://rss.app/feeds/v1.1/teNjWWOx9Zy3ZwWT.json', area: 'Gestão'          },
+  { url: 'https://rss.app/feeds/v1.1/thTwBi9sSCCoA5LA.json', area: 'Marketing'       },
+  { url: 'https://rss.app/feeds/v1.1/t6ZAgBg4AEwhIwxz.json', area: 'Tecnologia'      },
+  { url: 'https://rss.app/feeds/v1.1/tambzGRnCCMVfsG5.json', area: 'Tecnologia'      },
+  { url: 'https://rss.app/feeds/v1.1/thEdIJQFcmZQW6Oh.json', area: 'Negócios'        },
+  { url: 'https://rss.app/feeds/v1.1/teRJTeV4Z8Q4ET1w.json', area: 'RH & Compliance' },
+  { url: 'https://rss.app/feeds/v1.1/tTxTmL6dTzWdWGUn.json', area: 'RH & Compliance' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -132,66 +134,52 @@ interface NewsItem {
   thumbnail: string;
 }
 
+// Extrai nome do site a partir do URL do artigo
+function getSourceName(url: string): string {
+  try {
+    const host = new URL(url).hostname.replace('www.', '');
+    const known: Record<string, string> = {
+      'cnnportugal.iol.pt':   'CNN Portugal',
+      'rtp.pt':               'RTP',
+      'eco.pt':               'ECO',
+      'dinheirovivo.pt':      'Dinheiro Vivo',
+      'observador.pt':        'Observador',
+      'publico.pt':           'Público',
+      'jn.pt':                'JN',
+      'dn.pt':                'DN',
+      'expresso.pt':          'Expresso',
+      'jornaldenegocios.pt':  'J. Negócios',
+      'sabado.pt':            'Sábado',
+      'visao.pt':             'Visão',
+      'cmjornal.pt':          'CM Jornal',
+      'noticiasaominuto.com': 'Notícias ao Minuto',
+      'lusa.pt':              'Lusa',
+      'marketeer.sapo.pt':    'Marketeer',
+      'tek.sapo.pt':          'TEK',
+    };
+    return known[host] ?? host.split('.')[0].charAt(0).toUpperCase() + host.split('.')[0].slice(1);
+  } catch {
+    return 'Notícias';
+  }
+}
+
 function isValidImg(url: string): boolean {
   if (typeof url !== 'string' || url.length < 10 || !url.startsWith('http')) return false;
-  const blocked = ['1x1', 'pixel', 'spacer', 'tracking', 'beacon', 'blank'];
-  return !blocked.some(b => url.includes(b));
-}
-
-function extractFromHtml(html: string): string {
-  if (!html) return '';
-  const patterns = [
-    /src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
-    /data-src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
-    /data-lazy=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
-    /data-original=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
-  ];
-  for (const p of patterns) {
-    const m   = html.match(p);
-    const url = m?.[1]?.split(' ')[0]?.trim();
-    if (url && isValidImg(url)) return url;
-  }
-  return '';
-}
-
-// Microlink segue redirects do Google News e devolve og:image do artigo real
-async function fetchImageViaLink(link: string): Promise<string> {
-  try {
-    const ctrl  = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 6000);
-    const res   = await fetch(
-      `https://api.microlink.io/?url=${encodeURIComponent(link)}&meta=false`,
-      { signal: ctrl.signal }
-    );
-    clearTimeout(timer);
-    if (!res.ok) return '';
-    const data = await res.json();
-    const img  = data?.data?.image?.url ?? '';
-    return isValidImg(img) ? img : '';
-  } catch (_) {
-    return '';
-  }
+  return !['1x1', 'pixel', 'spacer', 'tracking', 'beacon', 'blank'].some(b => url.includes(b));
 }
 
 const EXCLUDE_KEYWORDS = [
-  // Desporto
   'futebol','sporting','benfica','porto','braga','golo','jogador','treinador',
-  'Mundial','campeonato','liga','atleta','desporto','ténis','ciclismo','natação',
-  // Guerra e conflito
-  'guerra','bombardeamento','míssil','ucraniana','rússia','israel','palestina',
-  'gazá','conflito armado','ataque militar',
-  // Entretenimento
-  'cinema','filme','série','televisão','novela','concerto','festival','música',
+  'mundial','campeonato','liga','atleta','desporto','ténis','ciclismo','natação',
+  'guerra','bombardeamento','míssil','ucraniana','rússia','israel','palestina','gazá',
+  'cinema','filme','série','televisão','novela','concerto','festival',
   'ator','atriz','celebridade','reality show',
-  // Saúde geral (não laboral)
-  'hospital','covid','pandemia','vacina','vírus','doença rara','cancro',
-  // Outros não relevantes
   'horóscopo','meteo','tempo hoje','receita','gastronomia',
 ];
 
 function isRelevantArticle(title: string): boolean {
   const lower = title.toLowerCase();
-  return !EXCLUDE_KEYWORDS.some(kw => lower.includes(kw.toLowerCase()));
+  return !EXCLUDE_KEYWORDS.some(kw => lower.includes(kw));
 }
 
 function NewsTickerSection() {
@@ -199,8 +187,7 @@ function NewsTickerSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Cache — tenta localStorage e sessionStorage (modo anónimo)
-    const tryGet = () => {
+    const tryGet = (): NewsItem[] | null => {
       for (const s of [localStorage, sessionStorage]) {
         try {
           const c = s.getItem(NEWS_CACHE_KEY);
@@ -223,72 +210,40 @@ function NewsTickerSection() {
     const cached = tryGet();
     if (cached) { setNews(cached); setLoading(false); return; }
 
-    // Fase 1 — fetch RSS (2 artigos por fonte = ~12 no total)
     Promise.allSettled(
       RSS_SOURCES.map(async (src) => {
         try {
           const ctrl  = new AbortController();
-          const timer = setTimeout(() => ctrl.abort(), 5000);
-          const res   = await fetch(
-            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=10&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
-            { signal: ctrl.signal }
-          );
+          const timer = setTimeout(() => ctrl.abort(), 6000);
+          const res   = await fetch(src.url, { signal: ctrl.signal });
           clearTimeout(timer);
+          if (!res.ok) return [];
+
           const json = await res.json();
-          if (json.status !== 'ok') return [];
+          const items = json.items ?? [];
 
-          return json.items.map((item: {
-            title: string; link: string; thumbnail: string;
-            content: string; description: string;
-            enclosure: { link: string; type: string };
-          }) => {
-            const rawTitle   = item.title || '';
-            const lastDash   = rawTitle.lastIndexOf(' - ');
-            const cleanTitle = lastDash > 10 ? rawTitle.slice(0, lastDash).trim() : rawTitle;
-            const sourceName = lastDash > 10 ? rawTitle.slice(lastDash + 3).trim() : src.name;
-
-            let thumbnail = '';
-            if (item.thumbnail && isValidImg(item.thumbnail))   thumbnail = item.thumbnail;
-            if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image'))
-              thumbnail = item.enclosure.link;
-            if (!thumbnail) thumbnail = extractFromHtml(item.content     ?? '');
-            if (!thumbnail) thumbnail = extractFromHtml(item.description ?? '');
-
-            return { title: cleanTitle, link: item.link, source: sourceName, area: src.area, thumbnail };
-          });
+          return items.slice(0, 5).map((item: {
+            url: string; title: string; image?: string;
+            content_html?: string;
+          }) => ({
+            title:     item.title ?? '',
+            link:      item.url   ?? '',
+            source:    getSourceName(item.url ?? ''),
+            area:      src.area,
+            thumbnail: isValidImg(item.image ?? '') ? (item.image ?? '') : '',
+          }));
         } catch (_) { return []; }
       })
-    ).then(async (results) => {
+    ).then((results) => {
       const all = results
         .filter((r): r is PromiseFulfilledResult<NewsItem[]> => r.status === 'fulfilled')
         .flatMap((r) => r.value)
-        .filter(item => isRelevantArticle(item.title))
+        .filter(item => item.title && item.link && isRelevantArticle(item.title))
         .sort(() => Math.random() - 0.5);
 
-      // Mostra imediatamente com o que temos
       setNews(all);
       setLoading(false);
-
-      // Fase 2 — microlink em paralelo APENAS para artigos sem imagem (~10 pedidos)
-      const needsImg = all
-        .map((a, i) => ({ ...a, _idx: i }))
-        .filter(a => !a.thumbnail);
-
-      if (needsImg.length > 0) {
-        const enriched = [...all];
-
-        await Promise.allSettled(
-          needsImg.map(async (item) => {
-            const img = await fetchImageViaLink(item.link);
-            if (img) enriched[item._idx] = { ...enriched[item._idx], thumbnail: img };
-          })
-        );
-
-        setNews([...enriched]);
-        trySave(enriched);
-      } else {
-        trySave(all);
-      }
+      if (all.length > 0) trySave(all);
     });
   }, []);
 
@@ -375,7 +330,7 @@ function NewsTickerSection() {
                   }}>
                     {item.area}
                   </span>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '11px', color: 'rgba(35,56,119,0.35)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100px' }}>
+                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '11px', color: 'rgba(35,56,119,0.35)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '110px' }}>
                     {item.source}
                   </span>
                 </div>
