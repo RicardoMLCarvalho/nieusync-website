@@ -103,12 +103,15 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
   
-  { url: 'https://eco.pt/feed/',                      name: 'ECO',           area: 'Negócios' },
-  { url: 'https://www.dinheirovivo.pt/feed/',         name: 'Dinheiro Vivo', area: 'Gestão' },
-  { url: 'https://news.google.com/rss/search?q=%22direito+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',               name: 'Google News', area: 'Direito' },
-  { url: 'https://news.google.com/rss/search?q=%22marketing+digital%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                name: 'Google News', area: 'Marketing' },
-  { url: 'https://news.google.com/rss/search?q=%22transforma%C3%A7%C3%A3o+digital%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt', name: 'Google News', area: 'Tecnologia' },
-  { url: 'https://news.google.com/rss/search?q=compliance+RGPD+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                name: 'Google News', area: 'RH & Compliance' },
+  { url: 'https://eco.pt/empresas/feed/',               name: 'ECO',           area: 'Negócios' },
+  { url: 'https://eco.pt/financas/feed/',               name: 'ECO',           area: 'Negócios' },
+  { url: 'https://eco.pt/tech/feed/',                   name: 'ECO',           area: 'Tecnologia' },
+  
+  { url: 'https://www.dinheirovivo.pt/economia/feed/',  name: 'Dinheiro Vivo', area: 'Gestão' },
+  { url: 'https://www.dinheirovivo.pt/digital/feed/',   name: 'Dinheiro Vivo', area: 'Tecnologia' },
+  { url: 'https://www.dinheirovivo.pt/empresas/feed/',  name: 'Dinheiro Vivo', area: 'Negócios' },
+  
+  { url: 'https://pplware.sapo.pt/feed/',               name: 'Pplware',       area: 'Tecnologia' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -170,6 +173,27 @@ async function fetchImageViaLink(link: string): Promise<string> {
   } catch (_) {
     return '';
   }
+}
+
+const EXCLUDE_KEYWORDS = [
+  // Desporto
+  'futebol','sporting','benfica','porto','braga','golo','jogador','treinador',
+  'Mundial','campeonato','liga','atleta','desporto','ténis','ciclismo','natação',
+  // Guerra e conflito
+  'guerra','bombardeamento','míssil','ucraniana','rússia','israel','palestina',
+  'gazá','conflito armado','ataque militar',
+  // Entretenimento
+  'cinema','filme','série','televisão','novela','concerto','festival','música',
+  'ator','atriz','celebridade','reality show',
+  // Saúde geral (não laboral)
+  'hospital','covid','pandemia','vacina','vírus','doença rara','cancro',
+  // Outros não relevantes
+  'horóscopo','meteo','tempo hoje','receita','gastronomia',
+];
+
+function isRelevantArticle(title: string): boolean {
+  const lower = title.toLowerCase();
+  return !EXCLUDE_KEYWORDS.some(kw => lower.includes(kw.toLowerCase()));
 }
 
 function NewsTickerSection() {
@@ -240,6 +264,7 @@ function NewsTickerSection() {
       const all = results
         .filter((r): r is PromiseFulfilledResult<NewsItem[]> => r.status === 'fulfilled')
         .flatMap((r) => r.value)
+        .filter(item => isRelevantArticle(item.title))
         .sort(() => Math.random() - 0.5);
 
       // Mostra imediatamente com o que temos
@@ -380,7 +405,7 @@ function NewsTickerSection() {
         .news-track {
           display: flex;
           width: max-content;
-          animation: scrollNews 80s linear infinite;
+          animation: scrollNews 120s linear infinite;
         }
         .news-track:hover { animation-play-state: paused; }
         .news-card:hover {
