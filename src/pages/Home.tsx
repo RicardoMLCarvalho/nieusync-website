@@ -238,7 +238,7 @@ function NewsTickerSection() {
       const all = results
         .filter((r): r is PromiseFulfilledResult<NewsItem[]> => r.status === 'fulfilled')
         .flatMap((r) => r.value)
-        .filter(item => item.title && item.link && isRelevantArticle(item.title))
+        .filter(item => item.title && item.link && item.thumbnail && isRelevantArticle(item.title))
         .sort(() => Math.random() - 0.5);
 
       setNews(all);
@@ -358,7 +358,7 @@ function NewsTickerSection() {
         .news-track {
           display: flex;
           width: max-content;
-          animation: scrollNews 120s linear infinite;
+          animation: scrollNews 200s linear infinite;
         }
         .news-track:hover { animation-play-state: paused; }
         .news-card:hover {
