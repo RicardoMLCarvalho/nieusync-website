@@ -106,9 +106,9 @@ const RSS_SOURCES = [
   { url: 'https://eco.pt/feed/',                     name: 'ECO',           area: 'Negócios' },
   { url: 'https://www.dinheirovivo.pt/feed/',        name: 'Dinheiro Vivo', area: 'Gestão' },
   // Batch a testar
-  { url: 'https://pplware.sapo.pt/feed/',            name: 'Pplware',       area: 'Tecnologia' },
-  { url: 'https://www.sabado.pt/economia/rss',       name: 'Sábado',        area: 'Negócios' },
-  { url: 'https://www.noticiasaominuto.com/rss/tech', name: 'Notícias ao Minuto', area: 'Tecnologia' },
+  { url: 'https://www.forbes.pt/feed/',              name: 'Forbes PT',     area: 'Negócios' },
+  { url: 'https://www.rtp.pt/noticias/rss/economia', name: 'RTP',           area: 'Gestão' },
+  { url: 'https://executivedigest.sapo.pt/feed/',    name: 'Executive Digest', area: 'Gestão' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
