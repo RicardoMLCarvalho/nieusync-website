@@ -102,68 +102,20 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
-    // ── Direito ──
-  {
-    url:  'https://news.google.com/rss/search?q=%22direito+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Direito',
-  },
-  {
-    url:  'https://news.google.com/rss/search?q=%22direito+laboral%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Direito',
-  },
-  // ── Gestão ──
-  {
-    url:  'https://news.google.com/rss/search?q=%22gest%C3%A3o+estrat%C3%A9gica%22+PME+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Gestão',
-  },
-  {
-    url:  'https://news.google.com/rss/search?q=%22consultoria+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Gestão',
-  },
-  // ── Marketing ──
-  {
-    url:  'https://news.google.com/rss/search?q=%22marketing+digital%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Marketing',
-  },
-  {
-    url:  'https://news.google.com/rss/search?q=%22estrat%C3%A9gia+digital%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Marketing',
-  },
-  // ── Tecnologia ──
-  {
-    url:  'https://news.google.com/rss/search?q=%22transforma%C3%A7%C3%A3o+digital%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Tecnologia',
-  },
-  {
-    url:  'https://news.google.com/rss/search?q=%22intelig%C3%AAncia+artificial%22+empresas+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Tecnologia',
-  },
-  // ── RH & Compliance ──
-  {
-    url:  'https://news.google.com/rss/search?q=%22recursos+humanos%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'RH & Compliance',
-  },
-  {
-    url:  'https://news.google.com/rss/search?q=compliance+RGPD+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'RH & Compliance',
-  },
-  // ── Negócios ──
-  {
-    url:  'https://news.google.com/rss/search?q=PME+Portugal+crescimento&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Negócios',
-  },
-  {
-    url:  'https://news.google.com/rss/search?q=%22empreendedorismo%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
-    name: 'Google News', area: 'Negócios',
-  },
+  { url: 'https://news.google.com/rss/search?q=%22direito+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',             name: 'Google News', area: 'Direito' },
+  { url: 'https://news.google.com/rss/search?q=%22gest%C3%A3o+estrat%C3%A9gica%22+PME+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt', name: 'Google News', area: 'Gestão' },
+  { url: 'https://news.google.com/rss/search?q=%22marketing+digital%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',               name: 'Google News', area: 'Marketing' },
+  { url: 'https://news.google.com/rss/search?q=%22transforma%C3%A7%C3%A3o+digital%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt', name: 'Google News', area: 'Tecnologia' },
+  { url: 'https://eco.pt/feed/',                                                                                           name: 'ECO',         area: 'Negócios' },
+  { url: 'https://news.google.com/rss/search?q=compliance+RGPD+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',               name: 'Google News', area: 'RH & Compliance' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
-  'Gestão':     '#233877',
-  'Tecnologia': '#9F8EC2',
-  'Marketing':  '#5B8FD4',
-  'Negócios':   '#3D5A99',
-  'Direito':    '#1E5C45',
+  'Direito':         '#1E5C45',
+  'Gestão':          '#233877',
+  'Marketing':       '#5B8FD4',
+  'Tecnologia':      '#9F8EC2',
+  'Negócios':        '#3D5A99',
   'RH & Compliance': '#7B5EA7',
 };
 
@@ -179,14 +131,9 @@ interface NewsItem {
 }
 
 function isValidImg(url: string): boolean {
-  if (typeof url !== 'string' || url.length < 10) return false;
-  if (!url.startsWith('http')) return false;
+  if (typeof url !== 'string' || url.length < 10 || !url.startsWith('http')) return false;
   const blocked = ['1x1', 'pixel', 'spacer', 'tracking', 'beacon', 'blank'];
-  if (blocked.some(b => url.includes(b))) return false;
-  // Aceita URLs com extensão conhecida OU de hosts de imagens conhecidos
-  const hasImgExt = /\.(jpg|jpeg|png|webp|gif|avif)/i.test(url);
-  const isImgHost = /sapo\.pt|cloudfront|cloudinary|imgix|twimg|fbcdn|wp\.com|squarespace|media\./i.test(url);
-  return hasImgExt || isImgHost;
+  return !blocked.some(b => url.includes(b));
 }
 
 function extractFromHtml(html: string): string {
@@ -196,129 +143,32 @@ function extractFromHtml(html: string): string {
     /data-src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
     /data-lazy=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
     /data-original=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
-    /data-lazy-src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
-    /data-echo=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
-    /srcset=["']([^"' ,]+)/i,
   ];
   for (const p of patterns) {
-    const m = html.match(p);
+    const m   = html.match(p);
     const url = m?.[1]?.split(' ')[0]?.trim();
     if (url && isValidImg(url)) return url;
   }
   return '';
 }
 
-// ── Tenta múltiplos proxies para ir buscar o og:image do artigo ──
-async function fetchOgImage(link: string): Promise<string> {
-  // Microlink — especializado em link previews, segue redirects do Google News
+// Microlink segue redirects do Google News e devolve og:image do artigo real
+async function fetchImageViaLink(link: string): Promise<string> {
   try {
     const ctrl  = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 8000);
+    const timer = setTimeout(() => ctrl.abort(), 6000);
     const res   = await fetch(
       `https://api.microlink.io/?url=${encodeURIComponent(link)}&meta=false`,
       { signal: ctrl.signal }
     );
     clearTimeout(timer);
-    if (res.ok) {
-      const data = await res.json();
-      const img  = data?.data?.image?.url || data?.data?.screenshot?.url || '';
-      if (img && isValidImg(img)) return img;
-    }
-  } catch (_) {}
-
-  // Fallback — proxies tradicionais para og:image
-  const proxies = [
-    (url: string) => ({ endpoint: `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,      isJson: false }),
-    (url: string) => ({ endpoint: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,      isJson: true  }),
-    (url: string) => ({ endpoint: `https://corsproxy.io/?${encodeURIComponent(url)}`,                   isJson: false }),
-    (url: string) => ({ endpoint: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`, isJson: false }),
-  ];
-
-  const ogPatterns = [
-    /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
-    /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
-    /<meta[^>]+name=["']twitter:image(?::src)?["'][^>]+content=["']([^"']+)["']/i,
-    /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image(?::src)?["']/i,
-  ];
-
-  for (const makeProxy of proxies) {
-    try {
-      const { endpoint, isJson } = makeProxy(link);
-      const ctrl  = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 7000);
-      const res   = await fetch(endpoint, { signal: ctrl.signal });
-      clearTimeout(timer);
-      if (!res.ok) continue;
-      const html = isJson ? ((await res.json()).contents ?? '') : await res.text();
-      if (!html || html.length < 100) continue;
-      for (const p of ogPatterns) {
-        const m = html.match(p);
-        if (m?.[1]?.startsWith('http')) return m[1];
-      }
-    } catch (_) {}
+    if (!res.ok) return '';
+    const data = await res.json();
+    const img  = data?.data?.image?.url ?? '';
+    return isValidImg(img) ? img : '';
+  } catch (_) {
+    return '';
   }
-  return '';
-}
-
-async function fetchRssDirect(src: { url: string; name: string; area: string }): Promise<NewsItem[]> {
-  const proxies = [
-    `https://api.allorigins.win/get?url=${encodeURIComponent(src.url)}`,
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(src.url)}`,
-    `https://corsproxy.io/?${encodeURIComponent(src.url)}`,
-  ];
-
-  for (const proxyUrl of proxies) {
-    try {
-      const ctrl  = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 8000);
-      const res   = await fetch(proxyUrl, { signal: ctrl.signal });
-      clearTimeout(timer);
-      if (!res.ok) continue;
-
-      let xml = '';
-      if (proxyUrl.includes('/get?')) {
-        const data = await res.json();
-        xml = data.contents ?? '';
-      } else {
-        xml = await res.text();
-      }
-
-      if (!xml || xml.length < 200) continue;
-
-      // Parse dos <item> do XML
-      const itemRegex = /<item[^>]*>([\s\S]*?)<\/item>/gi;
-      const items: NewsItem[] = [];
-      let match;
-
-      while ((match = itemRegex.exec(xml)) !== null && items.length < 5) {
-        const block = match[1];
-
-        const title = (
-          block.match(/<title[^>]*>(?:<!\[CDATA\[)?\s*([\s\S]*?)\s*(?:\]\]>)?<\/title>/i)?.[1] ?? ''
-        ).replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
-
-        const link = (
-          block.match(/<link[^>]*>(?:<!\[CDATA\[)?\s*(https?[^\s<\]]+)/i)?.[1] ??
-          block.match(/<guid[^>]*>(?:<!\[CDATA\[)?\s*(https?[^\s<\]]+)/i)?.[1] ?? ''
-        ).trim();
-
-        const thumbnail = (
-          block.match(/<media:content[^>]+url=["']([^"']+)["']/i)?.[1] ??
-          block.match(/<media:thumbnail[^>]+url=["']([^"']+)["']/i)?.[1] ??
-          block.match(/<enclosure[^>]+url=["']([^"']+)["'][^>]+type=["']image/i)?.[1] ??
-          extractFromHtml(block.match(/<description[^>]*>([\s\S]*?)<\/description>/i)?.[1] ?? '') ??
-          ''
-        );
-
-        if (title && link) {
-          items.push({ title, link, source: src.name, area: src.area, thumbnail });
-        }
-      }
-
-      if (items.length > 0) return items;
-    } catch (_) {}
-  }
-  return [];
 }
 
 function NewsTickerSection() {
@@ -326,50 +176,64 @@ function NewsTickerSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const cached = localStorage.getItem(NEWS_CACHE_KEY);
-      if (cached) {
-        const { data, ts } = JSON.parse(cached);
-        if (Date.now() - ts < NEWS_CACHE_TTL && data.length > 0) {
-          setNews(data);
-          setLoading(false);
-          return;
-        }
+    // Cache — tenta localStorage e sessionStorage (modo anónimo)
+    const tryGet = () => {
+      for (const s of [localStorage, sessionStorage]) {
+        try {
+          const c = s.getItem(NEWS_CACHE_KEY);
+          if (c) {
+            const { data, ts } = JSON.parse(c);
+            if (Date.now() - ts < NEWS_CACHE_TTL && data?.length > 0) return data;
+          }
+        } catch (_) {}
       }
-    } catch (_) {}
+      return null;
+    };
 
-    // ── FASE 1: fetch RSS ──
+    const trySave = (data: NewsItem[]) => {
+      const payload = JSON.stringify({ data, ts: Date.now() });
+      for (const s of [localStorage, sessionStorage]) {
+        try { s.setItem(NEWS_CACHE_KEY, payload); } catch (_) {}
+      }
+    };
+
+    const cached = tryGet();
+    if (cached) { setNews(cached); setLoading(false); return; }
+
+    // Fase 1 — fetch RSS (2 artigos por fonte = ~12 no total)
     Promise.allSettled(
       RSS_SOURCES.map(async (src) => {
-        const res  = await fetch(
-          `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=5&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`
-        );
-        const json = await res.json();
-        if (json.status !== 'ok') {
-          // rss2json falhou — tenta parser direto
-          return fetchRssDirect(src);
-        }
-        
-        return json.items.map((item: {
-          title: string; link: string; thumbnail: string;
-          content: string; description: string;
-          enclosure: { link: string; type: string };
-        }) => {
-          // Extrai nome real da fonte e título limpo do formato "Título - Fonte"
-          const rawTitle  = item.title || '';
-          const lastDash  = rawTitle.lastIndexOf(' - ');
-          const cleanTitle  = lastDash > 10 ? rawTitle.slice(0, lastDash).trim() : rawTitle;
-          const sourceName  = lastDash > 10 ? rawTitle.slice(lastDash + 3).trim() : src.name;
-        
-          let thumbnail = '';
-          if (item.thumbnail && isValidImg(item.thumbnail))   thumbnail = item.thumbnail;
-          if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image'))
-            thumbnail = item.enclosure.link;
-          if (!thumbnail) thumbnail = extractFromHtml(item.content     ?? '');
-          if (!thumbnail) thumbnail = extractFromHtml(item.description ?? '');
-        
-          return { title: cleanTitle, link: item.link, source: sourceName, area: src.area, thumbnail };
-        });
+        try {
+          const ctrl  = new AbortController();
+          const timer = setTimeout(() => ctrl.abort(), 5000);
+          const res   = await fetch(
+            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=2&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
+            { signal: ctrl.signal }
+          );
+          clearTimeout(timer);
+          const json = await res.json();
+          if (json.status !== 'ok') return [];
+
+          return json.items.map((item: {
+            title: string; link: string; thumbnail: string;
+            content: string; description: string;
+            enclosure: { link: string; type: string };
+          }) => {
+            const rawTitle   = item.title || '';
+            const lastDash   = rawTitle.lastIndexOf(' - ');
+            const cleanTitle = lastDash > 10 ? rawTitle.slice(0, lastDash).trim() : rawTitle;
+            const sourceName = lastDash > 10 ? rawTitle.slice(lastDash + 3).trim() : src.name;
+
+            let thumbnail = '';
+            if (item.thumbnail && isValidImg(item.thumbnail))   thumbnail = item.thumbnail;
+            if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image'))
+              thumbnail = item.enclosure.link;
+            if (!thumbnail) thumbnail = extractFromHtml(item.content     ?? '');
+            if (!thumbnail) thumbnail = extractFromHtml(item.description ?? '');
+
+            return { title: cleanTitle, link: item.link, source: sourceName, area: src.area, thumbnail };
+          });
+        } catch (_) { return []; }
       })
     ).then(async (results) => {
       const all = results
@@ -377,33 +241,29 @@ function NewsTickerSection() {
         .flatMap((r) => r.value)
         .sort(() => Math.random() - 0.5);
 
+      // Mostra imediatamente com o que temos
       setNews(all);
       setLoading(false);
 
-      // ── FASE 2: og:image em background para artigos sem imagem ──
-      const sourceMap = Object.fromEntries(RSS_SOURCES.map(s => [s.name, s]));
-      const missing = all
+      // Fase 2 — microlink em paralelo APENAS para artigos sem imagem (~10 pedidos)
+      const needsImg = all
         .map((a, i) => ({ ...a, _idx: i }))
-        .filter(a => !a.thumbnail || sourceMap[a.source]?.forceOg);
+        .filter(a => !a.thumbnail);
 
-      if (missing.length > 0) {
+      if (needsImg.length > 0) {
         const enriched = [...all];
 
         await Promise.allSettled(
-          missing.map(async (item) => {
-            const img = await fetchOgImage(item.link);
+          needsImg.map(async (item) => {
+            const img = await fetchImageViaLink(item.link);
             if (img) enriched[item._idx] = { ...enriched[item._idx], thumbnail: img };
           })
         );
 
         setNews([...enriched]);
-        try {
-          localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ data: enriched, ts: Date.now() }));
-        } catch (_) {}
+        trySave(enriched);
       } else {
-        try {
-          localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ data: all, ts: Date.now() }));
-        } catch (_) {}
+        trySave(all);
       }
     });
   }, []);
@@ -414,7 +274,7 @@ function NewsTickerSection() {
 
   return (
     <section style={{
-      background: 'var(--white)',
+      background:   'var(--white)',
       borderTop:    '1px solid rgba(159,142,194,0.18)',
       borderBottom: '1px solid rgba(159,142,194,0.18)',
       padding: '36px 0',
@@ -422,9 +282,9 @@ function NewsTickerSection() {
     }}>
       <div className="container" style={{ marginBottom: '20px' }}>
         <p style={{
-          fontFamily: 'Montserrat, sans-serif', fontWeight: 400,
-          fontSize: '13px', color: 'rgba(35,56,119,0.45)',
-          textAlign: 'center', textTransform: 'uppercase', letterSpacing: '0.10em',
+          fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px',
+          color: 'rgba(35,56,119,0.45)', textAlign: 'center',
+          textTransform: 'uppercase', letterSpacing: '0.10em',
         }}>
           Notícias relevantes para o seu negócio
         </p>
@@ -438,8 +298,7 @@ function NewsTickerSection() {
           {looped.map((item, i) => {
             const color = AREA_COLORS[item.area] ?? 'var(--blue)';
             return (
-              <a
-                key={i}
+              <a key={`${item.link}-${i}`}
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -456,20 +315,17 @@ function NewsTickerSection() {
                 {/* ── IMAGEM ── */}
                 {item.thumbnail ? (
                   <div style={{ borderRadius: '8px', overflow: 'hidden', height: '100px', flexShrink: 0 }}>
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      loading="lazy"
+                    <img src={item.thumbnail} alt={item.title} loading="lazy"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                       onError={(e) => {
-                        const img    = e.currentTarget as HTMLImageElement;
-                        const parent = img.parentElement as HTMLElement;
-                        img.style.display = 'none';
-                        parent.style.background = `linear-gradient(135deg, ${color}22, ${color}44)`;
-                        parent.style.display = 'flex';
-                        parent.style.alignItems = 'center';
-                        parent.style.justifyContent = 'center';
-                        parent.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" style="opacity:0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`;
+                        const el = e.currentTarget as HTMLImageElement;
+                        const p  = el.parentElement as HTMLElement;
+                        el.style.display = 'none';
+                        p.style.background = `linear-gradient(135deg, ${color}22, ${color}44)`;
+                        p.style.display = 'flex';
+                        p.style.alignItems = 'center';
+                        p.style.justifyContent = 'center';
+                        p.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" style="opacity:0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`;
                       }}
                     />
                   </div>
@@ -495,7 +351,7 @@ function NewsTickerSection() {
                   }}>
                     {item.area}
                   </span>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '11px', color: 'rgba(35,56,119,0.35)', whiteSpace: 'nowrap' }}>
+                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '11px', color: 'rgba(35,56,119,0.35)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100px' }}>
                     {item.source}
                   </span>
                 </div>
@@ -523,7 +379,7 @@ function NewsTickerSection() {
         .news-track {
           display: flex;
           width: max-content;
-          animation: scrollNews 90s linear infinite;
+          animation: scrollNews 60s linear infinite;
         }
         .news-track:hover { animation-play-state: paused; }
         .news-card:hover {
