@@ -111,6 +111,8 @@ const RSS_SOURCES = [
   { url: 'https://www.jornaldenegocios.pt/rss',         name: 'Jornal Negócios', area: 'Negócios' },
   { url: 'https://www.dn.pt/economia/rss/',             name: 'DN Economia',     area: 'Direito' },
   { url: 'https://www.publico.pt/rss/economia',         name: 'Público',         area: 'Direito' },
+  { url: 'https://observador.pt/feed/',               name: 'Observador',      area: 'Negócios' },
+  { url: 'https://www.oa.pt/rss.aspx',               name: 'Ordem Advogados', area: 'Direito' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -208,6 +210,67 @@ async function fetchOgImage(link: string): Promise<string> {
   return '';
 }
 
+async function fetchRssDirect(src: { url: string; name: string; area: string }): Promise<NewsItem[]> {
+  const proxies = [
+    `https://api.allorigins.win/get?url=${encodeURIComponent(src.url)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(src.url)}`,
+    `https://corsproxy.io/?${encodeURIComponent(src.url)}`,
+  ];
+
+  for (const proxyUrl of proxies) {
+    try {
+      const ctrl  = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 8000);
+      const res   = await fetch(proxyUrl, { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (!res.ok) continue;
+
+      let xml = '';
+      if (proxyUrl.includes('/get?')) {
+        const data = await res.json();
+        xml = data.contents ?? '';
+      } else {
+        xml = await res.text();
+      }
+
+      if (!xml || xml.length < 200) continue;
+
+      // Parse dos <item> do XML
+      const itemRegex = /<item[^>]*>([\s\S]*?)<\/item>/gi;
+      const items: NewsItem[] = [];
+      let match;
+
+      while ((match = itemRegex.exec(xml)) !== null && items.length < 5) {
+        const block = match[1];
+
+        const title = (
+          block.match(/<title[^>]*>(?:<!\[CDATA\[)?\s*([\s\S]*?)\s*(?:\]\]>)?<\/title>/i)?.[1] ?? ''
+        ).replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
+
+        const link = (
+          block.match(/<link[^>]*>(?:<!\[CDATA\[)?\s*(https?[^\s<\]]+)/i)?.[1] ??
+          block.match(/<guid[^>]*>(?:<!\[CDATA\[)?\s*(https?[^\s<\]]+)/i)?.[1] ?? ''
+        ).trim();
+
+        const thumbnail = (
+          block.match(/<media:content[^>]+url=["']([^"']+)["']/i)?.[1] ??
+          block.match(/<media:thumbnail[^>]+url=["']([^"']+)["']/i)?.[1] ??
+          block.match(/<enclosure[^>]+url=["']([^"']+)["'][^>]+type=["']image/i)?.[1] ??
+          extractFromHtml(block.match(/<description[^>]*>([\s\S]*?)<\/description>/i)?.[1] ?? '') ??
+          ''
+        );
+
+        if (title && link) {
+          items.push({ title, link, source: src.name, area: src.area, thumbnail });
+        }
+      }
+
+      if (items.length > 0) return items;
+    } catch (_) {}
+  }
+  return [];
+}
+
 function NewsTickerSection() {
   const [news,    setNews]    = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -232,7 +295,10 @@ function NewsTickerSection() {
           `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=5&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`
         );
         const json = await res.json();
-        if (json.status !== 'ok') return [];
+        if (json.status !== 'ok') {
+          // rss2json falhou — tenta parser direto
+          return fetchRssDirect(src);
+        }
         
         return json.items.map((item: {
           title: string; link: string; thumbnail: string;
