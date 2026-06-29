@@ -207,7 +207,7 @@ function NewsTickerSection() {
           const ctrl  = new AbortController();
           const timer = setTimeout(() => ctrl.abort(), 5000);
           const res   = await fetch(
-            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=2&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
+            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=5&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
             { signal: ctrl.signal }
           );
           clearTimeout(timer);
@@ -379,7 +379,7 @@ function NewsTickerSection() {
         .news-track {
           display: flex;
           width: max-content;
-          animation: scrollNews 60s linear infinite;
+          animation: scrollNews 40s linear infinite;
         }
         .news-track:hover { animation-play-state: paused; }
         .news-card:hover {
@@ -388,7 +388,7 @@ function NewsTickerSection() {
         }
         @keyframes scrollNews {
           0%   { transform: translateX(0); }
-          100% { transform: translateX(-33.333%); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
     </section>
