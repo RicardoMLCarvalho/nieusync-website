@@ -102,17 +102,60 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
-  { url: 'https://eco.pt/feed/',                        name: 'ECO',              area: 'Gestão' },
-  { url: 'https://www.dinheirovivo.pt/feed/',           name: 'Dinheiro Vivo',    area: 'Gestão' },
-  { url: 'https://feeds.feedburner.com/exame-informatica',   name: 'Exame Informática', area: 'Tecnologia' },
-  { url: 'https://www.pcguia.pt/feed/',                      name: 'PC Guia',       area: 'Tecnologia' },
-  { url: 'https://www.briefing.pt/feed/',                    name: 'Briefing',      area: 'Marketing' },
-  { url: 'https://www.meiosepublicidade.pt/feed/',           name: 'Meios & Publicidade', area: 'Marketing' },
-  { url: 'https://www.economico.pt/rss.xml',                 name: 'Económico',     area: 'Negócios' },
-  { url: 'https://www.vda.pt/pt/rss/noticias/',              name: 'VdA',           area: 'Direito' },
-  { url: 'https://jornaleconomico.sapo.pt/feed/',      name: 'Jornal Económico', area: 'Direito' }, 
-  { url: 'https://www.publico.pt/rss/economia',         name: 'Público',         area: 'Direito' },
-  { url: 'https://observador.pt/feed/',               name: 'Observador',      area: 'Negócios' },
+    // ── Direito ──
+  {
+    url:  'https://news.google.com/rss/search?q=%22direito+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Direito',
+  },
+  {
+    url:  'https://news.google.com/rss/search?q=%22direito+laboral%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Direito',
+  },
+  // ── Gestão ──
+  {
+    url:  'https://news.google.com/rss/search?q=%22gest%C3%A3o+estrat%C3%A9gica%22+PME+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Gestão',
+  },
+  {
+    url:  'https://news.google.com/rss/search?q=%22consultoria+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Gestão',
+  },
+  // ── Marketing ──
+  {
+    url:  'https://news.google.com/rss/search?q=%22marketing+digital%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Marketing',
+  },
+  {
+    url:  'https://news.google.com/rss/search?q=%22estrat%C3%A9gia+digital%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Marketing',
+  },
+  // ── Tecnologia ──
+  {
+    url:  'https://news.google.com/rss/search?q=%22transforma%C3%A7%C3%A3o+digital%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Tecnologia',
+  },
+  {
+    url:  'https://news.google.com/rss/search?q=%22intelig%C3%AAncia+artificial%22+empresas+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Tecnologia',
+  },
+  // ── RH & Compliance ──
+  {
+    url:  'https://news.google.com/rss/search?q=%22recursos+humanos%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'RH & Compliance',
+  },
+  {
+    url:  'https://news.google.com/rss/search?q=compliance+RGPD+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'RH & Compliance',
+  },
+  // ── Negócios ──
+  {
+    url:  'https://news.google.com/rss/search?q=PME+Portugal+crescimento&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Negócios',
+  },
+  {
+    url:  'https://news.google.com/rss/search?q=%22empreendedorismo%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',
+    name: 'Google News', area: 'Negócios',
+  },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -121,6 +164,7 @@ const AREA_COLORS: Record<string, string> = {
   'Marketing':  '#5B8FD4',
   'Negócios':   '#3D5A99',
   'Direito':    '#1E5C45',
+  'RH & Compliance': '#7B5EA7',
 };
 
 const NEWS_CACHE_KEY = 'nieusync_news';
