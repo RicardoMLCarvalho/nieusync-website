@@ -104,7 +104,7 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 const RSS_SOURCES = [
   { url: 'https://eco.pt/feed/',                        name: 'ECO',              area: 'Gestão' },
   { url: 'https://www.dinheirovivo.pt/feed/',           name: 'Dinheiro Vivo',    area: 'Gestão' },
-  { url: 'https://tek.sapo.pt/rss',                    name: 'TEK',              area: 'Tecnologia' },
+  { url: 'https://tek.sapo.pt/rss',                    name: 'TEK',              area: 'Tecnologia', forceOg: true  },
   { url: 'https://www.computerworld.com.pt/feed/',     name: 'Computerworld',    area: 'Tecnologia' },
   { url: 'https://marketeer.sapo.pt/feed/',            name: 'Marketeer',        area: 'Marketing' },
   { url: 'https://observador.pt/secao/economia/feed/', name: 'Observador',       area: 'Negócios' },
@@ -132,16 +132,14 @@ interface NewsItem {
 }
 
 function isValidImg(url: string): boolean {
-  return (
-    typeof url === 'string' &&
-    url.startsWith('http') &&
-    url.length > 20 &&
-    !url.includes('1x1') &&
-    !url.includes('pixel') &&
-    !url.includes('spacer') &&
-    !url.includes('tracking') &&
-    !url.includes('beacon')
-  );
+  if (typeof url !== 'string' || url.length < 10) return false;
+  if (!url.startsWith('http')) return false;
+  const blocked = ['1x1', 'pixel', 'spacer', 'tracking', 'beacon', 'blank'];
+  if (blocked.some(b => url.includes(b))) return false;
+  // Aceita URLs com extensão conhecida OU de hosts de imagens conhecidos
+  const hasImgExt = /\.(jpg|jpeg|png|webp|gif|avif)/i.test(url);
+  const isImgHost = /sapo\.pt|cloudfront|cloudinary|imgix|twimg|fbcdn|wp\.com|squarespace|media\./i.test(url);
+  return hasImgExt || isImgHost;
 }
 
 function extractFromHtml(html: string): string {
@@ -255,9 +253,10 @@ function NewsTickerSection() {
       setLoading(false);
 
       // ── FASE 2: og:image em background para artigos sem imagem ──
+      const sourceMap = Object.fromEntries(RSS_SOURCES.map(s => [s.name, s]));
       const missing = all
         .map((a, i) => ({ ...a, _idx: i }))
-        .filter(a => !a.thumbnail);
+        .filter(a => !a.thumbnail || sourceMap[a.source]?.forceOg);
 
       if (missing.length > 0) {
         const enriched = [...all];
@@ -501,7 +500,7 @@ function LeadMagnetSection() {
                 <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
                 <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '12px' }}>Guia enviado!</h3>
                 <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>
-                  Verifica a tua caixa de email. Se não encontrares, verifica a pasta de spam.
+                  Verifique a tua caixa de email. Se não encontrar, verifique a pasta de spam.
                 </p>
               </div>
             ) : (
