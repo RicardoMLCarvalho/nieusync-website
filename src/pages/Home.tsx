@@ -102,8 +102,6 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
-  
- const RSS_SOURCES = [
   // ✅ Confirmados a funcionar
   { url: 'https://eco.pt/feed/',                     name: 'ECO',           area: 'Negócios' },
   { url: 'https://www.dinheirovivo.pt/feed/',        name: 'Dinheiro Vivo', area: 'Gestão' },
