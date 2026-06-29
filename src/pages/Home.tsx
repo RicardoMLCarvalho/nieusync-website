@@ -102,12 +102,14 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
-  { url: 'https://eco.pt/feed/',                       name: 'ECO',           area: 'Gestão' },
-  { url: 'https://www.dinheirovivo.pt/feed/',          name: 'Dinheiro Vivo', area: 'Gestão' },
-  { url: 'https://tek.sapo.pt/rss',                   name: 'TEK',           area: 'Tecnologia' },
-  { url: 'https://www.computerworld.com.pt/feed/',    name: 'Computerworld', area: 'Tecnologia' },
-  { url: 'https://marketeer.sapo.pt/feed/',           name: 'Marketeer',     area: 'Marketing' },
-  { url: 'https://observador.pt/secao/economia/feed/', name: 'Observador',   area: 'Negócios' },
+  { url: 'https://eco.pt/feed/',                        name: 'ECO',              area: 'Gestão' },
+  { url: 'https://www.dinheirovivo.pt/feed/',           name: 'Dinheiro Vivo',    area: 'Gestão' },
+  { url: 'https://tek.sapo.pt/rss',                    name: 'TEK',              area: 'Tecnologia' },
+  { url: 'https://www.computerworld.com.pt/feed/',     name: 'Computerworld',    area: 'Tecnologia' },
+  { url: 'https://marketeer.sapo.pt/feed/',            name: 'Marketeer',        area: 'Marketing' },
+  { url: 'https://observador.pt/secao/economia/feed/', name: 'Observador',       area: 'Negócios' },
+  { url: 'https://jornaleconomico.sapo.pt/feed/',      name: 'Jornal Económico', area: 'Direito' },
+  { url: 'https://www.oa.pt/rss.aspx',                 name: 'Ordem Advogados',  area: 'Direito' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -115,6 +117,7 @@ const AREA_COLORS: Record<string, string> = {
   'Tecnologia': '#9F8EC2',
   'Marketing':  '#5B8FD4',
   'Negócios':   '#3D5A99',
+  'Direito':    '#1E5C45',
 };
 
 const NEWS_CACHE_KEY = 'nieusync_news';
@@ -128,7 +131,6 @@ interface NewsItem {
   thumbnail: string;
 }
 
-// ── Valida se uma URL de imagem é utilizável ──
 function isValidImg(url: string): boolean {
   return (
     typeof url === 'string' &&
@@ -142,7 +144,6 @@ function isValidImg(url: string): boolean {
   );
 }
 
-// ── Extrai a primeira imagem válida de um bloco de HTML ──
 function extractFromHtml(html: string): string {
   if (!html) return '';
   const patterns = [
@@ -162,28 +163,40 @@ function extractFromHtml(html: string): string {
   return '';
 }
 
-// ── Vai ao site do artigo buscar o og:image (imagem principal do artigo) ──
+// ── Tenta múltiplos proxies para ir buscar o og:image do artigo ──
 async function fetchOgImage(link: string): Promise<string> {
-  try {
-    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`;
-    const ctrl  = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 6000);
-    const res   = await fetch(proxy, { signal: ctrl.signal });
-    clearTimeout(timer);
-    const data = await res.json();
-    const html: string = data.contents ?? '';
+  const proxies = [
+    (url: string) => ({ endpoint: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, isJson: true }),
+    (url: string) => ({ endpoint: `https://corsproxy.io/?${encodeURIComponent(url)}`,             isJson: false }),
+    (url: string) => ({ endpoint: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`, isJson: false }),
+  ];
 
-    const patterns = [
-      /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
-      /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
-      /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i,
-      /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image["']/i,
-    ];
-    for (const p of patterns) {
-      const m = html.match(p);
-      if (m?.[1]?.startsWith('http')) return m[1];
-    }
-  } catch (_) {}
+  const ogPatterns = [
+    /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
+    /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
+    /<meta[^>]+name=["']twitter:image(?::src)?["'][^>]+content=["']([^"']+)["']/i,
+    /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image(?::src)?["']/i,
+  ];
+
+  for (const makeProxy of proxies) {
+    try {
+      const { endpoint, isJson } = makeProxy(link);
+      const ctrl  = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 6000);
+      const res   = await fetch(endpoint, { signal: ctrl.signal });
+      clearTimeout(timer);
+
+      if (!res.ok) continue;
+
+      const html = isJson ? ((await res.json()).contents ?? '') : await res.text();
+      if (!html) continue;
+
+      for (const p of ogPatterns) {
+        const m = html.match(p);
+        if (m?.[1]?.startsWith('http')) return m[1];
+      }
+    } catch (_) {}
+  }
   return '';
 }
 
@@ -192,7 +205,6 @@ function NewsTickerSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Tenta cache primeiro
     try {
       const cached = localStorage.getItem(NEWS_CACHE_KEY);
       if (cached) {
@@ -239,7 +251,6 @@ function NewsTickerSection() {
         .flatMap((r) => r.value)
         .sort(() => Math.random() - 0.5);
 
-      // Mostra imediatamente o que temos do RSS
       setNews(all);
       setLoading(false);
 
@@ -259,7 +270,6 @@ function NewsTickerSection() {
         );
 
         setNews([...enriched]);
-
         try {
           localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ data: enriched, ts: Date.now() }));
         } catch (_) {}
@@ -325,8 +335,7 @@ function NewsTickerSection() {
                       loading="lazy"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                       onError={(e) => {
-                        // Imagem falhou — esconde e mostra placeholder
-                        const img = e.currentTarget as HTMLImageElement;
+                        const img    = e.currentTarget as HTMLImageElement;
                         const parent = img.parentElement as HTMLElement;
                         img.style.display = 'none';
                         parent.style.background = `linear-gradient(135deg, ${color}22, ${color}44)`;
@@ -338,7 +347,6 @@ function NewsTickerSection() {
                     />
                   </div>
                 ) : (
-                  // Placeholder enquanto og:image ainda está a carregar em background
                   <div style={{
                     borderRadius: '8px', height: '100px', flexShrink: 0,
                     background: `linear-gradient(135deg, ${color}22, ${color}44)`,
