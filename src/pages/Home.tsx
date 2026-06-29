@@ -106,10 +106,11 @@ const RSS_SOURCES = [
   { url: 'https://www.dinheirovivo.pt/feed/',           name: 'Dinheiro Vivo',    area: 'Gestão' },
   { url: 'https://tek.sapo.pt/rss',                    name: 'TEK',              area: 'Tecnologia', forceOg: true  },
   { url: 'https://www.computerworld.com.pt/feed/',     name: 'Computerworld',    area: 'Tecnologia' },
-  { url: 'https://marketeer.sapo.pt/feed/',            name: 'Marketeer',        area: 'Marketing' },
-  { url: 'https://observador.pt/secao/economia/feed/', name: 'Observador',       area: 'Negócios' },
-  { url: 'https://jornaleconomico.sapo.pt/feed/',      name: 'Jornal Económico', area: 'Direito' },
-  { url: 'https://www.oa.pt/rss.aspx',                 name: 'Ordem Advogados',  area: 'Direito' },
+  { url: 'https://marketeer.sapo.pt/feed/',            name: 'Marketeer',        area: 'Marketing' },  
+  { url: 'https://jornaleconomico.sapo.pt/feed/',      name: 'Jornal Económico', area: 'Direito' }, 
+  { url: 'https://www.jornaldenegocios.pt/rss',         name: 'Jornal Negócios', area: 'Negócios' },
+  { url: 'https://www.dn.pt/economia/rss/',             name: 'DN Economia',     area: 'Direito' },
+  { url: 'https://www.publico.pt/rss/economia',         name: 'Público',         area: 'Direito' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -164,9 +165,11 @@ function extractFromHtml(html: string): string {
 // ── Tenta múltiplos proxies para ir buscar o og:image do artigo ──
 async function fetchOgImage(link: string): Promise<string> {
   const proxies = [
-    (url: string) => ({ endpoint: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, isJson: true }),
-    (url: string) => ({ endpoint: `https://corsproxy.io/?${encodeURIComponent(url)}`,             isJson: false }),
-    (url: string) => ({ endpoint: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`, isJson: false }),
+    (url: string) => ({ endpoint: `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,          isJson: false }),
+    (url: string) => ({ endpoint: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,          isJson: true  }),
+    (url: string) => ({ endpoint: `https://corsproxy.io/?${encodeURIComponent(url)}`,                       isJson: false }),
+    (url: string) => ({ endpoint: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,     isJson: false }),
+    (url: string) => ({ endpoint: `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,       isJson: false }),
   ];
 
   const ogPatterns = [
@@ -180,14 +183,21 @@ async function fetchOgImage(link: string): Promise<string> {
     try {
       const { endpoint, isJson } = makeProxy(link);
       const ctrl  = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 6000);
+      const timer = setTimeout(() => ctrl.abort(), 7000);
       const res   = await fetch(endpoint, { signal: ctrl.signal });
       clearTimeout(timer);
 
       if (!res.ok) continue;
 
-      const html = isJson ? ((await res.json()).contents ?? '') : await res.text();
-      if (!html) continue;
+      let html = '';
+      if (isJson) {
+        const data = await res.json();
+        html = data.contents ?? data.body ?? '';
+      } else {
+        html = await res.text();
+      }
+
+      if (!html || html.length < 100) continue;
 
       for (const p of ogPatterns) {
         const m = html.match(p);
@@ -223,9 +233,7 @@ function NewsTickerSection() {
         );
         const json = await res.json();
         if (json.status !== 'ok') return [];
-        if (src.name === 'TEK') {
-          console.log('TEK item exemplo:', JSON.stringify(json.items[0], null, 2));
-        }
+        
         return json.items.map((item: {
           title: string; link: string; thumbnail: string;
           content: string; description: string;
