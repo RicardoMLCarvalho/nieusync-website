@@ -210,12 +210,28 @@ function extractFromHtml(html: string): string {
 
 // ── Tenta múltiplos proxies para ir buscar o og:image do artigo ──
 async function fetchOgImage(link: string): Promise<string> {
+  // Microlink — especializado em link previews, segue redirects do Google News
+  try {
+    const ctrl  = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    const res   = await fetch(
+      `https://api.microlink.io/?url=${encodeURIComponent(link)}&meta=false`,
+      { signal: ctrl.signal }
+    );
+    clearTimeout(timer);
+    if (res.ok) {
+      const data = await res.json();
+      const img  = data?.data?.image?.url || data?.data?.screenshot?.url || '';
+      if (img && isValidImg(img)) return img;
+    }
+  } catch (_) {}
+
+  // Fallback — proxies tradicionais para og:image
   const proxies = [
-    (url: string) => ({ endpoint: `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,          isJson: false }),
-    (url: string) => ({ endpoint: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,          isJson: true  }),
-    (url: string) => ({ endpoint: `https://corsproxy.io/?${encodeURIComponent(url)}`,                       isJson: false }),
-    (url: string) => ({ endpoint: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,     isJson: false }),
-    (url: string) => ({ endpoint: `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,       isJson: false }),
+    (url: string) => ({ endpoint: `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,      isJson: false }),
+    (url: string) => ({ endpoint: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,      isJson: true  }),
+    (url: string) => ({ endpoint: `https://corsproxy.io/?${encodeURIComponent(url)}`,                   isJson: false }),
+    (url: string) => ({ endpoint: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`, isJson: false }),
   ];
 
   const ogPatterns = [
@@ -232,19 +248,9 @@ async function fetchOgImage(link: string): Promise<string> {
       const timer = setTimeout(() => ctrl.abort(), 7000);
       const res   = await fetch(endpoint, { signal: ctrl.signal });
       clearTimeout(timer);
-
       if (!res.ok) continue;
-
-      let html = '';
-      if (isJson) {
-        const data = await res.json();
-        html = data.contents ?? data.body ?? '';
-      } else {
-        html = await res.text();
-      }
-
+      const html = isJson ? ((await res.json()).contents ?? '') : await res.text();
       if (!html || html.length < 100) continue;
-
       for (const p of ogPatterns) {
         const m = html.match(p);
         if (m?.[1]?.startsWith('http')) return m[1];
@@ -349,18 +355,20 @@ function NewsTickerSection() {
           content: string; description: string;
           enclosure: { link: string; type: string };
         }) => {
+          // Extrai nome real da fonte e título limpo do formato "Título - Fonte"
+          const rawTitle  = item.title || '';
+          const lastDash  = rawTitle.lastIndexOf(' - ');
+          const cleanTitle  = lastDash > 10 ? rawTitle.slice(0, lastDash).trim() : rawTitle;
+          const sourceName  = lastDash > 10 ? rawTitle.slice(lastDash + 3).trim() : src.name;
+        
           let thumbnail = '';
-
-          if (item.thumbnail && isValidImg(item.thumbnail))
-            thumbnail = item.thumbnail;
-
+          if (item.thumbnail && isValidImg(item.thumbnail))   thumbnail = item.thumbnail;
           if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image'))
             thumbnail = item.enclosure.link;
-
           if (!thumbnail) thumbnail = extractFromHtml(item.content     ?? '');
           if (!thumbnail) thumbnail = extractFromHtml(item.description ?? '');
-
-          return { title: item.title, link: item.link, source: src.name, area: src.area, thumbnail };
+        
+          return { title: cleanTitle, link: item.link, source: sourceName, area: src.area, thumbnail };
         });
       })
     ).then(async (results) => {
