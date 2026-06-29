@@ -223,7 +223,9 @@ function NewsTickerSection() {
         );
         const json = await res.json();
         if (json.status !== 'ok') return [];
-
+        if (src.name === 'TEK') {
+          console.log('TEK item exemplo:', JSON.stringify(json.items[0], null, 2));
+        }
         return json.items.map((item: {
           title: string; link: string; thumbnail: string;
           content: string; description: string;
