@@ -104,15 +104,15 @@ function MegaphoneIcon({ size = 40, color = 'var(--blue)' }: { size?: number; co
 const RSS_SOURCES = [
   { url: 'https://eco.pt/feed/',                        name: 'ECO',              area: 'Gestão' },
   { url: 'https://www.dinheirovivo.pt/feed/',           name: 'Dinheiro Vivo',    area: 'Gestão' },
-  { url: 'https://tek.sapo.pt/rss',                    name: 'TEK',              area: 'Tecnologia', forceOg: true  },
-  { url: 'https://www.computerworld.com.pt/feed/',     name: 'Computerworld',    area: 'Tecnologia' },
-  { url: 'https://marketeer.sapo.pt/feed/',            name: 'Marketeer',        area: 'Marketing' },  
+  { url: 'https://feeds.feedburner.com/exame-informatica',   name: 'Exame Informática', area: 'Tecnologia' },
+  { url: 'https://www.pcguia.pt/feed/',                      name: 'PC Guia',       area: 'Tecnologia' },
+  { url: 'https://www.briefing.pt/feed/',                    name: 'Briefing',      area: 'Marketing' },
+  { url: 'https://www.meiosepublicidade.pt/feed/',           name: 'Meios & Publicidade', area: 'Marketing' },
+  { url: 'https://www.economico.pt/rss.xml',                 name: 'Económico',     area: 'Negócios' },
+  { url: 'https://www.vda.pt/pt/rss/noticias/',              name: 'VdA',           area: 'Direito' },
   { url: 'https://jornaleconomico.sapo.pt/feed/',      name: 'Jornal Económico', area: 'Direito' }, 
-  { url: 'https://www.jornaldenegocios.pt/rss',         name: 'Jornal Negócios', area: 'Negócios' },
-  { url: 'https://www.dn.pt/economia/rss/',             name: 'DN Economia',     area: 'Direito' },
   { url: 'https://www.publico.pt/rss/economia',         name: 'Público',         area: 'Direito' },
   { url: 'https://observador.pt/feed/',               name: 'Observador',      area: 'Negócios' },
-  { url: 'https://www.oa.pt/rss.aspx',               name: 'Ordem Advogados', area: 'Direito' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
