@@ -145,3 +145,121 @@ label {
 @media (max-width: 1024px) { h1 { font-size: 38px; } h2 { font-size: 30px; } .container { padding: 0 24px; } }
 @media (max-width: 768px) { h1 { font-size: 30px; } h2 { font-size: 24px; } h3 { font-size: 20px; } .container { padding: 0 20px; } }
 @media (max-width: 480px) { h1 { font-size: 28px; } h2 { font-size: 22px; } .container { padding: 0 16px; } }
+
+/* ── Animações de scroll ── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-child {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.stagger-child.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-float {
+  animation: floatCard 4s ease-in-out infinite;
+}
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ── Botão contorno branco (para fundos escuros) ── */
+.btn-outline-white {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.6);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 13px 30px; border-radius: 8px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  min-height: 44px;
+}
+.btn-outline-white:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--white);
+  transform: translateY(-3px);
+}
+
+/* ── Variantes de accent-line e section-label ── */
+.accent-line-center { margin-left: auto; margin-right: auto; }
+.accent-line-white   { background: rgba(255,255,255,0.5); }
+.section-label-white { color: rgba(255,255,255,0.85); }
+
+/* ── Botão flutuante WhatsApp ── */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  z-index: 999;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.whatsapp-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.30);
+}
+.whatsapp-tooltip {
+  position: absolute;
+  right: 68px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.whatsapp-btn:hover .whatsapp-tooltip {
+  opacity: 1;
+}
+@media (max-width: 768px) {
+  .whatsapp-tooltip { display: none; }
+}
+
+/* ── Barra de progresso de scroll ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--grad-main);
+  z-index: 1100;
+  transition: width 0.1s ease;
+}
+
+/* ── Banner de cookies ── */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--blue);
+  padding: 18px 0;
+  z-index: 1050;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+}
