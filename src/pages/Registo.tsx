@@ -44,11 +44,11 @@ export default function Registo() {
 
     const userId = data.user?.id;
     if (userId) {
-      const { error: profileError } = await supabase.from('profiles').insert({
+      const { error: profileError } = await supabase.from('profiles').upsert({
         id: userId,
         empresa_nome: form.empresa_nome,
         email: form.email,
-      });
+      }, { onConflict: 'id' });
 
       if (profileError) {
         setError('Conta criada, mas houve um problema a inicializar o perfil. Contacte-nos.');
