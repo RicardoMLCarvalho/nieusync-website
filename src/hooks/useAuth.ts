@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 
-// Estado de sessão partilhado por toda a app. Subscreve a
-// onAuthStateChange uma única vez e expõe session/user/loading.
 export function useAuth() {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);

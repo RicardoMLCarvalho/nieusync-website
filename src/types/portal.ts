@@ -1,12 +1,13 @@
 // ── Tipos do Portal de Clientes NIEUSYNC ──────────────────────
-// Espelham as tabelas criadas no Supabase. Editar aqui ao alterar
-// o schema em src/lib/supabase.ts ou nas migrações.
+// Espelham as tabelas criadas no Supabase.
 
 export type EstadoPacote = 'ativo' | 'expirado' | 'pendente';
 export type EstadoFatura = 'paga' | 'pendente';
 export type EstadoDocumento = 'pendente' | 'em_analise' | 'aprovado';
 export type EnviadoPor = 'cliente' | 'admin';
 export type EstadoConsulta = 'agendada' | 'concluida' | 'cancelada';
+export type EstadoProfile = 'ativa' | 'cancelada' | 'suspensa';
+export type EstadoCancelamento = 'pendente' | 'processado' | 'cancelado';
 
 export const CATEGORIAS_DOCUMENTOS = [
   'Direito Empresarial',
@@ -24,6 +25,8 @@ export interface Profile {
   telefone: string;
   email: string;
   cancelamento_pedido: boolean;
+  estado: EstadoProfile;
+  data_cancelamento: string | null;
   created_at: string;
 }
 
@@ -67,5 +70,16 @@ export interface Consulta {
   data_hora: string;
   estado: EstadoConsulta;
   notas: string;
+  created_at: string;
+}
+
+export interface CancelamentoPendente {
+  id: string;
+  profile_id: string;
+  empresa_nome: string;
+  email: string;
+  data_pedido: string;
+  data_apagamento_prevista: string | null;
+  estado: EstadoCancelamento;
   created_at: string;
 }

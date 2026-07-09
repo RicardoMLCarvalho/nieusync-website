@@ -44,17 +44,12 @@ export default function Registo() {
 
     const userId = data.user?.id;
     if (userId) {
-      const { error: profileError } = await supabase.from('profiles').upsert({
+      await supabase.from('profiles').upsert({
         id: userId,
         empresa_nome: form.empresa_nome,
         email: form.email,
+        estado: 'ativa',
       }, { onConflict: 'id' });
-
-      if (profileError) {
-        setError('Conta criada, mas houve um problema a inicializar o perfil. Contacte-nos.');
-        setLoading(false);
-        return;
-      }
     }
 
     navigate('/portal');
@@ -64,7 +59,7 @@ export default function Registo() {
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--grad-main)', padding: '24px' }}>
       <div className="card" style={{ width: '100%', maxWidth: '480px', padding: '40px 36px' }}>
         <Link to="/" style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-          <img src="logo_new.png" alt="NIEUSYNC" style={{ height: '64px', width: 'auto' }} />
+          <span style={{ fontFamily: 'Magistral, Montserrat, sans-serif', fontWeight: 700, fontSize: '28px', color: 'var(--blue)' }}>NIEUSYNC</span>
         </Link>
 
         <h1 style={{ fontSize: '28px', textAlign: 'center', marginBottom: '8px', color: 'var(--blue)' }}>
