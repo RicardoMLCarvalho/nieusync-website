@@ -80,6 +80,18 @@ export default function Navbar() {
             ))}
           </div>
 
+          <Link to="/portal" className="desktop-nav" style={{
+            fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px',
+            color: 'var(--blue)', padding: '8px 14px', borderRadius: '6px',
+            textDecoration: 'none', display: 'inline-flex', alignItems: 'center',
+            minHeight: '44px', transition: 'color 0.2s ease',
+          }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--purple)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--blue)'; }}
+          >
+            Área Reservada
+          </Link>
+
           <Link to="/contacto" className="btn-gradient desktop-nav" style={{ fontSize: '12px', padding: '12px 24px' }}>
             Agendar Consulta
           </Link>
@@ -139,6 +151,16 @@ export default function Navbar() {
             {link.label}
           </Link>
         ))}
+
+        <Link to="/portal" style={{
+          fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '16px',
+          color: 'var(--white)', padding: '12px 16px', borderRadius: '8px',
+          textDecoration: 'none', background: 'rgba(255,255,255,0.12)',
+          transition: 'background 0.2s ease', minHeight: '44px', display: 'flex', alignItems: 'center',
+          marginTop: '8px',
+        }}>
+          Área Reservada
+        </Link>
 
         <Link to="/contacto" className="btn-gradient" style={{ marginTop: '20px', textAlign: 'center' }}>
           Agendar Consulta
