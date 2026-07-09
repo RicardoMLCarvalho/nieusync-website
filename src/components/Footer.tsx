@@ -78,7 +78,7 @@ export default function Footer() {
                   ))}
                 </div>
                 <div style={{ flex: 1 }}>
-                  {[{ to: '/servicos#financas', label: 'Finanças & Contabilidade' }, { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' }].map(({ to, label }) => (
+                  {[{ to: '/servicos#compliance', label: 'Compliance' }, { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' }].map(({ to, label }) => (
                     <Link key={label} to={to} style={lnk} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
                   ))}
                 </div>
@@ -145,7 +145,7 @@ export default function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
           <div style={{ padding: '20px 12px', borderRight: '1px solid rgba(255,255,255,0.10)' }}>
             <p style={{ ...colTitle, fontSize: '10px' }}>Serviços</p>
-            {[{ to: '/servicos#direito', label: 'Direito Empresarial' }, { to: '/servicos#gestao', label: 'Gestão Estratégica' }, { to: '/servicos#marketing', label: 'Marketing Digital' }, { to: '/servicos#financas', label: 'Finanças & Contabilidade' }, { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' }].map(({ to, label }) => (
+            {[{ to: '/servicos#direito', label: 'Direito Empresarial' }, { to: '/servicos#gestao', label: 'Gestão Estratégica' }, { to: '/servicos#marketing', label: 'Marketing Digital' }, { to: '/servicos#compliance', label: 'Compliance' }, { to: '/servicos#tecnologias', label: 'Tecnologias de Informação' }].map(({ to, label }) => (
               <Link key={label} to={to} style={{ ...lnk, fontSize: '11px' }} onMouseEnter={hoverPurple} onMouseLeave={unhoverLink}>{label}</Link>
             ))}
           </div>

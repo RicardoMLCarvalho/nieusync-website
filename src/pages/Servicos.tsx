@@ -57,7 +57,7 @@ export default function Servicos() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = 'NIEUSYNC - Serviços · Direito Empresarial, Gestão Financeira, Marketing Digital e Tecnologia de Informação';
+    document.title = 'NIEUSYNC - Serviços · Direito Empresarial, Gestão Estratégica, Marketing Digital, Compliance e Tecnologias de Informação';
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -207,38 +207,36 @@ export default function Servicos() {
       />
 
       <ServiceSection
-        id="financas"
+        id="compliance"
         bg="var(--bg)"
         iconEl={(
           <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2"/>
-            <line x1="8" y1="7" x2="16" y2="7"/>
-            <line x1="8" y1="11" x2="16" y2="11"/>
-            <line x1="8" y1="15" x2="12" y2="15"/>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="M9 12l2 2 4-4" />
           </svg>
         )}
-        title="Finanças & Contabilidade"
-        description="Contabilidade integrada, gestão fiscal e financeira para ter controlo total sobre os números do seu negócio."
+        title="Compliance"
+        description="Garantimos que a sua empresa cumpre as obrigações legais e regulatórias, com foco exclusivo em RGPD, proteção de dados, compliance regulatório, políticas internas de conformidade e auditorias de conformidade."
         services={[
-          'Contabilidade organizada e actualizada',
-          'Declarações fiscais e obrigações legais',
-          'Controlo de caixa e tesouraria',
-          'Relatórios financeiros mensais',
-          'Preparação para auditoria ou investimento',
-          'Gestão de salários e recursos humanos',
-          'Optimização fiscal e redução de custos',
-          'Apoio a candidaturas e financiamentos',
+          'Implementação e auditoria RGPD',
+          'Mapeamento e protecção de dados pessoais',
+          'Compliance regulatório setorial',
+          'Políticas internas de conformidade',
+          'Códigos de conduta e ética empresarial',
+          'Auditorias de conformidade',
+          'Registos de tratamento e DPIA',
+          'Formação em privacidade e proteção de dados',
         ]}
         highlight={{
           title: 'Precisa deste serviço se...',
           items: [
-            'Não tem clareza sobre o que entra e sai da empresa',
-            'As obrigações fiscais causam ansiedade e atrasos',
-            'Quer preparar a empresa para receber investimento',
-            'Precisa de optimizar custos e melhorar a margem',
+            'Ainda não tem um encarregado de tratamento de dados (DPO) designado',
+            'Não sabe se está em conformidade com o RGPD',
+            'Precisa de políticas internas de conformidade actualizadas',
+            'Quer realizar uma auditoria de conformidade antes de uma operação relevante',
           ],
         }}
-        ctaText="Falar com um especialista em Finanças"
+        ctaText="Falar com um especialista em Compliance"
         reverse
       />
 

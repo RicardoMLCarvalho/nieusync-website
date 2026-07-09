@@ -25,7 +25,7 @@ export default function Sobre() {
   const values = [
     {
       icon: (<svg width="32" height="32" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><defs><linearGradient id="v1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs><circle cx="12" cy="12" r="10" stroke="url(#v1)" /><path stroke="url(#v1)" d="M8 12l3 3 5-5" /></svg>),
-      title: 'Integração', desc: 'Legal, financeiro e digital nunca funcionam em silos. Tratamos o seu negócio como um sistema único.',
+      title: 'Integração', desc: 'Legal, compliance e digital nunca funcionam em silos. Tratamos o seu negócio como um sistema único.',
     },
     {
       icon: (<svg width="32" height="32" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><defs><linearGradient id="v2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#233877" /><stop offset="100%" stopColor="#9F8EC2" /></linearGradient></defs><path stroke="url(#v2)" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" stroke="url(#v2)" /></svg>),
@@ -71,7 +71,7 @@ export default function Sobre() {
                 </p>
               </div>
               <p style={{ color: 'rgba(35,56,119,0.70)' }}>
-                A NIEUSYNC trabalha com empresas nacionais e internacionais. Acreditamos que o crescimento sustentável começa com uma base sólida: jurídica, financeira, digital e tecnológica.
+                A NIEUSYNC trabalha com empresas nacionais e internacionais. Acreditamos que o crescimento sustentável começa com uma base sólida: jurídica, compliance, digital e tecnológica.
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
@@ -129,7 +129,7 @@ export default function Sobre() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
           {[
-            { title: 'Multidisciplinar 360º', desc: 'Legal, financeiro e digital num só lugar' },
+            { title: 'Multidisciplinar 360º', desc: 'Legal, compliance e digital num só lugar' },
             { title: 'Resposta ágil', desc: 'Acesso directo à equipa, sem intermediários' },
             { title: 'Decisão com dados', desc: 'Relatórios simples para escolhas inteligentes' },
             { title: 'Preço transparente', desc: 'Sem surpresas, sem letras pequenas' },

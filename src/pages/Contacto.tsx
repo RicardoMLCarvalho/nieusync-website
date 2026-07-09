@@ -154,7 +154,7 @@ export default function Contacto() {
                       <label>Principal desafio *</label>
                       <select name="desafio" value={form.desafio} onChange={handleChange} style={{ color: form.desafio ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }} required>
                         <option value="" style={{ color: 'rgba(35,56,119,0.40)' }}>Seleccione o desafio principal</option>
-                        {['Questões legais', 'Organização financeira', 'Marketing e crescimento', 'Processos e automação', 'Não sei por onde começar'].map((d) => <option key={d} value={d} style={{ color: 'var(--blue)' }}>{d}</option>)}
+                        {['Questões legais', 'Compliance e proteção de dados', 'Marketing e crescimento', 'Processos e automação', 'Não sei por onde começar'].map((d) => <option key={d} value={d} style={{ color: 'var(--blue)' }}>{d}</option>)}
                       </select>
                     </div>
                     <div><label>Mensagem</label><textarea name="mensagem" value={form.mensagem} onChange={handleChange} rows={4} placeholder="Conte-nos mais sobre o seu negócio..." style={{ resize: 'vertical' }} /></div>
