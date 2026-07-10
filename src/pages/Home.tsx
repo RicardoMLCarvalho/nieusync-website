@@ -480,7 +480,7 @@ function LeadMagnetSection() {
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'NIEUSYNC - Consultora B2B · Direito Empresarial, Gestão Estratégica, Marketing Digital e Tecnologias de Informação';
+    document.title = 'NIEUSYNC - Consultora B2B · Direito Empresarial, Compliance, Gestão Estratégica, Marketing Digital e Tecnologias de Informação';
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
