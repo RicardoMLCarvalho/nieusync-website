@@ -93,7 +93,7 @@ const AREA_COLORS: Record<string, string> = {
   'Marketing':       '#5B8FD4',
   'Tecnologia':      '#9F8EC2',
   'Negócios':        '#3D5A99',
-  'Compliance': '#7B5EA7',
+  'Compliance':      '#7B5EA7',
 };
 
 const NEWS_CACHE_KEY = 'nieusync_news';
