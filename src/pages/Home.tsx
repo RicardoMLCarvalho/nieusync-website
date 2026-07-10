@@ -83,8 +83,8 @@ const RSS_SOURCES = [
   { url: 'https://rss.app/feeds/v1.1/t6ZAgBg4AEwhIwxz.json', area: 'Tecnologia'      },
   { url: 'https://rss.app/feeds/v1.1/tambzGRnCCMVfsG5.json', area: 'Tecnologia'      },
   { url: 'https://rss.app/feeds/v1.1/thEdIJQFcmZQW6Oh.json', area: 'Negócios'        },
-  { url: 'https://rss.app/feeds/v1.1/teRJTeV4Z8Q4ET1w.json', area: 'RH & Compliance' },
-  { url: 'https://rss.app/feeds/v1.1/tTxTmL6dTzWdWGUn.json', area: 'RH & Compliance' },
+  { url: 'https://rss.app/feeds/v1.1/teRJTeV4Z8Q4ET1w.json', area: 'Compliance' },
+  { url: 'https://rss.app/feeds/v1.1/tTxTmL6dTzWdWGUn.json', area: 'Compliance' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
@@ -93,7 +93,7 @@ const AREA_COLORS: Record<string, string> = {
   'Marketing':       '#5B8FD4',
   'Tecnologia':      '#9F8EC2',
   'Negócios':        '#3D5A99',
-  'RH & Compliance': '#7B5EA7',
+  'Compliance': '#7B5EA7',
 };
 
 const NEWS_CACHE_KEY = 'nieusync_news';
@@ -532,7 +532,7 @@ export default function Home() {
               </h1>
 
               <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', maxWidth: '520px', marginBottom: '36px' }}>
-                Direito Empresarial, Gestão Estratégica, Marketing Digital e Tecnologia de Informação integrados num único parceiro de confiança.
+                Direito Empresarial, Compliance, Gestão Estratégica, Marketing Digital e Tecnologia de Informação integrados num único parceiro de confiança.
               </p>
 
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
@@ -753,7 +753,7 @@ export default function Home() {
             <span className="section-label">Blog & Recursos</span>
             <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
             <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>Conhecimento que transforma</h2>
-            <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos de Direito Empresarial, Gestão Estratégica, Marketing Digital, Tecnologia e Inteligência Artificial, focados especialmente em empresas.</p>
+            <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>Artigos práticos de Direito Empresarial, Compliance, Gestão Estratégica, Marketing Digital, Tecnologia e Inteligência Artificial, focados especialmente em empresas.</p>
           </div>
           <BlogPreview />
           <div style={{ textAlign: 'center', marginTop: '40px' }}>
