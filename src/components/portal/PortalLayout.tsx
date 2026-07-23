@@ -70,7 +70,7 @@ export default function PortalLayout() {
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <aside className="portal-sidebar" style={{ position: 'fixed', top: 0, left: 0, bottom: 0, width: '260px', background: 'var(--grad-main)', padding: '28px 20px', display: 'flex', flexDirection: 'column', zIndex: 100 }}>
         <Link to="/" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
-          <span style={{ fontFamily: 'Magistral, Montserrat, sans-serif', fontWeight: 700, fontSize: '22px', color: 'var(--white)' }}>NIEUSYNC</span>
+          <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" style={{ height: '36px', width: 'auto' }} />
         </Link>
         <div style={{ padding: '0 16px 24px', borderBottom: '1px solid rgba(255,255,255,0.12)', marginBottom: '16px' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.10em', marginBottom: '4px' }}>Cliente</p>
@@ -90,7 +90,7 @@ export default function PortalLayout() {
       </aside>
 
       <div className="portal-topbar" style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '60px', background: 'var(--grad-main)', display: 'none', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px', zIndex: 100 }}>
-        <span style={{ fontFamily: 'Magistral, Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)' }}>NIEUSYNC</span>
+        <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" style={{ height: '28px', width: 'auto' }} />
         <button onClick={() => setMobileOpen(true)} aria-label="Abrir menu" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', display: 'flex', flexDirection: 'column', gap: '4px', minWidth: '44px', minHeight: '44px', alignItems: 'center', justifyContent: 'center' }}>
           {[0, 1, 2].map((i) => <span key={i} style={{ display: 'block', width: '22px', height: '2px', background: 'var(--white)', borderRadius: '2px' }} />)}
         </button>
