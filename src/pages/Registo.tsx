@@ -4,18 +4,17 @@ import { supabase } from '../lib/supabase';
 
 function getPasswordChecks(password: string) {
   return {
-    length:  password.length >= 8,
-    upper:   /[A-Z]/.test(password),
-    number:  /[0-9]/.test(password),
-    special: /[^A-Za-z0-9]/.test(password),
+    length: password.length >= 8,
+    upper:  /[A-Z]/.test(password),
+    number: /[0-9]/.test(password),
   };
 }
 
 function getStrengthLevel(checks: ReturnType<typeof getPasswordChecks>) {
   const passed = Object.values(checks).filter(Boolean).length;
-  if (passed <= 1) return { label: 'Fraca',  color: '#e53e3e', pct: 25 };
-  if (passed <= 3) return { label: 'Média',  color: '#d69e2e', pct: 65 };
-  return               { label: 'Forte',  color: '#38a169', pct: 100 };
+  if (passed <= 1) return { label: 'Fraca', color: '#e53e3e', pct: 33 };
+  if (passed === 2) return { label: 'Média', color: '#d69e2e', pct: 66 };
+  return              { label: 'Forte', color: '#38a169', pct: 100 };
 }
 
 export default function Registo() {
@@ -78,10 +77,9 @@ export default function Registo() {
   };
 
   const requisitos = [
-    { key: 'length',  label: 'Mínimo 8 caracteres' },
-    { key: 'upper',   label: 'Uma letra maiúscula' },
-    { key: 'number',  label: 'Um número' },
-    { key: 'special', label: 'Um caractere especial' },
+    { key: 'length', label: 'Mínimo 8 caracteres' },
+    { key: 'upper',  label: 'Uma letra maiúscula' },
+    { key: 'number', label: 'Um número' },
   ] as const;
 
   return (
@@ -131,7 +129,7 @@ export default function Registo() {
                   </span>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 12px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '4px 8px' }}>
                   {requisitos.map((r) => (
                     <div key={r.key} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span style={{
