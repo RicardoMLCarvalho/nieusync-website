@@ -32,7 +32,7 @@ export default function Login() {
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--grad-main)', padding: '24px' }}>
       <div className="card" style={{ width: '100%', maxWidth: '440px', padding: '40px 36px' }}>
-        <<Link to="/" style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
+        <Link to="/" style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
           <img src="/logo_new.png" alt="NIEUSYNC" style={{ height: '44px', width: 'auto' }} />
         </Link>
 
