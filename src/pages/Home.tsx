@@ -437,14 +437,22 @@ function LeadMagnetSection() {
 
           <div style={{ background: 'var(--white)', borderRadius: '16px', padding: '36px', boxShadow: '0 8px 40px rgba(35,56,119,0.20)' }}>
             {status === 'success' ? (
-              <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
-                <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '12px' }}>Guia enviado!</h3>
-                <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>
-                  Verifica a tua caixa de email. Se não encontrares, verifica a pasta de spam.
-                </p>
-              </div>
-            ) : (
+                <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+                  <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '12px' }}>Obrigado!</h3>
+                  <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>
+                    Clica no botão abaixo para descarregar o guia.
+                  </p>
+                  
+                    href="/guia-5-proteccoes-legais.pdf"
+                    download
+                    className="btn-gradient"
+                    style={{ display: 'inline-flex' }}
+                  >
+                    Descarregar PDF →
+                  </a>
+                </div>
+              ) : (
               <>
                 <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '24px' }}>
                   Descarregar guia gratuito
