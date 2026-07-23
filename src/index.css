@@ -290,3 +290,11 @@ label {
   z-index: 1050;
   box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
 }
+
+/* ── Reduz espaçamento vertical das secções em mobile ── */
+@media (max-width: 768px) {
+  section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+}
