@@ -372,7 +372,14 @@ function LeadMagnetSection() {
       }
     };
 
-    const params = new URLSearchParams({ EMAIL: email, FNAME: nome, MMERGE6: empresa, c: cbName });
+    const params = new URLSearchParams({
+      EMAIL: email,
+      FNAME: nome,
+      MMERGE6: empresa,
+      'group[SUBSTITUIR_ID][1]': '1',   // Lead Magnet - Guia
+      'group[SUBSTITUIR_ID][2]': '1',   // Newsletter Geral (consentimento dado no checkbox)
+      c: cbName,
+    });
     const script = document.createElement('script');
     script.src = `${MAILCHIMP_URL}&${params.toString()}`;
     scriptRef.current = script;
