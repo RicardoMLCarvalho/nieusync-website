@@ -17,15 +17,12 @@ export default function Login() {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
-
     if (signInError) {
       setError('Email ou palavra-passe incorretos.');
       setLoading(false);
       return;
     }
-
     navigate('/portal');
   };
 
@@ -33,22 +30,19 @@ export default function Login() {
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--grad-main)', padding: '24px' }}>
       <div className="card" style={{ width: '100%', maxWidth: '440px', padding: '40px 36px' }}>
         <Link to="/" style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-          <img src="/logo_new.png" alt="NIEUSYNC" style={{ height: '44px', width: 'auto' }} />
+          <img src="/logo_new.png" alt="NIEUSYNC" style={{ height: '72px', width: 'auto' }} />
         </Link>
-
         <h1 style={{ fontSize: '28px', textAlign: 'center', marginBottom: '8px', color: 'var(--blue)' }}>
           Área Reservada
         </h1>
         <p style={{ textAlign: 'center', color: 'rgba(35,56,119,0.60)', marginBottom: '28px', fontSize: '15px' }}>
           Entre na sua conta de cliente NIEUSYNC.
         </p>
-
         {error && (
           <div style={{ background: 'rgba(229,62,62,0.10)', border: '1px solid rgba(229,62,62,0.30)', borderRadius: '8px', padding: '12px 16px', marginBottom: '20px' }}>
             <p style={{ color: '#e53e3e', fontSize: '14px', margin: 0 }}>{error}</p>
           </div>
         )}
-
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
             <label htmlFor="email">Email</label>
@@ -62,7 +56,6 @@ export default function Login() {
             {loading ? 'A entrar...' : 'Entrar →'}
           </button>
         </form>
-
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '24px', fontSize: '13px', flexWrap: 'wrap', gap: '8px' }}>
           <Link to="/recuperar-password" style={{ color: 'var(--purple)', textDecoration: 'underline' }}>
             Esqueceu a palavra-passe?
