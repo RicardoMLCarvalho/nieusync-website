@@ -78,7 +78,7 @@ export default function PortalLayout() {
         </Link>
         <div style={{ padding: '0 16px 24px', borderBottom: '1px solid rgba(255,255,255,0.12)', marginBottom: '16px' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.10em', marginBottom: '4px' }}>Cliente</p>
-          <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '15px', color: 'var(--white)', wordBreak: 'break-word' }}>{empresaNome || user.email}</p>
+          <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '15px', color: 'var(--white)', wordBreak: 'break-word' }}>{empresaNome || nomeCompleto || user.email}</p>
         </div>
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
           {NAV_ITEMS.map((item) => (
