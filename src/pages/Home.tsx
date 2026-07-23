@@ -352,12 +352,18 @@ function LeadMagnetSection() {
   const [status,      setStatus]      = useState<LeadStatus>('idle');
   const scriptRef = useRef<HTMLScriptElement | null>(null);
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    if (!nome || !email || !empresa || !aceitaNewsletter) return;
-    setStatus('loading');
+  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    const cbName = `_mc_cb_${Date.now()}`;
+  const formData = new FormData(e.currentTarget);
+  const nomeVal    = (formData.get('nome') as string)?.trim()    || nome;
+  const emailVal   = (formData.get('email') as string)?.trim()   || email;
+  const empresaVal = (formData.get('empresa') as string)?.trim() || empresa;
+
+  if (!nomeVal || !emailVal || !empresaVal || !aceitaNewsletter) return;
+  setStatus('loading');
+
+  const cbName = `_mc_cb_${Date.now()}`;
 
     (window as Record<string, unknown>)[cbName] = (data: { result: string; msg: string }) => {
       delete (window as Record<string, unknown>)[cbName];
@@ -446,15 +452,15 @@ function LeadMagnetSection() {
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <div>
                     <label htmlFor="lead-nome">Nome completo</label>
-                    <input id="lead-nome" type="text" placeholder="O seu nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
+                    <input id="lead-nome" name="nome" type="text" placeholder="O seu nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
                   </div>
                   <div>
                     <label htmlFor="lead-email">Email profissional</label>
-                    <input id="lead-email" type="email" placeholder="email@empresa.pt" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input id="lead-email" name="email" type="email" placeholder="email@empresa.pt" value={email} onChange={(e) => setEmail(e.target.value)} required />
                   </div>
                   <div>
                     <label htmlFor="lead-empresa">Nome da empresa</label>
-                    <input id="lead-empresa" type="text" placeholder="A sua empresa" value={empresa} onChange={(e) => setEmpresa(e.target.value)} required />
+                    <input id="lead-empresa" name="empresa" type="text" placeholder="A sua empresa" value={empresa} onChange={(e) => setEmpresa(e.target.value)} required />
                   </div>
                                     <label style={{
                     display: 'flex', alignItems: 'flex-start', gap: '8px',
