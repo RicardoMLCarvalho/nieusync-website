@@ -340,7 +340,7 @@ function NewsTickerSection() {
 
 // ── MAILCHIMP ─────────────────────────────────────────────────
 const MAILCHIMP_URL =
-  'https://SUBSTITUIR.us1.list-manage.com/subscribe/post-json?u=SUBSTITUIR&id=SUBSTITUIR';
+  'https://nieusync.us15.list-manage.com/subscribe/post-json?u=edf3f3ab247fd09540b382778&id=e87a242f5a';
 
 type LeadStatus = 'idle' | 'loading' | 'success' | 'error' | 'duplicate';
 
@@ -376,8 +376,9 @@ function LeadMagnetSection() {
       EMAIL: email,
       FNAME: nome,
       MMERGE6: empresa,
-      'group[SUBSTITUIR_ID][1]': '1',   // Lead Magnet - Guia
-      'group[SUBSTITUIR_ID][2]': '1',   // Newsletter Geral (consentimento dado no checkbox)
+      'group[9][1]': '1',
+      'group[9][2]': '1',
+      b_edf3f3ab247fd09540b382778_e87a242f5a: '',
       c: cbName,
     });
     const script = document.createElement('script');
