@@ -398,7 +398,7 @@ function LeadMagnetSection() {
         setStatus('error');
       }
     }, 10000);
-  }, [nome, email, empresa]);
+  }, [nome, email, empresa, aceitaNewsletter]);
 
   const checklistItems = [
     'Contratos que não pode dispensar',
