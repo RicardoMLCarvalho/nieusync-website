@@ -75,25 +75,22 @@ function BlogPreview() {
 
 // ── NOTÍCIAS ──────────────────────────────────────────────────
 const RSS_SOURCES = [
-  { url: 'https://rss.app/feeds/v1.1/thmbFWR9SUIF8Uos.json', area: 'Direito'         },
-  { url: 'https://rss.app/feeds/v1.1/10MDgWuZVrI1ZDEn.json', area: 'Direito'         },
-  { url: 'https://rss.app/feeds/v1.1/tyFGbL2DIz8yppOv.json', area: 'Gestão'          },
-  { url: 'https://rss.app/feeds/v1.1/teNjWWOx9Zy3ZwWT.json', area: 'Gestão'          },
-  { url: 'https://rss.app/feeds/v1.1/thTwBi9sSCCoA5LA.json', area: 'Marketing'       },
-  { url: 'https://rss.app/feeds/v1.1/t6ZAgBg4AEwhIwxz.json', area: 'Tecnologia'      },
-  { url: 'https://rss.app/feeds/v1.1/tambzGRnCCMVfsG5.json', area: 'Tecnologia'      },
-  { url: 'https://rss.app/feeds/v1.1/thEdIJQFcmZQW6Oh.json', area: 'Negócios'        },
-  { url: 'https://rss.app/feeds/v1.1/teRJTeV4Z8Q4ET1w.json', area: 'Compliance' },
-  { url: 'https://rss.app/feeds/v1.1/tTxTmL6dTzWdWGUn.json', area: 'Compliance' },
+  { url: 'https://eco.pt/feed/',                       name: 'ECO',           area: 'Negócios' },
+  { url: 'https://www.dinheirovivo.pt/feed/',          name: 'Dinheiro Vivo', area: 'Gestão' },
+  { url: 'https://news.google.com/rss/search?q=%22direito+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',               area: 'Direito' },
+  { url: 'https://news.google.com/rss/search?q=%22direito+laboral%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                  area: 'Direito' },
+  { url: 'https://news.google.com/rss/search?q=%22marketing+digital%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                area: 'Marketing' },
+  { url: 'https://news.google.com/rss/search?q=%22transforma%C3%A7%C3%A3o+digital%22+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt', area: 'Tecnologia' },
+  { url: 'https://news.google.com/rss/search?q=compliance+RGPD+empresa+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                area: 'Compliance' },
 ];
 
 const AREA_COLORS: Record<string, string> = {
-  'Direito':         '#1E5C45',
-  'Gestão':          '#233877',
-  'Marketing':       '#5B8FD4',
-  'Tecnologia':      '#9F8EC2',
-  'Negócios':        '#3D5A99',
-  'Compliance':      '#7B5EA7',
+  'Direito':     '#1E5C45',
+  'Gestão':      '#233877',
+  'Marketing':   '#5B8FD4',
+  'Tecnologia':  '#9F8EC2',
+  'Negócios':    '#3D5A99',
+  'Compliance':  '#7B5EA7',
 };
 
 const NEWS_CACHE_KEY = 'nieusync_news';
@@ -107,37 +104,23 @@ interface NewsItem {
   thumbnail: string;
 }
 
-function getSourceName(url: string): string {
-  try {
-    const host = new URL(url).hostname.replace('www.', '');
-    const known: Record<string, string> = {
-      'cnnportugal.iol.pt':   'CNN Portugal',
-      'rtp.pt':               'RTP',
-      'eco.pt':               'ECO',
-      'dinheirovivo.pt':      'Dinheiro Vivo',
-      'observador.pt':        'Observador',
-      'publico.pt':           'Público',
-      'jn.pt':                'JN',
-      'dn.pt':                'DN',
-      'expresso.pt':          'Expresso',
-      'jornaldenegocios.pt':  'J. Negócios',
-      'sabado.pt':            'Sábado',
-      'visao.pt':             'Visão',
-      'cmjornal.pt':          'CM Jornal',
-      'noticiasaominuto.com': 'Notícias ao Minuto',
-      'lusa.pt':              'Lusa',
-      'marketeer.sapo.pt':    'Marketeer',
-      'tek.sapo.pt':          'TEK',
-    };
-    return known[host] ?? host.split('.')[0].charAt(0).toUpperCase() + host.split('.')[0].slice(1);
-  } catch {
-    return 'Notícias';
-  }
-}
-
 function isValidImg(url: string): boolean {
   if (typeof url !== 'string' || url.length < 10 || !url.startsWith('http')) return false;
   return !['1x1', 'pixel', 'spacer', 'tracking', 'beacon', 'blank'].some(b => url.includes(b));
+}
+
+function extractFromHtml(html: string): string {
+  if (!html) return '';
+  const patterns = [
+    /src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
+    /data-src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)/i,
+  ];
+  for (const p of patterns) {
+    const m   = html.match(p);
+    const url = m?.[1]?.split(' ')[0]?.trim();
+    if (url && isValidImg(url)) return url;
+  }
+  return '';
 }
 
 const EXCLUDE_KEYWORDS = [
@@ -187,30 +170,41 @@ function NewsTickerSection() {
         try {
           const ctrl  = new AbortController();
           const timer = setTimeout(() => ctrl.abort(), 6000);
-          const res   = await fetch(src.url, { signal: ctrl.signal });
+          const res   = await fetch(
+            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=5&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
+            { signal: ctrl.signal }
+          );
           clearTimeout(timer);
-          if (!res.ok) return [];
-
           const json = await res.json();
-          const items = json.items ?? [];
+          if (json.status !== 'ok') return [];
 
-          return items.slice(0, 5).map((item: {
-            url: string; title: string; image?: string;
-            content_html?: string;
-          }) => ({
-            title:     item.title ?? '',
-            link:      item.url   ?? '',
-            source:    getSourceName(item.url ?? ''),
-            area:      src.area,
-            thumbnail: isValidImg(item.image ?? '') ? (item.image ?? '') : '',
-          }));
+          return json.items.map((item: {
+            title: string; link: string; thumbnail: string;
+            content: string; description: string;
+            enclosure: { link: string; type: string };
+          }) => {
+            const rawTitle   = item.title || '';
+            const lastDash   = rawTitle.lastIndexOf(' - ');
+            const hasName    = 'name' in src;
+            const cleanTitle = !hasName && lastDash > 10 ? rawTitle.slice(0, lastDash).trim() : rawTitle;
+            const sourceName = hasName ? (src as any).name : (lastDash > 10 ? rawTitle.slice(lastDash + 3).trim() : 'Notícias');
+
+            let thumbnail = '';
+            if (item.thumbnail && isValidImg(item.thumbnail)) thumbnail = item.thumbnail;
+            if (!thumbnail && item.enclosure?.link && item.enclosure?.type?.startsWith('image'))
+              thumbnail = item.enclosure.link;
+            if (!thumbnail) thumbnail = extractFromHtml(item.content     ?? '');
+            if (!thumbnail) thumbnail = extractFromHtml(item.description ?? '');
+
+            return { title: cleanTitle, link: item.link, source: sourceName, area: src.area, thumbnail };
+          });
         } catch (_) { return []; }
       })
     ).then((results) => {
       const all = results
         .filter((r): r is PromiseFulfilledResult<NewsItem[]> => r.status === 'fulfilled')
         .flatMap((r) => r.value)
-        .filter(item => item.title && item.link && item.thumbnail && isRelevantArticle(item.title))
+        .filter(item => item.title && item.link && isRelevantArticle(item.title))
         .sort(() => Math.random() - 0.5);
 
       setNews(all);
