@@ -345,10 +345,11 @@ const MAILCHIMP_URL =
 type LeadStatus = 'idle' | 'loading' | 'success' | 'error' | 'duplicate';
 
 function LeadMagnetSection() {
-  const [nome,    setNome]    = useState('');
-  const [email,   setEmail]   = useState('');
-  const [empresa, setEmpresa] = useState('');
-  const [status,  setStatus]  = useState<LeadStatus>('idle');
+  const [nome,        setNome]        = useState('');
+  const [email,       setEmail]       = useState('');
+  const [empresa,     setEmpresa]     = useState('');
+  const [aceitaNewsletter, setAceitaNewsletter] = useState(false);
+  const [status,      setStatus]      = useState<LeadStatus>('idle');
   const scriptRef = useRef<HTMLScriptElement | null>(null);
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
