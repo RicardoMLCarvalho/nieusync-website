@@ -80,15 +80,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          <Link to="/portal" className="desktop-nav" style={{
-            fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px',
-            color: 'var(--blue)', padding: '8px 14px', borderRadius: '6px',
-            textDecoration: 'none', display: 'inline-flex', alignItems: 'center',
-            minHeight: '44px', transition: 'color 0.2s ease',
-          }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--purple)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--blue)'; }}
-          >
+          <Link to="/portal" className="btn-portal desktop-nav">
             Área Reservada
           </Link>
 
