@@ -711,13 +711,13 @@ export default function Home() {
         </div>
 
         <style>{`
+          @media (max-width: 1024px) {
+            .steps-grid-top { grid-template-columns: repeat(2,1fr) !important; }
+          }
           @media (max-width: 768px) {
             .steps-grid-top    { grid-template-columns: 1fr !important; }
             .steps-grid-bottom { grid-template-columns: 1fr !important; max-width: 100% !important; }
             .step-arrow { display: none !important; }
-          }
-          @media (max-width: 1024px) {
-            .steps-grid-top { grid-template-columns: repeat(2,1fr) !important; }
           }
         `}</style>
       </section>
