@@ -516,7 +516,7 @@ export default function Home() {
   {/* Camada de cor por cima da foto — dá destaque ao texto */}
   <div style={{
     position: 'absolute', inset: 0,
-    background: 'linear-gradient(135deg, rgba(35,56,119,0.20) 0%, rgba(159,142,194,0.20) 100%)',
+    background: 'linear-gradient(135deg, rgba(35,56,119,0.75) 0%, rgba(159,142,194,0.75) 100%)',
     zIndex: 1,
   }} />
 
