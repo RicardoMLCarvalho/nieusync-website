@@ -1,4 +1,3 @@
-import { useEffect, useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
@@ -19,7 +18,7 @@ function getStrengthLevel(checks: ReturnType<typeof getPasswordChecks>) {
 
 export default function Registo() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ empresa_nome: '', email: '', password: '', confirm: '' });
+  const [form, setForm] = useState({ nome_completo: '', empresa_nome: '', email: '', password: '', confirm: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [passwordTouched, setPasswordTouched] = useState(false);
@@ -67,7 +66,8 @@ export default function Registo() {
     if (userId) {
       await supabase.from('profiles').upsert({
         id: userId,
-        empresa_nome: form.empresa_nome,
+        nome_completo: form.nome_completo,
+        empresa_nome: form.empresa_nome || null,
         email: form.email,
         estado: 'ativa',
       }, { onConflict: 'id' });
@@ -114,8 +114,12 @@ export default function Registo() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
-            <label htmlFor="empresa_nome">Nome da empresa</label>
-            <input id="empresa_nome" name="empresa_nome" type="text" value={form.empresa_nome} onChange={handleChange} placeholder="A sua empresa, Lda." required />
+            <label htmlFor="nome_completo">Nome completo</label>
+            <input id="nome_completo" name="nome_completo" type="text" value={form.nome_completo} onChange={handleChange} placeholder="O seu nome" required />
+          </div>
+          <div>
+            <label htmlFor="empresa_nome">Nome da empresa <span style={{ textTransform: 'none', fontWeight: 400, letterSpacing: 'normal', color: 'rgba(35,56,119,0.45)' }}>(opcional)</span></label>
+            <input id="empresa_nome" name="empresa_nome" type="text" value={form.empresa_nome} onChange={handleChange} placeholder="Deixe em branco se não aplicável" />
           </div>
           <div>
             <label htmlFor="email">Email profissional</label>
