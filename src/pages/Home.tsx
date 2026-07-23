@@ -354,7 +354,7 @@ function LeadMagnetSection() {
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
-    if (!nome || !email || !empresa) return;
+    if (!nome || !email || !empresa || !aceitaNewsletter) return;
     setStatus('loading');
 
     const cbName = `_mc_cb_${Date.now()}`;
@@ -455,6 +455,23 @@ function LeadMagnetSection() {
                     <label htmlFor="lead-empresa">Nome da empresa</label>
                     <input id="lead-empresa" type="text" placeholder="A sua empresa" value={empresa} onChange={(e) => setEmpresa(e.target.value)} required />
                   </div>
+                                    <label style={{
+                    display: 'flex', alignItems: 'flex-start', gap: '8px',
+                    cursor: 'pointer', fontFamily: 'Montserrat, sans-serif',
+                    fontWeight: 400, fontSize: '12.5px', color: 'rgba(35,56,119,0.75)',
+                    lineHeight: 1.4, textTransform: 'none', letterSpacing: 'normal',
+                  }}>
+                    <input
+                      type="checkbox"
+                      required
+                      checked={aceitaNewsletter}
+                      onChange={(e) => setAceitaNewsletter(e.target.checked)}
+                      style={{ width: '16px', height: '16px', marginTop: '2px', flexShrink: 0 }}
+                    />
+                    <span>
+                      Aceito receber a newsletter da NIEUSYNC com novidades sobre Direito Empresarial, Gestão, Compliance, Marketing Digital e Tecnologia. *
+                    </span>
+                  </label>
                   {status === 'duplicate' && (
                     <p style={{ fontSize: '13px', color: '#e53e3e', margin: 0 }}>Este email já está registado. Verifica a tua caixa de entrada.</p>
                   )}
