@@ -144,13 +144,7 @@ export default function Navbar() {
           </Link>
         ))}
 
-        <Link to="/portal" style={{
-          fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '16px',
-          color: 'var(--white)', padding: '12px 16px', borderRadius: '8px',
-          textDecoration: 'none', background: 'rgba(255,255,255,0.12)',
-          transition: 'background 0.2s ease', minHeight: '44px', display: 'flex', alignItems: 'center',
-          marginTop: '8px',
-        }}>
+        <Link to="/portal" className="btn-gradient" style={{ marginTop: '8px', textAlign: 'center' }}>
           Área Reservada
         </Link>
 
