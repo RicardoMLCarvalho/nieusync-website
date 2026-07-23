@@ -503,89 +503,106 @@ export default function Home() {
     <main style={{ paddingTop: '72px' }}>
 
       {/* ── HERO ── */}
-      <section style={{ background: 'var(--grad-subtle)', padding: '100px 0 80px', position: 'relative', overflow: 'hidden' }}>
-        {[
-          { size: 400, top: '-100px', right: '-100px', opacity: 0.10 },
-          { size: 280, top: '40%',    right: '5%',     opacity: 0.12 },
-          { size: 180, bottom: '-60px', left: '-60px', opacity: 0.14 },
-        ].map((c, i) => (
-          <div key={i} style={{
-            position: 'absolute', width: c.size, height: c.size, borderRadius: '50%',
-            border: `1px solid rgba(159,142,194,${c.opacity})`,
-            top: (c as any).top, right: (c as any).right,
-            bottom: (c as any).bottom, left: (c as any).left, pointerEvents: 'none',
-          }} />
-        ))}
+<section style={{ padding: '100px 0 80px', position: 'relative', overflow: 'hidden' }}>
+  {/* Foto de fundo da sede */}
+  <div style={{
+    position: 'absolute', inset: 0,
+    backgroundImage: 'url(/sede-nieusync.jpg)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    zIndex: 0,
+  }} />
 
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '48px', alignItems: 'center' }} className="hero-grid">
-            <div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '100px', padding: '7px 18px', marginBottom: '28px' }}>
-                <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                  Consultora B2B · Portugal
-                </span>
-              </div>
+  {/* Camada de cor por cima da foto — dá destaque ao texto */}
+  <div style={{
+    position: 'absolute', inset: 0,
+    background: 'linear-gradient(135deg, rgba(35,56,119,0.87) 0%, rgba(159,142,194,0.87) 100%)',
+    zIndex: 1,
+  }} />
 
-              <h1 style={{ color: 'var(--white)', marginBottom: '24px', fontSize: '64px' }}>
-                WE ARE THE BASIS FOR <br />
-                <span style={{ color: 'var(--purple)' }}>YOUR BUSINESS</span> TO FLY
-              </h1>
+  {[
+    { size: 400, top: '-100px', right: '-100px', opacity: 0.10 },
+    { size: 280, top: '40%',    right: '5%',     opacity: 0.12 },
+    { size: 180, bottom: '-60px', left: '-60px', opacity: 0.14 },
+  ].map((c, i) => (
+    <div key={i} style={{
+      position: 'absolute', width: c.size, height: c.size, borderRadius: '50%',
+      border: `1px solid rgba(159,142,194,${c.opacity})`,
+      top: (c as any).top, right: (c as any).right,
+      bottom: (c as any).bottom, left: (c as any).left, pointerEvents: 'none',
+      zIndex: 1,
+    }} />
+  ))}
 
-              <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', maxWidth: '520px', marginBottom: '36px' }}>
-                Direito Empresarial, Compliance, Gestão Estratégica, Marketing Digital e Tecnologia de Informação integrados num único parceiro de confiança.
-              </p>
-
-              <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
-                <Link to="/contacto"
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--white)'; (e.currentTarget as HTMLElement).style.color = 'var(--purple)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--purple)'; (e.currentTarget as HTMLElement).style.color = 'var(--white)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
-                  style={{ fontSize: '13px', padding: '15px 28px', background: 'var(--purple)', color: 'var(--white)', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, borderRadius: '8px', textDecoration: 'none', display: 'inline-block', transition: 'background 0.25s ease, color 0.25s ease, transform 0.2s ease' }}
-                >
-                  Agendar Consulta →
-                </Link>
-                <Link to="/servicos" className="btn-outline-white">Conhecer os Serviços</Link>
-              </div>
-
-              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-                {['Parceiro Estratégico', 'Online ou presencial', 'Sem compromisso'].map((t) => (
-                  <span key={t} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)' }}>
-                    ✓ {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="hero-card-wrapper" style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className="animate-float" style={{ background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', padding: '40px', backdropFilter: 'blur(10px)', width: '100%', maxWidth: '400px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-                  {[
-                    { value: '360°', label: 'Abordagem integrada' },
-                    { value: '5',    label: 'Áreas especializadas' },
-                    { value: 'B2B',  label: 'Foco exclusivo em empresas' },
-                    { value: '100%', label: 'Compromisso com resultados' },
-                  ].map(({ value, label }, i) => (
-                    <div key={label} style={{ padding: '20px 16px', borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.10)' : 'none', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.10)' : 'none' }}>
-                      <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '38px', lineHeight: 1, marginBottom: '6px', background: 'linear-gradient(135deg,#fff,rgba(255,255,255,0.7))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                        {value}
-                      </div>
-                      <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)' }}>
-                        {label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+  <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '48px', alignItems: 'center' }} className="hero-grid">
+      <div>
+        <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '100px', padding: '7px 18px', marginBottom: '28px' }}>
+          <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            Consultora B2B · Portugal
+          </span>
         </div>
 
-        <style>{`
-          @media (max-width: 768px) {
-            .hero-grid { grid-template-columns: 1fr !important; }
-            .hero-card-wrapper { display: none !important; }
-          }
-        `}</style>
-      </section>
+        <h1 style={{ color: 'var(--white)', marginBottom: '24px', fontSize: '64px' }}>
+          WE ARE THE BASIS FOR <br />
+          <span style={{ color: 'var(--purple)' }}>YOUR BUSINESS</span> TO FLY
+        </h1>
+
+        <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', maxWidth: '520px', marginBottom: '36px' }}>
+          Direito Empresarial, Compliance, Gestão Estratégica, Marketing Digital e Tecnologia de Informação integrados num único parceiro de confiança.
+        </p>
+
+        <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
+          <Link to="/contacto"
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--white)'; (e.currentTarget as HTMLElement).style.color = 'var(--purple)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--purple)'; (e.currentTarget as HTMLElement).style.color = 'var(--white)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+            style={{ fontSize: '13px', padding: '15px 28px', background: 'var(--purple)', color: 'var(--white)', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, borderRadius: '8px', textDecoration: 'none', display: 'inline-block', transition: 'background 0.25s ease, color 0.25s ease, transform 0.2s ease' }}
+          >
+            Agendar Consulta →
+          </Link>
+          <Link to="/servicos" className="btn-outline-white">Conhecer os Serviços</Link>
+        </div>
+
+        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+          {['Parceiro Estratégico', 'Online ou presencial', 'Sem compromisso'].map((t) => (
+            <span key={t} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)' }}>
+              ✓ {t}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="hero-card-wrapper" style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className="animate-float" style={{ background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', padding: '40px', backdropFilter: 'blur(10px)', width: '100%', maxWidth: '400px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+            {[
+              { value: '360°', label: 'Abordagem integrada' },
+              { value: '5',    label: 'Áreas especializadas' },
+              { value: 'B2B',  label: 'Foco exclusivo em empresas' },
+              { value: '100%', label: 'Compromisso com resultados' },
+            ].map(({ value, label }, i) => (
+              <div key={label} style={{ padding: '20px 16px', borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.10)' : 'none', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.10)' : 'none' }}>
+                <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '38px', lineHeight: 1, marginBottom: '6px', background: 'linear-gradient(135deg,#fff,rgba(255,255,255,0.7))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                  {value}
+                </div>
+                <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)' }}>
+                  {label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>{`
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr !important; }
+      .hero-card-wrapper { display: none !important; }
+    }
+  `}</style>
+</section>
 
       {/* ── NOTÍCIAS ── */}
       <NewsTickerSection />
