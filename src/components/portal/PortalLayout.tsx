@@ -38,15 +38,19 @@ export default function PortalLayout() {
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [empresaNome, setEmpresaNome] = useState('');
+  const [nomeCompleto, setNomeCompleto] = useState('');
 
   useEffect(() => { document.title = 'NIEUSYNC · Área Reservada'; }, []);
 
   useEffect(() => {
-    if (!user) return;
-    supabase.from('profiles').select('empresa_nome').eq('id', user.id).maybeSingle().then(({ data }) => {
-      if (data) setEmpresaNome(data.empresa_nome);
-    });
-  }, [user]);
+  if (!user) return;
+  supabase.from('profiles').select('empresa_nome, nome_completo').eq('id', user.id).maybeSingle().then(({ data }) => {
+    if (data) {
+      setEmpresaNome(data.empresa_nome);
+      setNomeCompleto(data.nome_completo);
+    }
+  });
+}, [user]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
