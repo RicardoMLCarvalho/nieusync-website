@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useState, useCallback } from 'react';
 
 function LinkedInIcon() {
   return <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>;
@@ -34,74 +33,6 @@ const lnk: React.CSSProperties = {
   lineHeight: 1.4,
   textAlign: 'center',
 };
-
-function NewsletterSignup() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'duplicate'>('idle');
-
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    setStatus('loading');
-
-    const cbName = `_mc_nl_${Date.now()}`;
-    (window as Record<string, unknown>)[cbName] = (data: { result: string; msg: string }) => {
-      delete (window as Record<string, unknown>)[cbName];
-      if (data.result === 'success') {
-        setStatus('success');
-        setEmail('');
-      } else if (data.msg?.toLowerCase().includes('already')) {
-        setStatus('duplicate');
-      } else {
-        setStatus('error');
-      }
-    };
-
-    const params = new URLSearchParams({
-      EMAIL: email,
-      'group[SUBSTITUIR_ID][2]': '1',   // ← substitui pelo número real do grupo "Newsletter Geral"
-      c: cbName,
-    });
-
-    const script = document.createElement('script');
-    script.src = `https://TEU_DC.usX.list-manage.com/subscribe/post-json?u=TEU_U&id=TEU_ID&${params.toString()}`;
-    document.body.appendChild(script);
-
-    setTimeout(() => {
-      if ((window as Record<string, unknown>)[cbName]) {
-        delete (window as Record<string, unknown>)[cbName];
-        setStatus('error');
-      }
-    }, 10000);
-  }, [email]);
-
-  return (
-    <div style={{ marginTop: '20px' }}>
-      <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--white)', marginBottom: '10px' }}>
-        Receba as nossas novidades
-      </p>
-      {status === 'success' ? (
-        <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.75)' }}>Obrigado por subscrever!</p>
-      ) : (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '8px' }}>
-          <input
-            type="email"
-            required
-            placeholder="O seu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{ flex: 1, fontSize: '13px', padding: '8px 12px' }}
-          />
-          <button type="submit" className="btn-gradient btn-sm" disabled={status === 'loading'}>
-            {status === 'loading' ? '...' : 'OK'}
-          </button>
-        </form>
-      )}
-      {status === 'duplicate' && <p style={{ fontSize: '12px', color: '#ffb3b3', marginTop: '6px' }}>Este email já está inscrito.</p>}
-      {status === 'error' && <p style={{ fontSize: '12px', color: '#ffb3b3', marginTop: '6px' }}>Ocorreu um erro. Tenta novamente.</p>}
-    </div>
-  );
-}
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
