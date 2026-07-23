@@ -439,9 +439,9 @@ function LeadMagnetSection() {
             {status === 'success' ? (
                 <div style={{ textAlign: 'center', padding: '20px 0' }}>
                   <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
-                  <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '12px' }}>Obrigado!</h3>
+                  <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '12px' }}>Muito obrigado!</h3>
                   <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>
-                    Clica no botão abaixo para descarregar o guia.
+                    Clique no botão abaixo para descarregar o guia.
                   </p>
                   
                   <a
