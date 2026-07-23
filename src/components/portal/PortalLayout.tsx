@@ -90,7 +90,7 @@ export default function PortalLayout() {
       </aside>
 
       <div className="portal-topbar" style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '60px', background: 'var(--grad-main)', display: 'none', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px', zIndex: 100 }}>
-        <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" style={{ height: '40px', width: 'auto' }} />
+        <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" style={{ height: '75px', width: 'auto' }} />
         <button onClick={() => setMobileOpen(true)} aria-label="Abrir menu" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', display: 'flex', flexDirection: 'column', gap: '4px', minWidth: '44px', minHeight: '44px', alignItems: 'center', justifyContent: 'center' }}>
           {[0, 1, 2].map((i) => <span key={i} style={{ display: 'block', width: '22px', height: '2px', background: 'var(--white)', borderRadius: '2px' }} />)}
         </button>
