@@ -444,6 +444,7 @@ function LeadMagnetSection() {
                     Clica no botão abaixo para descarregar o guia.
                   </p>
                   
+                  <a
                     href="/guia-5-proteccoes-legais.pdf"
                     download
                     className="btn-gradient"
