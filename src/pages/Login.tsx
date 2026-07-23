@@ -17,12 +17,30 @@ export default function Login() {
     e.preventDefault();
     setError('');
     setLoading(true);
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+
+    const { data, error: signInError } = await supabase.auth.signInWithPassword({ email, password });
     if (signInError) {
       setError('Email ou palavra-passe incorretos.');
       setLoading(false);
       return;
     }
+
+    const userId = data.user?.id;
+    if (userId) {
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('estado')
+        .eq('id', userId)
+        .maybeSingle();
+
+      if (profileData?.estado === 'cancelada') {
+        await supabase.auth.signOut();
+        setError('Esta conta foi cancelada. Contacte-nos se pretender reverter o pedido.');
+        setLoading(false);
+        return;
+      }
+    }
+
     navigate('/portal');
   };
 
@@ -36,7 +54,7 @@ export default function Login() {
           Área Reservada
         </h1>
         <p style={{ textAlign: 'center', color: 'rgba(35,56,119,0.60)', marginBottom: '28px', fontSize: '15px' }}>
-          Entre na sua conta de cliente.
+          Entre na sua conta de cliente NIEUSYNC.
         </p>
         {error && (
           <div style={{ background: 'rgba(229,62,62,0.10)', border: '1px solid rgba(229,62,62,0.30)', borderRadius: '8px', padding: '12px 16px', marginBottom: '20px' }}>
