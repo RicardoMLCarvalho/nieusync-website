@@ -86,6 +86,28 @@ img { max-width: 100%; height: auto; }
 .btn-gradient:hover { background: var(--white); color: var(--purple); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(159, 142, 194, 0.35); }
 .btn-gradient:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
+.btn-portal {
+  background: rgba(159, 142, 194, 0.80);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  min-height: 36px;
+}
+.btn-portal:hover {
+  background: var(--purple);
+  transform: translateY(-1px);
+}
+
 .btn-secondary {
   background: transparent; border: 2px solid var(--blue); color: var(--blue);
   font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
