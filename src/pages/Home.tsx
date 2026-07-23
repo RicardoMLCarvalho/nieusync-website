@@ -381,7 +381,7 @@ function LeadMagnetSection() {
     const params = new URLSearchParams({
       EMAIL: emailVal,
       FNAME: nomeVal,
-      MMERGE6: empresaVal,
+      COMPANY: empresaVal,
       'group[9][1]': '1',
       'group[9][2]': '1',
       b_edf3f3ab247fd09540b382778_e87a242f5a: '',
