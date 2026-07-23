@@ -100,7 +100,15 @@ export default function Conta() {
 
       <div className="card" style={{ marginBottom: '24px' }}>
         <h3 style={{ fontSize: '20px', color: 'var(--blue)', marginBottom: '20px' }}>Dados pessoais</h3>
-        {savedMsg && <div style={{ background: 'rgba(34,139,87,0.10)', border: '1px solid rgba(34,139,87,0.30)', borderRadius: '8px', padding: '10px 14px', marginBottom: '16px' }}><p style={{ color: '#228B57', fontSize: '14px', margin: 0 }}>{savedMsg}</p></div>}
+        {savedMsg && (
+  <div style={{
+    background: savedMsg.startsWith('Erro') ? 'rgba(229,62,62,0.10)' : 'rgba(34,139,87,0.10)',
+    border: `1px solid ${savedMsg.startsWith('Erro') ? 'rgba(229,62,62,0.30)' : 'rgba(34,139,87,0.30)'}`,
+    borderRadius: '8px', padding: '10px 14px', marginBottom: '16px',
+  }}>
+    <p style={{ color: savedMsg.startsWith('Erro') ? '#e53e3e' : '#228B57', fontSize: '14px', margin: 0 }}>{savedMsg}</p>
+  </div>
+)}
         <form onSubmit={handleProfileSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
             <label htmlFor="nome_completo">Nome completo</label>
