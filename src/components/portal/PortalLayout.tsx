@@ -70,7 +70,7 @@ export default function PortalLayout() {
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <aside className="portal-sidebar" style={{ position: 'fixed', top: 0, left: 0, bottom: 0, width: '260px', background: 'var(--grad-main)', padding: '28px 20px', display: 'flex', flexDirection: 'column', zIndex: 100 }}>
         <Link to="/" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
-          <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" style={{ height: '120px', width: 'auto' }} />
+          <img src="/assets/logo-nieusync-white.png" alt="NIEUSYNC" style={{ height: '160px', width: 'auto' }} />
         </Link>
         <div style={{ padding: '0 16px 24px', borderBottom: '1px solid rgba(255,255,255,0.12)', marginBottom: '16px' }}>
           <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: '0.10em', marginBottom: '4px' }}>Cliente</p>
