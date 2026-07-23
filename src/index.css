@@ -87,7 +87,7 @@ img { max-width: 100%; height: auto; }
 .btn-gradient:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
 .btn-portal {
-  background: rgba(159, 142, 194, 0.80);
+  background: var(--blue);
   color: var(--white);
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
@@ -100,11 +100,12 @@ img { max-width: 100%; height: auto; }
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
   min-height: 36px;
 }
 .btn-portal:hover {
-  background: var(--purple);
+  background: var(--white);
+  color: var(--blue);
   transform: translateY(-1px);
 }
 
