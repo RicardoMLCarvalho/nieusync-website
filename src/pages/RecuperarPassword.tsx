@@ -34,8 +34,18 @@ export default function RecuperarPassword() {
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--grad-main)', padding: '24px' }}>
       <div className="card" style={{ width: '100%', maxWidth: '440px', padding: '40px 36px' }}>
+        <Link
+          to="/login"
+          style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--purple)', textDecoration: 'none', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', marginBottom: '16px' }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" />
+          </svg>
+          Voltar
+        </Link>
+        
         <Link to="/" style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-          <img src="/logo_new.png" alt="NIEUSYNC" style={{ height: '44px', width: 'auto' }} />
+          <img src="/logo_new.png" alt="NIEUSYNC" style={{ height: '72px', width: 'auto' }} />
         </Link>
 
         <h1 style={{ fontSize: '26px', textAlign: 'center', marginBottom: '8px', color: 'var(--blue)' }}>
