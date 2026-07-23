@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../hooks/useAuth';
 import type { Profile } from '../../types/portal';
 
 export default function Conta() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [savedMsg, setSavedMsg] = useState('');
-  const [form, setForm] = useState({ empresa_nome: '', nif: '', telefone: '', email: '' });
+  const [form, setForm] = useState({ nome_completo: '', empresa_nome: '', nif: '', telefone: '', email: '' });
   const [pwd, setPwd] = useState({ current: '', new: '', confirm: '' });
   const [pwdSaving, setPwdSaving] = useState(false);
   const [pwdMsg, setPwdMsg] = useState('');
@@ -22,7 +24,13 @@ export default function Conta() {
     supabase.from('profiles').select('*').eq('id', user.id).maybeSingle().then(({ data, error }) => {
       if (error || !data) { setLoading(false); return; }
       setProfile(data as Profile);
-      setForm({ empresa_nome: data.empresa_nome || '', nif: data.nif || '', telefone: data.telefone || '', email: data.email || user.email || '' });
+      setForm({
+        nome_completo: data.nome_completo || '',
+        empresa_nome: data.empresa_nome || '',
+        nif: data.nif || '',
+        telefone: data.telefone || '',
+        email: data.email || user.email || '',
+      });
       setLoading(false);
     });
   }, [user]);
@@ -31,7 +39,13 @@ export default function Conta() {
     e.preventDefault();
     if (!user) return;
     setSaving(true); setSavedMsg('');
-    const { error } = await supabase.from('profiles').update({ empresa_nome: form.empresa_nome, nif: form.nif, telefone: form.telefone, email: form.email }).eq('id', user.id);
+    const { error } = await supabase.from('profiles').update({
+      nome_completo: form.nome_completo,
+      empresa_nome: form.empresa_nome || null,
+      nif: form.nif,
+      telefone: form.telefone,
+      email: form.email,
+    }).eq('id', user.id);
     if (error) setSavedMsg('Erro ao guardar. Tente novamente.');
     else { setSavedMsg('Alterações guardadas com sucesso.'); setProfile((p) => p ? { ...p, ...form } : p); }
     setSaving(false);
@@ -54,8 +68,10 @@ export default function Conta() {
   const handleCancelAccount = async () => {
     if (!user) return;
     setCancelSaving(true);
+
     const dataApagamento = new Date();
     dataApagamento.setDate(dataApagamento.getDate() + 30);
+
     await supabase.from('cancelamentos_pendentes').insert({
       profile_id: user.id,
       empresa_nome: profile?.empresa_nome || '',
@@ -63,9 +79,16 @@ export default function Conta() {
       data_apagamento_prevista: dataApagamento.toISOString(),
       estado: 'pendente',
     });
-    const { error } = await supabase.from('profiles').update({ cancelamento_pedido: true, estado: 'cancelada', data_cancelamento: new Date().toISOString() }).eq('id', user.id);
-    if (!error) setProfile((p) => p ? { ...p, cancelamento_pedido: true, estado: 'cancelada' } : p);
-    setCancelSaving(false); setShowCancelModal(false);
+
+    await supabase.from('profiles').update({
+      cancelamento_pedido: true,
+      estado: 'cancelada',
+      data_cancelamento: new Date().toISOString(),
+    }).eq('id', user.id);
+
+    // Termina a sessão imediatamente e envia para o login
+    await supabase.auth.signOut();
+    navigate('/login');
   };
 
   if (loading) return <div style={{ textAlign: 'center', padding: '60px', color: 'var(--purple)', fontFamily: 'Montserrat, sans-serif' }}>A carregar...</div>;
@@ -73,19 +96,22 @@ export default function Conta() {
   return (
     <div style={{ maxWidth: '720px' }}>
       <h1 style={{ fontSize: '32px', color: 'var(--blue)', marginBottom: '8px' }}>Conta</h1>
-      <p style={{ color: 'rgba(35,56,119,0.60)', marginBottom: '32px' }}>Gerir os dados da sua empresa e a sua palavra-passe.</p>
-
-      {profile?.cancelamento_pedido && (
-        <div style={{ background: 'rgba(229,62,62,0.10)', border: '1px solid rgba(229,62,62,0.30)', borderRadius: '8px', padding: '14px 18px', marginBottom: '24px' }}>
-          <p style={{ color: '#e53e3e', fontSize: '14px', margin: 0 }}>O cancelamento da sua conta foi pedido. A equipa NIEUSYNC irá entrar em contacto para confirmar.</p>
-        </div>
-      )}
+      <p style={{ color: 'rgba(35,56,119,0.60)', marginBottom: '32px' }}>Gerir os seus dados e a sua palavra-passe.</p>
 
       <div className="card" style={{ marginBottom: '24px' }}>
-        <h3 style={{ fontSize: '20px', color: 'var(--blue)', marginBottom: '20px' }}>Dados da empresa</h3>
+        <h3 style={{ fontSize: '20px', color: 'var(--blue)', marginBottom: '20px' }}>Dados pessoais</h3>
         {savedMsg && <div style={{ background: 'rgba(34,139,87,0.10)', border: '1px solid rgba(34,139,87,0.30)', borderRadius: '8px', padding: '10px 14px', marginBottom: '16px' }}><p style={{ color: '#228B57', fontSize: '14px', margin: 0 }}>{savedMsg}</p></div>}
         <form onSubmit={handleProfileSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div><label htmlFor="empresa_nome">Nome da empresa</label><input id="empresa_nome" type="text" value={form.empresa_nome} onChange={(e) => setForm((p) => ({ ...p, empresa_nome: e.target.value }))} required /></div>
+          <div>
+            <label htmlFor="nome_completo">Nome completo</label>
+            <input id="nome_completo" type="text" value={form.nome_completo} onChange={(e) => setForm((p) => ({ ...p, nome_completo: e.target.value }))} required />
+          </div>
+          <div>
+            <label htmlFor="empresa_nome">
+              Nome da empresa <span style={{ textTransform: 'none', fontWeight: 400, letterSpacing: 'normal', color: 'rgba(35,56,119,0.45)' }}>(opcional)</span>
+            </label>
+            <input id="empresa_nome" type="text" value={form.empresa_nome} onChange={(e) => setForm((p) => ({ ...p, empresa_nome: e.target.value }))} placeholder="Deixe em branco se não aplicável" />
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="conta-grid">
             <div><label htmlFor="nif">NIF</label><input id="nif" type="text" value={form.nif} onChange={(e) => setForm((p) => ({ ...p, nif: e.target.value }))} placeholder="500000000" /></div>
             <div><label htmlFor="telefone">Telefone</label><input id="telefone" type="tel" value={form.telefone} onChange={(e) => setForm((p) => ({ ...p, telefone: e.target.value }))} placeholder="+351 912 345 678" /></div>
@@ -111,18 +137,22 @@ export default function Conta() {
 
       <div className="card" style={{ borderLeft: '4px solid #e53e3e' }}>
         <h3 style={{ fontSize: '20px', color: '#e53e3e', marginBottom: '10px' }}>Cancelar conta</h3>
-        <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>Pedir o cancelamento da conta de cliente. A sua conta não será apagada imediatamente — a equipa NIEUSYNC entrará em contacto para confirmar.</p>
-        <button onClick={() => setShowCancelModal(true)} disabled={profile?.cancelamento_pedido} className="btn-secondary" style={{ borderColor: '#e53e3e', color: '#e53e3e', opacity: profile?.cancelamento_pedido ? 0.5 : 1, cursor: profile?.cancelamento_pedido ? 'not-allowed' : 'pointer' }}>{profile?.cancelamento_pedido ? 'Cancelamento já pedido' : 'Cancelar conta'}</button>
+        <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>
+          Ao confirmar, a sua conta será desativada de imediato e os dados serão eliminados de forma definitiva ao fim de 30 dias. Faturas emitidas são mantidas de acordo com obrigações legais de conservação fiscal. Durante os 30 dias pode contactar-nos para reverter este pedido.
+        </p>
+        <button onClick={() => setShowCancelModal(true)} className="btn-secondary" style={{ borderColor: '#e53e3e', color: '#e53e3e' }}>Cancelar conta</button>
       </div>
 
       {showCancelModal && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
           <div className="card" style={{ maxWidth: '440px', width: '100%', padding: '32px' }}>
             <h3 style={{ fontSize: '22px', color: 'var(--blue)', marginBottom: '12px' }}>Confirmar cancelamento</h3>
-            <p style={{ fontSize: '15px', color: 'rgba(35,56,119,0.70)', marginBottom: '24px' }}>Tem a certeza que pretende pedir o cancelamento da sua conta? A sua conta não será apagada — a equipa NIEUSYNC entrará em contacto para confirmar o pedido.</p>
+            <p style={{ fontSize: '15px', color: 'rgba(35,56,119,0.70)', marginBottom: '24px' }}>
+              Tem a certeza que pretende cancelar a sua conta? O acesso é bloqueado de imediato e os dados são eliminados permanentemente ao fim de 30 dias.
+            </p>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
               <button onClick={() => setShowCancelModal(false)} className="btn-secondary btn-sm">Voltar</button>
-              <button onClick={handleCancelAccount} disabled={cancelSaving} className="btn-gradient btn-sm" style={{ background: '#e53e3e' }}>{cancelSaving ? 'A enviar...' : 'Confirmar pedido'}</button>
+              <button onClick={handleCancelAccount} disabled={cancelSaving} className="btn-gradient btn-sm" style={{ background: '#e53e3e' }}>{cancelSaving ? 'A processar...' : 'Confirmar pedido'}</button>
             </div>
           </div>
         </div>
