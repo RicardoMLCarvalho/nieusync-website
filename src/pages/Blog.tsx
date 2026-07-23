@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useArticles } from '../hooks/useArticles';
 
@@ -9,9 +9,16 @@ const formatDate = (dateStr: string) => {
   return new Date(dateStr).toLocaleDateString('pt-PT', { month: 'short', year: 'numeric' })
 }
 
+// ── MAILCHIMP — mesmo URL e grupo já configurados no Home.tsx ──
+const MAILCHIMP_URL =
+  'https://nieusync.us15.list-manage.com/subscribe/post-json?u=edf3f3ab247fd09540b382778&id=e87a242f5a';
+
+type NewsletterStatus = 'idle' | 'loading' | 'success' | 'error' | 'duplicate';
+
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<NewsletterStatus>('idle');
   const { articles, loading } = useArticles();
 
   const filtered = activeCategory === 'Todos'
@@ -21,6 +28,43 @@ export default function Blog() {
   useEffect(() => {
     document.title = 'NIEUSYNC - Blog & Recursos · Artigos sobre Direito Empresarial, Compliance, Gestão Estratégica, Marketing Digital, Tecnologias de Informação e Inteligência Artificial';
   }, []);
+
+  const handleNewsletterSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setStatus('loading');
+
+    const cbName = `_mc_blog_${Date.now()}`;
+    (window as Record<string, unknown>)[cbName] = (data: { result: string; msg: string }) => {
+      delete (window as Record<string, unknown>)[cbName];
+      if (data.result === 'success') {
+        setStatus('success');
+        setEmail('');
+      } else if (data.msg?.toLowerCase().includes('already')) {
+        setStatus('duplicate');
+      } else {
+        setStatus('error');
+      }
+    };
+
+    const params = new URLSearchParams({
+      EMAIL: email,
+      'group[9][2]': '1',
+      b_edf3f3ab247fd09540b382778_e87a242f5a: '',
+      c: cbName,
+    });
+
+    const script = document.createElement('script');
+    script.src = `${MAILCHIMP_URL}&${params.toString()}`;
+    document.body.appendChild(script);
+
+    setTimeout(() => {
+      if ((window as Record<string, unknown>)[cbName]) {
+        delete (window as Record<string, unknown>)[cbName];
+        setStatus('error');
+      }
+    }, 10000);
+  }, [email]);
 
   return (
     <main style={{ paddingTop: '72px' }}>
@@ -100,16 +144,32 @@ export default function Blog() {
             <div style={{ position: 'sticky', top: '90px' }}>
               <div className="card">
                 <h3 style={{ fontSize: '18px', color: 'var(--blue)', marginBottom: '10px' }}>Newsletter Mensal</h3>
-                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>
-                  Receba os melhores artigos sobre Direito Empresarial, Compliance, Gestão Estratégica, Marketing Digital, Tecnologias de Informação e Inteligência Artificial directamente no seu email.
-                </p>
-                <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <div>
-                    <label>Email profissional</label>
-                    <input type="email" placeholder="email@empresa.pt" value={email} onChange={(e) => setEmail(e.target.value)} />
-                  </div>
-                  <button type="submit" className="btn-gradient" style={{ width: '100%' }}>Subscrever</button>
-                </form>
+                {status === 'success' ? (
+                  <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>
+                    Obrigado! Verifica o teu email para confirmar a subscrição.
+                  </p>
+                ) : (
+                  <>
+                    <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>
+                      Receba os melhores artigos sobre Direito Empresarial, Compliance, Gestão Estratégica, Marketing Digital, Tecnologias de Informação e Inteligência Artificial directamente no seu email.
+                    </p>
+                    <form onSubmit={handleNewsletterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      <div>
+                        <label>Email profissional</label>
+                        <input type="email" placeholder="email@empresa.pt" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                      </div>
+                      {status === 'duplicate' && (
+                        <p style={{ fontSize: '12px', color: '#e53e3e', margin: 0 }}>Este email já está subscrito.</p>
+                      )}
+                      {status === 'error' && (
+                        <p style={{ fontSize: '12px', color: '#e53e3e', margin: 0 }}>Ocorreu um erro. Tenta novamente.</p>
+                      )}
+                      <button type="submit" className="btn-gradient" disabled={status === 'loading'} style={{ width: '100%', opacity: status === 'loading' ? 0.7 : 1 }}>
+                        {status === 'loading' ? 'A subscrever...' : 'Subscrever'}
+                      </button>
+                    </form>
+                  </>
+                )}
                 <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.40)', textAlign: 'center', marginTop: '10px' }}>
                   Sem spam. Pode cancelar a qualquer momento.
                 </p>
