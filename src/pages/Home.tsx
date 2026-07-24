@@ -549,11 +549,11 @@ export default function Home() {
   }} />
 
   {/* Camada de cor por cima da foto — dá destaque ao texto */}
-  <div style={{
-    position: 'absolute', inset: 0,
-    background: 'linear-gradient(135deg, rgba(35,56,119,0.85) 0%, rgba(159,142,194,0.85) 100%)',
-    zIndex: 1,
-  }} />
+    <div style={{
+        position: 'absolute', inset: 0,
+        background: 'rgba(35,56,119,0.85)',
+        zIndex: 1,
+    }} />
 
   {[
     { size: 400, top: '-100px', right: '-100px', opacity: 0.10 },
