@@ -204,7 +204,7 @@ function NewsTickerSection() {
       const all = results
         .filter((r): r is PromiseFulfilledResult<NewsItem[]> => r.status === 'fulfilled')
         .flatMap((r) => r.value)
-        .filter(item => item.title && item.link && item.thumbnail && isRelevantArticle(item.title))
+        .filter(item => item.title && item.link && isRelevantArticle(item.title))
         .sort(() => Math.random() - 0.5);
 
       setNews(all);
