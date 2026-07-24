@@ -142,6 +142,9 @@ function isRelevantArticle(title: string): boolean {
 function NewsTickerSection() {
   const [news,    setNews]    = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const tryGet = (): NewsItem[] | null => {
@@ -204,16 +207,53 @@ function NewsTickerSection() {
       })
     ).then((results) => {
       const all = results
-  .filter((r): r is PromiseFulfilledResult<NewsItem[]> => r.status === 'fulfilled')
-  .flatMap((r) => r.value)
-  .filter(item => item.title && item.link && item.thumbnail && isRelevantArticle(item.title))
-  .sort(() => Math.random() - 0.5);
+        .filter((r): r is PromiseFulfilledResult<NewsItem[]> => r.status === 'fulfilled')
+        .flatMap((r) => r.value)
+        .filter(item => item.title && item.link && item.thumbnail && isRelevantArticle(item.title))
+        .sort(() => Math.random() - 0.5);
 
       setNews(all);
       setLoading(false);
       if (all.length > 0) trySave(all);
     });
   }, []);
+
+  // Auto-scroll contínuo, com loop suave e pausa ao passar o rato ou usar as setas
+  useEffect(() => {
+    if (news.length === 0) return;
+    let raf: number;
+    const step = () => {
+      const el = trackRef.current;
+      if (el && !pausedRef.current) {
+        el.scrollLeft += 0.6;
+        const half = el.scrollWidth / 2;
+        if (el.scrollLeft >= half) {
+          el.scrollLeft -= half;
+        }
+      }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [news.length]);
+
+  const scrollByAmount = (direction: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    pausedRef.current = true;
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+
+    el.scrollBy({ left: 280 * direction, behavior: 'smooth' });
+
+    const half = el.scrollWidth / 2;
+    setTimeout(() => {
+      if (el.scrollLeft < 0) el.scrollLeft += half;
+      if (el.scrollLeft >= half) el.scrollLeft -= half;
+    }, 400);
+
+    resumeTimeoutRef.current = setTimeout(() => { pausedRef.current = false; }, 3500);
+  };
 
   if (loading || news.length === 0) return null;
 
@@ -237,11 +277,49 @@ function NewsTickerSection() {
         </p>
       </div>
 
-      <div style={{ overflow: 'hidden', position: 'relative' }}>
+      <div
+        style={{ overflow: 'hidden', position: 'relative' }}
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
+      >
         <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(to right, white, transparent)', zIndex: 2, pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(to left, white, transparent)', zIndex: 2, pointerEvents: 'none' }} />
 
-        <div className="news-track">
+        <button
+          type="button"
+          aria-label="Notícias anteriores"
+          onClick={() => scrollByAmount(-1)}
+          style={{
+            position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+            zIndex: 3, width: '40px', height: '40px', borderRadius: '50%',
+            background: 'var(--white)', border: '1px solid rgba(159,142,194,0.35)',
+            boxShadow: '0 4px 14px rgba(35,56,119,0.15)', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          aria-label="Próximas notícias"
+          onClick={() => scrollByAmount(1)}
+          style={{
+            position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+            zIndex: 3, width: '40px', height: '40px', borderRadius: '50%',
+            background: 'var(--white)', border: '1px solid rgba(159,142,194,0.35)',
+            boxShadow: '0 4px 14px rgba(35,56,119,0.15)', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+
+        <div ref={trackRef} className="news-track">
           {looped.map((item, i) => {
             const color = AREA_COLORS[item.area] ?? 'var(--blue)';
             return (
@@ -323,16 +401,11 @@ function NewsTickerSection() {
         .news-track {
           display: flex;
           width: max-content;
-          animation: scrollNews 200s linear infinite;
+          overflow-x: hidden;
         }
-        .news-track:hover { animation-play-state: paused; }
         .news-card:hover {
           border-color: rgba(159,142,194,0.45) !important;
           box-shadow: 0 4px 20px rgba(35,56,119,0.08);
-        }
-        @keyframes scrollNews {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
         }
       `}</style>
     </section>
