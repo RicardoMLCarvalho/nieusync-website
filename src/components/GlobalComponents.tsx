@@ -11,7 +11,7 @@ function WhatsAppIcon() {
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/351933644596?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20NIEUSYNC"
+      href="https://wa.me/351933544696?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20NIEUSYNC"
       target="_blank"
       rel="noopener noreferrer"
       className="whatsapp-btn"
