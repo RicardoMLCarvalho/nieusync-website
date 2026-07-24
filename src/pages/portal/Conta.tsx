@@ -66,19 +66,21 @@ export default function Conta() {
   };
 
   const handleCancelAccount = async () => {
-    if (!user) return;
-    setCancelSaving(true);
+  if (!user) return;
+  setCancelSaving(true);
 
-    const dataApagamento = new Date();
-    dataApagamento.setDate(dataApagamento.getDate() + 30);
+  const { error } = await supabase.rpc('solicitar_cancelamento');
 
-    await supabase.from('cancelamentos_pendentes').insert({
-      profile_id: user.id,
-      empresa_nome: profile?.empresa_nome || '',
-      email: profile?.email || user.email || '',
-      data_apagamento_prevista: dataApagamento.toISOString(),
-      estado: 'pendente',
-    });
+  if (error) {
+    setCancelSaving(false);
+    setSavedMsg('Erro ao processar o cancelamento. Tente novamente ou contacte-nos.');
+    setShowCancelModal(false);
+    return;
+  }
+
+  await supabase.auth.signOut();
+  navigate('/login');
+};
 
     await supabase.from('profiles').update({
       cancelamento_pedido: true,
