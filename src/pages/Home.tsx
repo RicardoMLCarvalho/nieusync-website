@@ -218,7 +218,6 @@ function NewsTickerSection() {
     });
   }, []);
 
-  // Auto-scroll contínuo, com loop suave e pausa ao passar o rato ou usar as setas
   useEffect(() => {
     if (news.length === 0) return;
     let raf: number;
@@ -227,7 +226,7 @@ function NewsTickerSection() {
       if (el && !pausedRef.current) {
         el.scrollLeft += 0.6;
         const half = el.scrollWidth / 2;
-        if (el.scrollLeft >= half) {
+        if (half > 0 && el.scrollLeft >= half) {
           el.scrollLeft -= half;
         }
       }
@@ -248,8 +247,10 @@ function NewsTickerSection() {
 
     const half = el.scrollWidth / 2;
     setTimeout(() => {
-      if (el.scrollLeft < 0) el.scrollLeft += half;
-      if (el.scrollLeft >= half) el.scrollLeft -= half;
+      if (half > 0) {
+        if (el.scrollLeft < 0) el.scrollLeft += half;
+        if (el.scrollLeft >= half) el.scrollLeft -= half;
+      }
     }, 400);
 
     resumeTimeoutRef.current = setTimeout(() => { pausedRef.current = false; }, 3500);
@@ -319,81 +320,85 @@ function NewsTickerSection() {
           </svg>
         </button>
 
-        <div ref={trackRef} className="news-track">
-          {looped.map((item, i) => {
-            const color = AREA_COLORS[item.area] ?? 'var(--blue)';
-            return (
-              <a key={`${item.link}-${i}`}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="news-card"
-                style={{
-                  flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '10px',
-                  width: '260px', padding: '16px 18px', margin: '0 10px',
-                  background: 'var(--bg)', borderRadius: '12px',
-                  border: '1px solid rgba(159,142,194,0.15)',
-                  textDecoration: 'none',
-                  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-                }}
-              >
-                {item.thumbnail ? (
-                  <div style={{ borderRadius: '8px', overflow: 'hidden', height: '100px', flexShrink: 0 }}>
-                    <img src={item.thumbnail} alt={item.title} loading="lazy"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                      onError={(e) => {
-                        const el = e.currentTarget as HTMLImageElement;
-                        const p  = el.parentElement as HTMLElement;
-                        el.style.display = 'none';
-                        p.style.background = `linear-gradient(135deg, ${color}22, ${color}44)`;
-                        p.style.display = 'flex';
-                        p.style.alignItems = 'center';
-                        p.style.justifyContent = 'center';
-                        p.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" style="opacity:0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`;
-                      }}
-                    />
+        {/* Este div é o que faz scroll de facto — largura fixa (100%) + overflow hidden */}
+        <div ref={trackRef} style={{ overflowX: 'hidden', width: '100%' }}>
+          {/* Este div é só a fila de cartões, mede-se ao tamanho do conteúdo */}
+          <div className="news-track">
+            {looped.map((item, i) => {
+              const color = AREA_COLORS[item.area] ?? 'var(--blue)';
+              return (
+                <a key={`${item.link}-${i}`}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="news-card"
+                  style={{
+                    flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '10px',
+                    width: '260px', padding: '16px 18px', margin: '0 10px',
+                    background: 'var(--bg)', borderRadius: '12px',
+                    border: '1px solid rgba(159,142,194,0.15)',
+                    textDecoration: 'none',
+                    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+                  }}
+                >
+                  {item.thumbnail ? (
+                    <div style={{ borderRadius: '8px', overflow: 'hidden', height: '100px', flexShrink: 0 }}>
+                      <img src={item.thumbnail} alt={item.title} loading="lazy"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        onError={(e) => {
+                          const el = e.currentTarget as HTMLImageElement;
+                          const p  = el.parentElement as HTMLElement;
+                          el.style.display = 'none';
+                          p.style.background = `linear-gradient(135deg, ${color}22, ${color}44)`;
+                          p.style.display = 'flex';
+                          p.style.alignItems = 'center';
+                          p.style.justifyContent = 'center';
+                          p.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" style="opacity:0.4"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`;
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div style={{
+                      borderRadius: '8px', height: '100px', flexShrink: 0,
+                      background: `linear-gradient(135deg, ${color}22, ${color}44)`,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" style={{ opacity: 0.4 }}>
+                        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+                      </svg>
+                    </div>
+                  )}
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
+                    <span style={{
+                      fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '10px',
+                      textTransform: 'uppercase', letterSpacing: '0.08em',
+                      color: color, background: `${color}18`,
+                      padding: '3px 8px', borderRadius: '100px', flexShrink: 0,
+                    }}>
+                      {item.area}
+                    </span>
+                    <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '11px', color: 'rgba(35,56,119,0.35)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '110px' }}>
+                      {item.source}
+                    </span>
                   </div>
-                ) : (
-                  <div style={{
-                    borderRadius: '8px', height: '100px', flexShrink: 0,
-                    background: `linear-gradient(135deg, ${color}22, ${color}44)`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+
+                  <p style={{
+                    fontFamily: 'Montserrat, sans-serif', fontWeight: 600, fontSize: '13px',
+                    color: 'var(--blue)', lineHeight: 1.45, margin: 0,
+                    display: '-webkit-box', WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical', overflow: 'hidden',
                   }}>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" style={{ opacity: 0.4 }}>
-                      <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-                    </svg>
-                  </div>
-                )}
+                    {item.title}
+                  </p>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
-                  <span style={{
-                    fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '10px',
-                    textTransform: 'uppercase', letterSpacing: '0.08em',
-                    color: color, background: `${color}18`,
-                    padding: '3px 8px', borderRadius: '100px', flexShrink: 0,
-                  }}>
-                    {item.area}
+                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', color: 'var(--purple)' }}>
+                    Ler artigo →
                   </span>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '11px', color: 'rgba(35,56,119,0.35)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '110px' }}>
-                    {item.source}
-                  </span>
-                </div>
-
-                <p style={{
-                  fontFamily: 'Montserrat, sans-serif', fontWeight: 600, fontSize: '13px',
-                  color: 'var(--blue)', lineHeight: 1.45, margin: 0,
-                  display: '-webkit-box', WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                }}>
-                  {item.title}
-                </p>
-
-                <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', color: 'var(--purple)' }}>
-                  Ler artigo →
-                </span>
-              </a>
-            );
-          })}
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -401,7 +406,6 @@ function NewsTickerSection() {
         .news-track {
           display: flex;
           width: max-content;
-          overflow-x: hidden;
         }
         .news-card:hover {
           border-color: rgba(159,142,194,0.45) !important;
