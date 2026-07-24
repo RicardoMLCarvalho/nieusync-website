@@ -54,7 +54,7 @@ export default function Login() {
           Área Reservada
         </h1>
         <p style={{ textAlign: 'center', color: 'rgba(35,56,119,0.60)', marginBottom: '28px', fontSize: '15px' }}>
-          Entre na sua conta de cliente NIEUSYNC.
+          Entre na sua conta de cliente.
         </p>
         {error && (
           <div style={{ background: 'rgba(229,62,62,0.10)', border: '1px solid rgba(229,62,62,0.30)', borderRadius: '8px', padding: '12px 16px', marginBottom: '20px' }}>
