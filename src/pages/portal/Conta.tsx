@@ -66,29 +66,18 @@ export default function Conta() {
   };
 
   const handleCancelAccount = async () => {
-  if (!user) return;
-  setCancelSaving(true);
+    if (!user) return;
+    setCancelSaving(true);
 
-  const { error } = await supabase.rpc('solicitar_cancelamento');
+    const { error } = await supabase.rpc('solicitar_cancelamento');
 
-  if (error) {
-    setCancelSaving(false);
-    setSavedMsg('Erro ao processar o cancelamento. Tente novamente ou contacte-nos.');
-    setShowCancelModal(false);
-    return;
-  }
+    if (error) {
+      setCancelSaving(false);
+      setSavedMsg('Erro ao processar o cancelamento. Tente novamente ou contacte-nos.');
+      setShowCancelModal(false);
+      return;
+    }
 
-  await supabase.auth.signOut();
-  navigate('/login');
-};
-
-    await supabase.from('profiles').update({
-      cancelamento_pedido: true,
-      estado: 'cancelada',
-      data_cancelamento: new Date().toISOString(),
-    }).eq('id', user.id);
-
-    // Termina a sessão imediatamente e envia para o login
     await supabase.auth.signOut();
     navigate('/login');
   };
