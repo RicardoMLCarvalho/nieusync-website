@@ -77,6 +77,8 @@ function BlogPreview() {
 const RSS_SOURCES = [
   { url: 'https://eco.pt/feed/',                       name: 'ECO',           area: 'Negócios' },
   { url: 'https://www.dinheirovivo.pt/feed/',          name: 'Dinheiro Vivo', area: 'Gestão' },
+  { url: 'https://www.jornaldenegocios.pt/rss',        name: 'Jornal de Negócios', area: 'Negócios' },
+  { url: 'https://marketeer.pt/feed/',                 name: 'Marketeer',     area: 'Marketing' },
   { url: 'https://news.google.com/rss/search?q=%22direito+empresarial%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',               area: 'Direito' },
   { url: 'https://news.google.com/rss/search?q=%22direito+laboral%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                  area: 'Direito' },
   { url: 'https://news.google.com/rss/search?q=%22marketing+digital%22+Portugal&hl=pt-PT&gl=PT&ceid=PT:pt',                area: 'Marketing' },
@@ -171,7 +173,7 @@ function NewsTickerSection() {
           const ctrl  = new AbortController();
           const timer = setTimeout(() => ctrl.abort(), 6000);
           const res   = await fetch(
-            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=5&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
+            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=15&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
             { signal: ctrl.signal }
           );
           clearTimeout(timer);
