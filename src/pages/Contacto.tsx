@@ -108,7 +108,7 @@ export default function Contacto() {
               <div className="card">
                 <h3 style={{ fontSize: '15px', color: 'var(--blue)', marginBottom: '8px' }}>Prefere agendar directamente?</h3>
                 <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '16px' }}>
-                  Escolha o horário que melhor se adequa à sua agenda. Reunião por videochamada ou telefone.
+                  Escolha o horário que melhor se adequa à sua agenda, que nós confirmamos a disponibilidade o mais rapidamente possível. Reunião por videochamada ou telefone.
                 </p>
                 <a href="https://calendly.com/nieusync" target="_blank" rel="noopener noreferrer" className="btn-gradient" style={{ display: 'inline-flex', fontSize: '12px', padding: '12px 24px' }}>
                   Agendar no Calendário
