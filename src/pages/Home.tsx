@@ -173,7 +173,7 @@ function NewsTickerSection() {
           const ctrl  = new AbortController();
           const timer = setTimeout(() => ctrl.abort(), 6000);
           const res   = await fetch(
-            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=25&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
+            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=15&api_key=njhlm5mla50wsecomipjdwxwdgoeifhi3u26y9fu`,
             { signal: ctrl.signal }
           );
           clearTimeout(timer);
