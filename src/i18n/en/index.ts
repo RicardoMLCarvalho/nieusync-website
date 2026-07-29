@@ -5,6 +5,7 @@ import home from './home';
 import services from './services';
 import about from './about';
 import blog from './blog';
+import checkup from './checkup';
 import contact from './contact';
 import legalNotices from './legalNotices';
 import codeOfConduct from './codeOfConduct';
@@ -21,6 +22,7 @@ const en = {
   services,
   about,
   blog,
+  checkup,
   contact,
   legalNotices,
   codeOfConduct,

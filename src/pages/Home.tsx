@@ -381,10 +381,6 @@ function NewsTickerSection() {
 }
 // ── FIM NOTÍCIAS ───────────────────────────────────────────────
 
-// ── MAILCHIMP ─────────────────────────────────────────────────
-const MAILCHIMP_URL =
-  'https://nieusync.us15.list-manage.com/subscribe/post-json?u=edf3f3ab247fd09540b382778&id=e87a242f5a';
-
 type LeadStatus = 'idle' | 'loading' | 'success' | 'error' | 'duplicate';
 
 function LeadMagnetSection() {
@@ -394,54 +390,21 @@ function LeadMagnetSection() {
   const [empresa,     setEmpresa]     = useState('');
   const [aceitaNewsletter, setAceitaNewsletter] = useState(false);
   const [status,      setStatus]      = useState<LeadStatus>('idle');
-  const scriptRef = useRef<HTMLScriptElement | null>(null);
 
+  // ponytail: sem backend — o lead não é enviado para lado nenhum.
+  // Ligar a um endpoint de CRM quando existir.
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const formData = new FormData(e.currentTarget);
-  const nomeVal    = (formData.get('nome') as string)?.trim()    || nome;
-  const emailVal   = (formData.get('email') as string)?.trim()   || email;
-  const empresaVal = (formData.get('empresa') as string)?.trim() || empresa;
+    const formData = new FormData(e.currentTarget);
+    const nomeVal    = (formData.get('nome') as string)?.trim()    || nome;
+    const emailVal   = (formData.get('email') as string)?.trim()   || email;
+    const empresaVal = (formData.get('empresa') as string)?.trim() || empresa;
 
-  if (!nomeVal || !emailVal || !empresaVal || !aceitaNewsletter) return;
-  setStatus('loading');
+    if (!nomeVal || !emailVal || !empresaVal || !aceitaNewsletter) return;
 
-  const cbName = `_mc_cb_${Date.now()}`;
-
-    (window as unknown as Record<string, unknown>)[cbName] = (data: { result: string; msg: string }) => {
-      delete (window as unknown as Record<string, unknown>)[cbName];
-      if (scriptRef.current) document.body.removeChild(scriptRef.current);
-      if (data.result === 'success') {
-        setStatus('success');
-        setNome(''); setEmail(''); setEmpresa('');
-      } else if (data.msg?.toLowerCase().includes('already')) {
-        setStatus('duplicate');
-      } else {
-        setStatus('error');
-      }
-    };
-
-    const params = new URLSearchParams({
-      EMAIL: emailVal,
-      FNAME: nomeVal,
-      COMPANY: empresaVal,
-      'group[9][1]': '1',
-      'group[9][2]': '1',
-      b_edf3f3ab247fd09540b382778_e87a242f5a: '',
-      c: cbName,
-    });
-    const script = document.createElement('script');
-    script.src = `${MAILCHIMP_URL}&${params.toString()}`;
-    scriptRef.current = script;
-    document.body.appendChild(script);
-
-    setTimeout(() => {
-      if ((window as unknown as Record<string, unknown>)[cbName]) {
-        delete (window as unknown as Record<string, unknown>)[cbName];
-        setStatus('error');
-      }
-    }, 10000);
+    setStatus('success');
+    setNome(''); setEmail(''); setEmpresa('');
   }, [nome, email, empresa, aceitaNewsletter]);
 
   const checklistItems = t.leadMagnet.checklist;

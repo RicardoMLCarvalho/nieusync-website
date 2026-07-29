@@ -7,6 +7,7 @@ const nav: Nav = {
     about: 'Sobre Nós',
     services: 'Serviços',
     blog: 'Blog',
+    checkup: 'Check-up',
     contact: 'Contactos',
   },
   portal: 'Área Reservada',

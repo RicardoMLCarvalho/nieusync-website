@@ -5,6 +5,7 @@ const nav = {
     about: 'About Us',
     services: 'Services',
     blog: 'Blog',
+    checkup: 'Check-up',
     contact: 'Contact',
   },
   portal: 'Client Portal',

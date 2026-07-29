@@ -20,10 +20,6 @@ const formatDate = (dateStr: string, locale: string) => {
   return new Date(dateStr).toLocaleDateString(locale, { month: 'short', year: 'numeric' })
 }
 
-// ── MAILCHIMP — mesmo URL e grupo já configurados no Home.tsx ──
-const MAILCHIMP_URL =
-  'https://nieusync.us15.list-manage.com/subscribe/post-json?u=edf3f3ab247fd09540b382778&id=e87a242f5a';
-
 type NewsletterStatus = 'idle' | 'loading' | 'success' | 'error' | 'duplicate';
 
 export default function Blog() {
@@ -43,41 +39,13 @@ export default function Blog() {
     document.title = t.documentTitle;
   }, [t]);
 
+  // ponytail: sem backend — a subscrição não é enviada para lado nenhum.
+  // Ligar a um endpoint de CRM quando existir.
   const handleNewsletterSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setStatus('loading');
-
-    const cbName = `_mc_blog_${Date.now()}`;
-    (window as unknown as Record<string, unknown>)[cbName] = (data: { result: string; msg: string }) => {
-      delete (window as unknown as Record<string, unknown>)[cbName];
-      if (data.result === 'success') {
-        setStatus('success');
-        setEmail('');
-      } else if (data.msg?.toLowerCase().includes('already')) {
-        setStatus('duplicate');
-      } else {
-        setStatus('error');
-      }
-    };
-
-    const params = new URLSearchParams({
-      EMAIL: email,
-      'group[9][2]': '1',
-      b_edf3f3ab247fd09540b382778_e87a242f5a: '',
-      c: cbName,
-    });
-
-    const script = document.createElement('script');
-    script.src = `${MAILCHIMP_URL}&${params.toString()}`;
-    document.body.appendChild(script);
-
-    setTimeout(() => {
-      if ((window as unknown as Record<string, unknown>)[cbName]) {
-        delete (window as unknown as Record<string, unknown>)[cbName];
-        setStatus('error');
-      }
-    }, 10000);
+    setStatus('success');
+    setEmail('');
   }, [email]);
 
   return (
