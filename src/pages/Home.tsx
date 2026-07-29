@@ -1,19 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { createClient } from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
-import { Article } from '../hooks/useArticles';
+import { useArticles, BLOG_URL } from '../hooks/useArticles';
 import { useT } from '../i18n';
-
-const sanityClient = createClient({
-  projectId: 'j7qyuhtx',
-  dataset: 'production',
-  useCdn: true,
-  apiVersion: '2024-01-01',
-});
-
-const builder = imageUrlBuilder(sanityClient);
-const urlFor = (source: any) => builder.image(source);
 
 const formatDate = (dateStr: string, locale: string) => {
   if (!dateStr) return '';
@@ -22,17 +10,7 @@ const formatDate = (dateStr: string, locale: string) => {
 
 function BlogPreview() {
   const t = useT('home');
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    sanityClient.fetch(`*[_type == "article"] | order(publishedAt desc)[0..2] {
-      _id, title, slug, category, author, readTime, publishedAt, excerpt, mainImage
-    }`).then((data) => {
-      setArticles(data);
-      setLoading(false);
-    }).catch(() => setLoading(false));
-  }, []);
+  const { articles, loading } = useArticles(3);
 
   if (loading) return (
     <div className="p-10 text-center text-purple">
@@ -43,31 +21,33 @@ function BlogPreview() {
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
       {articles.map((a) => (
-        <div key={a._id} className="card flex flex-col">
-          {a.mainImage && (
+        <div key={a.id} className="card flex flex-col">
+          {a.image && (
             <div className="mb-4 h-40 overflow-hidden rounded-lg">
               <img
-                src={urlFor(a.mainImage).width(400).height(160).fit('crop').url()}
+                src={a.image}
                 alt={a.title}
                 loading="lazy"
                 className="block h-full w-full object-cover"
               />
             </div>
           )}
-          <div className="mb-3">
-            <span className="badge badge-purple">{a.category}</span>
-          </div>
-          <Link to={`/demo/blog/${a.slug.current}`}>
+          {a.category && (
+            <div className="mb-3">
+              <span className="badge badge-purple">{a.category}</span>
+            </div>
+          )}
+          <a href={a.url}>
             <h3 className="mb-3 text-[17px] leading-[1.4] text-blue">{a.title}</h3>
-          </Link>
+          </a>
           <p className="mb-5 flex-1 text-sm text-blue/60">{a.excerpt}</p>
           <div className="mt-auto flex items-center justify-between border-t border-purple/15 pt-3.5">
             <span className="text-xs font-normal text-purple">
               {a.readTime} {t.blog.minutesSuffix} · {formatDate(a.publishedAt, t.meta.dateLocale)}
             </span>
-            <Link to={`/demo/blog/${a.slug.current}`} className="text-[13px] font-bold text-purple">
+            <a href={a.url} className="text-[13px] font-bold text-purple">
               {t.blog.readArticle}
-            </Link>
+            </a>
           </div>
         </div>
       ))}
@@ -729,7 +709,7 @@ export default function Home() {
           </div>
           <BlogPreview />
           <div className="mt-10 text-center">
-            <Link to="/demo/blog" className="btn-gradient">{t.blog.cta}</Link>
+            <a href={BLOG_URL} className="btn-gradient">{t.blog.cta}</a>
           </div>
         </div>
       </section>

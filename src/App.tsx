@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams, Outlet } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
 import { I18nProvider } from './i18n';
+import { BLOG_URL } from './hooks/useArticles';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { WhatsAppButton, ScrollProgressBar, CookieBanner } from './components/GlobalComponents';
@@ -10,9 +11,7 @@ const Landing              = lazy(() => import('./pages/Landing'));
 const Home                 = lazy(() => import('./pages/Home'));
 const Services             = lazy(() => import('./pages/Services'));
 const About                = lazy(() => import('./pages/About'));
-const Blog                 = lazy(() => import('./pages/Blog'));
 const Checkup              = lazy(() => import('./pages/Checkup'));
-const ArticlePage          = lazy(() => import('./pages/ArticlePage'));
 const Contact              = lazy(() => import('./pages/Contact'));
 const LegalNotices         = lazy(() => import('./pages/LegalNotices'));
 const CodeOfConduct        = lazy(() => import('./pages/CodeOfConduct'));
@@ -34,6 +33,16 @@ const LEGACY_ROUTES: Record<string, string> = {
   '/politica-uso-aceitavel': '/demo/acceptable-use',
   '/checkup': '/demo/checkup',
 };
+
+// O blog vive no Ghost — /demo/blog/* continua indexado, por isso reencaminha
+// para o post equivalente em blog.nieusync.com em vez de dar 404.
+function BlogRedirect() {
+  const { slug } = useParams();
+  useEffect(() => {
+    window.location.replace(slug ? `${BLOG_URL}/${slug}/` : BLOG_URL);
+  }, [slug]);
+  return <PageLoader />;
+}
 
 function PageLoader() {
   return (
@@ -84,8 +93,8 @@ export default function App() {
             <Route index                     element={<Home />} />
             <Route path="services"           element={<Services />} />
             <Route path="about"              element={<About />} />
-            <Route path="blog"               element={<Blog />} />
-            <Route path="blog/:slug"         element={<ArticlePage />} />
+            <Route path="blog"               element={<BlogRedirect />} />
+            <Route path="blog/:slug"         element={<BlogRedirect />} />
             <Route path="checkup"            element={<Checkup />} />
             <Route path="contact"            element={<Contact />} />
             <Route path="legal-notices"      element={<LegalNotices />} />
