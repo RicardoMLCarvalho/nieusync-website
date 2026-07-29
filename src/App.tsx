@@ -11,6 +11,7 @@ const Home                 = lazy(() => import('./pages/Home'));
 const Services             = lazy(() => import('./pages/Services'));
 const About                = lazy(() => import('./pages/About'));
 const Blog                 = lazy(() => import('./pages/Blog'));
+const Checkup              = lazy(() => import('./pages/Checkup'));
 const ArticlePage          = lazy(() => import('./pages/ArticlePage'));
 const Contact              = lazy(() => import('./pages/Contact'));
 const LegalNotices         = lazy(() => import('./pages/LegalNotices'));
@@ -31,6 +32,7 @@ const LEGACY_ROUTES: Record<string, string> = {
   '/politica-cookies': '/demo/cookie-policy',
   '/privacidade': '/demo/privacy',
   '/politica-uso-aceitavel': '/demo/acceptable-use',
+  '/checkup': '/demo/checkup',
 };
 
 function PageLoader() {
@@ -84,6 +86,7 @@ export default function App() {
             <Route path="about"              element={<About />} />
             <Route path="blog"               element={<Blog />} />
             <Route path="blog/:slug"         element={<ArticlePage />} />
+            <Route path="checkup"            element={<Checkup />} />
             <Route path="contact"            element={<Contact />} />
             <Route path="legal-notices"      element={<LegalNotices />} />
             <Route path="code-of-conduct"    element={<CodeOfConduct />} />
