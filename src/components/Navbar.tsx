@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useT, LanguageToggle } from '../i18n';
+import { BLOG_URL } from '../hooks/useArticles';
 
 // ponytail: área de cliente vive na app "platform"; definir VITE_PLATFORM_URL em produção
 const PLATFORM_URL = import.meta.env.VITE_PLATFORM_URL ?? 'http://localhost:5174';
@@ -32,7 +33,7 @@ export default function Navbar() {
     { to: '/demo',         label: t.links.home },
     { to: '/demo/about',    label: t.links.about },
     { to: '/demo/services', label: t.links.services },
-    { to: '/demo/blog',     label: t.links.blog },
+    { to: BLOG_URL,         label: t.links.blog, external: true },
     { to: '/demo/checkup',  label: t.links.checkup },
     { to: '/demo/contact',  label: t.links.contact },
   ];
@@ -53,20 +54,21 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden items-center gap-1 md:flex">
-            {mainLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`relative inline-flex min-h-[44px] items-center rounded-md px-[14px] py-2 text-sm font-bold transition-colors duration-200 hover:text-purple ${
-                  isActive(link.to) ? 'text-purple' : 'text-blue'
-                }`}
-              >
-                {link.label}
-                {isActive(link.to) && (
-                  <span className="absolute inset-x-[14px] bottom-0.5 h-0.5 rounded-sm bg-blue" />
-                )}
-              </Link>
-            ))}
+            {mainLinks.map((link) => {
+              const cls = `relative inline-flex min-h-[44px] items-center rounded-md px-[14px] py-2 text-sm font-bold transition-colors duration-200 hover:text-purple ${
+                isActive(link.to) ? 'text-purple' : 'text-blue'
+              }`;
+              // O blog é noutro domínio (Ghost), por isso é <a> e não <Link>
+              if (link.external) return <a key={link.to} href={link.to} className={cls}>{link.label}</a>;
+              return (
+                <Link key={link.to} to={link.to} className={cls}>
+                  {link.label}
+                  {isActive(link.to) && (
+                    <span className="absolute inset-x-[14px] bottom-0.5 h-0.5 rounded-sm bg-blue" />
+                  )}
+                </Link>
+              );
+            })}
             <LanguageToggle className="ml-2 text-blue" />
           </div>
 
@@ -114,17 +116,13 @@ export default function Navbar() {
           ×
         </button>
 
-        {mainLinks.map((link) => (
-          <Link
-            key={link.to}
-            to={link.to}
-            className={`flex min-h-[44px] items-center rounded-lg px-4 py-3 text-base font-bold text-white transition-colors duration-200 ${
-              isActive(link.to) ? 'bg-white/[0.12]' : 'bg-transparent'
-            }`}
-          >
-            {link.label}
-          </Link>
-        ))}
+        {mainLinks.map((link) => {
+          const cls = `flex min-h-[44px] items-center rounded-lg px-4 py-3 text-base font-bold text-white transition-colors duration-200 ${
+            isActive(link.to) ? 'bg-white/[0.12]' : 'bg-transparent'
+          }`;
+          if (link.external) return <a key={link.to} href={link.to} className={cls}>{link.label}</a>;
+          return <Link key={link.to} to={link.to} className={cls}>{link.label}</Link>;
+        })}
 
         <LanguageToggle className="ml-4 mt-3 self-start text-white" />
 

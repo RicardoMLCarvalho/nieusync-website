@@ -22,8 +22,7 @@ src/
   i18n/          en/ and pt/ dictionaries, one file per page namespace
   pages/         one file per route, lazy-loaded from App.tsx
   components/    Navbar, Footer, LegalPage, GlobalComponents
-  hooks/         useArticles (Sanity), useScrollReveal
-sanity.config.ts Sanity Studio schema (article)
+  hooks/         useArticles (Ghost content API), useScrollReveal
 scripts/         check-i18n.ts
 ```
 
@@ -41,7 +40,7 @@ Two conflicting utilities of the same type in one `className` (e.g. `text-sm` an
 
 **Routing.** New pages: add to `src/pages/`, `lazy()` it in `App.tsx`, register under the `/demo` route. Old Portuguese URLs stay indexed — if a route moves, add a redirect to `LEGACY_ROUTES`. Deep links work on Pages via the `404.html` copy in CI; don't remove that step.
 
-**Content comes from Sanity** (project `j7qyuhtx`, dataset `production`, public read). Article shape is `Article` in `src/hooks/useArticles.ts` — change the schema in `sanity.config.ts` and that interface together. No secrets in this repo; nothing here needs an API token.
+**The blog is Ghost**, at `blog.nieusync.com` (theme in [`nieusync/blog`](https://github.com/nieusync/blog)). This site has no blog pages of its own: the nav link and the home preview point outwards, and `/demo/blog/*` redirects to the matching Ghost URL so old links keep working. `src/hooks/useArticles.ts` reads the public Ghost content API — that key is read-only and safe in the bundle. No secrets in this repo.
 
 **Icons:** [Phosphor](https://phosphoricons.com/) (`@phosphor-icons/react`) only.
 
