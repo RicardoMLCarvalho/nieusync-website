@@ -48,62 +48,68 @@ export default function Contacto() {
   ];
 
   return (
-    <main style={{ paddingTop: '72px' }}>
-      <section style={{ background: 'var(--grad-main)', padding: '80px 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', width: '400px', height: '400px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.08)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', pointerEvents: 'none' }} />
-        <div className="container" style={{ position: 'relative' }}>
+    <main className="pt-[72px]">
+      <section className="relative overflow-hidden bg-grad-main py-20 text-center">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.08]" />
+        <div className="container relative">
           <span className="section-label section-label-white">{t.hero.label}</span>
           <div className="accent-line accent-line-white accent-line-center" />
-          <h1 style={{ color: 'var(--white)', marginBottom: '16px' }}>{t.hero.title}</h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '560px', margin: '0 auto', fontSize: '18px' }}>
+          <h1 className="mb-4 text-white">{t.hero.title}</h1>
+          <p className="mx-auto max-w-[560px] text-lg text-white/75">
             {t.hero.subtitle}
           </p>
         </div>
       </section>
 
-      <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
+      <section className="bg-bg py-20">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start' }} className="contact-grid">
+          <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2">
             <div className="animate-on-scroll">
-              <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>{t.info.title}</h2>
-              <p style={{ color: 'rgba(35,56,119,0.70)', marginBottom: '32px' }}>
+              <h2 className="mb-3 text-blue">{t.info.title}</h2>
+              <p className="mb-8 text-blue/70">
                 {t.info.body}
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '28px' }}>
+              <div className="mb-7 flex flex-col gap-3">
                 {contactItems.map(({ icon, label, value, href }) => (
-                  <a key={value} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    style={{ display: 'flex', alignItems: 'center', gap: '16px', background: 'var(--white)', borderLeft: '4px solid var(--blue)', borderRadius: '0 12px 12px 0', padding: '16px 20px', textDecoration: 'none', transition: 'box-shadow 0.2s ease' }}
-                    onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(35,56,119,0.10)'}
-                    onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.boxShadow = 'none'}
+                  <a
+                    key={value}
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="flex items-center gap-4 rounded-r-xl border-l-4 border-blue bg-white px-5 py-4 transition-shadow duration-200 hover:shadow-[0_4px_20px_rgba(35,56,119,0.10)]"
                   >
-                    <span style={{ color: 'var(--purple)', flexShrink: 0 }}>{icon}</span>
+                    <span className="shrink-0 text-purple">{icon}</span>
                     <div>
-                      <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.10em', color: 'var(--purple)', marginBottom: '2px' }}>{label}</div>
-                      <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '15px', color: 'var(--blue)' }}>{value}</div>
+                      <div className="mb-0.5 text-[11px] font-bold uppercase tracking-[0.1em] text-purple">{label}</div>
+                      <div className="text-[15px] font-normal text-blue">{value}</div>
                     </div>
                   </a>
                 ))}
               </div>
 
-              <a href={`https://wa.me/351933644596?text=${encodeURIComponent(t.whatsapp.prefill)}`} target="_blank" rel="noopener noreferrer"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', background: '#25D366', color: 'var(--white)', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '15px 24px', borderRadius: '8px', textDecoration: 'none', width: '100%', transition: 'background 0.2s ease, transform 0.2s ease', minHeight: '44px', marginBottom: '28px' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = '#1EB354'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = '#25D366'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+              <a
+                href={`https://wa.me/351933644596?text=${encodeURIComponent(t.whatsapp.prefill)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-7 flex min-h-[44px] w-full items-center justify-center gap-2.5 rounded-lg bg-whatsapp px-6 py-4 text-[13px] font-bold uppercase tracking-[0.08em] text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1EB354]"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
                 {t.whatsapp.cta}
               </a>
 
-              <div style={{ display: 'flex', gap: '16px', marginBottom: '28px', justifyContent: 'center' }}>
+              <div className="mb-7 flex justify-center gap-4">
                 {[
                   { href: 'https://www.linkedin.com/company/nieusync', Icon: LinkedInIcon },
                   { href: 'https://www.instagram.com/nieusync', Icon: InstagramIcon },
                   { href: 'https://www.facebook.com/nieusync', Icon: FacebookIcon },
                 ].map(({ href, Icon }) => (
-                  <a key={href} href={href} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--purple)', transition: 'color 0.2s ease' }}
-                    onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = 'var(--blue)'}
-                    onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)'}
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple transition-colors duration-200 hover:text-blue"
                   >
                     <Icon />
                   </a>
@@ -111,70 +117,77 @@ export default function Contacto() {
               </div>
 
               <div className="card">
-                <h3 style={{ fontSize: '15px', color: 'var(--blue)', marginBottom: '8px' }}>{t.schedule.title}</h3>
-                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '16px' }}>
+                <h3 className="mb-2 text-[15px] text-blue">{t.schedule.title}</h3>
+                <p className="mb-4 text-sm text-blue/65">
                   {t.schedule.body}
                 </p>
-                <a href="https://calendly.com/nieusync" target="_blank" rel="noopener noreferrer" className="btn-gradient" style={{ display: 'inline-flex', fontSize: '12px', padding: '12px 24px' }}>
+                <a href="https://calendly.com/nieusync" target="_blank" rel="noopener noreferrer" className="btn-gradient px-6 py-3 text-xs">
                   {t.schedule.cta}
                 </a>
               </div>
             </div>
 
             <div className="animate-on-scroll">
-              <div className="card" style={{ borderTop: '4px solid var(--purple)', boxShadow: '0 8px 40px rgba(35,56,119,0.12)' }}>
-                <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '22px', color: 'var(--blue)', marginBottom: '8px' }}>
+              <div className="card border-t-4 border-t-purple shadow-[0_8px_40px_rgba(35,56,119,0.12)]">
+                <h3 className="mb-2 text-[22px] font-bold text-blue">
                   {t.form.title}
                 </h3>
-                <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'var(--purple)', marginBottom: '28px' }}>
+                <p className="mb-7 text-sm font-normal text-purple">
                   {t.form.subtitle}
                 </p>
 
                 {submitted ? (
-                  <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-                    <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'var(--grad-main)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+                  <div className="px-5 py-10 text-center">
+                    <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-grad-main">
                       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
                     </div>
-                    <h3 style={{ color: 'var(--blue)', marginBottom: '10px', fontSize: '20px' }}>{t.success.title}</h3>
-                    <p style={{ color: 'rgba(35,56,119,0.65)', fontSize: '15px' }}>{t.success.body}</p>
+                    <h3 className="mb-2.5 text-xl text-blue">{t.success.title}</h3>
+                    <p className="text-[15px] text-blue/65">{t.success.body}</p>
                   </div>
                 ) : (
-                  <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="form-grid">
+                  <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="flex flex-col gap-4">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div><label>{t.form.name.label}</label><input type="text" name="nome" value={form.nome} onChange={handleChange} placeholder={t.form.name.placeholder} required /></div>
                       <div><label>{t.form.email.label}</label><input type="email" name="email" value={form.email} onChange={handleChange} placeholder={t.form.email.placeholder} required /></div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="form-grid">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div><label>{t.form.phone.label}</label><input type="tel" name="telefone" value={form.telefone} onChange={handleChange} placeholder={t.form.phone.placeholder} required /></div>
                       <div><label>{t.form.company.label}</label><input type="text" name="empresa" value={form.empresa} onChange={handleChange} placeholder={t.form.company.placeholder} /></div>
                     </div>
                     <div>
                       <label>{t.form.sector.label}</label>
-                      <select name="sector" value={form.sector} onChange={handleChange} style={{ color: form.sector ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }} required>
-                        <option value="" style={{ color: 'rgba(35,56,119,0.40)' }}>{t.form.sector.placeholder}</option>
-                        {SECTOR_KEYS.map((s) => <option key={s} value={s} style={{ color: 'var(--blue)' }}>{t.form.sector.options[s]}</option>)}
+                      <select name="sector" value={form.sector} onChange={handleChange} className={form.sector ? 'text-blue' : 'text-blue/40'} required>
+                        <option value="" className="text-blue/40">{t.form.sector.placeholder}</option>
+                        {SECTOR_KEYS.map((s) => <option key={s} value={s} className="text-blue">{t.form.sector.options[s]}</option>)}
                       </select>
                     </div>
                     <div>
                       <label>{t.form.challenge.label}</label>
-                      <select name="desafio" value={form.desafio} onChange={handleChange} style={{ color: form.desafio ? 'var(--blue)' : 'rgba(35,56,119,0.40)' }} required>
-                        <option value="" style={{ color: 'rgba(35,56,119,0.40)' }}>{t.form.challenge.placeholder}</option>
-                        {CHALLENGE_KEYS.map((d) => <option key={d} value={d} style={{ color: 'var(--blue)' }}>{t.form.challenge.options[d]}</option>)}
+                      <select name="desafio" value={form.desafio} onChange={handleChange} className={form.desafio ? 'text-blue' : 'text-blue/40'} required>
+                        <option value="" className="text-blue/40">{t.form.challenge.placeholder}</option>
+                        {CHALLENGE_KEYS.map((d) => <option key={d} value={d} className="text-blue">{t.form.challenge.options[d]}</option>)}
                       </select>
                     </div>
-                    <div><label>{t.form.message.label}</label><textarea name="mensagem" value={form.mensagem} onChange={handleChange} rows={4} placeholder={t.form.message.placeholder} style={{ resize: 'vertical' }} /></div>
-                  
-                    <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', textTransform: 'none', letterSpacing: 'normal', fontSize: '13px', fontWeight: 400, color: 'rgba(35,56,119,0.70)' }}>
-                      <div onClick={() => setForm((p) => ({ ...p, rgpd: !p.rgpd }))} style={{ width: '18px', height: '18px', minWidth: '18px', border: '2px solid var(--purple)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: form.rgpd ? 'var(--purple)' : 'var(--white)', transition: 'background 0.2s ease', marginTop: '2px', cursor: 'pointer' }}>
+                    <div><label>{t.form.message.label}</label><textarea name="mensagem" value={form.mensagem} onChange={handleChange} rows={4} placeholder={t.form.message.placeholder} className="resize-y" /></div>
+
+                    <label className="flex cursor-pointer items-start gap-2.5 text-[13px] font-normal normal-case tracking-normal text-blue/70">
+                      <div
+                        onClick={() => setForm((p) => ({ ...p, rgpd: !p.rgpd }))}
+                        className={`mt-0.5 flex h-[18px] w-[18px] min-w-[18px] cursor-pointer items-center justify-center rounded border-2 border-purple transition-colors duration-200 ${form.rgpd ? 'bg-purple' : 'bg-white'}`}
+                      >
                         {form.rgpd && <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round"><path d="M2 6l3 3 5-5" /></svg>}
                       </div>
-                      <span>{t.form.consent.before}<a href="/demo/privacy" style={{ color: 'var(--purple)', textDecoration: 'underline' }}>{t.form.consent.privacyLink}</a>{t.form.consent.after}</span>
+                      <span>{t.form.consent.before}<a href="/demo/privacy" className="text-purple underline">{t.form.consent.privacyLink}</a>{t.form.consent.after}</span>
                     </label>
-                  
-                    <button type="submit" className="btn-gradient" disabled={!form.rgpd} style={{ width: '100%', padding: '16px', fontSize: '14px', opacity: form.rgpd ? 1 : 0.5, cursor: form.rgpd ? 'pointer' : 'not-allowed', marginTop: '8px' }}>
+
+                    <button
+                      type="submit"
+                      className={`btn-gradient mt-2 w-full p-4 text-sm ${form.rgpd ? '' : 'cursor-not-allowed opacity-50'}`}
+                      disabled={!form.rgpd}
+                    >
                       {t.form.submit}
                     </button>
-                    <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.45)', textAlign: 'center' }}>
+                    <p className="text-center text-xs font-normal text-blue/45">
                       {t.form.note}
                     </p>
                   </form>
@@ -183,13 +196,6 @@ export default function Contacto() {
             </div>
           </div>
         </div>
-
-        <style>{`
-          @media (max-width: 768px) {
-            .contact-grid { grid-template-columns: 1fr !important; }
-            .form-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
     </main>
   );

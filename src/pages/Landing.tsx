@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useT, LanguageToggle } from '../i18n';
 
 // ponytail: porte do site estático ../landingpage (GitHub Pages) para dentro da app.
-// Estilos com escopo em .landing em vez de body, para não afectar as outras rotas.
 export default function Landing() {
   const t = useT('landing');
 
@@ -11,98 +10,33 @@ export default function Landing() {
   }, [t.documentTitle]);
 
   return (
-    <div className="landing">
-      <LanguageToggle style={{ position: 'absolute', top: '24px', right: '24px', color: '#fff' }} />
+    <div className="fixed inset-0 flex flex-col items-center justify-center overflow-hidden bg-grad-main px-6">
+      <LanguageToggle className="absolute right-6 top-6 text-white" />
 
-      <img className="landing-logo" src="/logo_white_1080x1080.png" alt="NIEUSYNC" />
+      <img
+        className="mb-10 w-[180px] max-w-[45vw] animate-pulse-soft"
+        src="/logo_white_1080x1080.png"
+        alt="NIEUSYNC"
+      />
 
-      <h1>
-        {t.headingBefore}<span>{t.headingHighlight}</span>{t.headingAfter}
+      {/* font-sans: index.css força 'Magistral' em h1 — a landing usa Montserrat 800 */}
+      <h1 className="mb-5 max-w-[700px] text-center font-sans text-[clamp(28px,5vw,52px)] font-extrabold leading-[1.2] tracking-[-0.5px] text-white">
+        {t.headingBefore}<span className="text-[#c9bfe0]">{t.headingHighlight}</span>{t.headingAfter}
       </h1>
 
-      <p>{t.body}</p>
-      <p className="last">{t.bodyLast}</p>
+      <p className="mb-2 max-w-[480px] text-center text-[clamp(14px,2vw,16px)] leading-[1.6] text-white/80">{t.body}</p>
+      <p className="mb-9 max-w-[480px] text-center text-[clamp(14px,2vw,16px)] leading-[1.6] text-white/80">{t.bodyLast}</p>
 
-      <div className="landing-dots">
-        <span className="landing-dot" />
-        <span className="landing-dot" />
-        <span className="landing-dot" />
+      <div className="flex gap-2.5">
+        <span className="h-2.5 w-2.5 animate-blink rounded-full bg-white" />
+        <span className="h-2.5 w-2.5 animate-blink rounded-full bg-white [animation-delay:0.2s]" />
+        <span className="h-2.5 w-2.5 animate-blink rounded-full bg-white [animation-delay:0.4s]" />
       </div>
 
-      <footer>
+      <footer className="absolute bottom-6 text-center text-[13px] text-white/60">
         {t.urgentPrefix}{' '}
         <a href="mailto:geral@nieusync.com">geral@nieusync.com</a>
       </footer>
-
-      <style>{`
-        .landing {
-          position: fixed;
-          inset: 0;
-          font-family: "Montserrat", sans-serif;
-          background: linear-gradient(135deg, #233877 0%, #9f8ec2 100%);
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 0 24px;
-          box-sizing: border-box;
-        }
-        .landing-logo {
-          width: 180px;
-          max-width: 45vw;
-          margin-bottom: 40px;
-          animation: landing-pulse 3s ease-in-out infinite;
-        }
-        .landing h1 {
-          /* index.css força 'Magistral' em h1 — a landing usa Montserrat 800 */
-          font-family: "Montserrat", sans-serif;
-          color: #fff;
-          font-weight: 800;
-          font-size: clamp(28px, 5vw, 52px);
-          line-height: 1.2;
-          text-align: center;
-          max-width: 700px;
-          margin: 0 0 20px;
-          letter-spacing: -0.5px;
-        }
-        .landing h1 span { color: #c9bfe0; }
-        .landing p {
-          color: rgba(255, 255, 255, 0.8);
-          font-size: clamp(14px, 2vw, 16px);
-          line-height: 1.6;
-          text-align: center;
-          max-width: 480px;
-          margin: 0 0 8px;
-        }
-        .landing p.last { margin-bottom: 36px; }
-        .landing-dots { display: flex; gap: 10px; }
-        .landing-dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: #fff;
-          animation: landing-blink 1.4s infinite both;
-        }
-        .landing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .landing-dot:nth-child(3) { animation-delay: 0.4s; }
-        .landing footer {
-          position: absolute;
-          bottom: 24px;
-          color: rgba(255, 255, 255, 0.6);
-          font-size: 13px;
-          text-align: center;
-        }
-        .landing footer a { color: inherit; }
-        @keyframes landing-pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.03); }
-        }
-        @keyframes landing-blink {
-          0%, 80%, 100% { opacity: 0.2; }
-          40% { opacity: 1; }
-        }
-      `}</style>
     </div>
   );
 }

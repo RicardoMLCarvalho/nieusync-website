@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type CSSProperties, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import en from './en';
 import pt from './pt';
 
@@ -40,7 +40,7 @@ export function useT<K extends keyof typeof en>(ns: K): (typeof en)[K] {
   return dicts[lang][ns];
 }
 
-export function LanguageToggle({ style }: { style?: CSSProperties }) {
+export function LanguageToggle({ className = '' }: { className?: string }) {
   const { lang, setLang } = useLang();
   const next: Lang = lang === 'en' ? 'pt' : 'en';
 
@@ -48,21 +48,7 @@ export function LanguageToggle({ style }: { style?: CSSProperties }) {
     <button
       onClick={() => setLang(next)}
       aria-label={next === 'pt' ? 'Mudar para português' : 'Switch to English'}
-      style={{
-        background: 'none',
-        border: '1px solid currentColor',
-        borderRadius: '6px',
-        cursor: 'pointer',
-        fontFamily: 'Montserrat, sans-serif',
-        fontWeight: 700,
-        fontSize: '11px',
-        letterSpacing: '0.08em',
-        color: 'inherit',
-        padding: '6px 10px',
-        minHeight: '32px',
-        opacity: 0.75,
-        ...style,
-      }}
+      className={`min-h-[32px] cursor-pointer rounded-md border border-current bg-transparent px-2.5 py-1.5 text-[11px] font-bold tracking-[0.08em] text-inherit opacity-75 ${className}`}
     >
       {next.toUpperCase()}
     </button>

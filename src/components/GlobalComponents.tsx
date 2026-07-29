@@ -17,10 +17,12 @@ export function WhatsAppButton() {
       href={`https://wa.me/351933644596?text=${encodeURIComponent(t.whatsapp.prefilledMessage)}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="whatsapp-btn"
+      className="whatsapp-btn group"
       aria-label={t.whatsapp.ariaLabel}
     >
-      <span className="whatsapp-tooltip">{t.whatsapp.tooltip}</span>
+      <span className="pointer-events-none absolute right-[68px] hidden whitespace-nowrap rounded-lg bg-blue px-[14px] py-2 text-[13px] font-bold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 md:block">
+        {t.whatsapp.tooltip}
+      </span>
       <WhatsAppIcon />
     </a>
   );
@@ -42,7 +44,7 @@ export function ScrollProgressBar() {
 
   return (
     <div
-      className="scroll-progress"
+      className="fixed left-0 top-0 z-[1100] h-[3px] bg-grad-main transition-[width] duration-100 ease-linear"
       style={{ width: `${progress}%` }}
       role="progressbar"
       aria-valuenow={Math.round(progress)}
@@ -74,29 +76,19 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="cookie-banner">
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
-        <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'var(--white)', margin: 0, flex: 1, minWidth: '200px' }}>
+    <div className="fixed inset-x-0 bottom-0 z-[1050] bg-blue py-[18px] shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
+      <div className="container flex flex-wrap items-center justify-between gap-5">
+        <p className="m-0 min-w-[200px] flex-1 text-sm font-normal text-white">
           {t.cookieBanner.textBefore}{' '}
-          <a href="/demo/privacy" style={{ color: 'var(--purple)', textDecoration: 'underline' }}>{t.cookieBanner.privacyLink}</a>{t.cookieBanner.textAfter}
+          <a href="/demo/privacy" className="text-purple underline">{t.cookieBanner.privacyLink}</a>{t.cookieBanner.textAfter}
         </p>
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexShrink: 0 }}>
+        <div className="flex shrink-0 items-center gap-3">
           <button onClick={accept} className="btn-gradient btn-sm">
             {t.cookieBanner.accept}
           </button>
           <button
             onClick={reject}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontFamily: 'Montserrat, sans-serif',
-              fontWeight: 400,
-              fontSize: '13px',
-              color: 'rgba(255,255,255,0.60)',
-              padding: '8px',
-              minHeight: '44px',
-            }}
+            className="min-h-[44px] cursor-pointer border-none bg-transparent p-2 text-[13px] font-normal text-white/60"
           >
             {t.cookieBanner.reject}
           </button>

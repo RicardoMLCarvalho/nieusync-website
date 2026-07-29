@@ -54,46 +54,46 @@ export default function ArticlePage() {
   }, [article, t])
 
   if (loading) return (
-    <main style={{ paddingTop: '72px' }}>
-      <div style={{ textAlign: 'center', padding: '120px 40px', color: 'var(--purple)', fontFamily: 'Montserrat,sans-serif' }}>
+    <main className="pt-[72px]">
+      <div className="px-10 py-[120px] text-center text-purple">
         {t.article.loading}
       </div>
     </main>
   )
 
   if (!article) return (
-    <main style={{ paddingTop: '72px' }}>
-      <div style={{ textAlign: 'center', padding: '120px 40px' }}>
-        <h2 style={{ color: 'var(--blue)', marginBottom: '16px' }}>{t.article.notFoundTitle}</h2>
+    <main className="pt-[72px]">
+      <div className="px-10 py-[120px] text-center">
+        <h2 className="mb-4 text-blue">{t.article.notFoundTitle}</h2>
         <Link to="/demo/blog" className="btn-primary">{t.article.notFoundCta}</Link>
       </div>
     </main>
   )
 
   return (
-    <main style={{ paddingTop: '72px' }}>
-      <section style={{ background: 'var(--grad-subtle)', padding: '64px 0' }}>
-        <div className="container" style={{ maxWidth: '760px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '24px' }}>
-            <Link to="/demo/blog" style={{ color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontFamily: 'Montserrat,sans-serif', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+    <main className="pt-[72px]">
+      <section className="bg-grad-main py-16">
+        <div className="container max-w-[760px]">
+          <div className="mb-6 flex items-center gap-3.5">
+            <Link to="/demo/blog" className="inline-flex items-center gap-1.5 text-sm text-white/65">
               {t.article.backToBlog}
             </Link>
-            <span className="badge badge-purple" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>
+            <span className="badge badge-purple">
               {article.category}
             </span>
           </div>
-          <h1 style={{ color: 'var(--white)', marginBottom: '20px', fontSize: '40px' }}>
+          <h1 className="mb-5 text-[40px] text-white">
             {article.title}
           </h1>
-          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-            <span style={{ color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontFamily: 'Montserrat,sans-serif' }}>
+          <div className="flex flex-wrap gap-5">
+            <span className="text-sm text-white/65">
               {article.author}
             </span>
-            <span style={{ color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontFamily: 'Montserrat,sans-serif' }}>
+            <span className="text-sm text-white/65">
               {formatDate(article.publishedAt, dateLocale)}
             </span>
             {article.readTime && (
-              <span style={{ color: 'rgba(255,255,255,0.65)', fontSize: '14px', fontFamily: 'Montserrat,sans-serif' }}>
+              <span className="text-sm text-white/65">
                 {t.readTime(article.readTime)}
               </span>
             )}
@@ -102,31 +102,31 @@ export default function ArticlePage() {
       </section>
 
       {article.mainImage && (
-        <div style={{ background: 'var(--bg)', padding: '40px 0 0' }}>
-          <div className="container" style={{ maxWidth: '760px' }}>
+        <div className="bg-bg pt-10">
+          <div className="container max-w-[760px]">
             <img
               src={urlFor(article.mainImage).width(720).url()}
               alt={article.title}
-              style={{ width: '100%', borderRadius: '14px', display: 'block' }}
+              className="block w-full rounded-[14px]"
             />
           </div>
         </div>
       )}
 
-      <section style={{ background: 'var(--bg)', padding: '48px 0 100px' }}>
-        <div className="container" style={{ maxWidth: '760px' }}>
+      <section className="bg-bg pb-[100px] pt-12">
+        <div className="container max-w-[760px]">
           {article.excerpt && (
-            <p style={{ fontSize: '18px', color: 'var(--blue)', lineHeight: 1.8, marginBottom: '36px', fontStyle: 'italic', borderLeft: '4px solid var(--purple)', paddingLeft: '20px' }}>
+            <p className="mb-9 border-l-4 border-purple pl-5 text-lg italic leading-[1.8] text-blue">
               {article.excerpt}
             </p>
           )}
           {article.body && (
-            <div style={{ fontFamily: 'Montserrat,sans-serif', fontSize: '16px', lineHeight: 1.9, color: 'rgba(35,56,119,0.85)' }}>
+            <div className="text-base leading-[1.9] text-blue/85">
               <PortableText value={article.body} />
             </div>
           )}
-          <div style={{ borderTop: '1px solid rgba(159,142,194,0.2)', paddingTop: '32px', marginTop: '48px', textAlign: 'center' }}>
-            <p style={{ color: 'rgba(35,56,119,0.60)', marginBottom: '16px', fontFamily: 'Montserrat,sans-serif' }}>
+          <div className="mt-12 border-t border-purple/20 pt-8 text-center">
+            <p className="mb-4 text-blue/60">
               {t.article.ctaText}
             </p>
             <Link to="/demo/contact" className="btn-gradient">

@@ -81,73 +81,69 @@ export default function Blog() {
   }, [email]);
 
   return (
-    <main style={{ paddingTop: '72px' }}>
-      <section style={{ background: 'var(--grad-subtle)', padding: '80px 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
+    <main className="pt-[72px]">
+      <section className="bg-grad-main py-20">
+        <div className="container text-center">
           <span className="section-label section-label-white">{t.hero.label}</span>
           <div className="accent-line accent-line-white accent-line-center" />
-          <h1 style={{ color: 'var(--white)', marginBottom: '16px' }}>{t.hero.title}</h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '520px', margin: '0 auto', fontSize: '18px' }}>
+          <h1 className="mb-4 text-white">{t.hero.title}</h1>
+          <p className="mx-auto max-w-[520px] text-lg text-white/75">
             {t.hero.subtitle}
           </p>
         </div>
       </section>
 
-      <section style={{ background: 'var(--bg)', padding: '60px 0 100px' }}>
+      <section className="bg-bg pb-[100px] pt-[60px]">
         <div className="container">
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '48px', justifyContent: 'center' }}>
+          <div className="mb-12 flex flex-wrap justify-center gap-2.5">
             {categories.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
-                style={{
-                  fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px',
-                  letterSpacing: '0.08em', textTransform: 'uppercase', padding: '8px 20px',
-                  borderRadius: '100px', cursor: 'pointer', minHeight: '44px',
-                  transition: 'all 0.2s ease',
-                  ...(activeCategory === cat.value
-                    ? { background: 'var(--purple)', color: 'var(--white)', border: 'none' }
-                    : { background: 'transparent', border: '1.5px solid var(--purple)', color: 'var(--purple)' }),
-                }}
+                className={`min-h-[44px] cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-[0.08em] transition-all duration-200 ${
+                  activeCategory === cat.value
+                    ? 'border-none bg-purple text-white'
+                    : 'border-[1.5px] border-purple bg-transparent text-purple'
+                }`}
               >
                 {t.categories[cat.key]}
               </button>
             ))}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '40px', alignItems: 'start' }} className="blog-layout">
+          <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[1fr_300px]">
             <div>
               {loading ? (
-                <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--purple)', fontFamily: 'Montserrat,sans-serif' }}>
+                <div className="py-[60px] text-center text-purple">
                   {t.list.loading}
                 </div>
               ) : filtered.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '60px 0' }}>
-                  <p style={{ color: 'rgba(35,56,119,0.50)', fontFamily: 'Montserrat,sans-serif' }}>
+                <div className="py-[60px] text-center">
+                  <p className="text-blue/50">
                     {t.list.empty}
                   </p>
                 </div>
               ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '24px' }} className="articles-grid">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   {filtered.map((a) => (
-                    <div key={a._id} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
-                      <div style={{ marginBottom: '14px' }}>
+                    <div key={a._id} className="card flex flex-col">
+                      <div className="mb-3.5">
                         <span className="badge badge-purple">{a.category}</span>
                       </div>
-                      <Link to={`/demo/blog/${a.slug.current}`} style={{ textDecoration: 'none' }}>
-                        <h3 style={{ fontSize: '17px', color: 'var(--blue)', marginBottom: '10px', lineHeight: 1.40 }}>{a.title}</h3>
+                      <Link to={`/demo/blog/${a.slug.current}`}>
+                        <h3 className="mb-2.5 text-[17px] leading-[1.4] text-blue">{a.title}</h3>
                       </Link>
-                      <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.60)', marginBottom: '16px', flex: 1 }}>{a.excerpt}</p>
-                      <div style={{ borderTop: '1px solid rgba(159,142,194,0.15)', paddingTop: '14px', marginTop: 'auto' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                          <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'var(--purple)' }}>
+                      <p className="mb-4 flex-1 text-sm text-blue/60">{a.excerpt}</p>
+                      <div className="mt-auto border-t border-purple/15 pt-3.5">
+                        <div className="mb-1.5 flex items-center justify-between">
+                          <span className="text-xs font-normal text-purple">
                             {t.readTime(a.readTime)} · {formatDate(a.publishedAt, dateLocale)}
                           </span>
-                          <Link to={`/demo/blog/${a.slug.current}`} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)' }}>
+                          <Link to={`/demo/blog/${a.slug.current}`} className="text-[13px] font-bold text-purple">
                             {t.list.readArticle}
                           </Link>
                         </div>
-                        <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.45)' }}>{a.author}</span>
+                        <span className="text-xs font-normal text-blue/45">{a.author}</span>
                       </div>
                     </div>
                   ))}
@@ -155,57 +151,55 @@ export default function Blog() {
               )}
             </div>
 
-            <div style={{ position: 'sticky', top: '90px' }}>
+            <div className="sticky top-[90px]">
               <div className="card">
-                <h3 style={{ fontSize: '18px', color: 'var(--blue)', marginBottom: '10px' }}>{t.newsletter.title}</h3>
+                <h3 className="mb-2.5 text-lg text-blue">{t.newsletter.title}</h3>
                 {status === 'success' ? (
-                  <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>
+                  <p className="text-sm text-blue/65">
                     {t.newsletter.success}
                   </p>
                 ) : (
                   <>
-                    <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>
+                    <p className="mb-5 text-sm text-blue/65">
                       {t.newsletter.description}
                     </p>
-                    <form onSubmit={handleNewsletterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-3">
                       <div>
                         <label>{t.newsletter.emailLabel}</label>
                         <input type="email" placeholder={t.newsletter.emailPlaceholder} value={email} onChange={(e) => setEmail(e.target.value)} required />
                       </div>
                       {status === 'duplicate' && (
-                        <p style={{ fontSize: '12px', color: '#e53e3e', margin: 0 }}>{t.newsletter.duplicate}</p>
+                        <p className="m-0 text-xs text-red-600">{t.newsletter.duplicate}</p>
                       )}
                       {status === 'error' && (
-                        <p style={{ fontSize: '12px', color: '#e53e3e', margin: 0 }}>{t.newsletter.error}</p>
+                        <p className="m-0 text-xs text-red-600">{t.newsletter.error}</p>
                       )}
-                      <button type="submit" className="btn-gradient" disabled={status === 'loading'} style={{ width: '100%', opacity: status === 'loading' ? 0.7 : 1 }}>
+                      <button
+                        type="submit"
+                        className={`btn-gradient w-full ${status === 'loading' ? 'opacity-70' : ''}`}
+                        disabled={status === 'loading'}
+                      >
                         {status === 'loading' ? t.newsletter.submitting : t.newsletter.submit}
                       </button>
                     </form>
                   </>
                 )}
-                <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.40)', textAlign: 'center', marginTop: '10px' }}>
+                <p className="mt-2.5 text-center text-xs font-normal text-blue/40">
                   {t.newsletter.disclaimer}
                 </p>
               </div>
-              <div className="card" style={{ marginTop: '20px' }}>
-                <h3 style={{ fontSize: '16px', color: 'var(--blue)', marginBottom: '10px' }}>{t.help.title}</h3>
-                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '16px' }}>
+              <div className="card mt-5">
+                <h3 className="mb-2.5 text-base text-blue">{t.help.title}</h3>
+                <p className="mb-4 text-sm text-blue/65">
                   {t.help.description}
                 </p>
-                <Link to="/demo/contact" className="btn-gradient" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <Link to="/demo/contact" className="btn-gradient flex w-full justify-center">
                   {t.help.cta}
                 </Link>
               </div>
             </div>
           </div>
         </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .blog-layout { grid-template-columns: 1fr !important; }
-            .articles-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
     </main>
   );

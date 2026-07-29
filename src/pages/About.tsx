@@ -35,111 +35,107 @@ export default function About() {
   const values = t.values.items.map((item, i) => ({ icon: valueIcons[i], ...item }));
 
   return (
-    <main style={{ paddingTop: '72px' }}>
-      <section style={{ background: 'var(--grad-main)', padding: '80px 0', position: 'relative', overflow: 'hidden' }}>
-        {[{ size: 300, top: '-80px', right: '-80px' }, { size: 200, bottom: '-60px', left: '10%' }].map((c, i) => (
-          <div key={i} style={{ position: 'absolute', width: c.size, height: c.size, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.10)', top: (c as any).top, right: (c as any).right, bottom: (c as any).bottom, left: (c as any).left, pointerEvents: 'none' }} />
-        ))}
-        <div className="container" style={{ textAlign: 'center', position: 'relative' }}>
+    <main className="pt-[72px]">
+      <section className="relative overflow-hidden bg-grad-main py-20">
+        <div className="pointer-events-none absolute -right-20 -top-20 h-[300px] w-[300px] rounded-full border border-white/10" />
+        <div className="pointer-events-none absolute -bottom-[60px] left-[10%] h-[200px] w-[200px] rounded-full border border-white/10" />
+        <div className="container relative text-center">
           <span className="section-label section-label-white">{t.hero.label}</span>
           <div className="accent-line accent-line-white accent-line-center" />
-          <h1 style={{ color: 'var(--white)', marginBottom: '20px' }}>{t.hero.title}</h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '580px', margin: '0 auto', fontSize: '18px' }}>
+          <h1 className="mb-5 text-white">{t.hero.title}</h1>
+          <p className="mx-auto max-w-[580px] text-lg text-white/75">
             {t.hero.subtitle}
           </p>
         </div>
       </section>
 
       {/* Mission */}
-      <section style={{ background: 'var(--white)', padding: '100px 0' }}>
+      <section className="bg-white py-[100px]">
         <div className="container animate-on-scroll">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' }} className="mission-grid">
+          <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2">
             <div>
               <span className="section-label">{t.mission.label}</span>
-              <div className="accent-line" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
-              <h2 style={{ color: 'var(--blue)', marginBottom: '24px' }}>{t.mission.title}</h2>
-              <div style={{ borderLeft: '4px solid var(--purple)', paddingLeft: '24px', marginBottom: '28px', maxWidth: '680px' }}>
-                <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '18px', color: 'var(--blue)', lineHeight: 1.70 }}>
+              <div className="accent-line bg-purple bg-none" />
+              <h2 className="mb-6 text-blue">{t.mission.title}</h2>
+              <div className="mb-7 max-w-[680px] border-l-4 border-purple pl-6">
+                <p className="text-lg font-normal leading-[1.7] text-blue">
                   {t.mission.quote}
                 </p>
               </div>
-              <p style={{ color: 'rgba(35,56,119,0.70)' }}>
+              <p className="text-blue/70">
                 {t.mission.body}
               </p>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div className="grid grid-cols-2 gap-5">
               {t.mission.stats.map(({ value, label }) => (
-                <div key={label} style={{ textAlign: 'center', padding: '24px', background: 'var(--bg)', borderRadius: '12px' }}>
-                  <div className="gradient-text" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '36px', marginBottom: '6px' }}>{value}</div>
-                  <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(35,56,119,0.65)' }}>{label}</div>
+                <div key={label} className="rounded-xl bg-bg p-6 text-center">
+                  <div className="gradient-text mb-1.5 text-4xl font-bold">{value}</div>
+                  <div className="text-[13px] font-normal text-blue/65">{label}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <style>{`@media (max-width: 768px) { .mission-grid { grid-template-columns: 1fr !important; } }`}</style>
       </section>
 
       {/* Values */}
-      <section style={{ background: 'var(--bg)', padding: '100px 0' }}>
+      <section className="bg-bg py-[100px]">
         <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <div className="animate-on-scroll mb-14 text-center">
             <span className="section-label">{t.values.label}</span>
-            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
-            <h2 style={{ color: 'var(--blue)' }}>{t.values.title}</h2>
+            <div className="accent-line accent-line-center bg-purple bg-none" />
+            <h2 className="text-blue">{t.values.title}</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '24px' }} className="values-grid animate-on-scroll">
+          <div className="animate-on-scroll grid grid-cols-1 gap-6 md:grid-cols-2">
             {values.map(({ icon, title, description }) => (
-              <div key={title} className="card stagger-child animate-on-scroll" style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-                <div style={{ flexShrink: 0, marginTop: '4px' }}>{icon}</div>
+              <div key={title} className="card stagger-child animate-on-scroll flex items-start gap-5">
+                <div className="mt-1 shrink-0">{icon}</div>
                 <div>
-                  <h3 style={{ fontSize: '18px', color: 'var(--blue)', marginBottom: '8px' }}>{title}</h3>
-                  <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.70)' }}>{description}</p>
+                  <h3 className="mb-2 text-lg text-blue">{title}</h3>
+                  <p className="text-sm text-blue/70">{description}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <style>{`@media (max-width: 768px) { .values-grid { grid-template-columns: 1fr !important; } }`}</style>
       </section>
 
-        {/* Why NIEUSYNC */}
-  <section style={{ background: 'var(--white)', padding: '100px 0' }}>
-    <div className="container">
-      <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '64px', alignItems: 'center' }} className="why-grid animate-on-scroll">
-        <div>
-          <span className="section-label">{t.why.label}</span>
-          <div className="accent-line" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
-          <h2 style={{ color: 'var(--blue)', marginBottom: '20px' }}>{t.why.title}</h2>
-          <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '36px' }}>
-            {t.why.body}
-          </p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-          {t.why.items.map(({ title, description }) => (
-            <div key={title} className="stagger-child animate-on-scroll" style={{ borderLeft: '3px solid var(--purple)', paddingLeft: '18px' }}>
-              <h3 style={{ fontSize: '15px', color: 'var(--blue)', marginBottom: '6px' }}>{title}</h3>
-              <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)' }}>{description}</p>
+      {/* Why NIEUSYNC */}
+      <section className="bg-white py-[100px]">
+        <div className="container">
+          <div className="animate-on-scroll grid grid-cols-1 items-center gap-16 md:grid-cols-[55%_42%]">
+            <div>
+              <span className="section-label">{t.why.label}</span>
+              <div className="accent-line bg-purple bg-none" />
+              <h2 className="mb-5 text-blue">{t.why.title}</h2>
+              <p className="mb-9 text-blue/75">
+                {t.why.body}
+              </p>
             </div>
-          ))}
+            <div className="grid grid-cols-2 gap-6">
+              {t.why.items.map(({ title, description }) => (
+                <div key={title} className="stagger-child animate-on-scroll border-l-[3px] border-purple pl-[18px]">
+                  <h3 className="mb-1.5 text-[15px] text-blue">{title}</h3>
+                  <p className="text-sm text-blue/65">{description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <style>{`@media (max-width: 768px) { .why-grid { grid-template-columns: 1fr !important; } }`}</style>
-  </section>
-  
-  {/* CTA Final */}
-  <section style={{ background: 'var(--grad-subtle)', padding: '80px 0', textAlign: 'center' }}>
-    <div className="container animate-on-scroll">
-      <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>{t.cta.title}</h2>
-      <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '480px', margin: '0 auto 36px' }}>
-        {t.cta.subtitle}
-      </p>
-      <Link to="/demo/contact" className="btn-gradient" style={{ padding: '16px 40px' }}>
-        {t.cta.button}
-      </Link>
-    </div>
-  </section>
-      </main>
+      </section>
+
+      {/* CTA Final */}
+      <section className="bg-grad-main py-20 text-center">
+        <div className="container animate-on-scroll">
+          <h2 className="mb-4 text-white">{t.cta.title}</h2>
+          <p className="mx-auto mb-9 max-w-[480px] text-white/70">
+            {t.cta.subtitle}
+          </p>
+          <Link to="/demo/contact" className="btn-gradient px-10 py-4">
+            {t.cta.button}
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

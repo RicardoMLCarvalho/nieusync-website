@@ -35,37 +35,37 @@ function BlogPreview() {
   }, []);
 
   if (loading) return (
-    <div style={{ textAlign: 'center', padding: '40px', color: 'var(--purple)', fontFamily: 'Montserrat,sans-serif' }}>
+    <div className="p-10 text-center text-purple">
       {t.blog.loading}
     </div>
   );
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="blog-grid">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
       {articles.map((a) => (
-        <div key={a._id} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div key={a._id} className="card flex flex-col">
           {a.mainImage && (
-            <div style={{ marginBottom: '16px', borderRadius: '8px', overflow: 'hidden', height: '160px' }}>
+            <div className="mb-4 h-40 overflow-hidden rounded-lg">
               <img
                 src={urlFor(a.mainImage).width(400).height(160).fit('crop').url()}
                 alt={a.title}
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                className="block h-full w-full object-cover"
               />
             </div>
           )}
-          <div style={{ marginBottom: '12px' }}>
+          <div className="mb-3">
             <span className="badge badge-purple">{a.category}</span>
           </div>
-          <Link to={`/demo/blog/${a.slug.current}`} style={{ textDecoration: 'none' }}>
-            <h3 style={{ fontSize: '17px', color: 'var(--blue)', marginBottom: '12px', lineHeight: 1.4 }}>{a.title}</h3>
+          <Link to={`/demo/blog/${a.slug.current}`}>
+            <h3 className="mb-3 text-[17px] leading-[1.4] text-blue">{a.title}</h3>
           </Link>
-          <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.60)', marginBottom: '20px', flex: 1 }}>{a.excerpt}</p>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(159,142,194,0.15)', paddingTop: '14px', marginTop: 'auto' }}>
-            <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'var(--purple)' }}>
+          <p className="mb-5 flex-1 text-sm text-blue/60">{a.excerpt}</p>
+          <div className="mt-auto flex items-center justify-between border-t border-purple/15 pt-3.5">
+            <span className="text-xs font-normal text-purple">
               {a.readTime} {t.blog.minutesSuffix} · {formatDate(a.publishedAt, t.meta.dateLocale)}
             </span>
-            <Link to={`/demo/blog/${a.slug.current}`} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--purple)' }}>
+            <Link to={`/demo/blog/${a.slug.current}`} className="text-[13px] font-bold text-purple">
               {t.blog.readArticle}
             </Link>
           </div>
@@ -273,42 +273,26 @@ function NewsTickerSection() {
   const looped = [...news, ...news];
 
   return (
-    <section style={{
-      background:   'var(--white)',
-      borderTop:    '1px solid rgba(159,142,194,0.18)',
-      borderBottom: '1px solid rgba(159,142,194,0.18)',
-      padding: '36px 0',
-      overflow: 'hidden',
-    }}>
-      <div className="container" style={{ marginBottom: '20px' }}>
-        <p style={{
-          fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px',
-          color: 'rgba(35,56,119,0.45)', textAlign: 'center',
-          textTransform: 'uppercase', letterSpacing: '0.10em',
-        }}>
+    <section className="overflow-hidden border-y border-purple/[0.18] bg-white py-9">
+      <div className="container mb-5">
+        <p className="text-center text-[13px] font-normal uppercase tracking-[0.1em] text-blue/45">
           {t.news.heading}
         </p>
       </div>
 
       <div
-        style={{ overflow: 'hidden', position: 'relative' }}
+        className="relative overflow-hidden"
         onMouseEnter={() => { pausedRef.current = true; }}
         onMouseLeave={() => { pausedRef.current = false; }}
       >
-        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(to right, white, transparent)', zIndex: 2, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(to left, white, transparent)', zIndex: 2, pointerEvents: 'none' }} />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-20 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-[2] w-20 bg-gradient-to-l from-white to-transparent" />
 
         <button
           type="button"
           aria-label={t.news.prevLabel}
           onClick={() => scrollByAmount(-1)}
-          style={{
-            position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
-            zIndex: 3, width: '40px', height: '40px', borderRadius: '50%',
-            background: 'var(--white)', border: '1px solid rgba(159,142,194,0.35)',
-            boxShadow: '0 4px 14px rgba(35,56,119,0.15)', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}
+          className="absolute left-3 top-1/2 z-[3] flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-purple/35 bg-white shadow-[0_4px_14px_rgba(35,56,119,0.15)]"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
@@ -319,13 +303,7 @@ function NewsTickerSection() {
           type="button"
           aria-label={t.news.nextLabel}
           onClick={() => scrollByAmount(1)}
-          style={{
-            position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
-            zIndex: 3, width: '40px', height: '40px', borderRadius: '50%',
-            background: 'var(--white)', border: '1px solid rgba(159,142,194,0.35)',
-            boxShadow: '0 4px 14px rgba(35,56,119,0.15)', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}
+          className="absolute right-3 top-1/2 z-[3] flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-purple/35 bg-white shadow-[0_4px_14px_rgba(35,56,119,0.15)]"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="9 18 15 12 9 6" />
@@ -333,9 +311,9 @@ function NewsTickerSection() {
         </button>
 
         {/* Este div é o que faz scroll de facto — largura fixa (100%) + overflow hidden */}
-        <div ref={trackRef} style={{ overflowX: 'hidden', width: '100%' }}>
+        <div ref={trackRef} className="w-full overflow-x-hidden">
           {/* Este div é só a fila de cartões, mede-se ao tamanho do conteúdo */}
-          <div className="news-track">
+          <div className="flex w-max">
             {looped.map((item, i) => {
               const color = AREA_COLORS[item.area] ?? 'var(--blue)';
               return (
@@ -343,20 +321,12 @@ function NewsTickerSection() {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="news-card"
-                  style={{
-                    flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '10px',
-                    width: '260px', padding: '16px 18px', margin: '0 10px',
-                    background: 'var(--bg)', borderRadius: '12px',
-                    border: '1px solid rgba(159,142,194,0.15)',
-                    textDecoration: 'none',
-                    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-                  }}
+                  className="mx-2.5 flex w-[260px] shrink-0 flex-col gap-2.5 rounded-xl border border-purple/15 bg-bg px-[18px] py-4 transition-[border-color,box-shadow] duration-200 hover:border-purple/45 hover:shadow-[0_4px_20px_rgba(35,56,119,0.08)]"
                 >
                   {item.thumbnail ? (
-                    <div style={{ borderRadius: '8px', overflow: 'hidden', height: '100px', flexShrink: 0 }}>
+                    <div className="h-[100px] shrink-0 overflow-hidden rounded-lg">
                       <img src={item.thumbnail} alt={item.title} loading="lazy"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        className="block h-full w-full object-cover"
                         onError={(e) => {
                           const el = e.currentTarget as HTMLImageElement;
                           const p  = el.parentElement as HTMLElement;
@@ -370,41 +340,34 @@ function NewsTickerSection() {
                       />
                     </div>
                   ) : (
-                    <div style={{
-                      borderRadius: '8px', height: '100px', flexShrink: 0,
-                      background: `linear-gradient(135deg, ${color}22, ${color}44)`,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" style={{ opacity: 0.4 }}>
+                    // ponytail: gradiente depende da cor da área — fica inline
+                    <div
+                      className="flex h-[100px] shrink-0 items-center justify-center rounded-lg"
+                      style={{ background: `linear-gradient(135deg, ${color}22, ${color}44)` }}
+                    >
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" className="opacity-40">
                         <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
                       </svg>
                     </div>
                   )}
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
-                    <span style={{
-                      fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '10px',
-                      textTransform: 'uppercase', letterSpacing: '0.08em',
-                      color: color, background: `${color}18`,
-                      padding: '3px 8px', borderRadius: '100px', flexShrink: 0,
-                    }}>
+                  <div className="flex items-center justify-between gap-2">
+                    <span
+                      className="shrink-0 rounded-full px-2 py-[3px] text-[10px] font-bold uppercase tracking-[0.08em]"
+                      style={{ color, background: `${color}18` }}
+                    >
                       {t.news.areas[item.area] ?? item.area}
                     </span>
-                    <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '11px', color: 'rgba(35,56,119,0.35)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '110px' }}>
+                    <span className="max-w-[110px] truncate text-[11px] text-blue/35">
                       {item.source}
                     </span>
                   </div>
 
-                  <p style={{
-                    fontFamily: 'Montserrat, sans-serif', fontWeight: 600, fontSize: '13px',
-                    color: 'var(--blue)', lineHeight: 1.45, margin: 0,
-                    display: '-webkit-box', WebkitLineClamp: 3,
-                    WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                  }}>
+                  <p className="m-0 line-clamp-3 text-[13px] font-semibold leading-[1.45] text-blue">
                     {item.title}
                   </p>
 
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', color: 'var(--purple)' }}>
+                  <span className="text-[11px] font-bold text-purple">
                     {t.news.readArticle}
                   </span>
                 </a>
@@ -413,17 +376,6 @@ function NewsTickerSection() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        .news-track {
-          display: flex;
-          width: max-content;
-        }
-        .news-card:hover {
-          border-color: rgba(159,142,194,0.45) !important;
-          box-shadow: 0 4px 20px rgba(35,56,119,0.08);
-        }
-      `}</style>
     </section>
   );
 }
@@ -495,56 +447,45 @@ function LeadMagnetSection() {
   const checklistItems = t.leadMagnet.checklist;
 
   return (
-    <section style={{ background: 'var(--grad-main)', padding: '80px 0' }}>
+    <section className="bg-grad-main py-20">
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '56px', alignItems: 'center' }} className="lead-grid animate-on-scroll">
+        <div className="animate-on-scroll grid grid-cols-1 items-center gap-14 md:grid-cols-2">
           <div>
-            <span style={{
-              display: 'inline-block', background: 'rgba(255,255,255,0.12)',
-              border: '1.5px solid rgba(255,255,255,0.40)', color: 'var(--white)',
-              fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px',
-              letterSpacing: '0.10em', textTransform: 'uppercase', padding: '5px 14px',
-              borderRadius: '100px', marginBottom: '20px',
-            }}>
+            <span className="mb-5 inline-block rounded-full border-[1.5px] border-white/40 bg-white/[0.12] px-3.5 py-[5px] text-[11px] font-bold uppercase tracking-[0.1em] text-white">
               {t.leadMagnet.badge}
             </span>
-            <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '28px', color: 'var(--white)', marginBottom: '24px', lineHeight: 1.3 }}>
+            <h3 className="mb-6 text-[28px] font-bold leading-[1.3] text-white">
               {t.leadMagnet.title}
             </h3>
-            <ul style={{ listStyle: 'none' }}>
+            <ul className="list-none">
               {checklistItems.map((item) => (
-                <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '15px', color: 'rgba(255,255,255,0.82)', padding: '6px 0', paddingLeft: '20px', position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: 0, color: 'var(--white)', fontWeight: 700 }}>✓</span>
+                <li key={item} className="relative py-1.5 pl-5 text-[15px] font-normal text-white/[0.82]">
+                  <span className="absolute left-0 font-bold text-white">✓</span>
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div style={{ background: 'var(--white)', borderRadius: '16px', padding: '36px', boxShadow: '0 8px 40px rgba(35,56,119,0.20)' }}>
+          <div className="rounded-2xl bg-white p-9 shadow-[0_8px_40px_rgba(35,56,119,0.20)]">
             {status === 'success' ? (
-                <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                  <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
-                  <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '12px' }}>{t.leadMagnet.successTitle}</h3>
-                  <p style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px' }}>
-                    {t.leadMagnet.successText}
-                  </p>
-                  
-                  <a
-                    href="/guia-5-proteccoes-legais.pdf"
-                    download
-                    className="btn-gradient"
-                    style={{ display: 'inline-flex' }}
-                  >
-                    {t.leadMagnet.downloadCta}
-                  </a>
-                </div>
-              ) : (
+              <div className="py-5 text-center">
+                <div className="mb-4 text-5xl">✅</div>
+                <h3 className="mb-3 text-xl font-bold text-blue">{t.leadMagnet.successTitle}</h3>
+                <p className="mb-5 text-sm text-blue/65">
+                  {t.leadMagnet.successText}
+                </p>
+
+                <a href="/guia-5-proteccoes-legais.pdf" download className="btn-gradient">
+                  {t.leadMagnet.downloadCta}
+                </a>
+              </div>
+            ) : (
               <>
-                <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '24px' }}>
+                <h3 className="mb-6 text-xl font-bold text-blue">
                   {t.leadMagnet.formTitle}
                 </h3>
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                   <div>
                     <label htmlFor="lead-nome">{t.leadMagnet.nameLabel}</label>
                     <input id="lead-nome" name="nome" type="text" placeholder={t.leadMagnet.namePlaceholder} value={nome} onChange={(e) => setNome(e.target.value)} required />
@@ -557,33 +498,32 @@ function LeadMagnetSection() {
                     <label htmlFor="lead-empresa">{t.leadMagnet.companyLabel}</label>
                     <input id="lead-empresa" name="empresa" type="text" placeholder={t.leadMagnet.companyPlaceholder} value={empresa} onChange={(e) => setEmpresa(e.target.value)} required />
                   </div>
-                                    <label style={{
-                    display: 'flex', alignItems: 'flex-start', gap: '8px',
-                    cursor: 'pointer', fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: 400, fontSize: '12.5px', color: 'rgba(35,56,119,0.75)',
-                    lineHeight: 1.4, textTransform: 'none', letterSpacing: 'normal',
-                  }}>
+                  <label className="flex cursor-pointer items-start gap-2 text-[12.5px] font-normal normal-case leading-[1.4] tracking-normal text-blue/75">
                     <input
                       type="checkbox"
                       required
                       checked={aceitaNewsletter}
                       onChange={(e) => setAceitaNewsletter(e.target.checked)}
-                      style={{ width: '16px', height: '16px', marginTop: '2px', flexShrink: 0 }}
+                      className="mt-0.5 h-4 w-4 shrink-0"
                     />
                     <span>
                       {t.leadMagnet.consent}
                     </span>
                   </label>
                   {status === 'duplicate' && (
-                    <p style={{ fontSize: '13px', color: '#e53e3e', margin: 0 }}>{t.leadMagnet.duplicateError}</p>
+                    <p className="m-0 text-[13px] text-red-600">{t.leadMagnet.duplicateError}</p>
                   )}
                   {status === 'error' && (
-                    <p style={{ fontSize: '13px', color: '#e53e3e', margin: 0 }}>{t.leadMagnet.genericError}</p>
+                    <p className="m-0 text-[13px] text-red-600">{t.leadMagnet.genericError}</p>
                   )}
-                  <button type="submit" className="btn-gradient" disabled={status === 'loading'} style={{ width: '100%', marginTop: '8px', opacity: status === 'loading' ? 0.7 : 1 }}>
+                  <button
+                    type="submit"
+                    className={`btn-gradient mt-2 w-full ${status === 'loading' ? 'opacity-70' : ''}`}
+                    disabled={status === 'loading'}
+                  >
                     {status === 'loading' ? t.leadMagnet.submitting : t.leadMagnet.submit}
                   </button>
-                  <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '12px', color: 'rgba(35,56,119,0.45)', textAlign: 'center', margin: 0 }}>
+                  <p className="m-0 text-center text-xs font-normal text-blue/45">
                     {t.leadMagnet.disclaimer}
                   </p>
                 </form>
@@ -592,9 +532,6 @@ function LeadMagnetSection() {
           </div>
         </div>
       </div>
-      <style>{`
-        @media (max-width: 768px) { .lead-grid { grid-template-columns: 1fr !important; } }
-      `}</style>
     </section>
   );
 }
@@ -623,123 +560,98 @@ export default function Home() {
   }, [t.meta.documentTitle]);
 
   return (
-    <main style={{ paddingTop: '72px' }}>
+    <main className="pt-[72px]">
 
       {/* ── HERO ── */}
-<section style={{ padding: '100px 0 80px', position: 'relative', overflow: 'hidden' }}>
-  {/* Foto de fundo da sede */}
-  <div style={{
-    position: 'absolute', inset: 0,
-    backgroundImage: 'url(/sede-nieusync.jpg)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    zIndex: 0,
-  }} />
+      <section className="relative overflow-hidden pb-20 pt-[100px]">
+        {/* Foto de fundo da sede */}
+        <div className="absolute inset-0 z-0 bg-[url(/sede-nieusync.jpg)] bg-cover bg-center" />
 
-  {/* Camada de cor por cima da foto — dá destaque ao texto */}
-    <div style={{
-        position: 'absolute', inset: 0,
-        background: 'rgba(35,56,119,0.85)',
-        zIndex: 1,
-    }} />
+        {/* Camada de cor por cima da foto — dá destaque ao texto */}
+        <div className="absolute inset-0 z-[1] bg-blue/85" />
 
-  {[
-    { size: 400, top: '-100px', right: '-100px', opacity: 0.10 },
-    { size: 280, top: '40%',    right: '5%',     opacity: 0.12 },
-    { size: 180, bottom: '-60px', left: '-60px', opacity: 0.14 },
-  ].map((c, i) => (
-    <div key={i} style={{
-      position: 'absolute', width: c.size, height: c.size, borderRadius: '50%',
-      border: `1px solid rgba(159,142,194,${c.opacity})`,
-      top: (c as any).top, right: (c as any).right,
-      bottom: (c as any).bottom, left: (c as any).left, pointerEvents: 'none',
-      zIndex: 1,
-    }} />
-  ))}
+        <div className="pointer-events-none absolute -right-[100px] -top-[100px] z-[1] h-[400px] w-[400px] rounded-full border border-purple/10" />
+        <div className="pointer-events-none absolute right-[5%] top-[40%] z-[1] h-[280px] w-[280px] rounded-full border border-purple/[0.12]" />
+        <div className="pointer-events-none absolute -bottom-[60px] -left-[60px] z-[1] h-[180px] w-[180px] rounded-full border border-purple/[0.14]" />
 
-  <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-    <div style={{ display: 'grid', gridTemplateColumns: '55% 42%', gap: '48px', alignItems: 'center' }} className="hero-grid">
-      <div>
-        <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '100px', padding: '7px 18px', marginBottom: '28px' }}>
-          <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            {t.hero.badge}
-          </span>
-        </div>
+        <div className="container relative z-[2]">
+          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[55%_42%]">
+            <div>
+              <div className="mb-7 inline-flex items-center rounded-full border border-white/25 bg-white/[0.12] px-[18px] py-[7px]">
+                <span className="text-xs font-bold uppercase tracking-[0.08em] text-white/85">
+                  {t.hero.badge}
+                </span>
+              </div>
 
-        <h1 style={{ color: 'var(--white)', marginBottom: '24px', fontSize: '64px' }}>
-          {t.hero.titleStart} <br />
-          <span style={{ color: 'var(--purple)' }}>{t.hero.titleHighlight}</span> {t.hero.titleEnd}
-        </h1>
+              <h1 className="mb-6 text-[64px] text-white">
+                {t.hero.titleStart} <br />
+                <span className="text-purple">{t.hero.titleHighlight}</span> {t.hero.titleEnd}
+              </h1>
 
-        <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', maxWidth: '520px', marginBottom: '36px' }}>
-          {t.hero.subtitle}
-        </p>
+              <p className="mb-9 max-w-[520px] text-[17px] text-white/[0.78]">
+                {t.hero.subtitle}
+              </p>
 
-        <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
-          <Link to="/demo/contact"
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--white)'; (e.currentTarget as HTMLElement).style.color = 'var(--purple)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--purple)'; (e.currentTarget as HTMLElement).style.color = 'var(--white)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
-            style={{ fontSize: '13px', padding: '15px 28px', background: 'var(--purple)', color: 'var(--white)', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, borderRadius: '8px', textDecoration: 'none', display: 'inline-block', transition: 'background 0.25s ease, color 0.25s ease, transform 0.2s ease' }}
-          >
-            {t.hero.ctaPrimary}
-          </Link>
-          <Link to="/demo/services" className="btn-outline-white">{t.hero.ctaSecondary}</Link>
-        </div>
+              <div className="mb-9 flex flex-wrap gap-3.5">
+                <Link
+                  to="/demo/contact"
+                  className="inline-block rounded-lg bg-purple px-7 py-[15px] text-[13px] font-bold uppercase tracking-[0.08em] text-white transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-purple"
+                >
+                  {t.hero.ctaPrimary}
+                </Link>
+                <Link to="/demo/services" className="btn-outline-white">{t.hero.ctaSecondary}</Link>
+              </div>
 
-        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-          {t.hero.trustPoints.map((point) => (
-            <span key={point} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)' }}>
-              ✓ {point}
-            </span>
-          ))}
-        </div>
-      </div>
+              <div className="flex flex-wrap gap-6">
+                {t.hero.trustPoints.map((point) => (
+                  <span key={point} className="text-[13px] font-normal text-white/65">
+                    ✓ {point}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-      <div className="hero-card-wrapper" style={{ display: 'flex', justifyContent: 'center' }}>
-        <div className="animate-float" style={{ background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', padding: '40px', backdropFilter: 'blur(10px)', width: '100%', maxWidth: '400px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-            {t.hero.stats.map(({ value, label }, i) => (
-              <div key={label} style={{ padding: '20px 16px', borderRight: i % 2 === 0 ? '1px solid rgba(255,255,255,0.10)' : 'none', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.10)' : 'none' }}>
-                <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '38px', lineHeight: 1, marginBottom: '6px', background: 'linear-gradient(135deg,#fff,rgba(255,255,255,0.7))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                  {value}
-                </div>
-                <div style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(255,255,255,0.65)' }}>
-                  {label}
+            <div className="hidden justify-center md:flex">
+              <div className="w-full max-w-[400px] animate-float rounded-[20px] border border-white/[0.18] bg-white/[0.09] p-10 backdrop-blur-[10px]">
+                <div className="grid grid-cols-2">
+                  {t.hero.stats.map(({ value, label }, i) => (
+                    <div
+                      key={label}
+                      className={`px-4 py-5 ${i % 2 === 0 ? 'border-r border-white/10' : ''} ${i < 2 ? 'border-b border-white/10' : ''}`}
+                    >
+                      <div className="mb-1.5 bg-gradient-to-br from-white to-white/70 bg-clip-text text-[38px] font-bold leading-none text-transparent">
+                        {value}
+                      </div>
+                      <div className="text-[13px] font-normal text-white/65">
+                        {label}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <style>{`
-    @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr !important; }
-      .hero-card-wrapper { display: none !important; }
-    }
-  `}</style>
-</section>
+      </section>
 
       {/* ── NOTÍCIAS ── */}
       <NewsTickerSection />
 
       {/* ── SERVICES ── */}
-      <section style={{ background: 'var(--bg)', padding: '100px 0' }}>
+      <section className="bg-bg py-[100px]">
         <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '100px' }}>
+          <div className="animate-on-scroll mb-[100px] text-center">
             <span className="section-label">{t.services.label}</span>
-            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
-            <h2 style={{ color: 'var(--blue)', marginBottom: '16px' }}>{t.services.title}</h2>
-            <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '560px', margin: '0 auto' }}>
+            <div className="accent-line accent-line-center bg-purple bg-none" />
+            <h2 className="mb-4 text-blue">{t.services.title}</h2>
+            <p className="mx-auto max-w-[560px] text-blue/60">
               {t.services.subtitle}
             </p>
           </div>
 
-          <div className="services-orbit animate-on-scroll" style={{ position: 'relative', width: '350px', height: '350px', margin: '60px auto 0', overflow: 'visible' }}>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/Logo_sem_letras.png" alt={t.services.logoAlt} loading="lazy" style={{ width: '350px', height: '350px', objectFit: 'contain' }} />
+          <div className="animate-on-scroll relative mx-auto mt-[60px] h-[220px] w-[220px] overflow-visible md:h-[350px] md:w-[350px]">
+            <div className="absolute left-1/2 top-1/2 z-[1] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+              <img src="/Logo_sem_letras.png" alt={t.services.logoAlt} loading="lazy" className="h-[200px] w-[200px] object-contain md:h-[350px] md:w-[350px]" />
             </div>
 
             {[
@@ -755,159 +667,126 @@ export default function Home() {
               const x = Math.cos(rad) * radius;
               const y = Math.sin(rad) * radius;
               return (
-                <Link key={href} to={href} className="orbit-item"
-                  style={{ position: 'absolute', top: '50%', left: '50%', transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', textDecoration: 'none', width: '120px', textAlign: 'center', transition: 'transform 0.3s ease', zIndex: 2 }}
-                  onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1.1)`}
-                  onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1)`}
+                // ponytail: posição orbital calculada — o transform fica inline
+                <Link key={href} to={href}
+                  className="absolute left-1/2 top-1/2 z-[2] flex w-[90px] flex-col items-center gap-2 text-center transition-transform duration-300 hover:scale-110 md:w-[120px]"
+                  style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
                 >
-                  <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'var(--white)', border: '2px solid rgba(159,142,194,0.25)', boxShadow: '0 4px 16px rgba(35,56,119,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'border-color 0.2s ease, box-shadow 0.2s ease' }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--purple)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 24px rgba(159,142,194,0.30)'; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(159,142,194,0.25)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(35,56,119,0.10)'; }}
-                  >
+                  <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full border-2 border-purple/25 bg-white shadow-[0_4px_16px_rgba(35,56,119,0.10)] transition-[border-color,box-shadow] duration-200 hover:border-purple hover:shadow-[0_6px_24px_rgba(159,142,194,0.30)] md:h-16 md:w-16 [&_svg]:h-[22px] [&_svg]:w-[22px] md:[&_svg]:h-7 md:[&_svg]:w-7">
                     {icon}
                   </div>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', color: 'var(--blue)', lineHeight: 1.3, letterSpacing: '0.02em' }}>{label}</span>
+                  <span className="text-xs font-bold leading-[1.3] tracking-[0.02em] text-blue md:text-[13px]">{label}</span>
                 </Link>
               );
             })}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '120px' }}>
+          <div className="mt-[120px] text-center">
             <Link to="/demo/services" className="btn-gradient">{t.services.cta}</Link>
           </div>
         </div>
-
-        <style>{`
-          @media (max-width: 768px) {
-            .services-orbit { width: 220px !important; height: 220px !important; }
-            .services-orbit .orbit-item { width: 90px !important; }
-            .services-orbit .orbit-item > div { width: 52px !important; height: 52px !important; }
-            .services-orbit .orbit-item > div svg { width: 22px !important; height: 22px !important; }
-            .services-orbit .orbit-item > span { font-size: 12px !important; }
-            .services-orbit img { width: 200px !important; height: 200px !important; }
-          }
-        `}</style>
       </section>
 
       {/* ── METHODOLOGY ── */}
-      <section style={{ background: 'var(--grad-subtle)', padding: '100px 0' }}>
+      <section className="bg-grad-main py-[100px]">
         <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div className="animate-on-scroll mb-16 text-center">
             <span className="section-label section-label-white">{t.methodology.label}</span>
             <div className="accent-line accent-line-white accent-line-center" />
-            <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>{t.methodology.title}</h2>
-            <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '540px', margin: '0 auto' }}>
+            <h2 className="mb-4 text-white">{t.methodology.title}</h2>
+            <p className="mx-auto max-w-[540px] text-white/70">
               {t.methodology.subtitle}
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px', position: 'relative', marginBottom: '32px' }} className="steps-grid-top animate-on-scroll">
+          <div className="animate-on-scroll relative mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {t.methodology.stepsTop.map((step, i) => (
-              <div key={step.num} className="stagger-child" style={{ textAlign: 'center', position: 'relative' }}>
-                {i < 2 && <div style={{ position: 'absolute', right: '-12%', top: '30px', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.18)', fontSize: '20px', fontWeight: 700 }} className="step-arrow">→</div>}
-                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.30)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)' }}>{step.num}</span>
+              <div key={step.num} className="stagger-child relative text-center">
+                {i < 2 && <div className="absolute -right-[12%] top-[30px] hidden -translate-y-1/2 text-xl font-bold text-white/[0.18] md:block">→</div>}
+                <div className="mx-auto mb-5 flex h-[60px] w-[60px] items-center justify-center rounded-full border-2 border-white/30 bg-white/[0.12]">
+                  <span className="text-lg font-bold text-white">{step.num}</span>
                 </div>
-                <h3 style={{ color: 'var(--white)', fontSize: '16px', marginBottom: '10px' }}>{step.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '14px' }}>{step.desc}</p>
+                <h3 className="mb-2.5 text-base text-white">{step.title}</h3>
+                <p className="text-sm text-white/[0.68]">{step.desc}</p>
               </div>
             ))}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '24px', maxWidth: '680px', margin: '0 auto', position: 'relative' }} className="steps-grid-bottom animate-on-scroll">
+          <div className="animate-on-scroll relative mx-auto grid max-w-full grid-cols-1 gap-6 md:max-w-[680px] md:grid-cols-2">
             {t.methodology.stepsBottom.map((step, i) => (
-              <div key={step.num} className="stagger-child" style={{ textAlign: 'center', position: 'relative' }}>
-                {i < 1 && <div style={{ position: 'absolute', right: '-12%', top: '30px', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.18)', fontSize: '20px', fontWeight: 700 }} className="step-arrow">→</div>}
-                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.30)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--white)' }}>{step.num}</span>
+              <div key={step.num} className="stagger-child relative text-center">
+                {i < 1 && <div className="absolute -right-[12%] top-[30px] hidden -translate-y-1/2 text-xl font-bold text-white/[0.18] md:block">→</div>}
+                <div className="mx-auto mb-5 flex h-[60px] w-[60px] items-center justify-center rounded-full border-2 border-white/30 bg-white/[0.12]">
+                  <span className="text-lg font-bold text-white">{step.num}</span>
                 </div>
-                <h3 style={{ color: 'var(--white)', fontSize: '16px', marginBottom: '10px' }}>{step.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.68)', fontSize: '14px' }}>{step.desc}</p>
+                <h3 className="mb-2.5 text-base text-white">{step.title}</h3>
+                <p className="text-sm text-white/[0.68]">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
-
-        <style>{`
-          @media (max-width: 1024px) {
-            .steps-grid-top { grid-template-columns: repeat(2,1fr) !important; }
-          }
-          @media (max-width: 768px) {
-            .steps-grid-top    { grid-template-columns: 1fr !important; }
-            .steps-grid-bottom { grid-template-columns: 1fr !important; max-width: 100% !important; }
-            .step-arrow { display: none !important; }
-          }
-        `}</style>
       </section>
 
       {/* ── PERSONA ── */}
-      <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
+      <section className="bg-bg py-20">
         <div className="container">
-          <h2 className="animate-on-scroll" style={{ color: 'var(--blue)', textAlign: 'center', marginBottom: '40px' }}>
-            {t.persona.headingBefore}<span style={{ color: 'var(--purple)' }}>{t.persona.headingBrand}</span>{t.persona.headingAfter}
+          <h2 className="animate-on-scroll mb-10 text-center text-blue">
+            {t.persona.headingBefore}<span className="text-purple">{t.persona.headingBrand}</span>{t.persona.headingAfter}
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px', marginBottom: '40px' }} className="persona-grid animate-on-scroll">
+          <div className="animate-on-scroll mb-10 grid grid-cols-1 gap-5 md:grid-cols-3">
             {t.persona.cards.map((text) => (
-              <div key={text} className="stagger-child animate-on-scroll" style={{ background: 'var(--white)', borderLeft: '4px solid var(--blue)', borderRadius: '0 14px 14px 0', padding: '22px 26px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" strokeWidth="2" strokeLinecap="round" style={{ flexShrink: 0, marginTop: '2px' }}>
+              <div key={text} className="stagger-child animate-on-scroll flex items-start gap-3 rounded-r-[14px] border-l-4 border-blue bg-white px-[26px] py-[22px]">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" strokeWidth="2" strokeLinecap="round" className="mt-0.5 shrink-0">
                   <circle cx="12" cy="12" r="10" /><path d="M12 8v4M12 16h.01" />
                 </svg>
-                <p style={{ fontSize: '15px', color: 'var(--blue)', margin: 0 }}>{text}</p>
+                <p className="m-0 text-[15px] text-blue">{text}</p>
               </div>
             ))}
           </div>
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ fontFamily: 'Montserrat, sans-serif', fontStyle: 'italic', color: 'rgba(35,56,119,0.65)', marginBottom: '24px', maxWidth: '560px', margin: '0 auto 24px' }}>
+          <div className="text-center">
+            <p className="mx-auto mb-6 max-w-[560px] italic text-blue/65">
               {t.persona.quote}
             </p>
             <Link to="/demo/contact" className="btn-gradient">{t.persona.cta}</Link>
           </div>
         </div>
-        <style>{`
-          @media (max-width: 768px) { .persona-grid { grid-template-columns: 1fr !important; } }
-        `}</style>
       </section>
 
       {/* ── LEAD MAGNET ── */}
       <LeadMagnetSection />
 
       {/* ── BLOG PREVIEW ── */}
-      <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
+      <section className="bg-bg py-20">
         <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div className="animate-on-scroll mb-12 text-center">
             <span className="section-label">{t.blog.label}</span>
-            <div className="accent-line accent-line-center" style={{ background: 'var(--purple)', backgroundImage: 'none' }} />
-            <h2 style={{ color: 'var(--blue)', marginBottom: '12px' }}>{t.blog.title}</h2>
-            <p style={{ color: 'rgba(35,56,119,0.60)', maxWidth: '460px', margin: '0 auto' }}>{t.blog.subtitle}</p>
+            <div className="accent-line accent-line-center bg-purple bg-none" />
+            <h2 className="mb-3 text-blue">{t.blog.title}</h2>
+            <p className="mx-auto max-w-[460px] text-blue/60">{t.blog.subtitle}</p>
           </div>
           <BlogPreview />
-          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+          <div className="mt-10 text-center">
             <Link to="/demo/blog" className="btn-gradient">{t.blog.cta}</Link>
           </div>
         </div>
-        <style>{`
-          @media (max-width: 768px) { .blog-grid { grid-template-columns: 1fr !important; } }
-        `}</style>
       </section>
 
       {/* ── CTA FINAL ── */}
-      <section style={{ background: 'var(--grad-main)', padding: '100px 0', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', width: '600px', height: '600px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.08)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', pointerEvents: 'none' }} />
-        <div className="container" style={{ position: 'relative' }}>
+      <section className="relative overflow-hidden bg-grad-main py-[100px] text-center">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.08]" />
+        <div className="container relative">
           <div className="animate-on-scroll">
-            <h2 style={{ fontFamily: "'Magistral', 'Montserrat', sans-serif", fontWeight: 700, fontSize: 'clamp(32px,5vw,48px)', color: 'var(--white)', marginBottom: '20px' }}>
+            <h2 className="mb-5 font-display text-[clamp(32px,5vw,48px)] font-bold text-white">
               {t.cta.title}
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '560px', margin: '0 auto 40px', fontSize: '17px' }}>
+            <p className="mx-auto mb-10 max-w-[560px] text-[17px] text-white/75">
               {t.cta.subtitle}
             </p>
-            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/demo/contact" className="btn-outline-white" style={{ padding: '16px 36px' }}>{t.cta.primary}</Link>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/demo/contact" className="btn-outline-white px-9 py-4">{t.cta.primary}</Link>
               <a href={`https://wa.me/351933644596?text=${encodeURIComponent(t.cta.whatsappMessage)}`}
                 target="_blank" rel="noopener noreferrer"
-                style={{ background: 'var(--white)', color: 'var(--blue)', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', letterSpacing: '0.08em', textTransform: 'uppercase', padding: '16px 36px', borderRadius: '8px', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'background 0.3s ease, color 0.3s ease, transform 0.2s ease', textDecoration: 'none', minHeight: '44px' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--grad-reverse)'; (e.currentTarget as HTMLElement).style.color = 'var(--white)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--white)'; (e.currentTarget as HTMLElement).style.color = 'var(--blue)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-9 py-4 text-[13px] font-bold uppercase tracking-[0.08em] text-blue transition duration-300 hover:-translate-y-[3px] hover:bg-grad-reverse hover:text-white"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
                 {t.cta.whatsapp}

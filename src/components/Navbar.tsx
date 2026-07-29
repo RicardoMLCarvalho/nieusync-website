@@ -36,74 +36,56 @@ export default function Navbar() {
     { to: '/demo/contact',  label: t.links.contact },
   ];
 
-  const navLinkStyle = (active: boolean): React.CSSProperties => ({
-    fontFamily: 'Montserrat, sans-serif',
-    fontWeight: 700,
-    fontSize: '14px',
-    color: active ? 'var(--purple)' : 'var(--blue)',
-    padding: '8px 14px',
-    borderRadius: '6px',
-    position: 'relative',
-    transition: 'color 0.2s ease',
-    textDecoration: 'none',
-    display: 'inline-flex',
-    alignItems: 'center',
-    minHeight: '44px',
-  });
-
   return (
     <>
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-        backgroundColor: 'var(--white)',
-        borderBottom: scrolled ? 'none' : '1px solid rgba(159,142,194,0.2)',
-        boxShadow: scrolled ? '0 2px 24px rgba(35,56,119,0.10)' : 'none',
-        transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
-      }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px' }}>
+      <nav
+        className={`fixed inset-x-0 top-0 z-[1000] bg-white transition-[box-shadow,border-color] duration-300 ${
+          scrolled ? 'border-b-0 shadow-[0_2px_24px_rgba(35,56,119,0.10)]' : 'border-b border-purple/20'
+        }`}
+      >
+        <div className="container flex h-[72px] items-center justify-between">
 
           {/* Logo */}
-          <Link to="/demo" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-            <img src="logo_new.png" alt={t.logoAlt} style={{ display: 'block', height: '120px', width: 'auto' }} />
+          <Link to="/demo" className="flex shrink-0 items-center">
+            <img src="logo_new.png" alt={t.logoAlt} className="block h-[120px] w-auto" />
           </Link>
 
           {/* Desktop Nav */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }} className="desktop-nav">
+          <div className="hidden items-center gap-1 md:flex">
             {mainLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                style={navLinkStyle(isActive(link.to))}
-                onMouseEnter={(e) => { if (!isActive(link.to)) (e.currentTarget as HTMLElement).style.color = 'var(--purple)'; }}
-                onMouseLeave={(e) => { if (!isActive(link.to)) (e.currentTarget as HTMLElement).style.color = 'var(--blue)'; }}
+                className={`relative inline-flex min-h-[44px] items-center rounded-md px-[14px] py-2 text-sm font-bold transition-colors duration-200 hover:text-purple ${
+                  isActive(link.to) ? 'text-purple' : 'text-blue'
+                }`}
               >
                 {link.label}
                 {isActive(link.to) && (
-                  <span style={{ position: 'absolute', bottom: '2px', left: '14px', right: '14px', height: '2px', borderRadius: '1px', background: 'var(--blue)' }} />
+                  <span className="absolute inset-x-[14px] bottom-0.5 h-0.5 rounded-sm bg-blue" />
                 )}
               </Link>
             ))}
-            <LanguageToggle style={{ color: 'var(--blue)', marginLeft: '8px' }} />
+            <LanguageToggle className="ml-2 text-blue" />
           </div>
 
-          <a href={PLATFORM_URL} className="btn-portal desktop-nav">
+          <a href={PLATFORM_URL} className="btn-portal hidden md:inline-flex">
             {t.portal}
           </a>
 
-          <Link to="/demo/contact" className="btn-gradient desktop-nav" style={{ fontSize: '12px', padding: '12px 24px' }}>
+          <Link to="/demo/contact" className="btn-gradient hidden px-6 py-3 text-xs md:inline-flex">
             {t.bookConsultation}
           </Link>
 
           {/* Hamburger */}
           <button
-            className="mobile-menu-btn"
             onClick={() => setMobileOpen(true)}
             aria-label={t.openMenu}
             aria-expanded={mobileOpen}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', display: 'flex', flexDirection: 'column', gap: '5px', minWidth: '44px', minHeight: '44px', alignItems: 'center', justifyContent: 'center' }}
+            className="flex min-h-[44px] min-w-[44px] cursor-pointer flex-col items-center justify-center gap-[5px] border-none bg-transparent p-2 md:hidden"
           >
             {[0, 1, 2].map((i) => (
-              <span key={i} style={{ display: 'block', width: '24px', height: '2px', background: 'var(--blue)', borderRadius: '2px' }} />
+              <span key={i} className="block h-0.5 w-6 rounded-sm bg-blue" />
             ))}
           </button>
         </div>
@@ -112,24 +94,21 @@ export default function Navbar() {
       {/* Mobile Overlay */}
       {mobileOpen && (
         <div
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 1001 }}
+          className="fixed inset-0 z-[1001] bg-black/40"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       {/* Mobile Drawer */}
-      <div style={{
-        position: 'fixed', top: 0, right: 0, bottom: 0, width: '280px',
-        background: 'var(--grad-subtle)', zIndex: 1002,
-        transform: mobileOpen ? 'translateX(0)' : 'translateX(100%)',
-        transition: 'transform 0.3s ease', padding: '24px',
-        display: 'flex', flexDirection: 'column', gap: '4px',
-        overflowY: 'auto',
-      }}>
+      <div
+        className={`fixed inset-y-0 right-0 z-[1002] flex w-[280px] flex-col gap-1 overflow-y-auto bg-grad-main p-6 transition-transform duration-300 ${
+          mobileOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
         <button
           onClick={() => setMobileOpen(false)}
           aria-label={t.closeMenu}
-          style={{ alignSelf: 'flex-end', background: 'none', border: 'none', color: 'var(--white)', fontSize: '28px', cursor: 'pointer', minWidth: '44px', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}
+          className="mb-2 flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center self-end border-none bg-transparent text-[28px] text-white"
         >
           ×
         </button>
@@ -138,38 +117,24 @@ export default function Navbar() {
           <Link
             key={link.to}
             to={link.to}
-            style={{
-              fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '16px',
-              color: 'var(--white)', padding: '12px 16px', borderRadius: '8px',
-              textDecoration: 'none',
-              background: isActive(link.to) ? 'rgba(255,255,255,0.12)' : 'transparent',
-              transition: 'background 0.2s ease', minHeight: '44px', display: 'flex', alignItems: 'center',
-            }}
+            className={`flex min-h-[44px] items-center rounded-lg px-4 py-3 text-base font-bold text-white transition-colors duration-200 ${
+              isActive(link.to) ? 'bg-white/[0.12]' : 'bg-transparent'
+            }`}
           >
             {link.label}
           </Link>
         ))}
 
-        <LanguageToggle style={{ color: 'var(--white)', alignSelf: 'flex-start', marginTop: '12px', marginLeft: '16px' }} />
+        <LanguageToggle className="ml-4 mt-3 self-start text-white" />
 
-        <a href={PLATFORM_URL} className="btn-gradient" style={{ marginTop: '8px', textAlign: 'center' }}>
+        <a href={PLATFORM_URL} className="btn-gradient mt-2 text-center">
           {t.portal}
         </a>
 
-        <Link to="/demo/contact" className="btn-gradient" style={{ marginTop: '20px', textAlign: 'center' }}>
+        <Link to="/demo/contact" className="btn-gradient mt-5 text-center">
           {t.bookConsultation}
         </Link>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: flex !important; }
-        }
-        @media (min-width: 769px) {
-          .mobile-menu-btn { display: none !important; }
-        }
-      `}</style>
     </>
   );
 }

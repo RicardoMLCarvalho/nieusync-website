@@ -24,34 +24,39 @@ export default function LegalPage({ title, subtitle, lastUpdated, sections, docT
   }, [title]);
 
   return (
-    <main style={{ paddingTop: '72px' }}>
-      <section style={{ background: 'var(--grad-subtle)', padding: '60px 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <Link to="/demo/about" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', color: 'rgba(255,255,255,0.65)', textTransform: 'uppercase', letterSpacing: '0.12em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '20px' }}>
+    <main className="pt-[72px]">
+      <section className="bg-grad-main py-[60px]">
+        <div className="container text-center">
+          <Link
+            to="/demo/about"
+            className="mb-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white/65"
+          >
             {t.legal.backToAbout}
           </Link>
-          <h1 style={{ color: 'var(--white)', marginBottom: '12px', fontSize: 'clamp(28px,4vw,48px)' }}>{title}</h1>
-          <p style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'Montserrat, sans-serif', fontSize: '14px' }}>
+          <h1 className="mb-3 text-[clamp(28px,4vw,48px)] text-white">{title}</h1>
+          <p className="text-sm text-white/65">
             {subtitle} · {t.legal.lastUpdatedLabel} {lastUpdated}
           </p>
         </div>
       </section>
 
-      <section style={{ background: 'var(--bg)', padding: '60px 0 80px' }}>
+      <section className="bg-bg pb-20 pt-[60px]">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: '48px', alignItems: 'start' }} className="legal-layout">
+          <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-[260px_1fr]">
             {/* Sidebar TOC */}
-            <div style={{ position: 'sticky', top: '90px' }}>
-              <div className="card" style={{ padding: '24px' }}>
-                <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--purple)', marginBottom: '14px' }}>
+            <div className="sticky top-[90px]">
+              <div className="card p-6">
+                <p className="mb-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-purple">
                   {t.legal.tocTitle}
                 </p>
                 <nav>
                   {sections.map((s, i) => (
-                    <a key={i} href={`#section-${i}`}
-                      style={{ display: 'block', fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(35,56,119,0.70)', padding: '6px 0', borderBottom: i < sections.length - 1 ? '1px solid rgba(159,142,194,0.10)' : 'none', textDecoration: 'none', transition: 'color 0.2s ease' }}
-                      onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = 'var(--purple)'}
-                      onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = 'rgba(35,56,119,0.70)'}
+                    <a
+                      key={i}
+                      href={`#section-${i}`}
+                      className={`block py-1.5 text-[13px] font-normal text-blue/70 transition-colors duration-200 hover:text-purple ${
+                        i < sections.length - 1 ? 'border-b border-purple/10' : ''
+                      }`}
                     >
                       {i + 1}. {s.title}
                     </a>
@@ -59,11 +64,11 @@ export default function LegalPage({ title, subtitle, lastUpdated, sections, docT
                 </nav>
               </div>
 
-              <div className="card" style={{ marginTop: '16px', padding: '20px', textAlign: 'center' }}>
-                <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(35,56,119,0.65)', marginBottom: '14px' }}>
+              <div className="card mt-4 p-5 text-center">
+                <p className="mb-3.5 text-[13px] font-normal text-blue/65">
                   {t.legal.questionsPrompt}
                 </p>
-                <Link to="/demo/contact" className="btn-gradient" style={{ fontSize: '12px', padding: '10px 20px', display: 'inline-flex' }}>
+                <Link to="/demo/contact" className="btn-gradient px-5 py-2.5 text-xs">
                   {t.legal.contactCta}
                 </Link>
               </div>
@@ -71,40 +76,40 @@ export default function LegalPage({ title, subtitle, lastUpdated, sections, docT
 
             {/* Content */}
             <div>
-              <div className="card" style={{ padding: '40px 48px' }}>
-                <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.55)', marginBottom: '36px', borderBottom: '1px solid rgba(159,142,194,0.15)', paddingBottom: '20px' }}>
-                  {t.legal.documentLabel} <strong style={{ color: 'var(--blue)' }}>{docTitle}</strong>
+              <div className="card px-12 py-10">
+                <p className="mb-9 border-b border-purple/15 pb-5 text-sm font-normal text-blue/55">
+                  {t.legal.documentLabel} <strong className="text-blue">{docTitle}</strong>
                 </p>
 
                 {sections.map((section, i) => (
-                  <div key={i} id={`section-${i}`} style={{ marginBottom: '40px', scrollMarginTop: '100px' }}>
-                    <h2 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '20px', color: 'var(--blue)', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: 'var(--grad-main)', color: 'var(--white)', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '12px', flexShrink: 0 }}>
+                  <div key={i} id={`section-${i}`} className="mb-10 scroll-mt-[100px]">
+                    <h2 className="mb-3.5 flex items-center gap-2.5 text-xl font-bold text-blue">
+                      <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-grad-main text-xs font-bold text-white">
                         {i + 1}
                       </span>
                       {section.title}
                     </h2>
                     {Array.isArray(section.content) ? (
-                      <ul style={{ listStyle: 'none', paddingLeft: '38px' }}>
+                      <ul className="list-none pl-[38px]">
                         {section.content.map((item, j) => (
-                          <li key={j} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '15px', color: 'rgba(35,56,119,0.75)', lineHeight: 1.80, padding: '4px 0', paddingLeft: '16px', position: 'relative' }}>
-                            <span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>·</span>
+                          <li key={j} className="relative py-1 pl-4 text-[15px] font-normal leading-[1.8] text-blue/75">
+                            <span className="absolute left-0 font-bold text-purple">·</span>
                             {item}
                           </li>
                         ))}
                       </ul>
                     ) : (
-                      <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '15px', color: 'rgba(35,56,119,0.75)', lineHeight: 1.80, paddingLeft: '38px' }}>
+                      <p className="pl-[38px] text-[15px] font-normal leading-[1.8] text-blue/75">
                         {section.content}
                       </p>
                     )}
                   </div>
                 ))}
 
-                <div style={{ borderTop: '1px solid rgba(159,142,194,0.15)', paddingTop: '24px', marginTop: '8px' }}>
-                  <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '13px', color: 'rgba(35,56,119,0.45)' }}>
+                <div className="mt-2 border-t border-purple/15 pt-6">
+                  <p className="text-[13px] font-normal text-blue/45">
                     {t.legal.footerContactBefore}{' '}
-                    <a href="mailto:geral@nieusync.com" style={{ color: 'var(--purple)', textDecoration: 'underline' }}>geral@nieusync.com</a>
+                    <a href="mailto:geral@nieusync.com" className="text-purple underline">geral@nieusync.com</a>
                     {' '}{t.legal.footerContactAfter}
                   </p>
                 </div>
@@ -112,12 +117,6 @@ export default function LegalPage({ title, subtitle, lastUpdated, sections, docT
             </div>
           </div>
         </div>
-
-        <style>{`
-          @media (max-width: 768px) {
-            .legal-layout { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
     </main>
   );

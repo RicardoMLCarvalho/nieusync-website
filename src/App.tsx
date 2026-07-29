@@ -35,7 +35,7 @@ const LEGACY_ROUTES: Record<string, string> = {
 
 function PageLoader() {
   return (
-    <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Montserrat, sans-serif', color: 'var(--purple)', fontSize: '15px' }}>
+    <div className="flex min-h-[60vh] items-center justify-center text-[15px] text-purple">
       ...
     </div>
   );

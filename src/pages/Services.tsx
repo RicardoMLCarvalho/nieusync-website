@@ -3,24 +3,24 @@ import { Link, useLocation } from 'react-router-dom';
 import { useT } from '../i18n';
 
 function ServiceSection({
-  id, bg, iconEl, title, description, services, highlight, ctaText, reverse,
+  id, bgClass, iconEl, title, description, services, highlight, ctaText, reverse,
 }: {
-  id: string; bg: string; iconEl: React.ReactNode; title: string; description: string;
+  id: string; bgClass: string; iconEl: React.ReactNode; title: string; description: string;
   services: string[]; highlight: { title: string; items: string[] }; ctaText: string; reverse?: boolean;
 }) {
   return (
-    <section id={id} style={{ background: bg, padding: '100px 0' }}>
+    <section id={id} className={`${bgClass} py-[100px]`}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'start', direction: reverse ? 'rtl' : 'ltr' }} className="service-layout">
-          <div style={{ direction: 'ltr' }} className="animate-on-scroll">
+        <div className="grid grid-cols-1 items-start gap-16 md:grid-cols-2">
+          <div className={`animate-on-scroll ${reverse ? 'md:order-2' : ''}`}>
             {iconEl}
-            <h2 style={{ color: 'var(--blue)', marginBottom: '10px', marginTop: '20px' }}>{title}</h2>
-            <div className="accent-line" style={{ width: '15%', background: 'var(--purple)', backgroundImage: 'none' }} />
-            <p style={{ color: 'rgba(35,56,119,0.75)', marginBottom: '24px' }}>{description}</p>
-            <ul style={{ listStyle: 'none', marginBottom: '28px' }}>
+            <h2 className="mb-2.5 mt-5 text-blue">{title}</h2>
+            <div className="accent-line w-[15%] bg-purple bg-none" />
+            <p className="mb-6 text-blue/75">{description}</p>
+            <ul className="mb-7 list-none">
               {services.map((s) => (
-                <li key={s} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '15px', color: 'rgba(35,56,119,0.80)', padding: '6px 0', paddingLeft: '20px', position: 'relative', borderBottom: '1px solid rgba(159,142,194,0.12)' }}>
-                  <span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700, fontSize: '18px' }}>·</span>
+                <li key={s} className="relative border-b border-purple/[0.12] py-1.5 pl-5 text-[15px] font-normal text-blue/80">
+                  <span className="absolute left-0 text-lg font-bold text-purple">·</span>
                   {s}
                 </li>
               ))}
@@ -28,15 +28,15 @@ function ServiceSection({
             <Link to="/demo/contact" className="btn-gradient">{ctaText}</Link>
           </div>
 
-          <div style={{ direction: 'ltr' }} className="animate-on-scroll">
-            <div style={{ background: 'rgba(159,142,194,0.08)', borderLeft: '4px solid var(--purple)', borderRadius: '0 12px 12px 0', padding: '24px 28px' }}>
-              <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.10em', color: 'var(--blue)', marginBottom: '14px' }}>
+          <div className={`animate-on-scroll ${reverse ? 'md:order-1' : ''}`}>
+            <div className="rounded-r-xl border-l-4 border-purple bg-purple/[0.08] px-7 py-6">
+              <p className="mb-3.5 text-[13px] font-bold uppercase tracking-[0.1em] text-blue">
                 {highlight.title}
               </p>
-              <ul style={{ listStyle: 'none' }}>
+              <ul className="list-none">
                 {highlight.items.map((item) => (
-                  <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.70)', padding: '6px 0', paddingLeft: '18px', position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--purple)', fontWeight: 700 }}>·</span>
+                  <li key={item} className="relative py-1.5 pl-[18px] text-sm font-normal text-blue/70">
+                    <span className="absolute left-0 font-bold text-purple">·</span>
                     {item}
                   </li>
                 ))}
@@ -45,11 +45,6 @@ function ServiceSection({
           </div>
         </div>
       </div>
-      <style>{`
-        @media (max-width: 768px) {
-          .service-layout { grid-template-columns: 1fr !important; direction: ltr !important; }
-        }
-      `}</style>
     </section>
   );
 }
@@ -111,13 +106,13 @@ export default function Servicos() {
   );
 
   return (
-    <main style={{ paddingTop: '72px' }}>
-      <section style={{ background: 'var(--grad-subtle)', padding: '80px 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
+    <main className="pt-[72px]">
+      <section className="bg-grad-main py-20">
+        <div className="container text-center">
           <span className="section-label section-label-white">{t.hero.label}</span>
           <div className="accent-line accent-line-white accent-line-center" />
-          <h1 style={{ color: 'var(--white)', marginBottom: '16px' }}>{t.hero.title}</h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', maxWidth: '560px', margin: '0 auto', fontSize: '18px' }}>
+          <h1 className="mb-4 text-white">{t.hero.title}</h1>
+          <p className="mx-auto max-w-[560px] text-lg text-white/75">
             {t.hero.subtitle}
           </p>
         </div>
@@ -125,7 +120,7 @@ export default function Servicos() {
 
       <ServiceSection
         id="legal"
-        bg="var(--white)"
+        bgClass="bg-white"
         iconEl={legalIcon}
         title={t.areas.legal.title}
         description={t.areas.legal.description}
@@ -136,7 +131,7 @@ export default function Servicos() {
 
       <ServiceSection
         id="management"
-        bg="var(--bg)"
+        bgClass="bg-bg"
         iconEl={gestaoIcon}
         title={t.areas.management.title}
         description={t.areas.management.description}
@@ -148,7 +143,7 @@ export default function Servicos() {
 
       <ServiceSection
         id="marketing"
-        bg="var(--white)"
+        bgClass="bg-white"
         iconEl={mktIcon}
         title={t.areas.marketing.title}
         description={t.areas.marketing.description}
@@ -159,7 +154,7 @@ export default function Servicos() {
 
       <ServiceSection
         id="compliance"
-        bg="var(--bg)"
+        bgClass="bg-bg"
         iconEl={(
           <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -176,7 +171,7 @@ export default function Servicos() {
 
       <ServiceSection
         id="technology"
-        bg="var(--white)"
+        bgClass="bg-white"
         iconEl={(
           <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -192,44 +187,39 @@ export default function Servicos() {
       />
 
       {/* Packages */}
-      <section style={{ background: 'var(--grad-subtle)', padding: '100px 0' }}>
+      <section className="bg-grad-main py-[100px]">
         <div className="container">
-          <div className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <div className="animate-on-scroll mb-14 text-center">
             <span className="section-label section-label-white">{t.packages.label}</span>
             <div className="accent-line accent-line-white accent-line-center" />
-            <h2 style={{ color: 'var(--white)', marginBottom: '16px' }}>{t.packages.title}</h2>
-            <p style={{ color: 'rgba(255,255,255,0.70)', maxWidth: '520px', margin: '0 auto' }}>
+            <h2 className="mb-4 text-white">{t.packages.title}</h2>
+            <p className="mx-auto max-w-[520px] text-white/70">
               {t.packages.subtitle}
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="packages-grid animate-on-scroll">
+          <div className="animate-on-scroll grid grid-cols-1 gap-6 md:grid-cols-3">
             {t.packages.tiers.map(({ name, desc, includes }) => (
-              <div key={name} className="card stagger-child animate-on-scroll" style={{ display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ color: 'var(--blue)', marginBottom: '8px', textAlign: 'center' }}>{name}</h3>
-                <p style={{ fontSize: '14px', color: 'rgba(35,56,119,0.65)', marginBottom: '20px', minHeight: '80px' }}>{desc}</p>
-                <ul style={{ listStyle: 'none', marginBottom: '24px', flex: 1 }}>
+              <div key={name} className="card stagger-child animate-on-scroll flex flex-col">
+                <h3 className="mb-2 text-center text-blue">{name}</h3>
+                <p className="mb-5 min-h-[80px] text-sm text-blue/65">{desc}</p>
+                <ul className="mb-6 flex-1 list-none">
                   {includes.map((item) => (
-                    <li key={item} style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400, fontSize: '14px', color: 'rgba(35,56,119,0.75)', padding: '5px 0', paddingLeft: '18px', position: 'relative' }}>
-                      <span style={{ position: 'absolute', left: 0, color: 'var(--purple)' }}>✓</span>
+                    <li key={item} className="relative py-[5px] pl-[18px] text-sm font-normal text-blue/75">
+                      <span className="absolute left-0 text-purple">✓</span>
                       {item}
                     </li>
                   ))}
                 </ul>
-                <div style={{ marginBottom: '16px', textAlign: 'center' }}>
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '18px', color: 'var(--blue)' }}>{t.packages.priceLabel}</span>
+                <div className="mb-4 text-center">
+                  <span className="text-lg font-bold text-blue">{t.packages.priceLabel}</span>
                 </div>
-                <Link to="/demo/contact" className="btn-gradient" style={{ width: '100%', justifyContent: 'center' }}>
+                <Link to="/demo/contact" className="btn-gradient w-full justify-center">
                   {t.packages.ctaText}
                 </Link>
               </div>
             ))}
           </div>
         </div>
-        <style>{`
-          @media (max-width: 768px) {
-            .packages-grid { grid-template-columns: 1fr !important; }
-          }
-        `}</style>
       </section>
     </main>
   );
