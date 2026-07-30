@@ -49,7 +49,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link to="/demo" className="flex shrink-0 items-center">
-            <img src="logo_new.png" alt={t.logoAlt} className="block h-[120px] w-auto" />
+            <img src="/logo_horizontal.png" alt={t.logoAlt} className="block h-[120px] w-auto" />
           </Link>
 
           {/* Desktop Nav */}

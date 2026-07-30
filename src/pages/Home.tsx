@@ -594,7 +594,7 @@ export default function Home() {
 
           <div className="animate-on-scroll relative mx-auto mt-[60px] h-[220px] w-[220px] overflow-visible md:h-[350px] md:w-[350px]">
             <div className="absolute left-1/2 top-1/2 z-[1] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center">
-              <img src="/Logo_sem_letras.png" alt={t.services.logoAlt} loading="lazy" className="h-[200px] w-[200px] object-contain md:h-[350px] md:w-[350px]" />
+              <img src="/logo_squared.png" alt={t.services.logoAlt} loading="lazy" className="h-[200px] w-[200px] object-contain md:h-[350px] md:w-[350px]" />
             </div>
 
             {[
