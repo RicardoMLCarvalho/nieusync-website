@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useT, LanguageToggle } from '../i18n';
 
-// ponytail: porte do site estático ../landingpage (GitHub Pages) para dentro da app.
+// ponytail: porte do antigo site estático `nieusync/landingpage` (GitHub Pages)
+// para dentro da app. Esse repo foi eliminado — esta página é a única versão.
 export default function Landing() {
   const t = useT('landing');
 
