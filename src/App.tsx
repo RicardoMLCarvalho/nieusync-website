@@ -20,7 +20,7 @@ const CookiePolicy         = lazy(() => import('./pages/CookiePolicy'));
 const Privacy              = lazy(() => import('./pages/Privacy'));
 const AcceptableUse        = lazy(() => import('./pages/AcceptableUse'));
 
-// ponytail: URLs antigas em português continuam indexadas — apontam para o site em /demo
+// ponytail: legacy Portuguese URLs are still indexed — point them at the site under /demo
 const LEGACY_ROUTES: Record<string, string> = {
   '/servicos': '/demo/services',
   '/sobre': '/demo/about',
@@ -34,8 +34,8 @@ const LEGACY_ROUTES: Record<string, string> = {
   '/checkup': '/demo/checkup',
 };
 
-// O blog vive no Ghost — /demo/blog/* continua indexado, por isso reencaminha
-// para o post equivalente em blog.nieusync.com em vez de dar 404.
+// The blog lives on Ghost — /demo/blog/* is still indexed, so redirect to the
+// matching post on blog.nieusync.com instead of 404ing.
 function BlogRedirect() {
   const { slug } = useParams();
   useEffect(() => {
@@ -81,14 +81,14 @@ export default function App() {
     <I18nProvider>
       <BrowserRouter>
         <Routes>
-          {/* Landing "brevemente" — sem Navbar/Footer */}
+          {/* "Coming soon" landing — no Navbar/Footer */}
           <Route path="/" element={<Suspense fallback={null}><Landing /></Suspense>} />
 
           {Object.entries(LEGACY_ROUTES).map(([from, to]) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />
           ))}
 
-          {/* Site completo, pré-lançamento */}
+          {/* Full site, pre-launch */}
           <Route path="/demo" element={<MarketingLayout />}>
             <Route index                     element={<Home />} />
             <Route path="services"           element={<Services />} />
