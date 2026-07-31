@@ -55,7 +55,7 @@ function BlogPreview() {
   );
 }
 
-// ── NOTÍCIAS ──────────────────────────────────────────────────
+// ── NEWS ──────────────────────────────────────────────────────
 const RSS_SOURCES = [
   { url: 'https://eco.pt/feed/',                       name: 'ECO',           area: 'Negócios' },
   { url: 'https://www.dinheirovivo.pt/feed/',          name: 'Dinheiro Vivo', area: 'Gestão' },
@@ -228,10 +228,10 @@ function NewsTickerSection() {
 
     const half = el.scrollWidth / 2;
 
-    // Perto do início e a ir para trás: o browser nunca deixa o scrollLeft
-    // ficar negativo, por isso saltamos primeiro (sem animação) para a posição
-    // equivalente na 2ª metade da lista duplicada — é visualmente idêntica,
-    // e a partir daí já há espaço real para recuar.
+    // Near the start and moving backwards: the browser never lets scrollLeft go
+    // negative, so jump first (without animation) to the equivalent position in
+    // the second half of the duplicated list — visually identical, and from
+    // there there is real room to scroll back.
     if (direction === -1 && el.scrollLeft - 280 < 0) {
       el.scrollLeft += half;
     }
@@ -290,9 +290,9 @@ function NewsTickerSection() {
           </svg>
         </button>
 
-        {/* Este div é o que faz scroll de facto — largura fixa (100%) + overflow hidden */}
+        {/* This div is what actually scrolls — fixed width (100%) + overflow hidden */}
         <div ref={trackRef} className="w-full overflow-x-hidden">
-          {/* Este div é só a fila de cartões, mede-se ao tamanho do conteúdo */}
+          {/* This div is just the row of cards, sized to its content */}
           <div className="flex w-max">
             {looped.map((item, i) => {
               const color = AREA_COLORS[item.area] ?? 'var(--blue)';
@@ -320,7 +320,7 @@ function NewsTickerSection() {
                       />
                     </div>
                   ) : (
-                    // ponytail: gradiente depende da cor da área — fica inline
+                    // ponytail: gradient depends on the area colour — stays inline
                     <div
                       className="flex h-[100px] shrink-0 items-center justify-center rounded-lg"
                       style={{ background: `linear-gradient(135deg, ${color}22, ${color}44)` }}
@@ -359,7 +359,7 @@ function NewsTickerSection() {
     </section>
   );
 }
-// ── FIM NOTÍCIAS ───────────────────────────────────────────────
+// ── END NEWS ──────────────────────────────────────────────────
 
 type LeadStatus = 'idle' | 'loading' | 'success' | 'error' | 'duplicate';
 
@@ -371,8 +371,8 @@ function LeadMagnetSection() {
   const [aceitaNewsletter, setAceitaNewsletter] = useState(false);
   const [status,      setStatus]      = useState<LeadStatus>('idle');
 
-  // ponytail: sem backend — o lead não é enviado para lado nenhum.
-  // Ligar a um endpoint de CRM quando existir.
+  // ponytail: no backend — the lead is not sent anywhere.
+  // Wire it to a CRM endpoint once there is one.
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -510,7 +510,7 @@ export default function Home() {
         {/* Foto de fundo da sede */}
         <div className="absolute inset-0 z-0 bg-[url(/sede-nieusync.jpg)] bg-cover bg-center" />
 
-        {/* Camada de cor por cima da foto — dá destaque ao texto */}
+        {/* Colour layer over the photo — makes the text stand out */}
         <div className="absolute inset-0 z-[1] bg-blue/85" />
 
         <div className="pointer-events-none absolute -right-[100px] -top-[100px] z-[1] h-[400px] w-[400px] rounded-full border border-purple/10" />
@@ -577,7 +577,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── NOTÍCIAS ── */}
+      {/* ── NEWS ── */}
       <NewsTickerSection />
 
       {/* ── SERVICES ── */}
@@ -610,7 +610,7 @@ export default function Home() {
               const x = Math.cos(rad) * radius;
               const y = Math.sin(rad) * radius;
               return (
-                // ponytail: posição orbital calculada — o transform fica inline
+                // ponytail: orbital position is computed — the transform stays inline
                 <Link key={href} to={href}
                   className="absolute left-1/2 top-1/2 z-[2] flex w-[90px] flex-col items-center gap-2 text-center transition-transform duration-300 hover:scale-110 md:w-[120px]"
                   style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useT, LanguageToggle } from '../i18n';
 import { BLOG_URL } from '../hooks/useArticles';
 
-// ponytail: área de cliente vive na app "platform"; definir VITE_PLATFORM_URL em produção
+// ponytail: the client area lives in the "platform" app; set VITE_PLATFORM_URL in production
 const PLATFORM_URL = import.meta.env.VITE_PLATFORM_URL ?? 'http://localhost:5174';
 
 export default function Navbar() {
@@ -58,7 +58,7 @@ export default function Navbar() {
               const cls = `relative inline-flex min-h-[44px] items-center rounded-md px-[14px] py-2 text-sm font-bold transition-colors duration-200 hover:text-purple ${
                 isActive(link.to) ? 'text-purple' : 'text-blue'
               }`;
-              // O blog é noutro domínio (Ghost), por isso é <a> e não <Link>
+              // The blog is on another domain (Ghost), hence <a> and not <Link>
               if (link.external) return <a key={link.to} href={link.to} className={cls}>{link.label}</a>;
               return (
                 <Link key={link.to} to={link.to} className={cls}>

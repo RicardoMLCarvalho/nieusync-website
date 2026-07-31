@@ -130,7 +130,7 @@ export default function Checkup() {
 
         <div className="card mb-14 overflow-hidden p-0">
           <div className="h-1 bg-purple/20">
-            {/* ponytail: largura calculada em runtime a partir do progresso */}
+            {/* ponytail: width computed at runtime from the progress value */}
             <i className="block h-full bg-blue transition-[width] duration-500" style={{ width: `${progress}%` }} />
           </div>
 
@@ -205,7 +205,7 @@ export default function Checkup() {
                     strokeWidth="16"
                     strokeLinecap="round"
                     strokeDasharray="314"
-                    /* ponytail: arco e agulha dependem do risco calculado */
+                    /* ponytail: arc and needle depend on the computed risk */
                     style={{ strokeDashoffset: 314 - 314 * (1 - result.risk), transition: 'stroke-dashoffset 1.1s cubic-bezier(.34,1,.5,1)' }}
                   />
                   <defs>
@@ -326,7 +326,7 @@ export default function Checkup() {
           {stage === 'done' && (
             <div className="px-6 py-14 text-center md:px-9">
               <div className="mx-auto mb-5 grid h-[60px] w-[60px] place-items-center rounded-full bg-[#4F7A54]/15">
-                {/* ponytail: SVG inline — o repo não usa biblioteca de ícones */}
+                {/* ponytail: inline SVG — this repo has no icon library */}
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                   <path d="M5 13l4 4L19 7" stroke="#4F7A54" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

@@ -65,7 +65,7 @@
   @media (max-width: 768px) { h1 { font-size: 30px; } h2 { font-size: 24px; } h3 { font-size: 20px; } }
   @media (max-width: 480px) { h1 { font-size: 28px; } h2 { font-size: 22px; } }
 
-  /* Reduz espaçamento vertical das secções em mobile */
+  /* Tighter vertical section spacing on mobile */
   @media (max-width: 768px) {
     section { padding-top: 40px !important; padding-bottom: 40px !important; }
   }
@@ -158,7 +158,7 @@
 
   .btn-sm { padding: 10px 22px; font-size: 12px; }
 
-  /* Botão contorno branco (para fundos escuros) */
+  /* White outline button (for dark backgrounds) */
   .btn-outline-white {
     background: transparent;
     border: 2px solid rgba(255,255,255,0.6);
@@ -210,7 +210,7 @@
   .accent-line-white   { background: rgba(255,255,255,0.5); }
   .section-label-white { color: rgba(255,255,255,0.85); }
 
-  /* Botão flutuante WhatsApp — o tooltip depende do :hover do pai */
+  /* Floating WhatsApp button — the tooltip depends on the parent's :hover */
   .whatsapp-btn {
     position: fixed;
     bottom: 24px;
@@ -232,7 +232,7 @@
   }
 }
 
-/* ── Animações de scroll (dependem da classe .visible aplicada por JS) ── */
+/* ── Scroll animations (depend on the .visible class applied by JS) ── */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
